@@ -1,13 +1,13 @@
-import {defineConfig} from 'sanity'
-import {structureTool} from 'sanity/structure'
-import {visionTool} from '@sanity/vision'
-import {schemaTypes} from './schemaTypes'
+import { defineConfig } from 'sanity'
+import { structureTool } from 'sanity/structure'
+import { visionTool } from '@sanity/vision'
+import { schemaTypes } from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
   title: 'The Entrepreneurial Chronicles',
 
-  projectId: 'gaa41xdq',
+  projectId: 'i7vt4u64',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
