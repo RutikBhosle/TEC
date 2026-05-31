@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -10,14 +9,25 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Magazines", href: "/magazines" },
   { label: "Blogs", href: "/blogs" },
-  { label: "Industries", href: "/industries" },
-  { label: "About Us", href: "/about-us" },
+  { label: "Web Profiles", href: "/category/web-profiles" },
+  { label: "Market News", href: "/category/market-news" },
+  { label: "Master Talks", href: "/category/master-talks" },
+  { label: "Advertise", href: "/advertise-with-us" },
   { label: "Contact", href: "/contact" },
 ];
 
-const FooterTwo = () => {
-  const [activeMag, setActiveMag] = useState(0);
+const categories = [
+  { label: "Business & Finance", href: "/category/business-bulletin" },
+  { label: "Innovation & Technology", href: "/industries/tech-ai" },
+  { label: "Leadership", href: "/category/master-talks" },
+  { label: "Aviation & Aerospace", href: "/industries/transportation" },
+  { label: "Health & Wellness", href: "/industries/healthcare" },
+  { label: "AgriTech", href: "/category/market-news" },
+  { label: "Entrepreneurship", href: "/blogs" },
+  { label: "Legal", href: "/industries/legal" },
+];
 
+const FooterTwo = () => {
   const query = `
 *[_type == "magazine"]{
   title,
@@ -28,514 +38,344 @@ const FooterTwo = () => {
 `;
 
   const { data } = useQuery({
-    queryKey: ["footer-magazines-clean"],
+    queryKey: ["footer-magazines-editorial"],
     queryFn: async () => client.fetch(query),
   });
 
   const magazines = data || [];
 
-  useEffect(() => {
-    if (!magazines.length) return;
-    const timer = setInterval(() => {
-      setActiveMag((prev) => (prev + 1) % magazines.length);
-    }, 3500);
-    return () => clearInterval(timer);
-  }, [magazines.length]);
-
-  useEffect(() => {
-    if (!magazines.length) return;
-    if (activeMag >= magazines.length) setActiveMag(0);
-  }, [activeMag, magazines.length]);
-
-  const showPrevMag = () => {
-    setActiveMag((prev) => (prev - 1 + magazines.length) % magazines.length);
-  };
-
-  const showNextMag = () => {
-    setActiveMag((prev) => (prev + 1) % magazines.length);
+  const formatDate = (mag) => {
+    const d = mag.publishedAt;
+    if (!d) return "";
+    try {
+      return new Date(d).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+    } catch { return ""; }
   };
 
   return (
-    <footer className="ecf-root">
-      <div className="ecf-wrap">
-        <div className="ecf-grid">
-          <section className="ecf-col ecf-brand">
-            <Link href="/" className="ecf-logo">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={NavbarLogo.src}
-                alt="chronicles-logo"
-                width="300"
-                height="100"
-                style={{ objectFit: "contain", width: "240px", height: "auto" }}
-              />
-            </Link>
-            <div className="ecf-brand-copy-wrap">
-              <p className="ecf-brand-copy">
-                The Entrepreneurial Chronicles is a business magazine that shares
-                inspiring success stories of entrepreneurs, transforming
-                intriguing tales into captivating narratives. With a skilled
-                storytelling team and extensive industry expertise, we amplify
-                untold stories from the business world, making our magazine both
-                compelling and insightful.
+    <>
+      <footer className="ec-footer">
+        <div className="ec-footer-wrap">
+          {/* TOP GRID */}
+          <div className="ec-footer-top">
+            {/* Brand Column */}
+            <div className="ec-footer-brand">
+              <Link href="/" className="ec-footer-logo">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={NavbarLogo.src}
+                  alt="The Entrepreneurial Chronicles"
+                  width="240"
+                  height="80"
+                  style={{ objectFit: "contain", width: "200px", height: "auto" }}
+                />
+              </Link>
+              <p className="ec-footer-tagline">
+                The Entrepreneurial Chronicles — Crafting Entrepreneurial Legends, one story at a time.
               </p>
-            </div>
-          </section>
-
-          <section className="ecf-col">
-            <h4 className="ecf-heading">Quick Links</h4>
-            <ul className="ecf-links">
-              {quickLinks.map((item) => (
-                <li key={item.href}>
-                  <Link href={item.href}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="ecf-col ecf-col--magazines">
-            <h4 className="ecf-heading">Latest Magazines</h4>
-            {magazines.length > 0 ? (
-              <div className="ecf-mag-carousel">
-                <Link
-                  href={`/magazine/${magazines[activeMag]?.slug?.current}`}
-                  className="ecf-mag-item ecf-mag-item--single"
-                >
-                  <Image
-                    src={magazines[activeMag]?.featureImg}
-                    alt={magazines[activeMag]?.title || "Magazine cover"}
-                    width={220}
-                    height={300}
-                  />
-                </Link>
-
-                {magazines.length > 1 ? (
-                  <div className="ecf-mag-controls">
-                    <button
-                      type="button"
-                      className="ecf-mag-arrow"
-                      onClick={showPrevMag}
-                      aria-label="Previous magazine"
-                    >
-                      <i className="feather icon-chevron-left" />
-                    </button>
-                    <div className="ecf-mag-dots">
-                      {magazines.map((mag, index) => (
-                        <button
-                          key={mag.slug?.current || index}
-                          type="button"
-                          className={`ecf-mag-dot ${index === activeMag ? "is-active" : ""}`}
-                          onClick={() => setActiveMag(index)}
-                          aria-label={`Go to magazine ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                    <button
-                      type="button"
-                      className="ecf-mag-arrow"
-                      onClick={showNextMag}
-                      aria-label="Next magazine"
-                    >
-                      <i className="feather icon-chevron-right" />
-                    </button>
-                  </div>
-                ) : null}
-
-              </div>
-            ) : (
-              <p className="ecf-muted">No magazines available.</p>
-            )}
-          </section>
-
-          <section className="ecf-col">
-            <h4 className="ecf-heading">Connect</h4>
-            <div className="ecf-contact">
-              <p>
-                <span>Email</span>
-                <a href="mailto:info@theentrepreneurialchronicle.com">
-                  info@theentrepreneurialchronicle.com
-                </a>
-              </p>
-              <p>
-                <span>Phone</span>
-                <a href="tel:+16146022959">+1 (614) 602-2959</a>
-              </p>
-              <p>
-                <span>Address</span>
-                <a
-                  href="https://www.google.com/maps/search/?api=1&query=6605+Longshore+St,+Dublin,+OH+43017,+USA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  6605 Longshore St, Dublin, OH 43017, USA
-                </a>
-              </p>
-              
-            </div>
-
-            <ul className="ecf-social">
-              <li>
-                <a href={SocialLink.fb.url} target="_blank" rel="noopener noreferrer">
+              <div className="ec-footer-socials">
+                <a href={SocialLink.fb.url} target="_blank" rel="noopener noreferrer" className="ec-footer-social">
                   <i className={SocialLink.fb.icon} />
                 </a>
-              </li>
-              <li>
-                <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer">
-                  <i className={SocialLink.yt.icon} />
-                </a>
-              </li>
-              <li>
-                <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer">
+                <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer" className="ec-footer-social">
                   <i className={SocialLink.linked.icon} />
                 </a>
-              </li>
-              <li>
-                <a
-                  href={SocialLink.instagram.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer" className="ec-footer-social">
+                  <i className={SocialLink.yt.icon} />
+                </a>
+                <a href={SocialLink.instagram.url} target="_blank" rel="noopener noreferrer" className="ec-footer-social">
                   <i className={SocialLink.instagram.icon} />
                 </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+              </div>
+            </div>
 
-        <div className="ecf-bottom">
-          <p>Copyright 2026 The Entrepreneurial Chronicles. All rights reserved.</p>
-          <p>
-            Designed by{" "}
-            <a
-              href="https://www.intellisysitsolutions.com/index.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Team Intellisys
-            </a>
-          </p>
+            {/* Quick Links */}
+            <div className="ec-footer-col">
+              <div className="ec-footer-col-title">Quick Links</div>
+              <ul className="ec-footer-links">
+                {quickLinks.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Categories */}
+            <div className="ec-footer-col">
+              <div className="ec-footer-col-title">Categories</div>
+              <ul className="ec-footer-links">
+                {categories.map((item) => (
+                  <li key={item.href}>
+                    <Link href={item.href}>{item.label}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Latest Magazines */}
+            <div className="ec-footer-col">
+              <div className="ec-footer-col-title">Latest Magazines</div>
+              {magazines.length > 0 ? (
+                <div className="ec-footer-mags">
+                  {magazines.map((mag, i) => (
+                    <Link
+                      key={mag.slug?.current || i}
+                      href={`/magazine/${mag.slug?.current}`}
+                      className="ec-footer-mag-item"
+                    >
+                      <div className="ec-footer-mag-img">
+                        {mag.featureImg ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img src={mag.featureImg} alt={mag.title} />
+                        ) : (
+                          <div className="ec-footer-mag-placeholder" />
+                        )}
+                      </div>
+                      <div>
+                        <div className="ec-footer-mag-title">{mag.title}</div>
+                        <div className="ec-footer-mag-date">{formatDate(mag)}</div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <p className="ec-footer-muted">Loading magazines…</p>
+              )}
+            </div>
+          </div>
+
+          {/* BOTTOM BAR */}
+          <div className="ec-footer-bottom">
+            <div className="ec-footer-copy">
+              © 2026 The Entrepreneurial Chronicles. All rights reserved.{" "}
+              <a href="https://www.intellisysitsolutions.com/index.html" target="_blank" rel="noopener noreferrer">
+                Designed by Team Intellisys
+              </a>
+            </div>
+            <div className="ec-footer-bottom-links">
+              <Link href="/">Privacy Policy</Link>
+              <Link href="/">Terms of Use</Link>
+              <Link href="/">Cookie Policy</Link>
+              <Link href="/">Sitemap</Link>
+            </div>
+          </div>
         </div>
-      </div>
+      </footer>
 
       <style jsx>{`
-        .ecf-root {
-          background:
-            radial-gradient(circle at top, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 42%),
-            linear-gradient(180deg, #17120b 0%, #0f0c08 100%);
-          border-top: 1px solid rgba(212, 175, 55, 0.18);
-          margin-top: 30px;
-          font-family: var(--secondary-font);
+        .ec-footer {
+          background: #0F1923;
+          border-top: 1px solid #1E2D3D;
+          color: #D0C9BF;
+          margin-top: 0;
+          font-family: 'DM Sans', sans-serif;
         }
 
-        .ecf-wrap {
-          max-width: 1200px;
+        .ec-footer-wrap {
+          max-width: 1240px;
           margin: 0 auto;
-          padding: 30px 20px 12px;
+          padding: 0 32px;
         }
 
-        .ecf-grid {
+        .ec-footer-top {
           display: grid;
-          grid-template-columns: 1fr;
-          gap: 24px;
+          grid-template-columns: 260px 1fr 1fr 1fr;
+          gap: 48px;
+          padding: 60px 0 48px;
+          border-bottom: 1px solid #1E2D3D;
         }
 
-        .ecf-col {
-          min-width: 0;
-          align-self: start;
-        }
-
-        .ecf-col--magazines {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .ecf-brand {
-          max-width: 390px;
-        }
-
-        .ecf-logo {
+        /* Brand */
+        .ec-footer-logo {
           display: inline-block;
-          margin-bottom: 24px;
-          width: 240px;
-          max-width: 100%;
+          margin-bottom: 16px;
           line-height: 0;
         }
 
-        .ecf-logo :global(img) {
-          width: 100%;
-          height: auto !important;
-          object-fit: contain;
-          display: block;
+        .ec-footer-tagline {
+          font-size: 12px;
+          color: #9A9490;
+          line-height: 1.6;
+          margin: 0 0 20px;
+          font-style: italic;
         }
 
-        .ecf-brand-copy-wrap {
-          margin-top: 8px;
-          padding-top: 14px;
-          border-top: 1px solid rgba(212, 175, 55, 0.12);
-          max-width: 380px;
+        .ec-footer-socials {
+          display: flex;
+          gap: 10px;
         }
 
-        .ecf-brand-copy {
-          margin: 0;
-          color: #d6ccbc;
-          font-size: var(--type-body);
-          line-height: 1.72;
-          font-weight: 400;
+        .ec-footer-social {
+          width: 32px;
+          height: 32px;
+          border: 1px solid #1E2D3D;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 13px;
+          color: #9A9490;
+          cursor: pointer;
+          text-decoration: none;
+          transition: border-color 0.2s, color 0.2s;
         }
+        .ec-footer-social:hover { border-color: #C1121F; color: #C1121F; }
 
-        .ecf-heading {
-          margin: 0 0 14px;
-          font-size: var(--type-h5);
-          line-height: 1.3;
-          text-transform: none;
-          letter-spacing: 0.01em;
+        /* Columns */
+        .ec-footer-col {}
+
+        .ec-footer-col-title {
+          font-size: 10px;
           font-weight: 700;
-          color: #e2bf63;
-          font-family: var(--primary-font);
-          text-decoration: underline;
-          text-underline-offset: 5px;
-          text-decoration-thickness: 1px;
-          text-decoration-color: rgba(226, 191, 99, 0.7);
-        }
-
-        .ecf-links {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          display: grid;
-          gap: 8px;
-        }
-
-        .ecf-links :global(a) {
-          color: #f8f3ea;
-          text-decoration: none;
-          font-size: var(--type-small);
-          line-height: 1.55;
-          font-weight: 400;
-        }
-
-        .ecf-links :global(a:hover) {
-          color: #e2bf63;
-        }
-
-        .ecf-mag-carousel {
-          max-width: 250px;
-          display: grid;
-          gap: 8px;
-          margin: 0 auto;
-        }
-
-        .ecf-magazines {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-        }
-
-        .ecf-magazines .ecf-heading {
-          text-align: center;
-        }
-
-        .ecf-magazines .ecf-mag-carousel,
-        .ecf-magazines .ecf-muted {
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .ecf-mag-item {
-          border-radius: 8px;
-          overflow: hidden;
-          border: 1px solid rgba(212, 175, 55, 0.16);
-          background: rgba(255, 248, 235, 0.04);
-          display: block;
-        }
-
-        .ecf-mag-item--single {
-          max-width: 250px;
-          margin: 0 auto;
-        }
-
-        .ecf-mag-item :global(img) {
-          width: 100%;
-          height: auto;
-          display: block;
-        }
-
-        .ecf-mag-controls {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 8px;
-          max-width: 250px;
-        }
-
-        .ecf-mag-arrow {
-          width: 28px;
-          height: 28px;
-          border-radius: 999px;
-          border: 1px solid rgba(212, 175, 55, 0.18);
-          background: rgba(255, 248, 235, 0.06);
-          color: #f5efe4;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          cursor: pointer;
-        }
-
-        .ecf-mag-arrow:hover {
-          background: #e2bf63;
-          border-color: #e2bf63;
-          color: #17120b;
-        }
-
-        .ecf-mag-dots {
-          display: flex;
-          gap: 6px;
-          align-items: center;
-        }
-
-        .ecf-mag-dot {
-          width: 8px;
-          height: 8px;
-          border-radius: 999px;
-          border: none;
-          background: rgba(212, 175, 55, 0.24);
-          padding: 0;
-          cursor: pointer;
-        }
-
-        .ecf-mag-dot.is-active {
-          background: #e2bf63;
-        }
-
-        .ecf-muted {
-          margin: 0;
-          color: #d6ccbc;
-          font-size: var(--type-small);
-        }
-
-        .ecf-contact p {
-          margin: 0 0 12px;
-          display: grid;
-          gap: 3px;
-        }
-
-        .ecf-contact span {
-          color: #e2bf63;
-          font-size: var(--type-small);
+          letter-spacing: 0.2em;
           text-transform: uppercase;
-          letter-spacing: 0.08em;
-          font-weight: 600;
+          color: #fff;
+          margin: 0 0 20px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #1E2D3D;
         }
 
-        .ecf-contact :global(a) {
-          color: #f5efe4;
-          text-decoration: none;
-          font-size: var(--type-small);
-          line-height: 1.5;
-          word-break: break-word;
-        }
-
-        .ecf-contact :global(a:hover) {
-          color: #e2bf63;
-        }
-
-        .ecf-social {
+        .ec-footer-links {
           list-style: none;
-          margin: 8px 0 0;
+          margin: 0;
           padding: 0;
           display: flex;
-          gap: 8px;
+          flex-direction: column;
+          gap: 10px;
         }
 
-        .ecf-social :global(a) {
-          width: 34px;
-          height: 34px;
-          border-radius: 999px;
-          border: 1px solid rgba(212, 175, 55, 0.18);
-          background: rgba(255, 248, 235, 0.06);
-          color: #f5efe4;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
+        .ec-footer-links :global(a) {
+          font-size: 13px;
+          color: #9A9490;
           text-decoration: none;
+          transition: color 0.2s;
         }
+        .ec-footer-links :global(a:hover) { color: #fff; }
 
-        .ecf-social :global(a:hover) {
-          background: #e2bf63;
-          border-color: #e2bf63;
-          color: #17120b;
-        }
-
-        .ecf-social i {
-          font-size: var(--type-small);
-        }
-
-        .ecf-bottom {
-          margin-top: 24px;
-          padding-top: 10px;
-          border-top: 1px solid rgba(212, 175, 55, 0.12);
+        /* Latest Magazines */
+        .ec-footer-mags {
           display: flex;
           flex-direction: column;
-          gap: 6px;
-          text-align: center;
+          gap: 0;
         }
 
-        .ecf-bottom p {
+        .ec-footer-mag-item {
+          display: flex;
+          gap: 12px;
+          margin-bottom: 14px;
+          padding-bottom: 14px;
+          border-bottom: 1px solid #1E2D3D;
+          text-decoration: none;
+          cursor: pointer;
+          transition: opacity 0.2s;
+        }
+        .ec-footer-mag-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .ec-footer-mag-item:hover { opacity: 0.8; }
+
+        .ec-footer-mag-img {
+          width: 56px;
+          height: 42px;
+          object-fit: cover;
+          background: #1E2D3D;
+          flex-shrink: 0;
+          overflow: hidden;
+        }
+
+        .ec-footer-mag-img img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .ec-footer-mag-placeholder {
+          width: 100%;
+          height: 100%;
+          background: #1E2D3D;
+        }
+
+        .ec-footer-mag-title {
+          font-family: 'Libre Baskerville', serif;
+          font-size: 12px;
+          color: #D0C9BF;
+          line-height: 1.4;
+          margin-bottom: 4px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .ec-footer-mag-date {
+          font-size: 10px;
+          color: #9A9490;
+        }
+
+        .ec-footer-muted {
+          font-size: 13px;
+          color: #9A9490;
           margin: 0;
-          color: #d6ccbc;
-          font-size: var(--type-small);
-          line-height: 1.5;
         }
 
-        .ecf-bottom :global(a) {
-          color: #67a8ff;
-          text-decoration: underline;
+        /* Bottom Bar */
+        .ec-footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 18px 0;
         }
 
-        .ecf-bottom :global(a:hover) {
-          color: #9dc4ff;
+        .ec-footer-copy {
+          font-size: 11px;
+          color: #9A9490;
         }
 
-        @media (min-width: 768px) {
-          .ecf-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            column-gap: 30px;
-            row-gap: 22px;
+        .ec-footer-copy :global(a) {
+          color: #9A9490;
+          text-decoration: none;
+        }
+        .ec-footer-copy :global(a:hover) { color: #C1121F; }
+
+        .ec-footer-bottom-links {
+          display: flex;
+          gap: 24px;
+        }
+
+        .ec-footer-bottom-links :global(a) {
+          font-size: 11px;
+          color: #9A9490;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .ec-footer-bottom-links :global(a:hover) { color: #C1121F; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+          .ec-footer-top {
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            row-gap: 28px;
           }
         }
 
-        @media (min-width: 1100px) {
-          .ecf-grid {
-            grid-template-columns: 1.35fr 0.75fr 1.05fr 1fr;
-            gap: 26px;
-            align-items: stretch;
+        @media (max-width: 768px) {
+          .ec-footer-wrap { padding: 0 18px; }
+          .ec-footer-top {
+            grid-template-columns: 1fr;
+            padding: 40px 0 32px;
           }
-
-          .ecf-col:not(.ecf-brand) {
-            border-left: 1px solid rgba(212, 175, 55, 0.12);
-            padding-left: 24px;
-          }
-
-          .ecf-brand {
-            display: flex;
+          .ec-footer-bottom {
             flex-direction: column;
-            justify-content: center;
-            align-self: center;
-          }
-
-          .ecf-bottom {
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 24px;
+            gap: 12px;
             text-align: center;
+          }
+          .ec-footer-bottom-links {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
           }
         }
       `}</style>
-    </footer>
+    </>
   );
 };
 

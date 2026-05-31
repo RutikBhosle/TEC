@@ -9,6 +9,14 @@ class MyDocument extends Document {
           <link rel="preload" href="/css/fontawesome-all.min.css" as="style" />
           <link rel="preload" href="/css/iconfont.css" as="style" />
 
+          {/* Editorial Google Fonts */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+          />
+
           {/* Static CSS Files */}
           <link rel="stylesheet" href="/css/fontawesome-all.min.css" />
           <link rel="stylesheet" href="/css/iconfont.css" />

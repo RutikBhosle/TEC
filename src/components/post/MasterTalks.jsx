@@ -1,12 +1,10 @@
-import PostLayoutTwo from "./layout/PostLayoutTwo";
-import SharedSidebarWidgets from "../widget/SharedSidebarWidgets";
-
+import React from "react";
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
-import SectionTitle from "../elements/SectionTitle";
 import Loader from "../common/Loader";
 
-const MasterTalks = ({ postData, adBanner, pClass }) => {
+const MasterTalks = () => {
   const query = `
 *[
   _type == "post" &&
@@ -14,7 +12,7 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
 ]
 {
   title,
-   altText,
+  altText,
   slug,
   'featureImg': mainImage.asset->url,
   description,
@@ -24,10 +22,11 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
     'slug': "master-talks"
   },
   publishedAt
-} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...7]
+} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...5]
 `;
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["master-talks-home"],
+    queryKey: ["master-talks-home-v2"],
     queryFn: async () => {
       const response = await client.fetch(query);
       return response;
@@ -38,295 +37,318 @@ const MasterTalks = ({ postData, adBanner, pClass }) => {
 
   if (isLoading) return <Loader />;
   if (error) return <div>Error fetching posts</div>;
-
   if (!data) return null;
+
+  const featuredTalk = data[0];
+  const gridTalks = data.slice(1, 5);
+
+  const formatDate = (post) => {
+    const d = post.publishedAt || post._updatedAt;
+    if (!d) return "";
+    try {
+      return new Date(d).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+    } catch { return ""; }
+  };
+
   return (
-  <div
-    className="container master-talks-section"
-    style={{
-      marginTop: "8px",
-      background: "#f6f2e8",
-      color: "#1d2430",
-      fontFamily: "var(--secondary-font)",
-    }}
-  >
-      <style jsx global>{`
-        .master-talks-section .axil-title {
-          color: #1d2430 !important;
-          font-size: var(--type-h3);
-        }
+    <>
+      <section className="ec-talks">
+        <div className="ec-talks-container">
+          <div className="ec-section-header">
+            <div>
+              <div className="ec-section-label">Insights &amp; Analysis</div>
+              <h2 className="ec-section-title">Master Talks</h2>
+            </div>
+            <Link href="/category/master-talks" className="ec-view-all">All Posts</Link>
+          </div>
 
-        .master-talks-section .btn-link {
-          color: #7a5a24 !important;
-        }
-
-        .master-talks-section .btn-link:hover {
-          color: #8b641d !important;
-        }
-
-        .master-talks-section .axil-content .post-block {
-          background: transparent;
-          border: none;
-          border-radius: 0;
-          padding: 6px 0;
-          margin-bottom: 0 !important;
-        }
-
-        .master-talks-section .axil-content {
-          border-top: 1px solid rgba(126, 92, 35, 0.12);
-          border-bottom: 1px solid rgba(126, 92, 35, 0.12);
-        }
-
-        .master-talks-section .axil-content > div {
-          margin-bottom: 0 !important;
-        }
-
-        .master-talks-section .axil-content > div + div {
-          border-top: 1px solid rgba(126, 92, 35, 0.12);
-        }
-
-        .master-talks-section .post-cat.cat-btn {
-          background: #f5ead3 !important;
-          border: 1px solid #d8bc7b !important;
-          color: #7a5a24 !important;
-          font-size: var(--type-caption) !important;
-          font-family: var(--secondary-font) !important;
-        }
-
-        .master-talks-section .post-cat.cat-btn:hover {
-          background: #d4af37 !important;
-          color: #3f2c0d !important;
-          border-color: #d4af37 !important;
-        }
-
-        .master-talks-section .axil-post-title,
-        .master-talks-section .axil-post-title a {
-          color: #1d2430 !important;
-          font-family: var(--primary-font) !important;
-        }
-
-        .master-talks-section .axil-content .post-block .axil-post-title {
-          font-size: var(--type-h5);
-          line-height: 1.45;
-          margin-bottom: 0.35rem;
-        }
-
-        .master-talks-section .axil-post-title a:hover {
-          color: #8b641d !important;
-        }
-
-        .master-talks-section .market-news-stack-desc {
-          color: #5e6876 !important;
-          font-size: var(--type-small);
-          font-family: var(--secondary-font);
-          line-height: 1.4;
-          margin-bottom: 0;
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 2;
-          overflow: hidden;
-        }
-
-        .master-talks-section .axil-content .post-block > a,
-        .master-talks-section .axil-content .post-block figure > a {
-          margin-right: 1rem;
-        }
-
-        .master-talks-section .axil-content .post-block img {
-          max-width: 9.5rem;
-        }
-
-        .master-talks-section .axil-content .post-block .media-body {
-          align-self: flex-start;
-          margin-top: 0 !important;
-          margin-bottom: 0 !important;
-        }
-
-        .master-talks-section .axil-content .post-block p {
-          margin-bottom: 0 !important;
-        }
-
-        .master-talks-section .post-sidebar > * {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 12px;
-          padding: 8px;
-        }
-
-        .master-talks-section .category-widget h3,
-        .master-talks-section .post-widget .nav-link {
-          color: #1d2430 !important;
-          font-size: 12px !important;
-        }
-
-        .master-talks-section .post-sidebar .section-title {
-          font-size: var(--type-small) !important;
-          line-height: 1.35 !important;
-          margin-bottom: 0.8rem !important;
-        }
-
-        .master-talks-section .post-sidebar .post-widget .media.post-block {
-          padding: 0 !important;
-        }
-
-        .master-talks-section .post-sidebar .post-widget .axil-post-title {
-          font-size: 13px !important;
-          line-height: 1.45 !important;
-        }
-
-        .master-talks-section .post-sidebar .post-widget .post-cat.cat-btn {
-          font-size: 10px !important;
-          padding: 2px 6px !important;
-        }
-
-        .master-talks-section .post-sidebar .post-widget img {
-          max-width: 8.2rem !important;
-        }
-
-        .master-talks-section .post-sidebar .shared-sidebar-panel {
-          gap: 0.7rem !important;
-        }
-
-        .master-talks-section .post-sidebar .sidebar-post-widget .nav-pills {
-          gap: 6px !important;
-          margin-bottom: 0.9rem !important;
-        }
-
-        .master-talks-section .post-sidebar .sidebar-post-widget .nav-pills .nav-item a {
-          font-size: 10px !important;
-          padding: 0.65rem 0.35rem !important;
-          border-radius: 10px !important;
-        }
-
-        .master-talks-section .post-sidebar .sidebar-post-widget .tab-content {
-          padding-top: 0.35rem !important;
-        }
-
-        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small {
-          margin-bottom: 0.2rem !important;
-          padding-bottom: 0.2rem !important;
-        }
-
-        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small > a,
-        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small figure > a {
-          margin-right: 1rem !important;
-        }
-
-        .master-talks-section .post-sidebar .sidebar-post-widget .post-block.post-block__small .media-body {
-          margin-top: 0 !important;
-          margin-bottom: 0 !important;
-        }
-
-        .master-talks-section .post-sidebar .newsletter-widget .axil-title,
-        .master-talks-section .post-sidebar .newsletter-widget h3,
-        .master-talks-section .post-sidebar .category-widget .widget-title {
-          font-size: var(--type-small) !important;
-          line-height: 1.35 !important;
-        }
-
-        .master-talks-section .post-sidebar .newsletter-widget p,
-        .master-talks-section .post-sidebar .newsletter-widget input,
-        .master-talks-section .post-sidebar .newsletter-widget button,
-        .master-talks-section .post-sidebar .category-widget li,
-        .master-talks-section .post-sidebar .widget-social-share a {
-          font-size: 12px !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .single-cat {
-          padding: 8px !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .single-cat .inner {
-          padding: 8px !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .cat-content {
-          padding: 8px 10px !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .cat-content .cat-title,
-        .master-talks-section .post-sidebar .category-widget .cat-content h4,
-        .master-talks-section .post-sidebar .category-widget .cat-content a {
-          font-size: 12px !important;
-          line-height: 1.35 !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .category-slider {
-          height: calc((145px * 4) + (0.9rem * 3)) !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .category-item {
-          margin-bottom: 0.9rem !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .category-item > a,
-        .master-talks-section .post-sidebar .category-widget .category-item :global(a.d-block.position-relative) {
-          height: 145px !important;
-          border-radius: 10px !important;
-        }
-
-        .master-talks-section .post-sidebar .category-widget .category-card-title {
-          font-size: var(--type-small) !important;
-          line-height: 1.25 !important;
-          padding: 0 10px !important;
-        }
-
-        .master-talks-section .category-widget .owl-nav button.custom-owl-prev,
-        .master-talks-section .category-widget .owl-nav button.custom-owl-next {
-          background: #fffaf1 !important;
-          border: 1px solid rgba(126, 92, 35, 0.14);
-        }
-
-        .master-talks-section .category-widget .owl-nav button.custom-owl-prev i,
-        .master-talks-section .category-widget .owl-nav button.custom-owl-next i {
-          color: #4d5b6c !important;
-        }
-
-        @media (max-width: 991px) {
-          .master-talks-section .axil-content .post-block .axil-post-title {
-            font-size: var(--type-small);
-            line-height: 1.5;
-          }
-
-          .master-talks-section .market-news-stack-desc {
-            font-size: var(--type-caption);
-          }
-
-          .master-talks-section .axil-content .post-block {
-            padding: 6px 0;
-          }
-
-          .master-talks-section .axil-content .post-block > a,
-          .master-talks-section .axil-content .post-block figure > a {
-            margin-right: 0.8rem;
-          }
-
-          .master-talks-section .axil-content .post-block img {
-            max-width: 7.2rem;
-          }
-        }
-      `}</style>
-      <div className="row">
-        <div className="col-lg-9">
-          <SectionTitle
-            title={data[0]?.category.title || "Master Talks"}
-            btnText="ALL Posts"
-            btnUrl={`/category/${data[0]?.category?.slug}`}
-            pClass="m-b-xs-10"
-          />
-          <div className="axil-content">
-            {data.slice(0, 8).map((post, index) => (
-              <div key={index}>
-                <PostLayoutTwo data={post} showDescription />
+          {/* FEATURED TALK */}
+          {featuredTalk && (
+            <div className="ec-talks-featured">
+              <div className="ec-talks-featured-img">
+                {featuredTalk.featureImg ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={featuredTalk.featureImg}
+                    alt={featuredTalk.altText || featuredTalk.title}
+                    className="ec-tfi"
+                  />
+                ) : (
+                  <div className="ec-talks-img-placeholder" />
+                )}
               </div>
+              <div className="ec-talks-featured-body">
+                <div className="ec-talks-featured-tag">Master Talks · Featured</div>
+                <h3 className="ec-talks-featured-title">{featuredTalk.title}</h3>
+                {featuredTalk.description && (
+                  <p className="ec-talks-featured-excerpt">{featuredTalk.description}</p>
+                )}
+                <div className="ec-talks-featured-author">
+                  By Editorial Team · {formatDate(featuredTalk)} · 6 min read
+                </div>
+                <Link
+                  href={`/post/${featuredTalk.slug?.current}`}
+                  className="ec-talks-cta"
+                >
+                  Read Full Talk →
+                </Link>
+              </div>
+            </div>
+          )}
+
+          {/* NUMBERED GRID */}
+          <div className="ec-talks-grid">
+            {gridTalks.map((talk, i) => (
+              <Link
+                key={talk.slug?.current || i}
+                href={`/post/${talk.slug?.current}`}
+                className="ec-talk-item"
+              >
+                <div className="ec-talk-num">0{i + 1}</div>
+                <div className="ec-talk-tag">{talk.category?.title || "Master Talks"}</div>
+                <div className="ec-talk-title">{talk.title}</div>
+                {talk.description && (
+                  <p className="ec-talk-excerpt">{talk.description}</p>
+                )}
+              </Link>
             ))}
           </div>
         </div>
-        <div className="col-lg-3">
-          <SharedSidebarWidgets className="post-sidebar" />
-        </div>
-      </div>
-    </div>
+      </section>
+
+      <style jsx>{`
+        .ec-talks {
+          background: #FAF8F5;
+          padding: 64px 0 56px;
+        }
+
+        .ec-talks-container {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 32px;
+        }
+
+        .ec-section-header {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          margin-bottom: 28px;
+          padding-bottom: 12px;
+          border-bottom: 2px solid #0F1923;
+        }
+
+        .ec-section-label {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: #C1121F;
+          margin-bottom: 6px;
+        }
+
+        .ec-section-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 22px;
+          font-weight: 700;
+          color: #0F1923;
+          letter-spacing: -0.01em;
+          margin: 0;
+        }
+
+        .ec-view-all {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: #C1121F;
+          text-decoration: none;
+          border-bottom: 1px solid #C1121F;
+          padding-bottom: 1px;
+          transition: opacity 0.2s;
+          white-space: nowrap;
+        }
+        .ec-view-all:hover { opacity: 0.7; color: #C1121F; }
+
+        /* FEATURED TALK — horizontal split */
+        .ec-talks-featured {
+          display: grid;
+          grid-template-columns: 2fr 1.5fr;
+          gap: 0;
+          background: #FAF8F5;
+          margin-bottom: 40px;
+          border-top: 1px solid #D0C9BF;
+          border-bottom: 1px solid #D0C9BF;
+        }
+
+        .ec-talks-featured-img {
+          overflow: hidden;
+          background: #1E2D3D;
+          height: 320px;
+        }
+
+        .ec-tfi {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s;
+        }
+        .ec-talks-featured:hover .ec-tfi { transform: scale(1.03); }
+
+        .ec-talks-img-placeholder {
+          width: 100%;
+          height: 100%;
+          background: #1E2D3D;
+        }
+
+        .ec-talks-featured-body {
+          background: #FAF8F5;
+          padding: 36px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .ec-talks-featured-tag {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #C1121F;
+          margin-bottom: 14px;
+        }
+
+        .ec-talks-featured-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 24px;
+          font-weight: 700;
+          color: #0F1923;
+          line-height: 1.2;
+          margin: 0 0 12px;
+        }
+
+        .ec-talks-featured-excerpt {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px;
+          color: #6B6560;
+          line-height: 1.7;
+          margin: 0 0 16px;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .ec-talks-featured-author {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 12px;
+          color: #9A9490;
+          font-style: italic;
+          margin-bottom: 20px;
+        }
+
+        .ec-talks-cta {
+          display: inline-block;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #C1121F;
+          text-decoration: none;
+          border-bottom: 1px solid #C1121F;
+          padding-bottom: 2px;
+          width: fit-content;
+          transition: opacity 0.2s;
+        }
+        .ec-talks-cta:hover { opacity: 0.7; }
+
+        /* 4-COLUMN NUMBERED GRID */
+        .ec-talks-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 32px;
+          background: transparent;
+        }
+
+        .ec-talk-item {
+          background: transparent;
+          padding: 0;
+          cursor: pointer;
+          text-decoration: none;
+          transition: transform 0.2s;
+          display: flex !important;
+          flex-direction: column !important;
+        }
+        .ec-talk-item:hover {
+          transform: translateY(-4px);
+        }
+
+        .ec-talk-num {
+          font-family: 'Playfair Display', serif;
+          font-size: 56px;
+          font-weight: 300;
+          color: #0F1923;
+          line-height: 1;
+          margin-bottom: 16px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #D0C9BF;
+          transition: color 0.2s, border-color 0.2s;
+        }
+        .ec-talk-item:hover .ec-talk-num { color: #C1121F; border-bottom-color: #C1121F; }
+
+        .ec-talk-tag {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #C1121F;
+          margin-bottom: 8px;
+        }
+
+        .ec-talk-title {
+          font-family: 'Libre Baskerville', serif;
+          font-size: 15px;
+          color: #0F1923;
+          line-height: 1.4;
+          margin-bottom: 8px;
+          flex: 1;
+        }
+
+        .ec-talk-excerpt {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 12px;
+          color: #6B6560;
+          line-height: 1.55;
+          margin: 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+          .ec-talks-featured { grid-template-columns: 280px 1fr; }
+          .ec-talks-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+          .ec-talks { padding: 48px 0 40px; }
+          .ec-talks-container { padding: 0 18px; }
+          .ec-talks-featured { grid-template-columns: 1fr; }
+          .ec-talks-featured-img { height: 240px; }
+          .ec-talks-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 480px) {
+          .ec-talks-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
+    </>
   );
 };
 

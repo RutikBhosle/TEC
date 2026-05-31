@@ -1,4 +1,3 @@
-// components/LogoSlider.js
 import React from "react";
 
 import Logo8FigureFirm from "../../assest/8figurefirm_logo 6.jpg";
@@ -16,118 +15,119 @@ import LogoMagnolia from "../../assest/magnolia.jpg";
 import LogoDevang from "../../assest/devang.jpg";
 import LogoBen from "../../assest/ben.jpg";
 
+const allImages = [
+  { src: Logo8FigureFirm, alt: "8 Figure Firm" },
+  { src: LogoAlloyPersonalTraining, alt: "Alloy Personal Training" },
+  { src: LogoCubeSoftware, alt: "Cube Software" },
+  { src: LogoExePresence, alt: "Exe Presence" },
+  { src: LogoMiyazaki, alt: "Miyazaki" },
+  { src: LogoNewWorldWind, alt: "New World Wind" },
+  { src: LogoPickupUsa, alt: "Pickup USA" },
+  { src: LogoTimePlast, alt: "TimePlast" },
+  { src: LogoShoumo, alt: "Shoumo" },
+  { src: LogoSurbhi, alt: "Surbhi" },
+  { src: LogoSlendy, alt: "Slendy" },
+  { src: LogoMagnolia, alt: "Magnolia" },
+  { src: LogoDevang, alt: "Devang" },
+  { src: LogoBen, alt: "Ben" },
+];
+
 const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperClassName = "" }) => {
-  const images = [
-    { src: Logo8FigureFirm, alt: "8 Figure Firm" },
-    { src: LogoAlloyPersonalTraining, alt: "Alloy Personal Training" },
-    { src: LogoCubeSoftware, alt: "Cube Software" },
-    { src: LogoExePresence, alt: "Exe Presence" },
-    { src: LogoMiyazaki, alt: "Miyazaki" },
-    { src: LogoNewWorldWind, alt: "New World Wind" },
-    { src: LogoPickupUsa, alt: "Pickup USA Franchise Company" },
-    { src: LogoTimePlast, alt: "TimePlast" },
-    { src: LogoShoumo, alt: "Shoumo" },
-    { src: LogoSurbhi, alt: "Surbhi" },
-    { src: LogoSlendy, alt: "Slendy" },
-    { src: LogoMagnolia, alt: "Magnolia" },
-    { src: LogoDevang, alt: "Devang" },
-    { src: LogoBen, alt: "Ben" },
-    { src: "/assest/Kevin Wooldridge.jpg", alt: "Kevin Wooldridge" },
-    { src: "/assest/Justin Macbale.jpg", alt: "Justin" },
-    { src: "/assest/Gundula Ullah.jpg", alt: "Gundula" },
-    { src: "/assest/Aman%20Singh.jpg", alt: "Aman" },
-    { src: "/assest/Clem%20Newton-Brown%20OAM.jpg", alt: "Clem" },
-    { src: "/assest/Margarita Eberline.jpg", alt: "Margarita Eberline" },
-    { src: "/assest/Rinki Pramanik.jpg", alt: "Rinki Pramanik" },
-    { src: "/assest/Shilpa Bhasin Mehra.jpg", alt: "Shilpa Bhasin Mehra" },
-    { src: "/assest/Alysson Foti Bourque.jpg", alt: "Alysson Foti Bourque" },
-  ];
+  const doubled = [...allImages, ...allImages];
 
   return (
-    <div className={`container my-5 logo-slider-section ${wrapperClassName}`.trim()}>
-      {showTitle ? (
-        <h2
-          className="text-center mb-4"
-          style={{
-            color: "#1d2430",
-            fontSize: "var(--type-h3)",
-            fontFamily: "var(--primary-font)",
-          }}
-        >
-          {title}
-        </h2>
-      ) : null}
-      <div className="row">
-        <div className="col">
-          <div className="logo-slider">
-            <div className="logo-slide-track">
-              {[...images, ...images].map((image, index) => (
-                <div key={index} className="logo-slide">
-                  <div className="logo-container">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={typeof image.src === 'string' ? image.src : image.src.src}
-                      alt={image.alt}
-                      width={image.customWidth || 80}
-                      height={image.customHeight || 80}
-                      style={{ objectFit: "contain", width: "auto", height: "auto" }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+    <>
+      <section className={`ec-partners ${wrapperClassName}`.trim()}>
+        {showTitle && (
+          <div className="ec-partners-header">
+            <span className="ec-partners-label">Trusted Partners</span>
+            <h2 className="ec-partners-title">{title}</h2>
+          </div>
+        )}
+
+        <div className="ec-partners-track-outer">
+          <div className="ec-partners-track">
+            {doubled.map((image, index) => (
+              <div key={index} className="ec-partner-logo">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={typeof image.src === "string" ? image.src : image.src.src}
+                  alt={image.alt}
+                  width={80}
+                  height={80}
+                  style={{ objectFit: "contain", width: "auto", height: "auto", maxWidth: "80px", maxHeight: "80px" }}
+                />
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
+
       <style jsx>{`
-        .logo-slider {
-          height: 100px;
-          position: relative;
-          overflow: hidden;
-          padding: 10px 0;
-          background: transparent;
-          border: none;
-          border-radius: 0;
-        }
-        .logo-slide-track {
-          display: flex;
-          animation: scroll 40s linear infinite;
-          width: calc(150px * ${images.length * 2});
-        }
-        .logo-slide {
-          height: 100px;
-          width: 100px;
-          margin: 0 29px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .logo-container {
-          background: rgba(255, 250, 241, 0.9);
-          border: 1px solid rgba(126, 92, 35, 0.12);
-          border-radius: 8px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100px;
-          aspect-ratio: 1 / 1;
-          padding: 0;
+        .ec-partners {
+          background: #0F1923;
+          padding: 52px 0;
+          border-top: 4px solid #C1121F;
         }
 
-        .logo-container img {
-          max-width: 100%;
-          max-height: 100%;
+        .ec-partners-header {
+          text-align: center;
+          margin-bottom: 40px;
         }
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(calc(-150px * ${images.length}));
-          }
+
+        .ec-partners-label {
+          display: block;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: #C1121F;
+          margin-bottom: 10px;
+        }
+
+        .ec-partners-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 28px;
+          font-weight: 700;
+          color: #fff;
+          margin: 0;
+        }
+
+        .ec-partners-track-outer {
+          width: 100%;
+          overflow: hidden;
+        }
+
+        .ec-partners-track {
+          display: flex;
+          align-items: center;
+          animation: partnerScroll 48s linear infinite;
+          width: max-content;
+          gap: 0;
+        }
+        .ec-partners-track:hover { animation-play-state: paused; }
+
+        .ec-partner-logo {
+          padding: 20px 36px;
+          border-right: 1px solid #1E2D3D;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          filter: brightness(0) invert(0.45);
+          transition: filter 0.25s;
+          cursor: pointer;
+          flex-shrink: 0;
+          height: 100px;
+        }
+        .ec-partner-logo:hover { filter: brightness(0) invert(1); }
+
+        @keyframes partnerScroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
         }
       `}</style>
-    </div>
+    </>
   );
 };
 

@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Entrepreneurial Chronicles – Crafting Entrepreneurial Legends</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F1923;
+    --ink-mid: #1E2D3D;
+    --ink-light: #2E4057;
+    --slate: #F5F2EE;
+    --slate-mid: #E8E3DC;
+    --slate-dark: #D0C9BF;
+    --cardinal: #C1121F;
+    --cardinal-dark: #96010D;
+    --warm-white: #FAF8F5;
+    --text-body: #2C2C2C;
+    --text-muted: #6B6560;
+    --text-light: #9A9490;
+    --rule: #D0C9BF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-body);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── UTILITY ── */
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+  .section-rule { border: none; border-top: 2px solid var(--ink); margin-bottom: 28px; }
+  .thin-rule { border: none; border-top: 1px solid var(--rule); }
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .view-all {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+    text-decoration: none;
+    border-bottom: 1px solid var(--cardinal);
+    padding-bottom: 1px;
+    transition: opacity 0.2s;
+  }
+  .view-all:hover { opacity: 0.7; }
+
+  /* ── NAVBAR ── */
+  .topbar {
+    background: var(--slate-mid);
+    border-bottom: 1px solid var(--rule);
+    padding: 6px 0;
+  }
+  .topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .topbar-inner a { color: var(--text-muted); text-decoration: none; }
+  .topbar-inner a:hover { color: var(--cardinal); }
+  .topbar-divider { margin: 0 10px; color: var(--rule); }
+
+  .navbar {
+    background: var(--ink);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(15,25,35,0.3);
+  }
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+    gap: 32px;
+  }
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logo-badge {
+    width: 42px;
+    height: 42px;
+    background: var(--cardinal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .logo-text .brand-top {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--slate-dark);
+  }
+  .logo-text .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+  }
+  .nav-links li a {
+    display: block;
+    padding: 8px 16px;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--slate-dark);
+    text-decoration: none;
+    transition: color 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+  .nav-links li a:hover { color: #fff; border-bottom-color: var(--cardinal); }
+  .nav-links li a.active { color: #fff; border-bottom-color: var(--cardinal); }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .btn-subscribe {
+    background: var(--cardinal);
+    color: #fff;
+    padding: 8px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-subscribe:hover { background: var(--cardinal-dark); }
+  .search-icon {
+    color: var(--slate-dark);
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.2s;
+  }
+  .search-icon:hover { color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    padding: 60px 0;
+    overflow: hidden;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 0;
+    align-items: stretch;
+  }
+  .hero-main {
+    border-right: 1px solid var(--ink-light);
+    padding-right: 48px;
+    position: relative;
+  }
+  .hero-kicker {
+    display: inline-block;
+    background: var(--cardinal);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    margin-bottom: 24px;
+  }
+  .hero-img-wrapper {
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    position: relative;
+    background: var(--ink-mid);
+  }
+  .hero-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+  }
+  .hero-img-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, var(--ink) 0%, transparent 100%);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 44px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+    max-width: 560px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--slate-dark);
+  }
+  .hero-excerpt {
+    font-size: 15px;
+    color: var(--slate-dark);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--text-light);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .hero-meta .author { color: var(--slate-dark); font-weight: 600; }
+  .hero-meta-dot { color: var(--ink-light); }
+
+  .hero-sidebar {
+    padding-left: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .hero-sidebar-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink-light);
+  }
+  .hero-sidebar-item {
+    display: flex;
+    gap: 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--ink-light);
+    cursor: pointer;
+  }
+  .hero-sidebar-item:last-child { border-bottom: none; }
+  .hero-sidebar-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--ink-light);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 36px;
+  }
+  .hero-sidebar-content {}
+  .hero-sidebar-cat {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+    margin-bottom: 4px;
+  }
+  .hero-sidebar-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 13.5px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.4;
+  }
+  .hero-sidebar-date {
+    font-size: 10px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ── TICKER ── */
+  .ticker-bar {
+    background: var(--cardinal);
+    padding: 10px 0;
+    overflow: hidden;
+  }
+  .ticker-inner {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  .ticker-tag {
+    background: var(--ink);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0 20px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 24px;
+  }
+  .ticker-scroll {
+    display: flex;
+    animation: ticker 30s linear infinite;
+    white-space: nowrap;
+    gap: 60px;
+  }
+  .ticker-item {
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.05em;
+  }
+  .ticker-item span { font-weight: 300; margin-left: 8px; opacity: 0.8; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── LATEST MAGAZINES ── */
+  .latest-magazines { padding: 64px 0 56px; }
+  .magazines-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .magazine-card {
+    background: var(--warm-white);
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .magazine-card:hover { background: var(--slate); }
+  .magazine-card-img {
+    width: 100%;
+    height: 280px;
+    background: var(--ink-mid);
+    overflow: hidden;
+    position: relative;
+  }
+  .magazine-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .magazine-card:hover .magazine-card-img img { transform: scale(1.04); }
+  .magazine-card-issue {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--cardinal);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 4px 8px;
+  }
+  .magazine-card-body { padding: 20px; }
+  .magazine-card-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+    margin-bottom: 8px;
+  }
+  .magazine-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .magazine-card-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .magazine-card-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--slate-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .magazine-card-date { font-size: 11px; color: var(--text-light); }
+  .magazine-card-cta {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+    text-decoration: none;
+  }
+
+  /* ── FEATURED MAGAZINE ── */
+  .featured-section {
+    background: var(--ink);
+    padding: 72px 0;
+  }
+  .featured-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .featured-img-col { position: relative; }
+  .featured-mag-cover {
+    width: 100%;
+    max-width: 360px;
+    height: 480px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 24px 24px 0 var(--cardinal-dark);
+  }
+  .featured-accent-block {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 120px;
+    height: 120px;
+    background: var(--cardinal);
+    z-index: 0;
+  }
+  .featured-content-col {}
+  .featured-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .featured-eyebrow-line { flex: 1; height: 1px; background: var(--ink-light); }
+  .featured-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+  }
+  .featured-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .featured-title em { font-style: italic; color: var(--slate-dark); }
+  .featured-desc {
+    font-size: 15px;
+    color: var(--slate-dark);
+    line-height: 1.75;
+    margin-bottom: 36px;
+  }
+  .featured-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--ink-light);
+    padding-top: 28px;
+    margin-bottom: 36px;
+  }
+  .featured-stat { padding-right: 24px; border-right: 1px solid var(--ink-light); }
+  .featured-stat:last-child { border-right: none; padding-left: 24px; padding-right: 0; }
+  .featured-stat:nth-child(2) { padding-left: 24px; padding-right: 24px; }
+  .featured-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--cardinal);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .featured-stat-label {
+    font-size: 10px;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .featured-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--cardinal);
+    color: #fff;
+    padding: 14px 28px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover { background: var(--cardinal-dark); }
+  .btn-outline {
+    background: transparent;
+    color: var(--slate-dark);
+    padding: 14px 28px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid var(--ink-light);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--slate-dark); color: #fff; }
+
+  /* ── MARKET NEWS ── */
+  .market-news { padding: 64px 0 56px; background: var(--slate); }
+  .market-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .market-main {
+    background: var(--warm-white);
+    cursor: pointer;
+    transition: background 0.18s;
+  }
+  .market-main:hover { background: var(--slate); }
+  .market-main-img {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: var(--ink-mid);
+  }
+  .market-main-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .market-main:hover .market-main-img img { transform: scale(1.04); }
+  .market-main-body { padding: 28px; }
+  .market-tag {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cardinal);
+    margin-bottom: 10px;
+  }
+  .market-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .market-main-excerpt { font-size: 13.5px; color: var(--text-muted); line-height: 1.65; margin-bottom: 16px; }
+  .market-main-meta { font-size: 11px; color: var(--text-light); }
+
+  .market-secondary {
+    background: var(--warm-white);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .market-item {
+    background: var(--warm-white);
+    padding: 22px 24px;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: background 0.18s;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .market-item:last-child { border-bottom: none; }
+  .market-item:hover { background: var(--slate); }
+  .market-item-img {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    background: var(--ink-mid);
+    flex-shrink: 0;
+  }
+  .market-item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .market-item-content {}
+  .market-item-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 5px; }
+  .market-item-title { font-family: 'Libre Baskerville', serif; font-size: 13px; font-weight: 400; color: var(--ink); line-height: 1.4; margin-bottom: 4px; }
+  .market-item-date { font-size: 10px; color: var(--text-light); }
+
+  /* ── BUSINESS BULLETIN ── */
+  .business-bulletin { padding: 64px 0 56px; }
+  .bulletin-grid {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 48px;
+  }
+  .bulletin-main {}
+  .bulletin-featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 1px;
+  }
+  .bulletin-feature-item {
+    background: var(--warm-white);
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .bulletin-feature-item:hover .bfi-img img { transform: scale(1.04); }
+  .bfi-img { width: 100%; height: 180px; overflow: hidden; background: var(--ink-mid); }
+  .bfi-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .bfi-body { padding: 18px; }
+  .bfi-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 6px; }
+  .bfi-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 6px; }
+  .bfi-excerpt { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+
+  .bulletin-list {
+    border-top: 2px solid var(--ink);
+    margin-top: 24px;
+  }
+  .bulletin-list-item {
+    display: flex;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+  }
+  .bli-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--slate-dark);
+    flex-shrink: 0;
+    line-height: 1;
+    width: 28px;
+  }
+  .bli-content {}
+  .bli-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 4px; }
+  .bli-title { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--ink); line-height: 1.35; margin-bottom: 4px; }
+  .bli-excerpt { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .bulletin-sidebar {}
+  .bulletin-sidebar-card {
+    background: var(--ink);
+    padding: 28px;
+    margin-bottom: 1px;
+  }
+  .bsc-overline { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 12px; }
+  .bsc-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: #fff; line-height: 1.25; margin-bottom: 10px; }
+  .bsc-text { font-size: 13px; color: var(--slate-dark); line-height: 1.65; margin-bottom: 18px; }
+  .bsc-link { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cardinal); text-decoration: none; border-bottom: 1px solid var(--cardinal); }
+
+  .newsletter-box {
+    background: var(--slate);
+    border: 1px solid var(--rule);
+    padding: 28px;
+    margin-top: 1px;
+  }
+  .newsletter-label { font-size: 9px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 10px; }
+  .newsletter-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 8px; }
+  .newsletter-text { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 18px; }
+  .newsletter-input-wrap { display: flex; }
+  .newsletter-input {
+    flex: 1;
+    border: 1px solid var(--slate-dark);
+    border-right: none;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-body);
+    outline: none;
+  }
+  .newsletter-input::placeholder { color: var(--text-light); }
+  .newsletter-btn {
+    background: var(--cardinal);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .newsletter-btn:hover { background: var(--cardinal-dark); }
+
+  /* ── WEB PROFILES ── */
+  .web-profiles { padding: 64px 0 56px; background: var(--slate); }
+  .profiles-layout {
+    display: grid;
+    grid-template-columns: 440px 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .profile-featured {
+    background: var(--warm-white);
+    overflow: hidden;
+    position: relative;
+  }
+  .profile-featured-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    background: var(--ink-mid);
+    display: block;
+  }
+  .profile-featured-img img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-featured-body { padding: 28px; }
+  .profile-featured-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 10px; }
+  .profile-featured-name { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.15; margin-bottom: 6px; }
+  .profile-featured-role { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; font-style: italic; }
+  .profile-featured-bio { font-size: 13.5px; color: var(--text-body); line-height: 1.7; }
+
+  .profiles-list {
+    background: var(--warm-white);
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-item {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: background 0.18s;
+    overflow: hidden;
+  }
+  .profile-item:last-child { border-bottom: none; }
+  .profile-item:hover { background: var(--slate); }
+  .profile-item-img { height: 100%; min-height: 100px; overflow: hidden; background: var(--ink-mid); }
+  .profile-item-img img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-item-body { padding: 20px 24px; }
+  .profile-item-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 5px; }
+  .profile-item-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+  .profile-item-role { font-size: 12px; color: var(--text-muted); font-style: italic; margin-bottom: 6px; }
+  .profile-item-excerpt { font-size: 12px; color: var(--text-body); line-height: 1.5; }
+
+  /* ── MASTER TALKS ── */
+  .master-talks { padding: 64px 0 56px; }
+  .talks-featured-item {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-bottom: 1px;
+  }
+  .talks-featured-img { overflow: hidden; background: var(--ink-mid); height: 340px; }
+  .talks-featured-img img { width: 100%; height: 100%; object-fit: cover; }
+  .talks-featured-body {
+    background: var(--warm-white);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .talks-featured-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 14px; }
+  .talks-featured-title { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 12px; }
+  .talks-featured-excerpt { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+  .talks-featured-author { font-size: 12px; color: var(--text-light); font-style: italic; }
+
+  .talks-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-top: none;
+  }
+  .talk-item {
+    background: var(--warm-white);
+    padding: 24px;
+    cursor: pointer;
+    transition: background 0.18s;
+    border-left: 3px solid transparent;
+  }
+  .talk-item:hover { background: var(--slate); border-left-color: var(--cardinal); }
+  .talk-item-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--slate-dark); line-height: 1; margin-bottom: 12px; }
+  .talk-item-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--cardinal); margin-bottom: 6px; }
+  .talk-item-title { font-family: 'Libre Baskerville', serif; font-size: 14px; color: var(--ink); line-height: 1.4; margin-bottom: 8px; }
+  .talk-item-excerpt { font-size: 12px; color: var(--text-muted); line-height: 1.55; }
+
+  /* ── PARTNER BRANDS ── */
+  .partner-brands {
+    background: var(--ink);
+    padding: 52px 0;
+    border-top: 4px solid var(--cardinal);
+  }
+  .partners-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .partners-header .section-label { color: var(--cardinal); margin-bottom: 10px; display: block; }
+  .partners-header h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #fff; }
+  .partners-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+  .partner-logo {
+    padding: 20px 36px;
+    border-right: 1px solid var(--ink-light);
+    border-bottom: 1px solid var(--ink-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: brightness(0) invert(0.5);
+    transition: filter 0.25s;
+    cursor: pointer;
+  }
+  .partner-logo:last-child { border-right: none; }
+  .partner-logo:hover { filter: brightness(0) invert(1); }
+  .partner-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid var(--ink-light);
+    color: var(--slate-dark);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr 1fr;
+    gap: 48px;
+    padding: 60px 0 48px;
+    border-bottom: 1px solid var(--ink-light);
+  }
+  .footer-brand {}
+  .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .footer-logo-badge {
+    width: 36px;
+    height: 36px;
+    background: var(--cardinal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 15px;
+    color: #fff;
+  }
+  .footer-logo-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: #fff; }
+  .footer-tagline { font-size: 12px; color: var(--text-light); line-height: 1.6; margin-bottom: 20px; font-style: italic; }
+  .footer-socials { display: flex; gap: 10px; }
+  .footer-social {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--ink-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--text-light);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .footer-social:hover { border-color: var(--cardinal); color: var(--cardinal); }
+
+  .footer-col-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--ink-light);
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links li a {
+    font-size: 13px;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links li a:hover { color: #fff; }
+
+  .footer-latest-item {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--ink-light);
+    cursor: pointer;
+  }
+  .footer-latest-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .footer-latest-img { width: 60px; height: 44px; object-fit: cover; background: var(--ink-mid); flex-shrink: 0; }
+  .footer-latest-img img { width: 100%; height: 100%; object-fit: cover; }
+  .footer-latest-title { font-size: 12px; color: var(--slate-dark); line-height: 1.4; font-family: 'Libre Baskerville', serif; }
+  .footer-latest-date { font-size: 10px; color: var(--text-light); margin-top: 4px; }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+  }
+  .footer-copy { font-size: 11px; color: var(--text-light); }
+  .footer-copy a { color: var(--text-light); text-decoration: none; }
+  .footer-copy a:hover { color: var(--cardinal); }
+  .footer-bottom-links { display: flex; gap: 24px; }
+  .footer-bottom-links a { font-size: 11px; color: var(--text-light); text-decoration: none; transition: color 0.2s; }
+  .footer-bottom-links a:hover { color: var(--cardinal); }
+
+  /* ── DIVIDER SECTION ── */
+  .section-divider {
+    height: 4px;
+    background: var(--rule);
+    position: relative;
+  }
+  .section-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 64px;
+    height: 4px;
+    background: var(--cardinal);
+  }
+
+  /* ── RESPONSIVE BASICS ── */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-main { border-right: none; padding-right: 0; margin-bottom: 40px; }
+    .hero-sidebar { padding-left: 0; border-top: 1px solid var(--ink-light); padding-top: 32px; }
+    .magazines-grid { grid-template-columns: repeat(2, 1fr); }
+    .featured-inner { grid-template-columns: 1fr; gap: 40px; }
+    .market-grid { grid-template-columns: 1fr; }
+    .profiles-layout { grid-template-columns: 1fr; }
+    .talks-featured-item { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .bulletin-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .container { padding: 0 18px; }
+    .magazines-grid { grid-template-columns: 1fr; }
+    .talks-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hero-title { font-size: 32px; }
+    .featured-title { font-size: 28px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-kicker { animation: fadeInUp 0.5s ease 0.1s both; }
+  .hero-title { animation: fadeInUp 0.5s ease 0.2s both; }
+  .hero-excerpt { animation: fadeInUp 0.5s ease 0.3s both; }
+  .hero-meta { animation: fadeInUp 0.5s ease 0.4s both; }
+
+  /* Image placeholder styles for demo */
+  .img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: var(--ink-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div>
+        <span>Sunday, May 31, 2026</span>
+        <span class="topbar-divider">|</span>
+        <a href="#">Latest Issue</a>
+        <span class="topbar-divider">|</span>
+        <a href="#">Print Edition</a>
+      </div>
+      <div>
+        <a href="#">Advertise</a>
+        <span class="topbar-divider">|</span>
+        <a href="#">Contact</a>
+        <span class="topbar-divider">|</span>
+        <a href="#">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="#" class="logo-area">
+        <div class="logo-badge">EC</div>
+        <div class="logo-text">
+          <span class="brand-top">The Entrepreneurial</span>
+          <span class="brand-name">Chronicles</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#">Magazines</a></li>
+        <li><a href="#">Blogs</a></li>
+        <li><a href="#">Web Profiles</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="#">Books Kit</a></li>
+      </ul>
+      <div class="nav-actions">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <a href="#" class="btn-subscribe">Subscribe</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-main">
+        <span class="hero-kicker">Cover Story · Issue 2026</span>
+        <div class="hero-img-wrapper">
+          <div class="img-placeholder" style="background:#1a2b3c; color:#2E4057; font-size:10px; letter-spacing:0.2em;">DR. HANAN ALGOTAUMEL · COVER</div>
+          <div class="hero-img-overlay"></div>
+        </div>
+        <h1 class="hero-title">Dr. Hanan Algotaumel — <em>Transforming Visions into Entrepreneurial Legacies</em></h1>
+        <p class="hero-excerpt">A powerhouse in global business development, Dr. Hanan Algotaumel has redefined what it means to lead with purpose. Her journey from ambition to empire offers a blueprint for the next generation of entrepreneurs.</p>
+        <div class="hero-meta">
+          <span class="author">By Editorial Team</span>
+          <span class="hero-meta-dot">·</span>
+          <span>May 2026</span>
+          <span class="hero-meta-dot">·</span>
+          <span>8 min read</span>
+        </div>
+      </div>
+      <div class="hero-sidebar">
+        <div class="hero-sidebar-label">Also in this issue</div>
+        <div class="hero-sidebar-item">
+          <span class="hero-sidebar-num">01</span>
+          <div class="hero-sidebar-content">
+            <div class="hero-sidebar-cat">Business &amp; Finance</div>
+            <div class="hero-sidebar-title">Gregory Chow — Top Visionaries in AgriTech Shaping Tomorrow's Food Systems</div>
+            <div class="hero-sidebar-date">May 2026</div>
+          </div>
+        </div>
+        <div class="hero-sidebar-item">
+          <span class="hero-sidebar-num">02</span>
+          <div class="hero-sidebar-content">
+            <div class="hero-sidebar-cat">Innovation</div>
+            <div class="hero-sidebar-title">Dr. Daniel Andreae — Driving Change in Brass Health &amp; Nanomedicine</div>
+            <div class="hero-sidebar-date">May 2026</div>
+          </div>
+        </div>
+        <div class="hero-sidebar-item">
+          <span class="hero-sidebar-num">03</span>
+          <div class="hero-sidebar-content">
+            <div class="hero-sidebar-cat">Leadership</div>
+            <div class="hero-sidebar-title">Clem Newton-Brown — The Most Eminent Aviation &amp; Airline Leader of 2026</div>
+            <div class="hero-sidebar-date">May 2026</div>
+          </div>
+        </div>
+        <div class="hero-sidebar-item">
+          <span class="hero-sidebar-num">04</span>
+          <div class="hero-sidebar-content">
+            <div class="hero-sidebar-cat">Profiles</div>
+            <div class="hero-sidebar-title">Justin Ménetez — The Most Iconic CEO to Watch in 2025</div>
+            <div class="hero-sidebar-date">April 2026</div>
+          </div>
+        </div>
+        <div class="hero-sidebar-item">
+          <span class="hero-sidebar-num">05</span>
+          <div class="hero-sidebar-content">
+            <div class="hero-sidebar-cat">Education</div>
+            <div class="hero-sidebar-title">Rakgadi Phatane — Top 10 Education Innovators to Watch in 2026</div>
+            <div class="hero-sidebar-date">April 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="container">
+    <div class="ticker-inner">
+      <div class="ticker-tag">Breaking</div>
+      <div class="ticker-scroll">
+        <span class="ticker-item">Bitcoin Breaks Record<span>Surges Past $98,000 Amid Trump's Pro-Crypto Stance</span></span>
+        <span class="ticker-item">Microsoft CEO<span>Receives 63% Pay Increase Despite Reporting a Business Loss</span></span>
+        <span class="ticker-item">TikTok Founder<span>Zhang Yiming Rises to Become China's Richest Person</span></span>
+        <span class="ticker-item">GE Aerospace<span>Announces $1 Billion Investment to Expand U.S. Manufacturing</span></span>
+        <span class="ticker-item">JD.com Launches<span>JoyBuy in Europe to Compete Against Amazon</span></span>
+        <span class="ticker-item">Nokia Expands<span>Network Partnerships with TDM Brazil and Deutsche Telekom</span></span>
+        <span class="ticker-item">Bitcoin Breaks Record<span>Surges Past $98,000 Amid Trump's Pro-Crypto Stance</span></span>
+        <span class="ticker-item">Microsoft CEO<span>Receives 63% Pay Increase Despite Reporting a Business Loss</span></span>
+        <span class="ticker-item">TikTok Founder<span>Zhang Yiming Rises to Become China's Richest Person</span></span>
+        <span class="ticker-item">GE Aerospace<span>Announces $1 Billion Investment to Expand U.S. Manufacturing</span></span>
+        <span class="ticker-item">JD.com Launches<span>JoyBuy in Europe to Compete Against Amazon</span></span>
+        <span class="ticker-item">Nokia Expands<span>Network Partnerships with TDM Brazil and Deutsche Telekom</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LATEST MAGAZINES -->
+<section class="latest-magazines">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label" style="margin-bottom:6px;">Fresh off the Press</div>
+        <h2>Latest Magazines</h2>
+      </div>
+      <a href="#" class="view-all">View All Magazines</a>
+    </div>
+    <div class="magazines-grid">
+      <!-- Card 1 -->
+      <div class="magazine-card">
+        <div class="magazine-card-img">
+          <div class="img-placeholder" style="background:#182330;">Gregory Chow Cover</div>
+          <span class="magazine-card-issue">Vol. 12</span>
+        </div>
+        <div class="magazine-card-body">
+          <div class="magazine-card-tag">AgriTech · Leadership</div>
+          <div class="magazine-card-title">Gregory Chow — Top Visionaries in AgriTech Shaping the World</div>
+          <div class="magazine-card-sub">How Gregory Chow is rewriting the rules of agricultural innovation beyond The World.</div>
+        </div>
+        <div class="magazine-card-footer">
+          <span class="magazine-card-date">May 2026</span>
+          <a href="#" class="magazine-card-cta">Read Now</a>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="magazine-card">
+        <div class="magazine-card-img">
+          <div class="img-placeholder" style="background:#1d1a20;">Dr. Andreae Cover</div>
+          <span class="magazine-card-issue">Vol. 11</span>
+        </div>
+        <div class="magazine-card-body">
+          <div class="magazine-card-tag">Health · Innovation</div>
+          <div class="magazine-card-title">Dr. Daniel Andreae — Distinguished Leader Driving Change in Nanomedicine</div>
+          <div class="magazine-card-sub">A distinguished leader whose impact on brass health is reshaping modern medicine.</div>
+        </div>
+        <div class="magazine-card-footer">
+          <span class="magazine-card-date">April 2026</span>
+          <a href="#" class="magazine-card-cta">Read Now</a>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="magazine-card">
+        <div class="magazine-card-img">
+          <div class="img-placeholder" style="background:#1a1f2e;">Clem Newton Cover</div>
+          <span class="magazine-card-issue">Vol. 10</span>
+        </div>
+        <div class="magazine-card-body">
+          <div class="magazine-card-tag">Aviation · Leadership</div>
+          <div class="magazine-card-title">Clem Newton-Brown — The Most Eminent Aviation &amp; Airline Leader 2026</div>
+          <div class="magazine-card-sub">Charting the future of sustainable aviation with bold decisions and sharper vision.</div>
+        </div>
+        <div class="magazine-card-footer">
+          <span class="magazine-card-date">March 2026</span>
+          <a href="#" class="magazine-card-cta">Read Now</a>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="magazine-card">
+        <div class="magazine-card-img">
+          <div class="img-placeholder" style="background:#1f2218;">Hanan Cover</div>
+          <span class="magazine-card-issue">Vol. 09</span>
+        </div>
+        <div class="magazine-card-body">
+          <div class="magazine-card-tag">Business · Entrepreneurship</div>
+          <div class="magazine-card-title">Dr. Hanan Algotaumel — Transforming Visions into Entrepreneurial Legacies</div>
+          <div class="magazine-card-sub">From idea to institution — the extraordinary rise of Dr. Hanan Algotaumel.</div>
+        </div>
+        <div class="magazine-card-footer">
+          <span class="magazine-card-date">February 2026</span>
+          <a href="#" class="magazine-card-cta">Read Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FEATURED MAGAZINE -->
+<section class="featured-section">
+  <div class="container">
+    <div class="featured-inner">
+      <div class="featured-img-col">
+        <div style="position:relative; display:inline-block; width:100%; max-width:360px;">
+          <div style="width:100%; max-width:360px; height:480px; background:#182330; position:relative; z-index:1; box-shadow: 24px 24px 0 #96010D;">
+            <div class="img-placeholder" style="height:100%; background:#182230; font-size:10px; color:#2E4057;">Rakgadi Phatane — Featured Magazine</div>
+          </div>
+        </div>
+      </div>
+      <div class="featured-content-col">
+        <div class="featured-eyebrow">
+          <span class="featured-tag">Featured Magazine</span>
+          <div class="featured-eyebrow-line"></div>
+        </div>
+        <h2 class="featured-title">Rakgadi Phatane — <em>Top 10 Education Innovators to Watch in 2026</em></h2>
+        <p class="featured-desc">Rakgadi Phatane is redefining educational leadership across the African continent and beyond. This landmark issue explores her philosophy, her impact on learning systems, and why education remains the most powerful lever for societal transformation.</p>
+        <div class="featured-stats">
+          <div class="featured-stat">
+            <div class="featured-stat-num">10+</div>
+            <div class="featured-stat-label">Countries Reached</div>
+          </div>
+          <div class="featured-stat">
+            <div class="featured-stat-num">50K</div>
+            <div class="featured-stat-label">Students Impacted</div>
+          </div>
+          <div class="featured-stat">
+            <div class="featured-stat-num">12</div>
+            <div class="featured-stat-label">Industry Awards</div>
+          </div>
+        </div>
+        <div class="featured-btns">
+          <a href="#" class="btn-primary">View Magazine</a>
+          <a href="#" class="btn-outline">View All Magazines</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET NEWS -->
+<section class="market-news">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label" style="margin-bottom:6px;">Global Business Intelligence</div>
+        <h2>Market News</h2>
+      </div>
+      <a href="#" class="view-all">All Market News</a>
+    </div>
+    <div class="market-grid">
+      <div class="market-main">
+        <div class="market-main-img">
+          <div class="img-placeholder" style="background:#111820;">TikTok / Zhang Yiming</div>
+        </div>
+        <div class="market-main-body">
+          <div class="market-tag">Technology · China</div>
+          <h3 class="market-main-title">TikTok Founder Zhang Yiming Rises to Become China's Richest Person</h3>
+          <p class="market-main-excerpt">As ByteDance continues its global expansion, Zhang Yiming's net worth has surged past domestic tech rivals, cementing his position atop China's wealth rankings for the first time amid ongoing regulatory pressures.</p>
+          <div class="market-main-meta">May 29, 2026 · 4 min read</div>
+        </div>
+      </div>
+      <div class="market-secondary">
+        <div class="market-item">
+          <div class="market-item-img">
+            <div class="img-placeholder" style="height:60px; background:#1a1210; font-size:9px;">Micron</div>
+          </div>
+          <div class="market-item-content">
+            <div class="market-item-tag">Semiconductors</div>
+            <div class="market-item-title">Microsoft CEO Receives 63% Pay Increase Despite Reporting a Business Loss</div>
+            <div class="market-item-date">May 28, 2026</div>
+          </div>
+        </div>
+        <div class="market-item">
+          <div class="market-item-img">
+            <div class="img-placeholder" style="height:60px; background:#101a14; font-size:9px;">Google</div>
+          </div>
+          <div class="market-item-content">
+            <div class="market-item-tag">Technology</div>
+            <div class="market-item-title">Google Photos Just Got Smarter with AI-Powered Search Capabilities</div>
+            <div class="market-item-date">May 27, 2026</div>
+          </div>
+        </div>
+        <div class="market-item">
+          <div class="market-item-img">
+            <div class="img-placeholder" style="height:60px; background:#181218; font-size:9px;">Tesla</div>
+          </div>
+          <div class="market-item-content">
+            <div class="market-item-tag">Automotive</div>
+            <div class="market-item-title">Predictions for the Tesla Model 2 for the Upcoming Release Event</div>
+            <div class="market-item-date">May 26, 2026</div>
+          </div>
+        </div>
+      </div>
+      <div class="market-secondary">
+        <div class="market-item">
+          <div class="market-item-img">
+            <div class="img-placeholder" style="height:60px; background:#141a10; font-size:9px;">GE Aerospace</div>
+          </div>
+          <div class="market-item-content">
+            <div class="market-item-tag">Manufacturing</div>
+            <div class="market-item-title">GE Aerospace Announces $1 Billion Investment to Expand U.S. Manufacturing Footprint</div>
+            <div class="market-item-date">May 28, 2026</div>
+          </div>
+        </div>
+        <div class="market-item">
+          <div class="market-item-img">
+            <div class="img-placeholder" style="height:60px; background:#10121a; font-size:9px;">JD.com</div>
+          </div>
+          <div class="market-item-content">
+            <div class="market-item-tag">E-Commerce</div>
+            <div class="market-item-title">JD.com Launches JoyBuy in Europe to Compete Against Amazon in Western Markets</div>
+            <div class="market-item-date">May 27, 2026</div>
+          </div>
+        </div>
+        <div class="market-item">
+          <div class="market-item-img">
+            <div class="img-placeholder" style="height:60px; background:#14101a; font-size:9px;">Nokia</div>
+          </div>
+          <div class="market-item-content">
+            <div class="market-item-tag">Telecom</div>
+            <div class="market-item-title">Nokia Expands Network Partnerships with TDM Brazil and Deutsche Telekom</div>
+            <div class="market-item-date">May 26, 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS BULLETIN -->
+<section class="business-bulletin">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label" style="margin-bottom:6px;">Curated Intelligence</div>
+        <h2>Business Bulletin</h2>
+      </div>
+      <a href="#" class="view-all">View All</a>
+    </div>
+    <div class="bulletin-grid">
+      <div class="bulletin-main">
+        <div class="bulletin-featured">
+          <div class="bulletin-feature-item">
+            <div class="bfi-img">
+              <div class="img-placeholder" style="height:180px; background:#0d1a14; font-size:9px;">Bitcoin / Crypto</div>
+            </div>
+            <div class="bfi-body">
+              <div class="bfi-tag">Crypto · Finance</div>
+              <div class="bfi-title">Bitcoin Breaks Record, Surges Past $98,000 Amid Trump's Pro-Crypto Stance</div>
+              <p class="bfi-excerpt">Bitcoin smashes a historic milestone, surpassing $98,000 for the first time as Pennsylvania Trump's pro-crypto stance and market optimism reach fever pitch.</p>
+            </div>
+          </div>
+          <div class="bulletin-feature-item">
+            <div class="bfi-img">
+              <div class="img-placeholder" style="height:180px; background:#181014; font-size:9px;">AI / Google</div>
+            </div>
+            <div class="bfi-body">
+              <div class="bfi-tag">AI · Productivity</div>
+              <div class="bfi-title">How Google Photos Is Leveraging AI to Redefine Personal Search</div>
+              <p class="bfi-excerpt">Google's latest AI integration transforms photo management — find any memory with conversational, natural-language queries and pinpoint accuracy.</p>
+            </div>
+          </div>
+        </div>
+        <div class="bulletin-list">
+          <div class="bulletin-list-item">
+            <span class="bli-num">01</span>
+            <div class="bli-content">
+              <div class="bli-tag">Automotive</div>
+              <div class="bli-title">Predictions for the Tesla Model 2 Ahead of the Upcoming Release Event</div>
+              <p class="bli-excerpt">What industry analysts expect from Tesla's most anticipated budget release — and why it could reshape the EV market.</p>
+            </div>
+          </div>
+          <div class="bulletin-list-item">
+            <span class="bli-num">02</span>
+            <div class="bli-content">
+              <div class="bli-tag">Corporate</div>
+              <div class="bli-title">Microsoft CEO Receives 63% Pay Increase Despite Reporting a Business Loss</div>
+              <p class="bli-excerpt">Shareholder scrutiny intensifies as the tech giant's leadership compensation continues to defy conventional performance benchmarks.</p>
+            </div>
+          </div>
+          <div class="bulletin-list-item">
+            <span class="bli-num">03</span>
+            <div class="bli-content">
+              <div class="bli-tag">Manufacturing</div>
+              <div class="bli-title">GE Aerospace Bets Big on American Manufacturing with a $1 Billion Expansion</div>
+              <p class="bli-excerpt">The aerospace giant doubles down on domestic production, signaling renewed confidence in U.S. industrial capacity.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bulletin-sidebar">
+        <div class="bulletin-sidebar-card">
+          <div class="bsc-overline">Editor's Pick</div>
+          <div class="bsc-title">The Most Influential Businesses Shaping Our Digital World</div>
+          <p class="bsc-text">A curated deep-dive into the companies rewriting the rules of commerce, innovation, and global influence in 2026.</p>
+          <a href="#" class="bsc-link">Explore Feature →</a>
+        </div>
+        <div class="newsletter-box">
+          <div class="newsletter-label">Newsletter</div>
+          <div class="newsletter-title">Stay ahead of the story.</div>
+          <p class="newsletter-text">The EC Chronicles digest — curated business intelligence, fresh profiles, and market insight, weekly.</p>
+          <div class="newsletter-input-wrap">
+            <input class="newsletter-input" type="email" placeholder="Your email address">
+            <button class="newsletter-btn">Join</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- WEB PROFILES -->
+<section class="web-profiles">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label" style="margin-bottom:6px;">People of Influence</div>
+        <h2>Web Profiles</h2>
+      </div>
+      <a href="#" class="view-all">View All Profiles</a>
+    </div>
+    <div class="profiles-layout">
+      <div class="profile-featured">
+        <div class="profile-featured-img">
+          <div class="img-placeholder" style="height:320px; background:#111820; font-size:9px;">Justin J. MacBale — Featured</div>
+        </div>
+        <div class="profile-featured-body">
+          <div class="profile-featured-tag">Innovator · Education Technology</div>
+          <div class="profile-featured-name">Justin J. MacBale</div>
+          <div class="profile-featured-role">Creator, Co-Creator of the Genius Learning Platform</div>
+          <p class="profile-featured-bio">Justin MacBale — The Most Innovative Business Leader to Watch in 2026. He has made significant contributions to the field in a way that his good work both thrives in business and makes life better for everyone. His professional accomplishments, community involvement and standout contributions are as impressive at the international level, carefully demonstrating that it's possible to be an outstandingly successful business leader.</p>
+        </div>
+      </div>
+      <div class="profiles-list">
+        <div class="profile-item">
+          <div class="profile-item-img">
+            <div class="img-placeholder" style="background:#0f1820; font-size:9px;">Justin M.</div>
+          </div>
+          <div class="profile-item-body">
+            <div class="profile-item-tag">Top Profile · CEO</div>
+            <div class="profile-item-name">Justin Ménetez</div>
+            <div class="profile-item-role">The Most Iconic CEO to Watch in 2025</div>
+            <p class="profile-item-excerpt">A relentless innovator who has built category-defining ventures across three continents.</p>
+          </div>
+        </div>
+        <div class="profile-item">
+          <div class="profile-item-img">
+            <div class="img-placeholder" style="background:#101a14; font-size:9px;">Clem N.</div>
+          </div>
+          <div class="profile-item-body">
+            <div class="profile-item-tag">Top Profile · Aviation</div>
+            <div class="profile-item-name">Clem Newton-Brown</div>
+            <div class="profile-item-role">The Most Eminent Aviation &amp; Airline Leader</div>
+            <p class="profile-item-excerpt">Former elected official turned aviation executive, shaping the future of green aerospace.</p>
+          </div>
+        </div>
+        <div class="profile-item">
+          <div class="profile-item-img">
+            <div class="img-placeholder" style="background:#181014; font-size:9px;">Rakgadi</div>
+          </div>
+          <div class="profile-item-body">
+            <div class="profile-item-tag">Top Profile · Education</div>
+            <div class="profile-item-name">Rakgadi Phatane</div>
+            <div class="profile-item-role">Top 10 Education Innovators to Watch</div>
+            <p class="profile-item-excerpt">Transforming learning infrastructure across Sub-Saharan Africa through technology and policy.</p>
+          </div>
+        </div>
+        <div class="profile-item">
+          <div class="profile-item-img">
+            <div class="img-placeholder" style="background:#14180f; font-size:9px;">Phillip L.</div>
+          </div>
+          <div class="profile-item-body">
+            <div class="profile-item-tag">Top Profile · Education</div>
+            <div class="profile-item-name">Phillip Leighton Daly</div>
+            <div class="profile-item-role">The Most Influential University &amp; Education Leader</div>
+            <p class="profile-item-excerpt">A visionary in higher education whose work redefines institutional leadership for the digital age.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MASTER TALKS -->
+<section class="master-talks">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-label" style="margin-bottom:6px;">Insights &amp; Analysis</div>
+        <h2>Master Talks</h2>
+      </div>
+      <a href="#" class="view-all">All Posts</a>
+    </div>
+    <!-- Featured Talk -->
+    <div class="talks-featured-item">
+      <div class="talks-featured-img">
+        <div class="img-placeholder" style="height:340px; background:#10181a; font-size:9px;">Andre Hakkak</div>
+      </div>
+      <div class="talks-featured-body">
+        <div class="talks-featured-tag">Master Talks · Finance</div>
+        <h3 class="talks-featured-title">Andre Hakkak Willis: Marrisou Shipman, A Tale of Love, Entrepreneurship, and Impact</h3>
+        <p class="talks-featured-excerpt">Andre Hakkak Willis Discusses finances, entrepreneurship, relationship the music business associate Marrisou Shipman. A rare insight into the intersection of personal mission and business legacy, and how vulnerability became a competitive advantage.</p>
+        <div class="talks-featured-author">By Editorial Team · May 2026 · 6 min read</div>
+      </div>
+    </div>
+    <!-- Talks Grid -->
+    <div class="talks-grid">
+      <div class="talk-item">
+        <div class="talk-item-num">01</div>
+        <div class="talk-item-tag">Finance · Leadership</div>
+        <div class="talk-item-title">Brook B. Taube: Redefining Leadership in Finance and Investment Banking</div>
+        <p class="talk-item-excerpt">Brook B. Taube is revolutionizing leadership through vision, thought-through strategy, innovative thinking, and an entrepreneurial approach.</p>
+      </div>
+      <div class="talk-item">
+        <div class="talk-item-num">02</div>
+        <div class="talk-item-tag">Science · Universe</div>
+        <div class="talk-item-title">The 3 Most Exciting Things in the Universe You Probably Didn't Know About</div>
+        <p class="talk-item-excerpt">The 3 most exciting and mind-bending phenomena in the universe you probably didn't know about, from vacuoles to oscillations.</p>
+      </div>
+      <div class="talk-item">
+        <div class="talk-item-num">03</div>
+        <div class="talk-item-tag">Business · Global</div>
+        <div class="talk-item-title">Exploring Top Franchise Business Opportunities in the World Today</div>
+        <p class="talk-item-excerpt">Top franchise businesses to consider in the world, discussing different industries, global brand recognition, and lucrative opportunities.</p>
+      </div>
+      <div class="talk-item">
+        <div class="talk-item-num">04</div>
+        <div class="talk-item-tag">Branding · Marketing</div>
+        <div class="talk-item-title">Brand Value: Famous Brand Ambassadors in the World and Their Impact</div>
+        <p class="talk-item-excerpt">Famous brand ambassadors in the world — Victor Osimhe, Shopee, Taylor Swift, Dani Carvajal — and their measurable brand impact.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PARTNER BRANDS -->
+<section class="partner-brands">
+  <div class="container">
+    <div class="partners-header">
+      <span class="section-label">Trusted Partners</span>
+      <h2>Our Partner Brands</h2>
+    </div>
+    <div class="partners-logos">
+      <div class="partner-logo"><span class="partner-logo-text" style="font-family:'DM Sans'; font-size:15px; font-weight:600;">MAMMOTH</span></div>
+      <div class="partner-logo"><span class="partner-logo-text" style="font-family:'Playfair Display'; font-size:18px;">Maersk</span></div>
+      <div class="partner-logo"><span class="partner-logo-text" style="font-family:'DM Sans'; font-size:14px; font-weight:700; letter-spacing:0.1em;">NEW WORLD</span></div>
+      <div class="partner-logo"><span class="partner-logo-text" style="font-family:'DM Sans'; font-size:15px; font-weight:600;">KONNECT</span></div>
+      <div class="partner-logo"><span class="partner-logo-text" style="font-family:'Playfair Display'; font-size:17px;">Stellar</span></div>
+      <div class="partner-logo"><span class="partner-logo-text" style="font-family:'DM Sans'; font-size:13px; font-weight:700; letter-spacing:0.12em;">GLOBALINK</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <!-- Brand col -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="footer-logo-badge">EC</div>
+          <span class="footer-logo-name">EC Chronicles</span>
+        </div>
+        <p class="footer-tagline">The Entrepreneurial Chronicles — Crafting Entrepreneurial Legends, one story at a time.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social">f</a>
+          <a href="#" class="footer-social">in</a>
+          <a href="#" class="footer-social">tw</a>
+          <a href="#" class="footer-social">yt</a>
+          <a href="#" class="footer-social">ig</a>
+        </div>
+      </div>
+      <!-- Quick links -->
+      <div>
+        <div class="footer-col-title">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Magazines</a></li>
+          <li><a href="#">Blogs</a></li>
+          <li><a href="#">Web Profiles</a></li>
+          <li><a href="#">Market News</a></li>
+          <li><a href="#">Master Talks</a></li>
+          <li><a href="#">Advertise</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <!-- Categories -->
+      <div>
+        <div class="footer-col-title">Categories</div>
+        <ul class="footer-links">
+          <li><a href="#">Business &amp; Finance</a></li>
+          <li><a href="#">Innovation &amp; Technology</a></li>
+          <li><a href="#">Leadership</a></li>
+          <li><a href="#">Education</a></li>
+          <li><a href="#">Aviation &amp; Aerospace</a></li>
+          <li><a href="#">Health &amp; Wellness</a></li>
+          <li><a href="#">AgriTech</a></li>
+          <li><a href="#">Entrepreneurship</a></li>
+        </ul>
+      </div>
+      <!-- Latest -->
+      <div>
+        <div class="footer-col-title">Latest Magazines</div>
+        <div class="footer-latest-item">
+          <div class="footer-latest-img">
+            <div class="img-placeholder" style="background:#111820; font-size:8px;">Gregory</div>
+          </div>
+          <div>
+            <div class="footer-latest-title">Gregory Chow — Top Visionaries in AgriTech</div>
+            <div class="footer-latest-date">May 2026</div>
+          </div>
+        </div>
+        <div class="footer-latest-item">
+          <div class="footer-latest-img">
+            <div class="img-placeholder" style="background:#1d1a20; font-size:8px;">Andreae</div>
+          </div>
+          <div>
+            <div class="footer-latest-title">Dr. Daniel Andreae — Driving Change in Nanomedicine</div>
+            <div class="footer-latest-date">April 2026</div>
+          </div>
+        </div>
+        <div class="footer-latest-item">
+          <div class="footer-latest-img">
+            <div class="img-placeholder" style="background:#1a1f2e; font-size:8px;">Clem</div>
+          </div>
+          <div>
+            <div class="footer-latest-title">Clem Newton-Brown — Aviation &amp; Airline Leader 2026</div>
+            <div class="footer-latest-date">March 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2026 The Entrepreneurial Chronicles. All rights reserved. 
+        Designed by <a href="#">Jolie Solutions</a>.
+      </div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

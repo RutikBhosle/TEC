@@ -772,18 +772,34 @@ const HeaderOne = () => {
 
   return (
     <>
-      <header className="page-header sticky-top">
-        <div className="header-top bg-grey-dark-one">
-          <div className="container">
-            <div className="row align-items-center">
-            </div>
+      {/* ── TOPBAR ── */}
+      <div className="ec-topbar">
+        <div className="ec-topbar-inner">
+          <div className="ec-topbar-left">
+            <span className="ec-topbar-date">
+              {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+            </span>
+            <span className="ec-topbar-divider">|</span>
+            <Link href="/magazines" className="ec-topbar-link">Latest Issue</Link>
+            <span className="ec-topbar-divider">|</span>
+            <Link href="/magazines" className="ec-topbar-link">Print Edition</Link>
+          </div>
+          <div className="ec-topbar-right">
+            <Link href="/advertise-with-us" className="ec-topbar-link">Advertise</Link>
+            <span className="ec-topbar-divider">|</span>
+            <Link href="/contact" className="ec-topbar-link">Contact</Link>
+            <span className="ec-topbar-divider">|</span>
+            <Link href="/magazines" className="ec-topbar-link ec-topbar-link--accent">Subscribe</Link>
           </div>
         </div>
+      </div>
+
+      <header className="page-header sticky-top">
         <nav className="navbar bg-black">
           <div className="container">
             <div className="navbar-inner">
               <div className="brand-logo-container">
-                <Link href="/">
+                <Link href="/" className="ec-logo-area">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={NavbarLogo.src}
@@ -951,6 +967,8 @@ const HeaderOne = () => {
                 >
                   <i className="far fa-search" />
                 </button>
+
+                <Link href="/magazines" className="ec-nav-subscribe-btn">Subscribe</Link>
 
                 {/* Mobile Hamburger Menu */}
                 <button 
@@ -1124,9 +1142,43 @@ const HeaderOne = () => {
       </header>
 
       <style jsx global>{`
+        /* ── EC TOPBAR ── */
+        .ec-topbar {
+          background: #E8E3DC;
+          border-bottom: 1px solid #D0C9BF;
+          padding: 6px 0;
+        }
+        .ec-topbar-inner {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 32px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          color: #6B6560;
+          letter-spacing: 0.05em;
+        }
+        .ec-topbar-left, .ec-topbar-right {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .ec-topbar-divider { color: #D0C9BF; }
+        .ec-topbar-link {
+          color: #6B6560;
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .ec-topbar-link:hover { color: #C1121F; }
+        .ec-topbar-link--accent { color: #C1121F !important; font-weight: 600; }
+        .ec-topbar-date { color: #6B6560; }
+
+        /* ── NAVBAR ── */
         .navbar {
-          background-color: #000 !important;
-          border-bottom: 1px solid #333;
+          background-color: #0F1923 !important;
+          border-bottom: 1px solid #1E2D3D;
         }
 
         .navbar-inner {
@@ -1140,6 +1192,32 @@ const HeaderOne = () => {
           flex-shrink: 0;
           margin-left: 0;
           padding-left: 0;
+        }
+
+        .ec-logo-area { text-decoration: none; display: block; }
+
+        /* Subscribe CTA in nav */
+        .ec-nav-subscribe-btn {
+          background: #C1121F;
+          color: #fff !important;
+          padding: 8px 20px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          text-decoration: none;
+          border: none;
+          cursor: pointer;
+          transition: background 0.2s;
+          white-space: nowrap;
+          display: inline-block;
+        }
+        .ec-nav-subscribe-btn:hover { background: #96010D; color: #fff !important; }
+
+        @media (max-width: 991px) {
+          .ec-topbar { display: none; }
+          .ec-nav-subscribe-btn { display: none; }
         }
 
         @media (min-width: 992px) {
@@ -1982,10 +2060,8 @@ const HeaderOne = () => {
 
         .navbar,
         .main-navbar {
-          background:
-            radial-gradient(circle at top, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 42%),
-            linear-gradient(180deg, #17120b 0%, #0f0c08 100%) !important;
-          border-bottom: 1px solid rgba(212, 175, 55, 0.18) !important;
+          background: #0F1923 !important;
+          border-bottom: 1px solid #1E2D3D !important;
         }
 
         .navbar .nav-link,
@@ -1993,7 +2069,7 @@ const HeaderOne = () => {
         .navbar .nav-submenu-toggle,
         .navbar .nav-search-field-toggler,
         .navbar-extra-features button {
-          color: #f5efe4 !important;
+          color: #D0C9BF !important;
         }
 
         .navbar .nav-link:hover,
@@ -2001,31 +2077,31 @@ const HeaderOne = () => {
         .navbar .nav-submenu-toggle:hover,
         .navbar .nav-search-field-toggler:hover,
         .navbar-extra-features button:hover {
-          color: #e2bf63 !important;
+          color: #fff !important;
         }
 
         .nav-dropdown-menu,
         .nav-submenu-menu,
         .search-suggestions-dropdown,
         .mobile-menu-dropdown {
-          background: linear-gradient(180deg, #17120b 0%, #120e09 100%) !important;
-          border-color: rgba(212, 175, 55, 0.16) !important;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28) !important;
+          background: #0F1923 !important;
+          border-color: #2E4057 !important;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
         }
 
         .navbar .navbar-search-field,
         .navbar .navbar-search-field:focus {
-          background: rgba(255, 248, 235, 0.06) !important;
-          background-color: rgba(255, 248, 235, 0.06) !important;
-          color: #f5efe4 !important;
-          border: 1px solid rgba(212, 175, 55, 0.2) !important;
+          background: #1E2D3D !important;
+          background-color: #1E2D3D !important;
+          color: #FAF8F5 !important;
+          border: 1px solid #2E4057 !important;
         }
 
         .navbar .navbar-search-field::placeholder,
         .navbar .navbar-search-field::-webkit-input-placeholder,
         .navbar .navbar-search-field::-moz-placeholder,
         .navbar .navbar-search-field:-ms-input-placeholder {
-          color: #b7ab98 !important;
+          color: #9A9490 !important;
         }
 
         .search-suggestions-header,
@@ -2033,38 +2109,40 @@ const HeaderOne = () => {
         .mobile-nav-link,
         .mobile-nav-accordion,
         .mobile-nav-accordion-toggle {
-          border-color: rgba(126, 92, 35, 0.12) !important;
+          border-color: #1E2D3D !important;
         }
 
         .search-suggestions-header h4,
         .suggestion-text,
         .mobile-nav-link,
         .mobile-nav-accordion-toggle {
-          color: #f5efe4 !important;
+          color: #FAF8F5 !important;
         }
 
         .search-suggestion-item:hover,
         .mobile-nav-link:hover {
-          background: rgba(212, 175, 55, 0.08) !important;
-          color: #e2bf63 !important;
+          background: #1E2D3D !important;
+          color: #fff !important;
         }
 
         .suggestion-image,
         .search-tips,
         .mobile-submenu {
-          background: rgba(255, 248, 235, 0.04) !important;
-          border-color: rgba(212, 175, 55, 0.12) !important;
+          background: #1E2D3D !important;
+          border-color: #2E4057 !important;
         }
 
         .suggestion-link span {
-          color: #b7ab98 !important;
+          color: #9A9490 !important;
         }
+
+        .suggestion-type { color: #C1121F !important; }
 
         .hamburger {
           background: repeating-linear-gradient(
             to bottom,
-            #f5efe4 0,
-            #f5efe4 2px,
+            #D0C9BF 0,
+            #D0C9BF 2px,
             transparent 2px,
             transparent 6px
           ) !important;
@@ -2072,8 +2150,25 @@ const HeaderOne = () => {
 
         .hamburger span,
         .navbar .mobile-menu-toggle .hamburger span {
-          background: #f5efe4 !important;
-          background-color: #f5efe4 !important;
+          background: #D0C9BF !important;
+          background-color: #D0C9BF !important;
+        }
+
+        .navbar-nav-links .nav-link {
+          color: #D0C9BF !important;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11.5px !important;
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          border-bottom: 2px solid transparent;
+          transition: color 0.2s, border-color 0.2s;
+          padding: 8px 12px !important;
+        }
+        .navbar-nav-links .nav-link:hover {
+          color: #fff !important;
+          border-bottom-color: #C1121F !important;
+          text-decoration: none;
         }
 
         

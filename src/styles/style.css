@@ -6,11 +6,11 @@ Date Created: Oct 14, 2022
 
 ==================================================== --*/
 
-/* Base dark theme defaults (non-intrusive; component styles can override) */
+/* Base editorial theme defaults */
 html,
 body {
-  background: #000;
-  color: #e6e8eb;
+  background: #FAF8F5;
+  color: #0F1923;
 }
 
 a {
@@ -18,14 +18,14 @@ a {
 }
 
 a:hover {
-  color: #d4af37;
+  color: #C1121F;
 }
 
 /* Section-level defaults only */
 .axil-video-posts,
 .trending-stories {
-  background: #000;
-  color: #e6e8eb;
+  background: #FAF8F5;
+  color: #0F1923;
 }
 /*-- == Table of contents =====================
 
@@ -77,8 +77,9 @@ a:hover {
 ================================================== --*/
 /*--Custom Variables--*/
 :root {
-  --primary-font: var(--font-merriweather), serif;
-  --secondary-font: var(--font-inter), sans-serif;
+  --primary-font: 'Playfair Display', Georgia, serif;
+  --secondary-font: 'DM Sans', system-ui, sans-serif;
+  --tertiary-font: 'Libre Baskerville', Georgia, serif;
   --type-display: 56px;
   --type-h1: 48px;
   --type-h2: 36px;
@@ -167,7 +168,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Body copy discipline */
 p,
 li,
 td,
@@ -177,7 +177,7 @@ input,
 textarea,
 select {
   font-family: var(--secondary-font);
-  font-weight: 400 !important;
+  font-weight: 400;
   line-height: 1.7;
 }
 
@@ -190,13 +190,13 @@ h6,
 .page-title,
 .section-title,
 .axil-post-title {
-  font-family: var(--primary-font) !important;
+  font-family: var(--primary-font);
   letter-spacing: -0.01em;
   line-height: 1.25;
 }
 
 .axil-post-title {
-  font-weight: 700 !important;
+  font-weight: 700;
 }
 
 h1,
@@ -217,15 +217,15 @@ h6 *,
 .section-title *,
 .axil-post-title,
 .axil-post-title * {
-  font-family: var(--primary-font) !important;
+  font-family: var(--primary-font);
 }
 
 .post-cat,
 .suggestion-type,
 .read-more-link,
 .nav-link {
-  font-family: var(--secondary-font) !important;
-  font-weight: 500 !important;
+  font-family: var(--secondary-font);
+  font-weight: 500;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
@@ -233,13 +233,13 @@ h6 *,
 /* Keep headings intentionally strong, not all text */
 h1,
 .h1 {
-  font-weight: 700 !important;
+  font-weight: 700;
 }
 h2,
 .h2,
 h3,
 .h3 {
-  font-weight: 600 !important;
+  font-weight: 600;
 }
 h4,
 .h4,
@@ -247,7 +247,7 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-weight: 500 !important;
+  font-weight: 500;
 }
 /*--Spacing--*/
 .m-xs-0 {

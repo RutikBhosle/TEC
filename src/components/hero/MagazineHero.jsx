@@ -1,389 +1,384 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
 
 const MagazineHero = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [hasLoaded, setHasLoaded] = useState(false);
-  
-  // Fetch real magazine data from Sanity
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
   const { data: magazineData, isLoading, error } = useQuery({
-    queryKey: ["magazine-hero"],
+    queryKey: ["web-profiles-hero"],
     queryFn: async () => {
-      const query = `*[_type == "magazine"] | order(coalesce(publishedAt, _updatedAt, _createdAt) desc) [0...9] {
+      const query = `*[
+        _type == "post" &&
+        "web-profiles" in categories[]->slug.current
+      ] | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...8] {
         title,
         slug,
         'featureImg': mainImage.asset->url,
         description,
         publishedAt,
         _updatedAt,
-        _createdAt
+        'categories': categories[]->{title, slug}
       }`;
       return await client.fetch(query);
     },
   });
 
-  // Fallback static data if Sanity data is not available
   const fallbackData = [
-    {
-      id: 1,
-      title: "Anchel Gupta",
-      slug: { current: "anchel-gupta" },
-      featureImg: "/images/magzine1_anchel.webp",
-      description: "Featured Entrepreneur"
-    },
-    {
-      id: 2,
-      title: "Jorden",
-      slug: { current: "jorden" },
-      featureImg: "/images/magzine2_jorden.webp",
-      description: "Business Leader"
-    },
-    {
-      id: 3,
-      title: "Manuel",
-      slug: { current: "manuel" },
-      featureImg: "/images/magzine3_manuel.webp",
-      description: "Innovation Expert"
-    },
-    {
-      id: 4,
-      title: "Suzanne",
-      slug: { current: "suzanne" },
-      featureImg: "/images/magzine4_suzanne.webp",
-      description: "Tech Pioneer"
-    },
-    {
-      id: 5,
-      title: "Nilmini",
-      slug: { current: "nilmini" },
-      featureImg: "/images/magzine5_nilmini.webp",
-      description: "Startup Founder"
-    },
-    {
-      id: 6,
-      title: "Shabnam",
-      slug: { current: "shabnam" },
-      featureImg: "/images/magzine6_shabnam.webp",
-      description: "Industry Leader"
-    },
-    {
-      id: 7,
-      title: "Valenia",
-      slug: { current: "valenia" },
-      featureImg: "/images/magzine7_valenia.webp",
-      description: "Visionary CEO"
-    },
-    {
-      id: 8,
-      title: "Ross",
-      slug: { current: "ross" },
-      featureImg: "/images/magzine8_ross.webp",
-      description: "Business Strategist"
-    },
-    {
-      id: 9,
-      title: "Khalid",
-      slug: { current: "khalid" },
-      featureImg: "/images/magzine9_khalid.webp",
-      description: "Market Innovator"
-    }
+    { title: "Dr. Hanan Algotaumel — Transforming Visions into Entrepreneurial Legacies", slug: { current: "hanan-algotaumel" }, featureImg: null, description: "A powerhouse in global business development, Dr. Hanan Algotaumel has redefined what it means to lead with purpose.", publishedAt: "2026-05-01", categories: [{ title: "Business & Finance" }] },
+    { title: "Gregory Chow — Top Visionaries in AgriTech Shaping Tomorrow's Food Systems", slug: { current: "gregory-chow" }, featureImg: null, description: "", publishedAt: "2026-04-01", categories: [{ title: "Business & Finance" }] },
+    { title: "Dr. Daniel Andreae — Driving Change in Nanomedicine", slug: { current: "daniel-andreae" }, featureImg: null, description: "", publishedAt: "2026-03-01", categories: [{ title: "Innovation" }] },
+    { title: "Clem Newton-Brown — The Most Eminent Aviation & Airline Leader of 2026", slug: { current: "clem-newton-brown" }, featureImg: null, description: "", publishedAt: "2026-02-01", categories: [{ title: "Leadership" }] },
+    { title: "Justin Ménetez — The Most Iconic CEO to Watch in 2025", slug: { current: "justin-menetez" }, featureImg: null, description: "", publishedAt: "2026-01-01", categories: [{ title: "Profiles" }] },
   ];
 
-  // Use Sanity data if available, otherwise use fallback
   const displayData = magazineData && magazineData.length > 0 ? magazineData : fallbackData;
+  const mainMag = displayData[selectedIndex] || displayData[0];
+  const sidebarMags = displayData.slice(0, 7);
 
-  useEffect(() => {
-    if (displayData && displayData.length > 0) {
-      setCurrentIndex(0);
-      setHasLoaded(true);
-    }
-  }, [displayData]);
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    try {
+      return new Date(dateStr).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+    } catch { return ""; }
+  };
 
-  useEffect(() => {
-    if (!displayData || displayData.length === 0) return;
-
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % displayData.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [displayData]);
+  const getCategory = (mag) => {
+    if (mag.categories && mag.categories.length > 0) return mag.categories[0].title;
+    return "Cover Story";
+  };
 
   if (isLoading) return <Loader />;
-  if (error) return <div style={{ color: "#1d2430" }}>Error loading magazines</div>;
+  if (error) return <div style={{ color: "#0F1923", padding: "40px" }}>Error loading magazines</div>;
 
   return (
     <>
-      <section className="mag-hero-section">
-        <div className="mag-hero-bg" />
-        <div className="mag-hero-vignette mag-hero-vignette--left" />
-        <div className="mag-hero-vignette mag-hero-vignette--right" />
-        <div className="mag-hero-core-glow" />
+      <section className="ec-hero">
+        <div className="ec-hero-container">
+          {/* MAIN COVER */}
+          <div className="ec-hero-main">
+            <span className="ec-hero-kicker">Featured Profile</span>
+            <div className="ec-hero-img-wrapper">
+              {mainMag.featureImg ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={mainMag.featureImg} alt={mainMag.title} className="ec-hero-img" />
+              ) : (
+                <div className="ec-hero-img-placeholder" />
+              )}
+              <div className="ec-hero-img-overlay" />
+            </div>
+            <div className="ec-hero-text">
+              <span className="ec-hero-cat">{getCategory(mainMag)}</span>
+              <h1 className="ec-hero-title">
+                {mainMag.title}
+              </h1>
+              {mainMag.description && (
+                <p className="ec-hero-excerpt">{mainMag.description}</p>
+              )}
+              <div className="ec-hero-meta">
+                <span className="ec-hero-meta-author">By Editorial Team</span>
+                <span className="ec-hero-meta-dot">·</span>
+                <span>{formatDate(mainMag.publishedAt || mainMag._updatedAt)}</span>
+                <span className="ec-hero-meta-dot">·</span>
+                <span>8 min read</span>
+              </div>
+              <Link
+                href={`/magazine/${mainMag.slug?.current || mainMag.slug}`}
+                className="ec-hero-cta"
+              >
+                Read Cover Story →
+              </Link>
+            </div>
+          </div>
 
-        {/* Custom Carousel */}
-        <div className="carousel-container">
-          <div className={`carousel-track ${hasLoaded ? 'loaded' : ''}`}>
-            {displayData.map((magazine, index) => {
-              const isCenter = index === currentIndex;
-              const relativePosition = index - currentIndex;
-              
-              // Calculate position for 9-card layout: 4 left + 1 center + 4 right
-              let position = relativePosition;
-              if (position > 4) position = position - displayData.length; // Wrap around for circular effect
-              if (position < -4) position = position + displayData.length;
-              
-              // Only show cards within the 9-card range
-              if (Math.abs(position) > 4) return null;
-              
-              // Use progressive offsets so edge cards don't drift too far from neighbors
-              const offsetMap = [0, 185, 345, 485, 605];
-              const offset = (position < 0 ? -1 : 1) * offsetMap[Math.abs(position)];
-              const scale = isCenter ? 1.0 : Math.max(0.2, 1.0 - Math.abs(position) * 0.2); // Progressive scaling: 100%, 80%, 60%, 40%, 20%
-              const overlayOpacity = [0, 0.14, 0.28, 0.42, 0.56][Math.abs(position)];
-              
-              return (
-                <div
-                  key={`${magazine.slug?.current || magazine.slug}-${index}`}
-                  className={`carousel-item ${isCenter ? 'center' : 'side'}`}
-                  style={{
-                    left: "50%",
-                    transform: `translateX(calc(-50% + ${offset}px)) translateY(-50%) scale(${scale})`,
-                    opacity: 1,
-                    zIndex: isCenter ? 10 : Math.max(1, 10 - Math.abs(position)),
-                  }}
-                >
-                  <div className="magazine-card">
-                    <Link href={`/magazine/${magazine.slug?.current || magazine.slug}`} className="magazine-link">
-                      <div className="image-container">
-                        <Image
-                          src={magazine.featureImg || magazine.image}
-                          alt={magazine.title}
-                          width={1000}
-                          height={1000}
-                          className="img-fluid"
-                        />
-                        <span
-                          className="magazine-darkness"
-                          style={{ opacity: overlayOpacity }}
-                          aria-hidden="true"
-                        />
-                      </div>
-                    </Link>
+          {/* SIDEBAR */}
+          <div className="ec-hero-sidebar">
+            <div className="ec-hero-sidebar-label">Also In This Issue</div>
+            {sidebarMags.map((mag, i) => (
+              <div
+                key={mag.slug?.current || i}
+                className={`ec-hero-sidebar-item ${selectedIndex === i ? "is-active" : ""}`}
+                onClick={() => setSelectedIndex(i)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && setSelectedIndex(i)}
+              >
+                <span className="ec-hero-sidebar-num">0{i + 1}</span>
+                <div className="ec-hero-sidebar-content">
+                  <div className="ec-hero-sidebar-cat">{getCategory(mag)}</div>
+                  <Link
+                    href={`/magazine/${mag.slug?.current || mag.slug}`}
+                    className="ec-hero-sidebar-title"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {mag.title}
+                  </Link>
+                  <div className="ec-hero-sidebar-date">
+                    {formatDate(mag.publishedAt || mag._updatedAt)}
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <style jsx>{`
-        .mag-hero-section {
-          width: 100%;
-          min-height: 102vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
+        .ec-hero {
+          background: #0F1923;
+          padding: 40px 0 10px 0;
           overflow: hidden;
-          isolation: isolate;
-          background: #f6f2e8;
-          padding: 5.5rem 3.5rem 3rem;
         }
 
-        .mag-hero-bg {
-          position: absolute;
-          inset: 0;
-          background: #f6f2e8;
-          z-index: 0;
-        }
-
-        .mag-hero-vignette {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          width: 18%;
-          z-index: 2;
-          pointer-events: none;
-        }
-
-        .mag-hero-vignette--left {
-          left: 0;
-          background: linear-gradient(90deg, rgba(246, 242, 232, 0.98) 0%, rgba(246, 242, 232, 0) 100%);
-        }
-
-        .mag-hero-vignette--right {
-          right: 0;
-          background: linear-gradient(270deg, rgba(246, 242, 232, 0.98) 0%, rgba(246, 242, 232, 0) 100%);
-        }
-
-        .mag-hero-core-glow {
-          position: absolute;
-          left: 50%;
-          top: 58%;
-          transform: translate(-50%, -50%);
-          width: min(74vw, 1000px);
-          height: min(50vw, 460px);
-          border-radius: 999px;
-          background: radial-gradient(closest-side, rgba(212, 175, 55, 0.1) 0%, rgba(212, 175, 55, 0) 100%);
-          filter: blur(12px);
-          z-index: 1;
-          pointer-events: none;
-        }
-
-        .carousel-container {
-          position: relative;
-          width: min(calc(100% - 9rem), 1240px);
-          height: 100%;
-          overflow: visible;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 3;
-        }
-
-        .carousel-track {
-          position: relative;
-          width: 100%;
+        .ec-hero-container {
           max-width: 1240px;
-          height: 100%;
+          margin: 0 auto;
+          padding: 0 32px;
+          display: grid;
+          grid-template-columns: 1fr 380px;
+          gap: 0;
+          align-items: stretch;
+        }
+
+        /* MAIN */
+        .ec-hero-main {
+          border-right: 1px solid #2E4057;
+          padding-right: 48px;
           display: flex;
-          align-items: center;
-          justify-content: center;
+          flex-direction: column;
         }
 
-        .carousel-item {
-          position: absolute;
-          transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transform-origin: center center;
-          top: 50%;
-          bottom: 50%;
-          transform: translateY(-50%);
-          opacity: 0;
+        .ec-hero-kicker {
+          display: inline-block;
+          background: #C1121F;
+          color: #fff;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          padding: 5px 12px;
+          margin-bottom: 24px;
+          animation: fadeInUp 0.5s ease 0.1s both;
+          width: fit-content;
         }
 
-        .carousel-track.loaded .carousel-item {
-          opacity: 1;
-        }
-
-        .carousel-item.center {
-          z-index: 10;
-        }
-
-        .carousel-item.side {
-          z-index: 1;
-        }
-
-        .magazine-card {
-          border-radius: 0.5rem;
+        .ec-hero-img-wrapper {
+          width: 100%;
+          height: 480px;
           overflow: hidden;
-          background: transparent;
-          box-shadow: none;
-          width: 350px;
-          aspect-ratio: 350 / 460;
-          margin: 0;
-          padding: 0;
-          transition: all 0.3s ease;
-        }
-
-        .magazine-link {
-          display: block;
-          width: 100%;
-          height: 100%;
-          background: transparent !important;
-        }
-
-        .magazine-card:hover {
-          transform: scale(1.05);
-        }
-        
-        .image-container {
+          margin-bottom: 28px;
           position: relative;
-          width: 100%;
-          height: 100%;
-          transition: transform 0.3s ease-in-out;
+          background: #1E2D3D;
         }
 
-        .image-container:hover {
-          transform: scale(1.05);
-        }
-
-        .magazine-card img {
+        .ec-hero-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 0.5rem;
-          border: none;
-          outline: none;
-          background: transparent !important;
+          opacity: 0.85;
+          transition: transform 0.5s ease;
         }
 
-        .magazine-darkness {
+        .ec-hero-img-wrapper:hover .ec-hero-img { transform: scale(1.03); }
+
+        .ec-hero-img-placeholder {
+          width: 100%;
+          height: 100%;
+          background: #1E2D3D;
+        }
+
+        .ec-hero-img-overlay {
           position: absolute;
-          inset: 0;
-          border-radius: 0.5rem;
-          background: rgba(0, 0, 0, 1);
-          pointer-events: none;
-          transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 50%;
+          background: linear-gradient(to top, #0F1923 0%, transparent 100%);
         }
 
-        .magazine-card * {
-          border: none !important;
-          outline: none !important;
+        .ec-hero-text { flex: 1; }
+
+        .ec-hero-cat {
+          display: block;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #C1121F;
+          margin-bottom: 10px;
         }
 
-        @media (max-width: 1199px) {
-          .mag-hero-section {
-            min-height: 94vh;
-            padding: 4.75rem 2.5rem 2.5rem;
-          }
-
-          .carousel-container {
-            width: min(calc(100% - 6rem), 1100px);
-          }
+        .ec-hero-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 38px;
+          font-weight: 900;
+          color: #fff;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+          margin-bottom: 16px;
+          max-width: 560px;
+          animation: fadeInUp 0.5s ease 0.2s both;
         }
 
-        @media (max-width: 991px) {
-          .mag-hero-section {
-            min-height: 86vh;
-            padding: 4rem 1.5rem 2rem;
-          }
-
-          .carousel-container {
-            width: min(calc(100% - 3rem), 960px);
-          }
-
-          .magazine-card {
-            width: 295px;
-            aspect-ratio: 295 / 395;
-          }
+        .ec-hero-excerpt {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 15px;
+          color: #D0C9BF;
+          line-height: 1.7;
+          max-width: 480px;
+          margin-bottom: 20px;
+          animation: fadeInUp 0.5s ease 0.3s both;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
 
-        @media (max-width: 767px) {
-          .mag-hero-section {
-            min-height: 78vh;
-            padding: 3.25rem 1rem 1.5rem;
-          }
+        .ec-hero-meta {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          color: #9A9490;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 24px;
+          animation: fadeInUp 0.5s ease 0.4s both;
+        }
 
-          .carousel-container {
-            width: calc(100% - 2rem);
-          }
+        .ec-hero-meta-author { color: #D0C9BF; font-weight: 600; }
+        .ec-hero-meta-dot { color: #2E4057; }
 
-          .mag-hero-vignette {
-            width: 24%;
-          }
+        .ec-hero-cta {
+          display: inline-block;
+          background: #C1121F;
+          color: #fff;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          text-decoration: none;
+          padding: 12px 24px;
+          transition: background 0.2s;
+          width: fit-content;
+        }
+        .ec-hero-cta:hover { background: #96010D; color: #fff; }
 
-          .magazine-card {
-            width: 250px;
-            aspect-ratio: 250 / 340;
+        /* SIDEBAR */
+        .ec-hero-sidebar {
+          padding-left: 36px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .ec-hero-sidebar-label {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: #C1121F;
+          margin-bottom: 20px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid #2E4057;
+        }
+
+        .ec-hero-sidebar-item {
+          display: flex;
+          gap: 14px;
+          padding: 16px 0;
+          border-bottom: 1px solid #1E2D3D;
+          cursor: pointer;
+          transition: border-color 0.2s;
+        }
+        .ec-hero-sidebar-item:last-child { border-bottom: none; }
+        .ec-hero-sidebar-item.is-active { border-left: 2px solid #C1121F; padding-left: 10px; margin-left: -12px; }
+        .ec-hero-sidebar-item:hover { border-bottom-color: #2E4057; }
+
+        .ec-hero-sidebar-num {
+          font-family: 'Playfair Display', serif;
+          font-size: 26px;
+          font-weight: 900;
+          color: rgba(250, 248, 245, 0.3);
+          line-height: 1;
+          flex-shrink: 0;
+          width: 36px;
+          transition: color 0.2s;
+        }
+        .ec-hero-sidebar-item.is-active .ec-hero-sidebar-num { color: #C1121F; }
+
+        .ec-hero-sidebar-cat {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: #C1121F;
+          margin-bottom: 4px;
+        }
+
+        :global(.ec-hero-sidebar-title) {
+          font-family: 'Libre Baskerville', serif;
+          font-size: 13px;
+          font-weight: 400;
+          color: #FAF8F5 !important;
+          line-height: 1.45;
+          text-decoration: none;
+          display: block;
+          margin-bottom: 4px;
+          transition: color 0.2s;
+        }
+        :global(.ec-hero-sidebar-title:hover) { color: #D0C9BF !important; }
+
+        .ec-hero-sidebar-date {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          color: #9A9490;
+        }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+          .ec-hero-container {
+            grid-template-columns: 1fr 320px;
           }
+          .ec-hero-title { font-size: 30px; }
+        }
+
+        @media (max-width: 768px) {
+          .ec-hero {
+            padding: 40px 0 10px 0;
+          }
+          .ec-hero-container {
+            grid-template-columns: 1fr;
+            padding: 0 18px;
+          }
+          .ec-hero-main {
+            border-right: none;
+            padding-right: 0;
+            margin-bottom: 40px;
+          }
+          .ec-hero-sidebar {
+            padding-left: 0;
+            border-top: 1px solid #2E4057;
+            padding-top: 32px;
+          }
+          .ec-hero-title { font-size: 26px; }
+          .ec-hero-img-wrapper { height: 360px; }
+        }
+
+        @media (max-width: 480px) {
+          .ec-hero-title { font-size: 22px; }
         }
       `}</style>
     </>
