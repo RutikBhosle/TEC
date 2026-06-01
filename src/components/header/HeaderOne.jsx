@@ -848,7 +848,7 @@ const HeaderOne = () => {
                 {/* Right Side: Search and Subscribe */}
                 <div className="navbar-right-actions">
                   
-                  {/* Premium Floating Search Dropdown Card */}
+                  {/* Premium Inline Slide-Out Search Bar */}
                   <form
                     ref={searchFormRef}
                     onSubmit={handleSearch}
@@ -869,7 +869,7 @@ const HeaderOne = () => {
                       </button>
                     </div>
 
-                    {/* Spotlight search suggestions inside card */}
+                    {/* Spotlight search suggestions dropdown inside search card */}
                     {searchshow && showResults && searchResults.length > 0 && (
                       <div className="search-suggestions-dropdown">
                         <div className="search-suggestions-header">
@@ -924,9 +924,16 @@ const HeaderOne = () => {
                   <button
                     ref={searchToggleRef}
                     className="nav-search-field-toggler"
-                    onClick={headerSearchShow}
+                    onClick={() => {
+                      if (searchshow) {
+                        headerSearchClose();
+                      } else {
+                        headerSearchShow();
+                      }
+                    }}
+                    aria-label="Toggle search"
                   >
-                    <i className="far fa-search" />
+                    <i className={searchshow ? "far fa-times" : "far fa-search"} />
                   </button>
 
                   <Link href="/magazines" className="ec-nav-subscribe-btn">Subscribe</Link>
@@ -1472,39 +1479,67 @@ const HeaderOne = () => {
           color: #0F1923 !important;
         }
 
-        /* ── PREMIUM FLOATING DROPDOWN SEARCH BUBBLE ── */
+        /* ── PREMIUM INLINE SLIDE-OUT SEARCH BAR ── */
         .navbar-search {
-          position: absolute;
-          top: calc(100% + 15px);
-          right: 0;
-          width: 360px;
-          background: rgba(15, 25, 35, 0.98) !important;
-          backdrop-filter: blur(16px) saturate(180%);
-          -webkit-backdrop-filter: blur(16px) saturate(180%);
-          border: 1px solid #2E4057;
-          border-radius: 12px;
-          padding: 12px;
-          z-index: 10000;
-          opacity: 0;
-          visibility: hidden;
-          pointer-events: none;
-          transform: translateY(-10px);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+          display: flex !important;
+          align-items: center !important;
+          width: 0 !important;
+          max-width: 0 !important;
+          height: auto !important;
+          background: transparent !important;
+          position: relative !important;
+          top: auto !important;
+          left: auto !important;
+          right: auto !important;
+          bottom: auto !important;
+          transform: none !important;
+          opacity: 0 !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+          overflow: hidden !important;
+          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          z-index: 1000 !important;
         }
 
         .navbar-search.show-nav-search {
-          opacity: 1;
-          visibility: visible;
-          pointer-events: auto;
-          transform: translateY(0);
+          width: 280px !important;
+          max-width: 280px !important;
+          opacity: 1 !important;
+          visibility: visible !important;
+          pointer-events: auto !important;
+          margin-right: 12px !important;
+          overflow: visible !important;
+        }
+
+        @media (max-width: 1199px) {
+          .navbar-search.show-nav-search {
+            width: 200px !important;
+            max-width: 200px !important;
+          }
+        }
+
+        @media (max-width: 991px) {
+          .navbar-search.show-nav-search {
+            width: 140px !important;
+            max-width: 140px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .navbar-search.show-nav-search {
+            width: 100px !important;
+            max-width: 100px !important;
+          }
         }
 
         .navbar-search .search-field {
-          width: 100%;
-          position: relative;
-          display: flex;
-          align-items: center;
+          width: 100% !important;
+          margin: 0 !important;
+          position: relative !important;
+          display: flex !important;
+          align-items: center !important;
         }
 
         .navbar .navbar-search-field,
@@ -1515,9 +1550,9 @@ const HeaderOne = () => {
           border-radius: 6px;
           color: #FAF8F5 !important;
           font-family: 'DM Sans', sans-serif;
-          font-size: 13.5px !important;
+          font-size: 13px !important;
           font-weight: 400;
-          padding: 10px 40px 10px 12px !important;
+          padding: 8px 36px 8px 12px !important;
           transition: border-color 0.2s ease, box-shadow 0.2s ease;
           outline: none !important;
         }
@@ -1527,10 +1562,7 @@ const HeaderOne = () => {
           box-shadow: 0 0 0 2px rgba(193, 18, 31, 0.15);
         }
 
-        .navbar .navbar-search-field::placeholder,
-        .navbar .navbar-search-field::-webkit-input-placeholder,
-        .navbar .navbar-search-field::-moz-placeholder,
-        .navbar .navbar-search-field:-ms-input-placeholder {
+        .navbar .navbar-search-field::placeholder {
           color: #6B7280 !important;
         }
 
@@ -1540,7 +1572,7 @@ const HeaderOne = () => {
           background: transparent !important;
           border: none !important;
           color: #D0C9BF !important;
-          font-size: 14px;
+          font-size: 13px;
           cursor: pointer;
           transition: color 0.2s ease;
           padding: 0;
@@ -1553,32 +1585,36 @@ const HeaderOne = () => {
           color: #fff !important;
         }
 
-        /* Suggestions inside the floating card */
+        /* Suggestions Popover Card aligned with search card */
         .navbar-search .search-suggestions-dropdown {
-          position: static;
-          transform: none;
-          width: 100%;
-          max-width: 100%;
-          background: transparent !important;
-          border: none !important;
-          border-radius: 0;
-          margin-top: 10px;
-          padding: 0;
-          box-shadow: none !important;
+          position: absolute;
+          top: calc(100% + 12px);
+          right: 0;
+          width: 340px;
+          background: #0F1923 !important;
+          border: 1px solid #2E4057 !important;
+          border-radius: 8px;
+          padding: 8px;
+          z-index: 10000;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
           max-height: 280px;
           overflow-y: auto;
           scrollbar-width: none;
           -ms-overflow-style: none;
         }
 
+        .navbar-search .search-suggestions-dropdown::-webkit-scrollbar {
+          display: none;
+        }
+
         .navbar-search .search-suggestions-header {
-          padding: 8px 4px;
+          padding: 6px 4px;
           border-bottom: 1px solid #1E2D3D;
         }
 
         .navbar-search .search-suggestions-header h4 {
           color: #D0C9BF;
-          font-size: 11px;
+          font-size: 10px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
           margin: 0;
@@ -1598,24 +1634,47 @@ const HeaderOne = () => {
         }
 
         .navbar-search .suggestion-content {
+          display: flex;
+          align-items: center;
           gap: 10px;
         }
 
         .navbar-search .suggestion-image {
+          flex-shrink: 0;
           width: 36px;
           height: 36px;
           border-radius: 4px;
+          overflow: hidden;
+          background: #333;
+        }
+
+        .navbar-search .suggestion-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 4px;
+        }
+
+        .navbar-search .suggestion-details {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
         }
 
         .navbar-search .suggestion-type {
-          font-size: 9px;
+          color: #C1121F !important;
+          font-size: 8px;
           font-weight: 700;
           letter-spacing: 0.5px;
+          text-transform: uppercase;
         }
 
         .navbar-search .suggestion-text {
-          font-size: 12px;
+          color: #FAF8F5;
+          font-size: 11.5px;
           font-weight: 500;
+          line-height: 1.2;
         }
 
         .navbar-search .no-suggestions {
@@ -1626,10 +1685,11 @@ const HeaderOne = () => {
         }
 
         @media (max-width: 767px) {
-          .navbar-search {
+          .navbar-search .search-suggestions-dropdown {
+            position: absolute;
             width: calc(100vw - 32px);
             right: -16px;
-            top: calc(100% + 10px);
+            top: calc(100% + 8px);
           }
         }
         
@@ -2072,8 +2132,8 @@ const HeaderOne = () => {
 
         .navbar .navbar-search-field,
         .navbar .navbar-search-field:focus {
-          background: transparent !important;
-          background-color: transparent !important;
+          background: #111B24 !important;
+          background-color: #111B24 !important;
           color: #FAF8F5 !important;
         }
 
