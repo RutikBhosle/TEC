@@ -4788,7 +4788,7 @@ input[type="radio"] + label::after {
   top: 50%;
   right: 3rem;
   font-size: 2.4rem;
-  color: #D4AF37 !important;
+  color: #0F1923 !important;
   margin-right: 3rem;
   transform: translateY(-50%);
   background-color: transparent;
@@ -4804,7 +4804,7 @@ input[type="radio"] + label::after {
   }
 }
 .navbar-search .navbar-search-close:hover {
-  color: #FFD700 !important;
+  color: #0F1923 !important;
 }
 .nav-search-field-toggler {
   position: relative;
@@ -7818,7 +7818,7 @@ ul.gallery img {
 .join-us {
   margin-top: -1.4rem;
 }
-/* Team social icons: always visible, gold by default, animate on view/hover */
+/* Team social icons: always visible, ink blue by default, animate on view/hover */
 .axil-team-block .axil-team-share-wrapper .social-share__vertical li {
   transform: none !important;
   opacity: 1 !important;
@@ -7842,11 +7842,11 @@ ul.gallery img {
   font-size: 1.6rem !important;
 }
 
-/* Ensure circular background stays gold */
+/* Ensure circular background stays ink blue */
 .axil-team-block .axil-team-share-wrapper .social-share.social-share__with-bg li a,
 .axil-team-block .axil-team-share-wrapper .social-share__with-bg-white li a {
-  background: #D4AF37 !important;
-  border-color: #D4AF37 !important;
+  background: #0F1923 !important;
+  border-color: #0F1923 !important;
 }
 
 /* Hover interaction: slight lift/scale */
@@ -7855,11 +7855,11 @@ ul.gallery img {
   color: #fff !important; /* keep icon white on hover */
 }
 
-/* Keep circle gold on hover as well */
+/* Keep circle ink blue on hover as well */
 .axil-team-block .axil-team-share-wrapper .social-share__with-bg li a:hover,
 .axil-team-block .axil-team-share-wrapper .social-share__with-bg-white li a:hover {
-  background: #D4AF37 !important;
-  border-color: #D4AF37 !important;
+  background: #0F1923 !important;
+  border-color: #0F1923 !important;
 }
 
 /* Brand hover backgrounds (full circle), keeping icon white */
@@ -7893,7 +7893,7 @@ ul.gallery img {
 }
 
 /* Brand hover colors */
-/* Brand colors disabled; using uniform gold on hover */
+/* Brand colors disabled; using uniform ink blue on hover */
 
 @keyframes icon-pop-in {
   0% { opacity: 0; transform: translateY(8px) scale(0.96); }

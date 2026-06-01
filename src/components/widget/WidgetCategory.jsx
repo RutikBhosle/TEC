@@ -141,8 +141,8 @@ const WidgetCategory = ({ showTitle = true }) => {
 
         .category-widget .owl-nav button.custom-owl-prev:hover,
         .category-widget .owl-nav button.custom-owl-next:hover {
-          background-color: #f5ead3;
-          border-color: rgba(212, 175, 55, 0.6);
+          background-color: rgba(15, 25, 35, 0.08);
+          border-color: rgba(15, 25, 35, 0.15);
         }
 
         .category-widget .owl-nav button.custom-owl-prev:disabled,

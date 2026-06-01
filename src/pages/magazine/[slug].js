@@ -160,7 +160,7 @@ const MagazineDetails = ({
           height: 90vh;
           width: 100%;
           padding-bottom: 0;
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          background: linear-gradient(180deg, #FAF8F5 0%, #F0EDE8 100%);
           border-top: 1px solid rgba(126, 92, 35, 0.12);
           border-bottom: 1px solid rgba(126, 92, 35, 0.12);
         }
@@ -171,12 +171,12 @@ const MagazineDetails = ({
           border: none;
           width: 100%;
           height: 100%;
-          background: #fffdf8;
+          background: #FAF8F5;
         }
 
         .magazine-detail-footer {
           margin-top: 0;
-          background: #f6f2e8;
+          background: #FAF8F5;
         }
       `}</style>
     </>

@@ -20,7 +20,7 @@ const FooterTwo = () => {
               <div className="footer-logo-container">
                 <Link href="/">
                   <Image
-                    src="/logos/logo-primary.png"
+                    src="/assets/logoblack.jpg"
                     alt="footer logo"
                     className="footer-logo"
                     width={86}

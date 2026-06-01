@@ -94,7 +94,7 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .single-blog-wrapper .axil-post-title a:hover {
-            color: #8b641d;
+            color: #0F1923;
           }
 
           .post-detail-page .post-details > span img,
@@ -148,7 +148,7 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .post-details a:not(.btn):hover {
-            color: #8b641d;
+            color: #0F1923;
           }
 
           .post-detail-page .post-details strong {
@@ -156,7 +156,7 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .post-details blockquote {
-            border-left: 3px solid rgba(212, 175, 55, 0.65);
+            border-left: 3px solid rgba(15, 25, 35, 0.15);
             padding-left: 0.85rem;
             margin: 1.1rem 0;
           }
@@ -207,7 +207,7 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .post-sidebar > * {
-            background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+            background: linear-gradient(180deg, #FAF8F5 0%, #F0EDE8 100%);
             border: 1px solid rgba(126, 92, 35, 0.14);
             border-radius: 12px;
             padding: 8px;

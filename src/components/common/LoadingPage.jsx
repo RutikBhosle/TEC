@@ -21,8 +21,8 @@ const LoadingPage = () => {
           <div className="loading-logo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/logos/chronicle_logo.png"
-              alt="Chronicles Logo"
+              src="/assets/logowhite.jpg"
+              alt="Star Prime Logo"
               style={{ 
                 width: "100%",
                 height: "auto",
@@ -46,7 +46,7 @@ const LoadingPage = () => {
           
           <div className="loading-text">
             <h2>Loading...</h2>
-            <p>Welcome to The Entrepreneurial Chronicles</p>
+            <p>Welcome to Star Prime</p>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ const LoadingPage = () => {
         .dot {
           width: var(--dot-size);
           height: var(--dot-size);
-          background: #D4AF37;
+          background: #0F1923;
           border-radius: 50%;
           animation: bounce 1.4s ease-in-out infinite both;
         }
@@ -133,7 +133,7 @@ const LoadingPage = () => {
 
         .progress-fill {
           height: 100%;
-          background: linear-gradient(90deg, #D4AF37, #FFD700, #D4AF37);
+          background: linear-gradient(90deg, #0F1923, #2a3a4a, #0F1923);
           border-radius: 2px;
           animation: progressFill 2s ease-in-out;
         }
@@ -143,7 +143,7 @@ const LoadingPage = () => {
         }
 
         .loading-text h2 {
-          color: #D4AF37;
+          color: #0F1923;
           font-size: var(--heading-size);
           margin: 0 0 0.5rem 0;
           font-weight: 600;

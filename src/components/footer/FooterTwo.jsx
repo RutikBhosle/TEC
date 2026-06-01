@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import SocialLink from "../../data/social/SocialLink.json";
-import NavbarLogo from "../../assest/chronicle_logo.png";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -63,15 +62,15 @@ const FooterTwo = () => {
               <Link href="/" className="ec-footer-logo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={NavbarLogo.src}
-                  alt="The Entrepreneurial Chronicles"
+                  src="/assets/logowhite.jpg"
+                  alt="Star Prime Logo"
                   width="240"
                   height="80"
                   style={{ objectFit: "contain", width: "200px", height: "auto" }}
                 />
               </Link>
               <p className="ec-footer-tagline">
-                The Entrepreneurial Chronicles — Crafting Entrepreneurial Legends, one story at a time.
+                Star Prime — Crafting Entrepreneurial Legends, one story at a time.
               </p>
               <div className="ec-footer-socials">
                 <a href={SocialLink.fb.url} target="_blank" rel="noopener noreferrer" className="ec-footer-social">
@@ -148,7 +147,7 @@ const FooterTwo = () => {
           {/* BOTTOM BAR */}
           <div className="ec-footer-bottom">
             <div className="ec-footer-copy">
-              © 2026 The Entrepreneurial Chronicles. All rights reserved.{" "}
+              © 2026 Star Prime. All rights reserved.{" "}
               <a href="https://www.intellisysitsolutions.com/index.html" target="_blank" rel="noopener noreferrer">
                 Designed by Team Intellisys
               </a>

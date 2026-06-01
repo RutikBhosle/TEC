@@ -37,9 +37,9 @@ const PostComment = () => {
         .comment-form input[type="email"]:focus,
         .comment-form textarea:focus {
           color: #1d2430 !important;
-          background: #fffdf8 !important;
-          border-color: #d4af37 !important;
-          box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2) !important;
+          background: #FAF8F5 !important;
+          border-color: #0F1923 !important;
+          box-shadow: 0 0 0 2px rgba(15, 25, 35, 0.2) !important;
         }
         .comment-form .form-group label {
           color: #5e6876 !important;
@@ -51,8 +51,8 @@ const PostComment = () => {
           z-index: -1 !important;
         }
         .comment-form .form-group.focused label {
-          background: #fffdf8 !important;
-          color: #8b641d !important;
+          background: #FAF8F5 !important;
+          color: #0F1923 !important;
           opacity: 1 !important;
           z-index: 10 !important;
         }

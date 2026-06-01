@@ -123,7 +123,7 @@ const BusinessBulletin = () => {
                 <div className="ec-newsletter-label">Newsletter</div>
                 <div className="ec-newsletter-title">Stay ahead of the story.</div>
                 <p className="ec-newsletter-text">
-                  The EC Chronicles digest — curated business intelligence, fresh profiles, and market
+                  The Star Prime digest — curated business intelligence, fresh profiles, and market
                   insight, weekly.
                 </p>
                 <div className="ec-newsletter-form">

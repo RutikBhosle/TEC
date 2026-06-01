@@ -27,8 +27,8 @@ const Home = () => {
         <meta name="google-site-verification" content="Hb-PBtfDrWImSPQKiNhfbw0JxtOLWsPKDEbfz_WJ8ZE" />
       </Head>
       <HeadMeta
-        metaTitle="The Entrepreneurial Chronicles: A Business Magazine for Inspiring Entrepreneur Stories"
-        metaDesc="The Entrepreneurial Chronicles is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
+        metaTitle="Star Prime: A Business Magazine for Inspiring Entrepreneur Stories"
+        metaDesc="Star Prime is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
       />
 
       {/* 1 — HEADER (Top Bar + Ink Navy Sticky Nav) */}

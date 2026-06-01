@@ -1,25 +1,14 @@
-import React from "react";
-import Head from "next/head";
-import HeaderOne from "../components/header/HeaderOne";
-import FooterTwo from "../components/footer/FooterTwo";
-import HeadMeta from "../components/elements/HeadMeta";
-import MediaKit from "../components/media-kit/MediaKit";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const MediaKitPage = () => {
-  return (
-    <>
-      <Head>
-        <meta name="google-site-verification" content="Hb-PBtfDrWImSPQKiNhfbw0JxtOLWsPKDEbfz_WJ8ZE" />
-      </Head>
-      <HeadMeta
-        metaTitle="Media Kit - The Global Voice of Education Leadership and Innovation"
-        metaDesc="Download our media kit with brand guidelines, logos, and promotional materials."
-      />
-      <HeaderOne />
-      <MediaKit />
-      <FooterTwo />
-    </>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/advertise-with-us");
+  }, [router]);
+
+  return null;
 };
 
 export default MediaKitPage;

@@ -51,7 +51,7 @@ const FAQSection = () => {
       <style jsx>{`
         .faq-section {
           background:
-            radial-gradient(circle at top, rgba(212, 175, 55, 0.08) 0%, rgba(212, 175, 55, 0) 42%),
+            radial-gradient(circle at top, rgba(15, 25, 35, 0.08) 0%, rgba(15, 25, 35, 0) 42%),
             linear-gradient(180deg, #17120b 0%, #0f0c08 100%);
           color: #f5efe4;
           font-family: var(--secondary-font);
@@ -88,7 +88,7 @@ const FAQSection = () => {
           text-align: center;
           margin-bottom: 1rem;
           font-weight: 800;
-          text-shadow: 0 2px 10px rgba(212, 175, 55, 0.22);
+          text-shadow: 0 2px 10px rgba(15, 25, 35, 0.22);
           position: relative;
         }
 
@@ -100,7 +100,7 @@ const FAQSection = () => {
           transform: translateX(-50%);
           width: 80px;
           height: 3px;
-          background: linear-gradient(90deg, #d4af37, #f4e4bc, #d4af37);
+          background: linear-gradient(90deg, #0F1923, rgba(15, 25, 35, 0.4), #0F1923);
           border-radius: 2px;
         }
 
@@ -123,7 +123,7 @@ const FAQSection = () => {
         }
 
         .faq-item {
-          border-bottom: 1px solid rgba(212, 175, 55, 0.22);
+          border-bottom: 1px solid rgba(15, 25, 35, 0.22);
           padding: 2rem 0;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
@@ -142,7 +142,7 @@ const FAQSection = () => {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+          background: linear-gradient(90deg, transparent, rgba(15, 25, 35, 0.1), transparent);
           transition: left 0.6s ease;
         }
 
@@ -175,7 +175,7 @@ const FAQSection = () => {
 
         .faq-item:hover .faq-question {
           color: #e2bf63;
-          text-shadow: 0 0 15px rgba(212, 175, 55, 0.24);
+          text-shadow: 0 0 15px rgba(15, 25, 35, 0.24);
           background: linear-gradient(45deg, #e2bf63, #f2dfae);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -185,8 +185,8 @@ const FAQSection = () => {
         .faq-item:hover {
           transform: translateX(10px);
           border-color: rgba(226, 191, 99, 0.55);
-          background: rgba(212, 175, 55, 0.05);
-          box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+          background: rgba(15, 25, 35, 0.05);
+          box-shadow: 0 5px 20px rgba(15, 25, 35, 0.1);
         }
 
         @media (max-width: 1024px) {
@@ -227,7 +227,7 @@ const FAQSection = () => {
         }
 
         .faq-item:focus-within {
-          outline: 2px solid #ffd700;
+          outline: 2px solid #0F1923;
           outline-offset: 2px;
         }
       `}</style>

@@ -93,7 +93,7 @@ const SliderOne = () => {
                       <Link href={`/magazine/${item.slug?.current || item.slug}`}>{item.title}</Link>
                     </h2>
                     <p className="featured-magazine-desc">
-                      {item.description || "Explore this featured issue from The Entrepreneurial Chronicles."}
+                      {item.description || "Explore this featured issue from Star Prime."}
                     </p>
                     <div className="featured-magazine-actions">
                       <Link className="btn btn-primary" href={`/magazine/${item.slug?.current || item.slug}`}>
@@ -299,7 +299,7 @@ const SliderOne = () => {
         }
 
         .featured-magazine-title a:hover {
-          color: #8b641d !important;
+          color: #0F1923 !important;
         }
 
         .featured-magazine-desc {
@@ -327,15 +327,15 @@ const SliderOne = () => {
         }
 
         .featured-magazine-btn-outline {
-          border: 1px solid rgba(212, 175, 55, 0.65);
-          color: #8b641d;
+          border: 1px solid rgba(15, 25, 35, 0.15);
+          color: #0F1923;
           background: rgba(255, 250, 241, 0.8);
         }
 
         .featured-magazine-btn-outline:hover {
-          background: #d4af37;
+          background: #0F1923;
           color: #111315;
-          border-color: #d4af37;
+          border-color: #0F1923;
         }
 
         .featured-magazine-controls {
@@ -361,8 +361,8 @@ const SliderOne = () => {
         }
 
         .featured-magazine-arrow:hover {
-          background: #d4af37;
-          border-color: #d4af37;
+          background: #0F1923;
+          border-color: #0F1923;
           color: #111315;
           transform: translateY(-1px);
         }
@@ -387,11 +387,11 @@ const SliderOne = () => {
           width: 100%;
           aspect-ratio: 11 / 14;
           border-radius: 10px;
-          border: 1px solid rgba(212, 175, 55, 0.25);
+          border: 1px solid rgba(15, 25, 35, 0.25);
           background: linear-gradient(
             90deg,
             rgba(126, 92, 35, 0.06) 0%,
-            rgba(212, 175, 55, 0.14) 50%,
+            rgba(15, 25, 35, 0.14) 50%,
             rgba(126, 92, 35, 0.06) 100%
           );
           background-size: 200% 100%;

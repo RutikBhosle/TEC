@@ -139,7 +139,7 @@ const WidgetPost = () => {
       </Tab.Container>
       <style jsx>{`
         :global(.sidebar-post-widget) {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
+          background: linear-gradient(180deg, #FAF8F5 0%, #F0EDE8 100%);
           border: 1px solid rgba(126, 92, 35, 0.14);
           border-radius: 16px;
           padding: 14px;
@@ -167,8 +167,8 @@ const WidgetPost = () => {
 
         :global(.sidebar-post-widget .nav-pills .nav-item a:hover),
         :global(.sidebar-post-widget .nav-pills .nav-item a.active) {
-          background-color: #f5ead3;
-          border-color: rgba(212, 175, 55, 0.52);
+          background-color: rgba(15, 25, 35, 0.08);
+          border-color: rgba(15, 25, 35, 0.15);
           color: #7a5a24;
         }
 
@@ -194,13 +194,13 @@ const WidgetPost = () => {
         }
 
         :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a:hover) {
-          color: #8b641d;
+          color: #0F1923;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small .bg-color-blue-one) {
-          color: #8b641d;
-          background: #f5ead3;
-          border: 1px solid rgba(212, 175, 55, 0.28);
+          color: #0F1923;
+          background: rgba(15, 25, 35, 0.08);
+          border: 1px solid rgba(15, 25, 35, 0.15);
           border-radius: 999px;
           padding: 0.25rem 0.65rem;
           font-size: var(--type-caption);

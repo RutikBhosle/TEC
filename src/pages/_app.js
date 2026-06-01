@@ -34,7 +34,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <div
       className={`${inter.variable} ${merriweather.variable}`}
-      style={{ background: "#f6f3ec", color: "#1d2430", minHeight: "100vh" }}
+      style={{ background: "#FAF8F5", color: "#0F1923", minHeight: "100vh" }}
     >
       <QueryClientProvider client={queryClient}>
         <Script

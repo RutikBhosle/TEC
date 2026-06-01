@@ -10,7 +10,7 @@ const HeadMeta = ({ metaTitle, metaDesc }) => {
         name="description"
         content={
           metaDesc ||
-          " The Entrepreneurial  is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
+          "Star Prime is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
         }
       />
       <meta
@@ -19,7 +19,7 @@ const HeadMeta = ({ metaTitle, metaDesc }) => {
       />
       <title>
         {metaTitle ||
-          "The Entrepreneurial Chronicles: A Business Magazine for Inspiring Entrepreneur Stories"}
+          "Star Prime: A Business Magazine for Inspiring Entrepreneur Stories"}
       </title>
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     </Head>

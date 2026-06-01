@@ -52,7 +52,7 @@ const ScrollToTop = () => {
           right: 30px;
           width: 50px;
           height: 50px;
-          background: #D4AF37;
+          background: #0F1923;
           color: #000;
           border: none;
           border-radius: 50%;
@@ -62,7 +62,7 @@ const ScrollToTop = () => {
           justify-content: center;
           font-size: 18px;
           font-weight: bold;
-          box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+          box-shadow: 0 4px 20px rgba(15, 25, 35, 0.3);
           transition: all 0.3s ease;
           z-index: 9999;
           opacity: 0;
@@ -71,9 +71,9 @@ const ScrollToTop = () => {
         }
 
         .scroll-to-top:hover {
-          background: #FFD700;
+          background: #0F1923;
           transform: translateY(-3px);
-          box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4);
+          box-shadow: 0 6px 25px rgba(15, 25, 35, 0.4);
         }
 
         .scroll-to-top:active {

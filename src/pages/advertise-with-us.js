@@ -8,416 +8,738 @@ const AdvertiseWithUs = () => {
   return (
     <>
       <HeadMeta
-        metaTitle={
-          "Exclusive Interviews with Entrepreneurs Featured in The Entrepreneurial Chronicles Magazine"
-        }
-        metaDesc={
-          " Exclusive interviews with top entrepreneurs featured in The Entrepreneurial Chronicles Magazine. Discover their inspiring journey, business strategies, and tips for success in the entrepreneurial world "
-        }
+        metaTitle="Advertise With Us - Brand Amplification & Media Kit | Star Prime"
+        metaDesc="Partner with Star Prime Magazine to align your brand with leading global decision-makers, startup founders, and innovators. Access premium placements today."
       />
 
       <HeaderOne />
 
-      <main className="advertise-page">
+      <main className="advertise-page animate-fade">
+        
+        {/* ULTRA-PREMIUM ASYMMETRIC SPLIT DARK HERO COVER */}
         <section className="advertise-hero">
-          <div className="advertise-hero__overlay" />
-          <div className="advertise-hero__content">
-            <h1>Advertise With Us</h1>
-            <p>
-              Welcome to The Entrepreneurial Chronicles Magazine, where we
-              spotlight trailblazers from all sectors transforming the business
-              magazine landscape. Our mission is to inspire and empower new
-              leaders with groundbreaking ideas worldwide. Count on us for
-              reliable insights, advice, and industry trends, supporting both
-              established and aspiring leaders.
-            </p>
+          <div className="advertise-hero-shell">
+            <div className="advertise-hero-grid">
+              
+              {/* LEFT COLUMN: HERO COPY */}
+              <div className="advertise-hero__left">
+                <span className="advertise-hero__eyebrow">Brand Amplification</span>
+                <h1 className="advertise-hero__title">Advertise With Star Prime</h1>
+                <p className="advertise-hero__desc">
+                  Welcome to Star Prime, where we spotlight trailblazers
+                  shaping the global business landscape. Connect your brand with an elite circle 
+                  of founders, executives, and high-net-worth innovators.
+                </p>
+                <div className="advertise-hero__divider" />
+              </div>
+
+              {/* RIGHT COLUMN: PREMIUM EDITORIAL MASTHEAD BADGES */}
+              <div className="advertise-hero__right">
+                <div className="media-masthead-card">
+                  <div className="masthead-seal">T.S.P</div>
+                  <div className="masthead-info">
+                    <span className="masthead-label">Audience Scale</span>
+                    <div className="masthead-badge">
+                      <span className="badge-kicker">Print Circulation</span>
+                      <span className="badge-value">85,000+</span>
+                    </div>
+                    <div className="masthead-badge">
+                      <span className="badge-kicker">Monthly Digital</span>
+                      <span className="badge-value">420,000+</span>
+                    </div>
+                    <div className="masthead-badge">
+                      <span className="badge-kicker">Decision Makers</span>
+                      <span className="badge-value">78% Executive</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </section>
 
+        {/* SECTION 1: WHY ADVERTISE WITH US */}
         <section className="advertise-section">
           <div className="advertise-shell">
             <div className="intro-grid">
+              {/* Left Intro Card */}
               <div className="intro-block">
-                <h2>Why Brands Advertise Here</h2>
-                <p className="advertise-copy">
-                  A wise businessman once said, &quot;The toothpaste you use to
-                  the shiny shoes you wear to the car you drive to the bed you
-                  sleep in is advertised,&quot; and adding to that we say,
-                  &quot;and you, my friend are afraid to advertise with us!&quot;
+                <span className="section-eyebrow">Market Influence</span>
+                <h2 className="section-title">Why Brands Advertise Here</h2>
+                <p className="advertise-copy italic-quote">
+                  "The toothpaste you use, the shiny shoes you wear, the car you drive, the bed you sleep in—all of it is advertised."
                 </p>
                 <p className="advertise-copy">
-                  Being a magazine that strives to bring new age businesses to
-                  light, it makes a perfect hub of new blood in the market to
-                  recognise you.
+                  Being a prime digital and print journal that brings trailblazing new-age businesses to light, Star Prime makes the perfect, trusted ecosystem for high-value brands to secure visibility.
+                </p>
+                <p className="advertise-copy">
+                  Establish authentic connections with market leaders of the paradigm shift in the global enterprise world.
                 </p>
               </div>
+
+              {/* Right Metrics Grid */}
               <div className="metric-grid">
                 <div className="metric-card">
+                  <span className="metric-num">01</span>
                   <h3>Premium Niche Audience</h3>
-                  <p>Entrepreneurs, founders, decision-makers, and innovators.</p>
+                  <p>Reach founders, decision-makers, high-net-worth investors, and innovators.</p>
                 </div>
                 <div className="metric-card">
-                  <h3>Brand-Led Storytelling</h3>
-                  <p>Editorial environment built for trust and high recall.</p>
+                  <span className="metric-num">02</span>
+                  <h3>Editorial Storytelling</h3>
+                  <p>High-recall environments custom-tailored for maximum brand trust.</p>
                 </div>
                 <div className="metric-card">
+                  <span className="metric-num">03</span>
                   <h3>Multi-Format Reach</h3>
-                  <p>Website, digital magazine, and social amplification.</p>
+                  <p>Website listings, high-end print-replica digital magazines, and newsletter streams.</p>
                 </div>
                 <div className="metric-card">
-                  <h3>Actionable Visibility</h3>
-                  <p>Targeted placement designed to drive inquiries.</p>
+                  <span className="metric-num">04</span>
+                  <h3>High Conversion Rates</h3>
+                  <p>Targeted placements that naturally draw click-throughs and corporate inquiries.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="advertise-section">
+        {/* SECTION 2: WEBSITE PLACEMENT */}
+        <section className="advertise-section website-showcase">
           <div className="advertise-shell">
             <div className="website-layout">
-              <div className="image-card image-card--single">
+              <div className="showcase-image-card">
                 <Image
                   src="/images/ads-img.png"
-                  alt="CI3FAME Advertisement Placements"
+                  alt="The Star Prime Advertisement Placements on Desktop Website"
                   width={600}
                   height={800}
                   style={{ width: "100%", height: "auto" }}
+                  className="showcase-img"
                 />
               </div>
               <div className="website-copy">
-                <h2 className="advertise-heading">Website Placement Advertise</h2>
-                <p className="advertise-copy">
-                  A wise businessman once said, &quot;The toothpaste you use to the
-                  shiny shoes you wear to the car you drive to the bed you sleep in is
-                  advertised,&quot; and adding to that we say, &quot;and you, my
-                  friend are afraid to advertise with us!&quot;
+                <span className="section-eyebrow">Digital Channels</span>
+                <h2 className="showcase-title">Website Placements</h2>
+                <p className="advertise-copy italic-quote">
+                  "Connect yourself with the brand leaders of the paradigm shift in the business world."
                 </p>
                 <p className="advertise-copy">
-                  Being a magazine that strives to bring new age businesses to light,
-                  it makes a perfect hub of new blood in the market to recognise you!
+                  Position your brand natively alongside top-performing global features, break-out founder stories, and trending sector reports.
                 </p>
                 <p className="advertise-copy">
-                  Advertise with us and connect yourself with the brand leaders of the
-                  paradigm shift in the business world.
+                  We offer premium header banners, inline editorial placements, and sidebar campaign sponsorships designed for seamless visibility with highly optimized CTRs.
                 </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="advertise-section">
+        {/* SECTION 3: DIGITAL MAGAZINE */}
+        <section className="advertise-section magazine-showcase-section">
           <div className="advertise-shell">
-            <h2 className="advertise-heading advertise-heading--centered">Digital Magazine Placement Advertise</h2>
-            <p className="advertise-copy advertise-copy--centered">
-              The space and dimension of the Ad on the print and digital platforms
-              are mentioned below.
-            </p>
+            <header className="showcase-section-header">
+              <span className="section-eyebrow">Print Archives</span>
+              <h2 className="showcase-title">Digital Magazine Placements</h2>
+              <p className="showcase-desc">
+                Choose the perfect space and dimension for your campaign in our print-replica digital edition.
+              </p>
+              <div className="showcase-divider" />
+            </header>
+
             <div className="image-grid">
-              <div className="image-card">
+              <div className="showcase-image-card hover-lift">
                 <Image
                   src="/images/Advertisement-1.jpg"
-                  alt="CI3FAME Advertisement Placements"
+                  alt="The Star Prime Full Page Ad Dimensions"
                   width={600}
                   height={800}
                   style={{ width: "100%", height: "auto" }}
+                  className="showcase-img"
                 />
               </div>
-              <div className="image-card">
+              <div className="showcase-image-card hover-lift">
                 <Image
                   src="/images/Advertisement-2.jpg"
-                  alt="CI3FAME Advertisement Placements"
+                  alt="The Star Prime Half Page Ad Dimensions"
                   width={600}
                   height={800}
                   style={{ width: "100%", height: "auto" }}
+                  className="showcase-img"
                 />
               </div>
             </div>
           </div>
         </section>
 
+        {/* SECTION 4: CALL TO ACTION */}
         <section className="advertise-cta">
           <div className="advertise-shell">
             <div className="cta-wrap">
-              <h2>Ready To Advertise Your Brand?</h2>
-              <p>Let&apos;s align your campaign with the right audience and placements.</p>
-              <Link href="/contact" className="btn btn-primary">
+              <span className="cta-kicker">Request Media Kit</span>
+              <h2>Ready to Advertise Your Brand?</h2>
+              <p>Let's align your campaign with the right target audience and premium placements.</p>
+              <Link href="/contact" className="btn btn-primary-cta">
                 Get In Touch
               </Link>
             </div>
           </div>
         </section>
+
       </main>
+
       <FooterTwo />
+
       <style jsx>{`
         .advertise-page {
-          background: #f6f2e8;
-          color: #1d2430;
-          font-family: var(--secondary-font);
+          background: #FAF8F5;
+          color: #0F1923;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          min-height: 100vh;
         }
 
         .advertise-shell {
           width: 100%;
-          max-width: 100%;
-          padding-left: 10px;
-          padding-right: 10px;
-          margin: 0;
+          max-width: 1240px;
+          padding-left: 32px;
+          padding-right: 32px;
+          margin: 0 auto;
         }
 
+        /* Immersive Dark Hero Cover with Asymmetric Split */
         .advertise-hero {
+          background: #0F1923;
+          color: #FFFFFF;
+          padding: 6.5rem 0;
           position: relative;
-          min-height: 50vh;
-          display: flex;
+          border-bottom: 1px solid #1E2D3D;
+        }
+
+        .advertise-hero-shell {
+          max-width: 1240px !important;
+          width: 100% !important;
+          margin: 0 auto;
+          padding-left: 32px !important;
+          padding-right: 32px !important;
+        }
+
+        .advertise-hero-grid {
+          display: grid;
+          grid-template-columns: 1.4fr 1fr;
+          gap: 4.5rem;
           align-items: center;
-          padding: 5.2rem 0;
-          overflow: hidden;
         }
 
-        .advertise-hero__overlay {
-          position: absolute;
-          inset: 0;
-          background:
-            linear-gradient(180deg, rgba(6, 9, 13, 0.62) 0%, rgba(6, 9, 13, 0.88) 100%),
-            url("https://vinayravindran.com/wp-content/uploads/2013/05/top-magazines1.jpg") center/cover no-repeat;
-          z-index: 0;
+        .advertise-hero__left {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          text-align: left;
         }
 
-        .advertise-hero__content {
-          position: relative;
-          z-index: 1;
+        .advertise-hero__eyebrow {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: var(--cardinal, #C1121F);
+          text-transform: uppercase;
+          margin-bottom: 0.75rem;
+        }
+
+        .advertise-hero__title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+          font-weight: 800;
+          line-height: 1.15;
+          color: #FFFFFF;
+          margin: 0 0 1.25rem;
+          letter-spacing: -0.02em;
+        }
+
+        .advertise-hero__desc {
+          font-family: var(--font-serif-body, 'Libre Baskerville', serif);
+          font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+          line-height: 1.75;
+          color: #D0C9BF;
+          margin: 0 0 1.5rem;
+        }
+
+        .advertise-hero__divider {
+          width: 80px;
+          height: 3px;
+          background: var(--cardinal, #C1121F);
+          margin-bottom: 2.25rem;
+          border-radius: 999px;
+        }
+
+        /* Right Column: Premium Masthead Card */
+        .advertise-hero__right {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        .media-masthead-card {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1.5px solid rgba(255, 255, 255, 0.08);
+          border-radius: 16px;
+          padding: 2.5rem;
           width: 100%;
-          text-align: center;
-          margin: 0 auto;
-          max-width: 1080px;
-          padding: 0 10px;
+          max-width: 380px;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
         }
 
-        .advertise-hero__content h1 {
-          margin: 0 0 1rem;
-          color: #f4f8fc;
-          font-family: var(--primary-font);
-          font-size: clamp(var(--type-h2), 5vw, var(--type-display));
-          line-height: 1.1;
+        .media-masthead-card:hover {
+          border-color: rgba(255, 255, 255, 0.15);
+          transform: translateY(-3px);
+          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
         }
 
-        .advertise-hero__content p {
-          margin: 0 auto;
-          color: #d3dde9;
-          font-size: var(--type-body);
-          line-height: 1.7;
-          font-family: var(--secondary-font);
-          max-width: 960px;
+        .masthead-seal {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 5.5rem;
+          font-weight: 900;
+          color: rgba(255, 255, 255, 0.03);
+          line-height: 1;
+          position: absolute;
+          right: -10px;
+          bottom: -15px;
+          pointer-events: none;
+          letter-spacing: -0.05em;
         }
 
+        .masthead-info {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .masthead-label {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--cardinal, #C1121F);
+          margin-bottom: 0.25rem;
+        }
+
+        .masthead-badge {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          border-bottom: 1.5px solid rgba(255, 255, 255, 0.08);
+          padding-bottom: 0.75rem;
+        }
+
+        .masthead-badge:last-child {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+
+        .badge-kicker {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: #9A9490;
+          text-transform: uppercase;
+        }
+
+        .badge-value {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 1.45rem;
+          font-weight: 700;
+          color: #FFFFFF;
+        }
+
+        /* ── SECTIONS GENERAL ── */
         .advertise-section {
-          padding: 3.5rem 0 0;
+          padding: 6rem 0 0;
+          background: #FAF8F5;
+        }
+
+        .section-eyebrow {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: var(--cardinal, #C1121F);
+          text-transform: uppercase;
+          margin-bottom: 0.5rem;
+          display: block;
+        }
+
+        .section-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+          font-weight: 800;
+          color: #0F1923;
+          margin: 0 0 1.5rem;
+          line-height: 1.2;
+          letter-spacing: -0.01em;
         }
 
         .intro-grid {
           display: grid;
-          grid-template-columns: 1.2fr 1fr;
-          gap: 2rem;
+          grid-template-columns: 1.3fr 1fr;
+          gap: 4rem;
         }
 
         .intro-block {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 14px;
-          padding: 1.6rem;
+          background: #FFFFFF;
+          border: 1px solid rgba(15, 25, 35, 0.06);
+          border-radius: 16px;
+          padding: 2.75rem;
+          box-shadow: 0 8px 30px rgba(15, 25, 35, 0.03);
+          display: flex;
+          flex-direction: column;
+          position: relative;
         }
 
-        .intro-block h2 {
-          color: #1d2430;
-          font-family: var(--primary-font);
-          font-size: var(--type-h2);
-          line-height: 1.2;
-          margin-bottom: 1rem;
-        }
-
-        .metric-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 1rem;
-        }
-
-        .metric-card {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 12px;
-          padding: 1.1rem;
-        }
-
-        .metric-card h3 {
-          color: #1d2430;
-          font-size: var(--type-h5);
-          line-height: 1.35;
-          font-family: var(--primary-font);
-          margin-bottom: 0.5rem;
-        }
-
-        .metric-card p {
-          color: #5e6876;
-          font-size: var(--type-small);
-          line-height: 1.6;
-          font-family: var(--secondary-font);
-          margin: 0;
-        }
-
-        .advertise-heading {
-          color: #1d2430;
-          font-family: var(--primary-font);
-          font-size: var(--type-h2);
-          line-height: 1.2;
-          font-weight: 700;
-          margin: 0 0 1rem;
+        .intro-block::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 4px;
+          background: var(--cardinal, #C1121F);
+          border-top-left-radius: 16px;
+          border-bottom-left-radius: 16px;
         }
 
         .advertise-copy {
-          color: #5e6876;
-          font-size: var(--type-body);
-          line-height: 1.7;
-          font-family: var(--secondary-font);
-          font-weight: 400;
-          max-width: 980px;
-          margin-bottom: 0.9rem;
+          color: #555555;
+          font-size: 1.05rem;
+          line-height: 1.65;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          margin-bottom: 1.25rem;
         }
 
-        .advertise-heading--centered,
-        .advertise-copy--centered {
+        .advertise-copy:last-child {
+          margin-bottom: 0;
+        }
+
+        .italic-quote {
+          font-family: var(--font-serif-body, 'Libre Baskerville', serif);
+          font-size: 1.25rem;
+          font-style: italic;
+          color: #0F1923;
+          line-height: 1.7;
+          border-left: 2px dashed rgba(15, 25, 35, 0.15);
+          padding-left: 1.25rem;
+          margin-bottom: 1.5rem;
+        }
+
+        /* Right Metrics Grid */
+        .metric-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1.5rem;
+        }
+
+        .metric-card {
+          background: #FFFFFF;
+          border: 1px solid rgba(15, 25, 35, 0.05);
+          border-radius: 12px;
+          padding: 1.75rem;
+          box-shadow: 0 4px 15px rgba(15, 25, 35, 0.02);
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .metric-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 10px 25px rgba(15, 25, 35, 0.06);
+          border-color: rgba(15, 25, 35, 0.1);
+        }
+
+        .metric-num {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 2.2rem;
+          font-weight: 900;
+          color: rgba(193, 18, 31, 0.2);
+          margin-bottom: 0.5rem;
+          display: block;
+          transition: color 0.3s ease;
+          line-height: 1;
+        }
+
+        .metric-card:hover .metric-num {
+          color: var(--cardinal, #C1121F);
+        }
+
+        .metric-card h3 {
+          color: #0F1923;
+          font-size: 1.35rem;
+          line-height: 1.35;
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          margin: 0 0 0.5rem;
+          font-weight: 700;
+        }
+
+        .metric-card p {
+          color: #555555;
+          font-size: 1.05rem;
+          line-height: 1.6;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          margin: 0;
+        }
+
+        /* website placement showcase */
+        .website-showcase {
+          padding-top: 6rem;
+        }
+
+        .website-layout {
+          display: grid;
+          grid-template-columns: 1.1fr 1fr;
+          gap: 4.5rem;
+          align-items: center;
+        }
+
+        .showcase-image-card {
+          background: #FFFFFF;
+          border: 1px solid rgba(15, 25, 35, 0.06);
+          border-radius: 16px;
+          overflow: hidden;
+          box-shadow: 0 12px 35px rgba(15, 25, 35, 0.04);
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .showcase-image-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 45px rgba(15, 25, 35, 0.1);
+        }
+
+        .showcase-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+          font-weight: 800;
+          color: #0F1923;
+          margin: 0 0 1.5rem;
+          line-height: 1.2;
+          letter-spacing: -0.01em;
+        }
+
+        /* Digital Magazine Showcase Section */
+        .magazine-showcase-section {
+          padding-bottom: 6rem;
+        }
+
+        .showcase-section-header {
           text-align: center;
-          margin-left: auto;
-          margin-right: auto;
+          margin-bottom: 3.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .showcase-desc {
+          font-family: var(--font-serif-body, 'Libre Baskerville', serif);
+          font-size: 1.15rem;
+          color: #555555;
+          line-height: 1.65;
+          max-width: 680px;
+          margin: 0.5rem auto 0;
+        }
+
+        .showcase-divider {
+          width: 50px;
+          height: 2px;
+          background: var(--cardinal, #C1121F);
+          margin-top: 1.25rem;
         }
 
         .image-grid {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 1.5rem;
-          margin-top: 1rem;
+          gap: 2.5rem;
         }
 
-        .image-card {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 12px;
-          overflow: hidden;
-          box-shadow: 0 14px 30px rgba(126, 92, 35, 0.12);
-        }
-
-        .image-card--single {
-          width: 100%;
-        }
-
-        .website-layout {
-          display: grid;
-          grid-template-columns: minmax(280px, 560px) minmax(0, 1fr);
-          gap: 1.6rem;
-          align-items: stretch;
-        }
-
-        .website-copy {
-          min-width: 0;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-        }
-
+        /* CTA block at bottom */
         .advertise-cta {
-          padding: 3rem 0 4rem;
+          padding: 0 0 6rem 0;
+          background: #FAF8F5;
         }
 
         .cta-wrap {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%);
-          border: 1px solid rgba(126, 92, 35, 0.16);
-          border-radius: 14px;
-          padding: 2rem 1.2rem;
+          background: #0F1923;
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          border-radius: 16px;
+          padding: 4rem 2rem;
           text-align: center;
+          color: #FFFFFF;
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+
+        .cta-wrap:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+        }
+
+        .cta-kicker {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: var(--cardinal, #C1121F);
+          text-transform: uppercase;
+          margin-bottom: 0.75rem;
         }
 
         .cta-wrap h2 {
-          color: #1d2430;
-          font-size: var(--type-h3);
-          line-height: 1.2;
-          font-family: var(--primary-font);
-          margin-bottom: 0.6rem;
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          color: #FFFFFF;
+          font-size: clamp(1.85rem, 3.5vw, 2.5rem);
+          line-height: 1.25;
+          margin: 0 0 0.85rem 0;
+          letter-spacing: -0.01em;
         }
 
         .cta-wrap p {
-          color: #5e6876;
-          font-size: var(--type-small);
-          line-height: 1.6;
-          font-family: var(--secondary-font);
-          margin-bottom: 1rem;
+          font-family: var(--font-serif-body, 'Libre Baskerville', serif);
+          color: #D0C9BF;
+          font-size: 1.15rem;
+          line-height: 1.65;
+          margin: 0 0 2rem 0;
+          max-width: 600px;
         }
 
-        .cta-wrap :global(.btn) {
-          min-width: 180px;
-          font-family: var(--secondary-font);
-          font-size: var(--type-small);
+        .cta-wrap :global(.btn-primary-cta) {
+          border-radius: 999px !important;
+          padding: 16px 44px !important;
+          font-family: var(--font-sans, 'DM Sans', sans-serif) !important;
+          font-size: 1rem !important;
+          font-weight: 700 !important;
+          letter-spacing: 0.12em !important;
+          text-transform: uppercase !important;
+          transition: all 0.3s ease !important;
+          cursor: pointer !important;
+          background-color: var(--cardinal, #C1121F) !important;
+          border: none !important;
+          color: #FFFFFF !important;
+          box-shadow: 0 4px 15px rgba(193, 18, 31, 0.25) !important;
+          text-decoration: none !important;
         }
 
-        @media (max-width: 991px) {
+        .cta-wrap :global(.btn-primary-cta:hover) {
+          background-color: #FFFFFF !important;
+          color: var(--ink, #0F1923) !important;
+          transform: translateY(-2px) !important;
+          box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade {
+          animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        /* Responsive rules */
+        @media (max-width: 1024px) {
           .advertise-shell {
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 24px;
+            padding-right: 24px;
           }
 
-          .advertise-hero {
-            min-height: 44vh;
-            padding: 3.5rem 0;
-          }
-
-          .advertise-hero__content p {
-            font-size: var(--type-small);
-            line-height: 1.6;
+          .advertise-hero-grid {
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3rem;
           }
 
           .intro-grid {
             grid-template-columns: 1fr;
-          }
-
-          .metric-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .advertise-heading {
-            font-size: var(--type-h3);
-          }
-
-          .advertise-copy {
-            font-size: var(--type-small);
-            line-height: 1.6;
-          }
-
-          .image-grid {
-            grid-template-columns: 1fr;
+            gap: 3rem;
           }
 
           .website-layout {
             grid-template-columns: 1fr;
-          }
-
-          .cta-wrap h2 {
-            font-size: var(--type-h4);
-          }
-
-          .cta-wrap p {
-            font-size: var(--type-small);
-            line-height: 1.6;
+            gap: 3rem;
           }
         }
 
-        @media (min-width: 768px) {
-          .advertise-shell {
-            padding-left: 14px;
-            padding-right: 14px;
+        @media (max-width: 991px) {
+          .advertise-section {
+            padding-top: 4rem;
+          }
+          .magazine-showcase-section {
+            padding-bottom: 4rem;
+          }
+          .advertise-cta {
+            padding-bottom: 4rem;
+          }
+          .advertise-hero-grid {
+            grid-template-columns: 1fr;
+            gap: 4rem;
+          }
+          .advertise-hero__right {
+            justify-content: center;
+          }
+          .media-masthead-card {
+            max-width: 100%;
           }
         }
 
-        @media (min-width: 1200px) {
+        @media (max-width: 768px) {
+          .advertise-hero {
+            padding: 4.5rem 0;
+          }
+          .advertise-hero__left {
+            align-items: center;
+            text-align: center;
+          }
+          .advertise-hero__divider {
+            margin-left: auto;
+            margin-right: auto;
+          }
+          .metric-grid {
+            grid-template-columns: 1fr;
+          }
+          .image-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+          }
+          .cta-wrap {
+            padding: 3rem 1.5rem;
+          }
+        }
+
+        @media (max-width: 480px) {
           .advertise-shell {
-            padding-left: 18px;
-            padding-right: 18px;
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+          .advertise-hero {
+            padding: 3.5rem 0;
+          }
+          .intro-block {
+            padding: 1.75rem 1.5rem;
           }
         }
       `}</style>

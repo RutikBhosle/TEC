@@ -90,8 +90,8 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
       <div
         className="axil-video-posts"
         style={{
-          background: '#f6f2e8',
-          color: '#1d2430',
+          background: '#FAF8F5',
+          color: '#0F1923',
           paddingTop: '2rem',
           paddingBottom: '0',
           fontFamily: 'var(--secondary-font)',
@@ -136,7 +136,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       position: 'relative',
-                      color: page === pageNumber - 1 ? '#D4AF37' : '#5e6876',
+                      color: page === pageNumber - 1 ? '#0F1923' : '#5e6876',
                       fontSize: 'var(--type-body-lg)',
                       fontFamily: 'var(--secondary-font)',
                       fontWeight: page === pageNumber - 1 ? 'bold' : 'normal',
@@ -150,7 +150,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                         marginTop: '6px',
                         width: '30px',
                         height: '3px',
-                        backgroundColor: page === pageNumber - 1 ? '#D4AF37' : '#8b97a3',
+                        backgroundColor: page === pageNumber - 1 ? '#0F1923' : '#8b97a3',
                         display: 'block',
                         visibility: 'visible',
                         opacity: 1,
@@ -201,7 +201,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
         .axil-video-posts .section-title .axil-title {
           text-align: left !important;
           margin-bottom: 0 !important;
-          color: #1d2430 !important;
+          color: #0F1923 !important;
         }
         
         .axil-video-posts .section-title .btn-link {
