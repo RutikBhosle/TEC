@@ -36,8 +36,8 @@ const Magazines = () => {
   if (isLoading) return <Loader />;
   if (error)
     return (
-      <div style={{ color: "#8b641d", textAlign: "center", background: "#f6f2e8" }}>
-        Error fetching magazines
+      <div style={{ color: "#C1121F", textAlign: "center", background: "#FAF8F5", padding: "3rem 1rem", fontFamily: "var(--font-sans)" }}>
+        Error fetching magazines. Please try again later.
       </div>
     );
   if (!data) return null;
@@ -51,139 +51,218 @@ const Magazines = () => {
   return (
     <>
       <HeadMeta
-        metaTitle="Exclusive Interviews with Entrepreneurs Featured in The Entrepreneurial Chronicles Magazine"
-        metaDesc="Exclusive interviews with top entrepreneurs featured in The Entrepreneurial Chronicles Magazine."
+        metaTitle="Exclusive Interviews with Entrepreneurs Featured in Star Prime Magazine"
+        metaDesc="Exclusive interviews with top entrepreneurs featured in Star Prime Magazine."
       />
 
       <HeaderOne />
 
-      <div
-        className="magazines-page"
-        style={{
-          width: "100%",
-          minHeight: "100vh",
-          background: "#f6f2e8",
-          color: "#1d2430",
-          fontFamily: "var(--secondary-font)",
-        }}
-      >
-        <style jsx global>{`
-          .magazines-page .magazines-search {
+      <div className="magazines-page">
+        <style jsx>{`
+          .magazines-page {
             width: 100%;
-            max-width: 640px;
-            background: rgba(255, 250, 241, 0.96);
-            color: #1d2430;
-            border: 1px solid rgba(126, 92, 35, 0.18);
+            min-height: 100vh;
+            background: #FAF8F5;
+            color: #0F1923;
+            padding-bottom: 5rem;
+          }
+
+          /* Premium Editorial Hero */
+          .editorial-hero {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 4.5rem 1.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .hero-eyebrow {
+            font-family: var(--font-sans, 'DM Sans', sans-serif);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            color: var(--cardinal, #C1121F);
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+          }
+
+          .hero-title {
+            font-family: var(--font-serif, 'Playfair Display', serif);
+            font-size: clamp(2.5rem, 5vw, 3.75rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: #0F1923;
+            margin: 0 0 1.25rem;
+          }
+
+          .hero-desc {
+            font-family: var(--font-serif-body, 'Libre Baskerville', serif);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            line-height: 1.7;
+            color: #4a5568;
+            max-width: 720px;
+            margin: 0 auto;
+          }
+
+          .hero-divider {
+            width: 80px;
+            height: 3px;
+            background: var(--cardinal, #C1121F);
+            margin-top: 1.5rem;
+            border-radius: 999px;
+          }
+
+          /* Search Section */
+          .search-section {
+            max-width: 600px;
+            margin: 0 auto 4rem;
+            padding: 0 1.5rem;
+            width: 100%;
+          }
+
+          .search-input-wrapper {
+            position: relative;
+            width: 100%;
+          }
+
+          .magazines-search {
+            width: 100%;
+            background: #FFFFFF;
+            color: #0F1923;
+            border: 1.5px solid rgba(15, 25, 35, 0.1);
             outline: none;
-            padding: 12px 16px;
-            border-radius: 10px;
-            box-shadow: 0 12px 28px rgba(126, 92, 35, 0.08);
+            padding: 14px 20px 14px 45px;
+            border-radius: 999px;
+            font-family: var(--font-sans, 'DM Sans', sans-serif);
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 4px 15px rgba(15, 25, 35, 0.03);
           }
 
-          .magazines-page .magazines-search::placeholder {
-            color: #7a6f61;
+          .magazines-search:focus {
+            border-color: var(--cardinal, #C1121F);
+            box-shadow: 0 8px 25px rgba(193, 18, 31, 0.08);
+            transform: translateY(-1px);
           }
 
-          .magazines-page .no-magazines {
-            color: #5e6876;
-            font-size: var(--type-body);
+          .magazines-search::placeholder {
+            color: #a0aec0;
+          }
+
+          .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            transition: color 0.3s ease;
+          }
+
+          .magazines-search:focus + .search-icon {
+            color: var(--cardinal, #C1121F);
+          }
+
+          /* Magazine Grid */
+          .grid-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+          }
+
+          .magazine-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            justify-items: center;
+            width: 100%;
+          }
+
+          @media (max-width: 991px) {
+            .magazine-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+
+          @media (max-width: 575px) {
+            .magazine-grid {
+              grid-template-columns: repeat(1, 1fr);
+            }
+          }
+
+          .no-magazines {
+            color: #718096;
+            font-family: var(--font-serif-body, 'Libre Baskerville', serif);
+            font-size: 1.15rem;
             text-align: center;
             width: 100%;
+            padding: 4rem 1rem;
           }
-
         `}</style>
-        {/* Simple local search (magazine titles only) */}
-        <div style={{
-          display: 'flex',
-          justifyContent: 'center',
-          padding: '2rem 1rem 0',
-        }}>
-          <input
-            className="magazines-search"
-            type="text"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-            placeholder="Search magazines by name..."
-            aria-label="Search magazines by name"
-          />
-        </div>
-        {/* Hero / Text Section */}
-        {/* <div
-          style={{
-            width: "100%",
-            backgroundImage: `url('/images/mag_bg.jpg')`,
-            backgroundRepeat: "repeat",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "2rem 0",
-            backgroundSize: "cover",
-          }}
-        >
-          <div
-            style={{
-              width: "90%",
-              maxWidth: "1200px",
-              textAlign: "center",
-              padding: "0 1rem",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "2rem",
-                fontWeight: "bolder",
-                marginBottom: "2px",
-                color: "white",
-              }}
-            >
-              LATEST MAGAZINES
-            </p>
-            <p
-              style={{
-                fontSize: "1.7rem",
-                fontWeight: "lighter",
-                color: "white",
-              }}
-            >
-              Welcome to The Entrepreneurial Chronicles Magazine, where we
-              spotlight trailblazers from all sectors transforming the business
-              magazine landscape. Our mission is to inspire and empower new
-              leaders with groundbreaking ideas worldwide.
-            </p>
-          </div>
-        </div> */}
 
-        {/* Magazine Grid */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: searchValue ? "center" : "flex-start",
-            gap: "40px",
-            maxWidth: "1600px",
-            margin: "0 auto",
-          }}
-        >
-          {filteredMagazines.length > 0 ? (
-            filteredMagazines.map((post, index) => (
-              <PostLayoutformag data={post} key={index} />
-            ))
-          ) : (
-            <p className="no-magazines">
-              No magazines found.
-            </p>
-          )}
+        {/* 1. Hero Header */}
+        <header className="editorial-hero">
+          <span className="hero-eyebrow">The Archives</span>
+          <h1 className="hero-title">Star Prime Library</h1>
+          <p className="hero-desc">
+            Explore our curated catalog of print-inspired business leadership magazines, visionary startup profiles, and exclusive global founder portfolios.
+          </p>
+          <div className="hero-divider" />
+        </header>
+
+        {/* 2. Stylized Search */}
+        <section className="search-section">
+          <div className="search-input-wrapper">
+            <input
+              className="magazines-search"
+              type="text"
+              value={searchValue}
+              onChange={(e) => setSearchValue(e.target.value)}
+              placeholder="Search issues by name..."
+              aria-label="Search magazines by name"
+            />
+            <svg
+              className="search-icon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+        </section>
+
+        {/* 3. Grid Content */}
+        <div className="grid-container">
+          <div className="magazine-grid">
+            {filteredMagazines.length > 0 ? (
+              filteredMagazines.map((post, index) => (
+                <PostLayoutformag data={post} key={index} />
+              ))
+            ) : (
+              <p className="no-magazines">
+                No archived issues matching your search criteria were found.
+              </p>
+            )}
+          </div>
         </div>
       </div>
 
-      <Faq/>
+      <Faq />
 
-      <div className="magazines-footer" style={{ marginTop: "-30px" }}>
+      <div className="magazines-footer" style={{ marginTop: "0" }}>
         <FooterTwo />
       </div>
     </>
   );
 };
 
-export default Magazines; 
+export default Magazines;

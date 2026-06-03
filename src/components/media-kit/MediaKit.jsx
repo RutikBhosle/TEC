@@ -95,7 +95,7 @@ const MediaKit = () => {
           display: block;
           width: 100%;
           height: 3px;
-          background: #d4af37;
+          background: #0F1923;
           margin: 30px 0;
         }
 

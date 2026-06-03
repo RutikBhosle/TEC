@@ -96,7 +96,7 @@ const Magazines = () => {
       <style jsx>{`
         .ec-magazines {
           background: #FAF8F5;
-          padding: 64px 0 56px;
+          padding: 24px 0 16px;
         }
 
         .ec-magazines-container {

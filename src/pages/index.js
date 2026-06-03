@@ -27,15 +27,15 @@ const Home = () => {
         <meta name="google-site-verification" content="Hb-PBtfDrWImSPQKiNhfbw0JxtOLWsPKDEbfz_WJ8ZE" />
       </Head>
       <HeadMeta
-        metaTitle="The Entrepreneurial Chronicles: A Business Magazine for Inspiring Entrepreneur Stories"
-        metaDesc="The Entrepreneurial Chronicles is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
+        metaTitle="Star Prime: A Business Magazine for Inspiring Entrepreneur Stories"
+        metaDesc="Star Prime is a business magazine that brings inspiring stories of entrepreneurs who have turned their dreams into reality."
       />
 
       {/* 1 — HEADER (Top Bar + Ink Navy Sticky Nav) */}
       <HeaderOne />
 
-      {/* 2 — HERO (Split: large cover + numbered sidebar) */}
-      <MagazineHero />
+      {/* 2 — WEB PROFILES (Featured + list stack) */}
+      <WebProfiles />
 
       {/* 3 — BREAKING TICKER */}
       <BreakingTicker />
@@ -49,8 +49,8 @@ const Home = () => {
       {/* 6 — BUSINESS BULLETIN (2-col split with newsletter) */}
       <BusinessBulletin />
 
-      {/* 7 — WEB PROFILES (Featured + list stack) */}
-      <WebProfiles />
+      {/* 7 — HERO (Split: large cover + numbered sidebar) */}
+      <MagazineHero />
 
       {/* 8 — MASTER TALKS (Featured + 4-col numbered grid) */}
       <MasterTalks />

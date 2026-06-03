@@ -15,7 +15,7 @@ export async function fetchAllPost() {
 }
 
 export function generateSitemap(slugs) {
-  const baseUrl = "https://www.theentrepreneurialchronicle.com";
+  const baseUrl = "https://www.starprime.com";
 
   const staticUrls = [
     { url: `${baseUrl}/`, changefreq: "daily", priority: 1.0 },

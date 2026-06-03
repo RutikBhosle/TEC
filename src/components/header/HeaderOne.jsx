@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { client } from "../../client";
-import NavbarLogo from "../../assest/chronicle_logo.png";
- 
+
 import SocialLink from "../../data/social/SocialLink.json";
 
 const HeaderOne = () => {
@@ -26,6 +25,7 @@ const HeaderOne = () => {
   const [mobileTechAiOpen, setMobileTechAiOpen] = useState(false);
 
   const [hoverCapable, setHoverCapable] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [techAiOpen, setTechAiOpen] = useState(false);
@@ -112,6 +112,16 @@ const HeaderOne = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -770,376 +780,281 @@ const HeaderOne = () => {
   };
 
 
+
   return (
     <>
-      {/* ── TOPBAR ── */}
-      <div className="ec-topbar">
-        <div className="ec-topbar-inner">
-          <div className="ec-topbar-left">
-            <span className="ec-topbar-date">
-              {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-            </span>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/magazines" className="ec-topbar-link">Latest Issue</Link>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/magazines" className="ec-topbar-link">Print Edition</Link>
-          </div>
-          <div className="ec-topbar-right">
-            <Link href="/advertise-with-us" className="ec-topbar-link">Advertise</Link>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/contact" className="ec-topbar-link">Contact</Link>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/magazines" className="ec-topbar-link ec-topbar-link--accent">Subscribe</Link>
+      <header className="page-header" style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 9999 }}>
+        {/* ── TOPBAR ── */}
+        <div className="ec-topbar">
+          <div className="ec-topbar-inner">
+            <div className="ec-topbar-left">
+              <span className="ec-topbar-date">
+                {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              </span>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/magazines" className="ec-topbar-link">Latest Issue</Link>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/magazines" className="ec-topbar-link">Print Edition</Link>
+            </div>
+            <div className="ec-topbar-right">
+              <Link href="/advertise-with-us" className="ec-topbar-link">Advertise</Link>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/contact" className="ec-topbar-link">Contact</Link>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/magazines" className="ec-topbar-link ec-topbar-link--accent">Subscribe</Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      <header className="page-header sticky-top">
-        <nav className="navbar bg-black">
+        <nav className={`navbar bg-black ${isScrolled ? "scrolled" : ""}`}>
+          {/* Mobile Sidebar Backdrop inside same stacking context as rows */}
+          {mobileMenuOpen && (
+            <div className="drawer-backdrop" onClick={closeMobileMenu} />
+          )}
           <div className="container">
-            <div className="navbar-inner">
-              <div className="brand-logo-container">
-                <Link href="/" className="ec-logo-area">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={NavbarLogo.src}
-                    alt="chronicles-logo"
-                    width="300"
-                    height="100"
-                    style={{ objectFit: "contain", width: "300px", height: "100px" }}
-                  />
-                </Link>
-              </div>
-
-              {/* Navigation Links - Desktop Only */}
-              <div className="navbar-nav-links desktop-nav">
-                <Link href="/" className="nav-link">Home</Link>
-                <Link href="/magazines" className="nav-link">Magazines</Link>
-                <Link href="/blogs" className="nav-link">Blogs</Link>
-                <div className="nav-dropdown">
-                  <button
-                    type="button"
-                    className="nav-link nav-dropdown-toggle"
-                    aria-expanded={industriesOpen}
-                    onClick={() => {
-                      setIndustriesOpen((v) => !v);
-                      setTechAiOpen(false);
-                    }}
+            <div className="navbar-rows">
+              {/* ROW 1: Centered Logo with Hamburger Left and Actions Right */}
+              <div className="navbar-row-one">
+                {/* Left Side: Hamburger Menu Button */}
+                <div className="navbar-left-menu">
+                  <button 
+                    className="mobile-menu-toggle menu-hamburger-btn"
+                    onClick={toggleMobileMenu}
+                    aria-label="Toggle menu"
+                    style={{ display: "block" }}
                   >
-                    Industries
-                    <span className={`nav-dropdown-arrow ${industriesOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
-                      <i className="far fa-chevron-down" />
+                    <span className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}>
+                      <span style={{ backgroundColor: "#fff" }}></span>
+                      <span style={{ backgroundColor: "#fff" }}></span>
+                      <span style={{ backgroundColor: "#fff" }}></span>
                     </span>
                   </button>
-                  <div className={`nav-dropdown-menu ${industriesOpen ? "is-open" : ""}`.trim()}>
-                    <Link
-                      href="/industries/healthcare"
-                      className="nav-dropdown-item"
-                      onClick={() => {
-                        setIndustriesOpen(false);
-                      }}
-                    >
-                      Healthcare
-                    </Link>
-                    <Link
-                      href="/industries/legal"
-                      className="nav-dropdown-item"
-                      onClick={() => {
-                        setIndustriesOpen(false);
-                      }}
-                    >
-                      Legal
-                    </Link>
+                </div>
 
-                    <div className="nav-submenu">
-                      <button
-                        type="button"
-                        className="nav-dropdown-item nav-submenu-toggle"
-                        aria-expanded={techAiOpen}
-                        onClick={() => {
-                          setTechAiOpen((v) => !v);
-                        }}
-                      >
-                        Tech/AI
-                        <span className={`nav-submenu-arrow ${techAiOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
-                          <i className="far fa-chevron-right" />
-                        </span>
+                {/* Middle: Brand Logo */}
+                <div className={`brand-logo-container brand-logo-center ${searchshow ? "search-active-hide-logo" : ""}`}>
+                  <Link href="/" className="ec-logo-area">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/assets/logoblack.jpg"
+                      alt="Star Prime Logo"
+                      style={{ width: "260px", height: "auto", objectFit: "contain" }}
+                    />
+                  </Link>
+                </div>
+
+                {/* Right Side: Search and Subscribe */}
+                <div className="navbar-right-actions">
+                  {/* Search form - flex:1 fills gap naturally */}
+                  <form
+                    ref={searchFormRef}
+                    onSubmit={handleSearch}
+                    className={`navbar-search ${
+                      searchshow ? "show-nav-search" : ""
+                    }`}
+                  >
+                    <div className="search-field">
+                      <input
+                        type="text"
+                        className="navbar-search-field"
+                        placeholder="Search entire website..."
+                        value={searchQuery}
+                        onChange={handleSearchInput}
+                      />
+                      <button className="navbar-search-btn" type="submit">
+                        <i className="fal fa-search" />
                       </button>
-                      <div className={`nav-submenu-menu ${techAiOpen ? "is-open" : ""}`.trim()}>
-                        <Link
-                          href="/industries/tech-ai"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          All Tech/AI
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai#ai"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          AI
-                        </Link>
-                        <Link
-                          href="/industries/tech-ai#technology"
-                          className="nav-dropdown-item"
-                          onClick={() => {
-                            setIndustriesOpen(false);
-                            setTechAiOpen(false);
-                          }}
-                        >
-                          Technology
-                        </Link>
-                      </div>
                     </div>
 
-                    <Link
-                      href="/industries/manufacturing-products"
-                      className="nav-dropdown-item"
-                      onClick={() => {
-                        setIndustriesOpen(false);
-                      }}
-                    >
-                      Manufacturing/Products
-                    </Link>
-                    <Link
-                      href="/industries/transportation"
-                      className="nav-dropdown-item"
-                      onClick={() => {
-                        setIndustriesOpen(false);
-                      }}
-                    >
-                      Transportation
-                    </Link>
-                  </div>
+                    {searchshow && showResults && searchResults.length > 0 && (
+                      <div className="search-suggestions-dropdown">
+                        <div className="search-suggestions-header">
+                          <h4>Suggestions ({searchResults.length})</h4>
+                        </div>
+                        <div className="search-suggestions-list">
+                          {searchResults.map((result, index) => (
+                            <div 
+                              key={result.id} 
+                              className="search-suggestion-item"
+                              data-type={result.type}
+                              onClick={() => handleSuggestionClick(result)}
+                            >
+                              <div className="suggestion-content">
+                                {result.hasImage && result.imageSrc && (
+                                  <div className="suggestion-image">
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                      src={result.imageSrc} 
+                                      alt={result.imageAlt || result.text}
+                                      width={40}
+                                      height={40}
+                                      className="suggestion-img"
+                                    />
+                                  </div>
+                                )}
+                                <div className="suggestion-details">
+                                  <div className="suggestion-type">{result.type}</div>
+                                  <div className="suggestion-text">{result.text}</div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {searchshow && showResults && searchResults.length === 0 && searchQuery.trim().length > 0 && (
+                      <div className="search-suggestions-dropdown">
+                        <div className="search-suggestions-header">
+                          <h4>No Results Found</h4>
+                        </div>
+                        <div className="search-suggestions-list">
+                          <div className="no-suggestions">
+                            <p>No content found matching &quot;{searchQuery}&quot;</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </form>
+
+                  <button
+                    ref={searchToggleRef}
+                    className="nav-search-field-toggler"
+                    onClick={() => {
+                      if (searchshow) {
+                        headerSearchClose();
+                      } else {
+                        headerSearchShow();
+                      }
+                    }}
+                    aria-label="Toggle search"
+                  >
+                    <i className={searchshow ? "far fa-times" : "far fa-search"} />
+                  </button>
+
+                  <Link href="/magazines" className="ec-nav-subscribe-btn">Subscribe</Link>
                 </div>
-                {/* <span className="nav-link nav-link--disabled" aria-disabled="true">Media Kit</span>
-                <span className="nav-link nav-link--disabled" aria-disabled="true">Podcast</span> */}
-                {/* <Link href="/about-us" className="nav-link">About Us</Link> */}
-                <Link href="/contact" className="nav-link">Contact</Link>
-                <Link href="/advertise-with-us" className="nav-link">Advertise</Link>
-                {router.pathname === "/media-kit" ? (
-                  <span className="nav-link active-page-link" aria-current="page">Media Kit</span>
-                ) : (
-                  <Link href="/media-kit" className="nav-link">Media Kit</Link>
-                )}
               </div>
 
-              {/* Search and Mobile Menu */}
-              <div className="navbar-extra-features">
-                <form
-                  ref={searchFormRef}
-                  onSubmit={handleSearch}
-                  className={`navbar-search ${
-                    searchshow ? "show-nav-search" : ""
-                  }`}
-                >
-                  <div className="search-field">
-                    <input
-                      type="text"
-                      className="navbar-search-field"
-                      placeholder="Search entire website..."
-                      value={searchQuery}
-                      onChange={handleSearchInput}
-                    />
-                    <button className="navbar-search-btn" type="submit">
-                      <i className="fal fa-search" />
+              {/* ROW 2: Navigation Links controlled by Hamburger */}
+              <div className={`navbar-row-two desktop-nav-links-row ${mobileMenuOpen ? "show-menu" : ""} ${!isScrolled ? "show-nav-at-top" : ""}`}>
+                <div className="navbar-nav-links-centered">
+                  <Link href="/" className="nav-link">Home</Link>
+                  <Link href="/magazines" className="nav-link">Magazines</Link>
+                  <Link href="/blogs" className="nav-link">Blogs</Link>
+                  <div className="nav-dropdown">
+                    <button
+                      type="button"
+                      className="nav-link nav-dropdown-toggle"
+                      aria-expanded={industriesOpen}
+                      onClick={() => {
+                        setIndustriesOpen((v) => !v);
+                        setTechAiOpen(false);
+                      }}
+                    >
+                      Industries
+                      <span className={`nav-dropdown-arrow ${industriesOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
+                        <i className="far fa-chevron-down" />
+                      </span>
                     </button>
+                    <div className={`nav-dropdown-menu ${industriesOpen ? "is-open" : ""}`.trim()}>
+                      <Link
+                        href="/industries/healthcare"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setIndustriesOpen(false);
+                        }}
+                      >
+                        Healthcare
+                      </Link>
+                      <Link
+                        href="/industries/legal"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setIndustriesOpen(false);
+                        }}
+                      >
+                        Legal
+                      </Link>
+
+                      <div className="nav-submenu">
+                        <button
+                          type="button"
+                          className="nav-dropdown-item nav-submenu-toggle"
+                          aria-expanded={techAiOpen}
+                          onClick={() => {
+                            setTechAiOpen((v) => !v);
+                          }}
+                        >
+                          Tech/AI
+                          <span className={`nav-submenu-arrow ${techAiOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
+                            <i className="far fa-chevron-right" />
+                          </span>
+                        </button>
+                        <div className={`nav-submenu-menu ${techAiOpen ? "is-open" : ""}`.trim()}>
+                          <Link
+                            href="/industries/tech-ai"
+                            className="nav-dropdown-item"
+                            onClick={() => {
+                              setIndustriesOpen(false);
+                              setTechAiOpen(false);
+                            }}
+                          >
+                            All Tech/AI
+                          </Link>
+                          <Link
+                            href="/industries/tech-ai#ai"
+                            className="nav-dropdown-item"
+                            onClick={() => {
+                              setIndustriesOpen(false);
+                              setTechAiOpen(false);
+                            }}
+                          >
+                            AI
+                          </Link>
+                          <Link
+                            href="/industries/tech-ai#technology"
+                            className="nav-dropdown-item"
+                            onClick={() => {
+                              setIndustriesOpen(false);
+                              setTechAiOpen(false);
+                            }}
+                          >
+                            Technology
+                          </Link>
+                        </div>
+                      </div>
+                      <Link
+                        href="/industries/stock-market"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setIndustriesOpen(false);
+                        }}
+                      >
+                        Stock Market
+                      </Link>
+                      <Link
+                        href="/industries/politics"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setIndustriesOpen(false);
+                        }}
+                      >
+                        Politics
+                      </Link>
+                    </div>
                   </div>
-                  <span
-                    className="navbar-search-close"
-                    onClick={headerSearchClose}
-                  >
-                    <i className="fal fa-times" />
-                  </span>
-                </form>
-
-                <button
-                  ref={searchToggleRef}
-                  className="nav-search-field-toggler"
-                  onClick={headerSearchShow}
-                >
-                  <i className="far fa-search" />
-                </button>
-
-                <Link href="/magazines" className="ec-nav-subscribe-btn">Subscribe</Link>
-
-                {/* Mobile Hamburger Menu */}
-                <button 
-                  className="mobile-menu-toggle"
-                  onClick={toggleMobileMenu}
-                  onMouseEnter={() => {
-                    if (!hoverCapable) return;
-                    setMobileMenuOpen(true);
-                  }}
-                  aria-label="Toggle mobile menu"
-                >
-                  <span className={`hamburger ${mobileMenuOpen ? 'active' : ''}`}>
-                    <span style={{ backgroundColor: "#fff" }}></span>
-                    <span style={{ backgroundColor: "#fff" }}></span>
-                    <span style={{ backgroundColor: "#fff" }}></span>
-                  </span>
-                </button>
+                  <Link href="/contact" className="nav-link">Contact</Link>
+                  <Link href="/advertise-with-us" className="nav-link">Advertise</Link>
+                  <span className="nav-link nav-link--disabled" aria-disabled="true">Media Kit</span>
+                </div>
               </div>
             </div>
           </div>
         </nav>
-
-        {/* Mobile Menu Dropdown */}
-        {mobileMenuOpen && (
-          <div
-            className="mobile-menu-dropdown"
-            onMouseLeave={() => {
-              if (!hoverCapable) return;
-              closeMobileMenu();
-            }}
-          >
-            <div className="mobile-menu-content">
-              <Link href="/" className="mobile-nav-link" onClick={closeMobileMenu}>Home</Link>
-              <Link href="/magazines" className="mobile-nav-link" onClick={closeMobileMenu}>Magazines</Link>
-              <Link href="/blogs" className="mobile-nav-link" onClick={closeMobileMenu}>Blogs</Link>
-
-              <div className="mobile-nav-accordion">
-                <button
-                  type="button"
-                  className={`mobile-nav-accordion-toggle ${mobileIndustriesOpen ? "is-open" : ""}`.trim()}
-                  aria-expanded={mobileIndustriesOpen}
-                  onClick={() => {
-                    setMobileIndustriesOpen((v) => !v);
-                    setMobileTechAiOpen(false);
-                  }}
-                >
-                  Industries
-                  <i className="far fa-chevron-down" aria-hidden="true" />
-                </button>
-
-                {mobileIndustriesOpen && (
-                  <div className="mobile-submenu">
-                    <Link href="/industries/healthcare" className="mobile-nav-link" onClick={closeMobileMenu}>Healthcare</Link>
-                    <Link href="/industries/legal" className="mobile-nav-link" onClick={closeMobileMenu}>Legal</Link>
-
-                    <div className="mobile-nav-accordion">
-                      <button
-                        type="button"
-                        className={`mobile-nav-accordion-toggle ${mobileTechAiOpen ? "is-open" : ""}`.trim()}
-                        aria-expanded={mobileTechAiOpen}
-                        onClick={() => {
-                          setMobileTechAiOpen((v) => !v);
-                        }}
-                      >
-                        Tech/AI
-                        <i className="far fa-chevron-down" aria-hidden="true" />
-                      </button>
-
-                      {mobileTechAiOpen && (
-                        <div className="mobile-submenu">
-                          <Link href="/industries/tech-ai" className="mobile-nav-link" onClick={closeMobileMenu}>All Tech/AI</Link>
-                          <Link href="/industries/tech-ai#ai" className="mobile-nav-link" onClick={closeMobileMenu}>AI</Link>
-                          <Link href="/industries/tech-ai#technology" className="mobile-nav-link" onClick={closeMobileMenu}>Technology</Link>
-                        </div>
-                      )}
-                    </div>
-
-                    <Link href="/industries/manufacturing-products" className="mobile-nav-link" onClick={closeMobileMenu}>Manufacturing/Products</Link>
-                    <Link href="/industries/transportation" className="mobile-nav-link" onClick={closeMobileMenu}>Transportation</Link>
-                  </div>
-                )}
-              </div>
-
-              {/* <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Media Kit</span>
-              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Podcast</span> */}
-              {/* <Link href="/about-us" className="mobile-nav-link" onClick={closeMobileMenu}>About Us</Link> */}
-              <Link href="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link>
-              <Link href="/advertise-with-us" className="mobile-nav-link" onClick={closeMobileMenu}>Advertise With Us</Link>
-              {router.pathname === "/media-kit" ? (
-                <span className="mobile-nav-link active-page-link" aria-current="page">Media Kit</span>
-              ) : (
-                <Link href="/media-kit" className="mobile-nav-link" onClick={closeMobileMenu}>Media Kit</Link>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Search Suggestions Dropdown */}
-        {searchshow && showResults && searchResults.length > 0 && (
-          <div className="search-suggestions-dropdown">
-            <div className="search-suggestions-header">
-              <h4>Suggestions ({searchResults.length})</h4>
-            </div>
-            <div className="search-suggestions-list">
-              {searchResults.map((result, index) => (
-                <div 
-                  key={result.id} 
-                  className="search-suggestion-item"
-                  data-type={result.type}
-                  onClick={() => handleSuggestionClick(result)}
-                >
-                  <div className="suggestion-content">
-                    {result.hasImage && result.imageSrc && (
-                      <div className="suggestion-image">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={result.imageSrc} 
-                          alt={result.imageAlt || result.text}
-                          width={50}
-                          height={50}
-                          className="suggestion-img"
-                        />
-                      </div>
-                    )}
-                    <div className="suggestion-details">
-                      <div className="suggestion-type">{result.type}</div>
-                      <div className="suggestion-text">{result.text}</div>
-                      {result.page && (
-                        <div className="suggestion-page">
-                          <span>📍 {result.page}</span>
-                        </div>
-                      )}
-                      {result.description && (
-                        <div className="suggestion-description">
-                          <span>{result.description}</span>
-                        </div>
-                      )}
-                      {result.href && (
-                        <div className="suggestion-link">
-                          <span>{result.href}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {searchshow && showResults && searchResults.length === 0 && searchQuery.trim().length > 0 && (
-          <div className="search-suggestions-dropdown">
-            <div className="search-suggestions-header">
-              <h4>No Results Found</h4>
-            </div>
-            <div className="search-suggestions-list">
-              <div className="no-suggestions">
-                <p>No content found matching &quot;{searchQuery}&quot;</p>
-                <div className="search-tips">
-                  <p>Try searching for:</p>
-                  <ul>
-                    <li>• Magazine names (Anchel, Jorden, Manuel, etc.)</li>
-                    <li>• Page sections (Home, About, Contact)</li>
-                    <li>• General keywords</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </header>
+      {/* Spacer to prevent content from hiding behind fixed header */}
+      <div className="navbar-fixed-spacer" />
 
       <style jsx global>{`
         /* ── EC TOPBAR ── */
@@ -1175,23 +1090,152 @@ const HeaderOne = () => {
         .ec-topbar-link--accent { color: #C1121F !important; font-weight: 600; }
         .ec-topbar-date { color: #6B6560; }
 
+        /* ── FIXED NAVBAR SPACER ── */
+        .navbar-fixed-spacer {
+          height: 170px; /* topbar + logo row + nav row */
+        }
+        @media (max-width: 991px) {
+          .navbar-fixed-spacer {
+            height: 110px; /* topbar + logo row only on mobile */
+          }
+        }
+
         /* ── NAVBAR ── */
         .navbar {
-          background-color: #0F1923 !important;
+          background-color: #000000 !important;
           border-bottom: 1px solid #1E2D3D;
         }
 
-        .navbar-inner {
+        .navbar .container {
+          max-width: 1240px !important;
+          padding-left: 32px !important;
+          padding-right: 32px !important;
+          width: 100% !important;
+          margin: 0 auto !important;
+        }
+
+        @media (max-width: 768px) {
+          .navbar .container {
+            padding-left: 18px !important;
+            padding-right: 18px !important;
+          }
+        }
+
+        .navbar-rows {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .navbar-row-one {
           display: flex;
           align-items: center;
           justify-content: space-between;
           width: 100%;
+          min-height: 80px;
+          position: relative;
+          padding: 12px 0;
+          transition: min-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                      padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .brand-logo-container {
-          flex-shrink: 0;
-          margin-left: 0;
-          padding-left: 0;
+        .navbar.scrolled .navbar-row-one {
+          min-height: 60px;
+          padding: 6px 0;
+        }
+
+        .navbar-left-menu {
+          flex: 1 1 0%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+
+        .brand-logo-container.brand-logo-center {
+          flex: 0 0 auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          margin: 0;
+          padding: 0;
+        }
+
+        .brand-logo-container.brand-logo-center img {
+          max-height: 60px;
+          width: auto !important;
+          max-width: 260px !important;
+          object-fit: contain;
+          transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .navbar.scrolled .brand-logo-container.brand-logo-center img {
+          max-height: 42px;
+        }
+
+        .navbar-right-actions {
+          flex: 1 1 0%;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 12px;
+          position: relative;
+        }
+
+        .navbar-right-actions .nav-search-field-toggler,
+        .navbar-right-actions .ec-nav-subscribe-btn {
+          flex-shrink: 0 !important;
+        }
+
+        .navbar-row-two {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-top: 1px solid #1E2D3D;
+          padding: 0;
+          max-height: 0px;
+          opacity: 0;
+          overflow: hidden;
+          visibility: hidden;
+          pointer-events: none;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                      opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                      padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                      visibility 0.35s;
+        }
+
+        .navbar-row-two.show-menu {
+          max-height: 60px;
+          opacity: 1;
+          padding: 10px 0;
+          visibility: visible;
+          pointer-events: auto;
+          transform: scaleX(1);
+          overflow: visible !important;
+        }
+
+        @media (min-width: 992px) {
+          .navbar-row-two.show-nav-at-top,
+          .navbar-row-two.show-menu {
+            max-height: 60px !important;
+            opacity: 1 !important;
+            padding: 10px 0 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: scaleX(1) !important;
+            overflow: visible !important;
+          }
+        }
+
+        .navbar-nav-links-centered {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 24px;
         }
 
         .ec-logo-area { text-decoration: none; display: block; }
@@ -1215,28 +1259,100 @@ const HeaderOne = () => {
         }
         .ec-nav-subscribe-btn:hover { background: #96010D; color: #fff !important; }
 
-        @media (max-width: 991px) {
-          .ec-topbar { display: none; }
-          .ec-nav-subscribe-btn { display: none; }
+        .drawer-backdrop {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          z-index: 100 !important;
+          animation: drawerFadeIn 0.25s ease-out;
         }
 
-        @media (min-width: 992px) {
-          .navbar {
-            padding-top: 6px;
-            padding-bottom: 6px;
-          }
+        @keyframes drawerFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
 
-          .navbar-inner {
-            min-height: 72px;
+        @media (max-width: 991px) {
+          .drawer-backdrop {
+            display: block !important;
           }
+        }
 
-          .brand-logo-container {
-            margin-left: -12px;
+        @media (max-width: 991px) {
+          .ec-topbar { display: none; }
+          .navbar-row-one {
+            min-height: 60px;
+            padding: 8px 0;
           }
+          .brand-logo-container.brand-logo-center img {
+            max-height: 40px;
+            max-width: 160px !important;
+          }
+          .navbar-row-two {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            align-items: stretch !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            bottom: 0 !important;
+            width: 280px !important;
+            height: 100vh !important;
+            background: #000000 !important;
+            z-index: 101 !important;
+            padding: 40px 24px !important;
+            border-top: none !important;
+            border-right: 1px solid #1E2D3D !important;
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.6) !important;
+            overflow-y: auto !important;
+            transform: translate3d(-100%, 0, 0) !important;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            max-height: none !important;
+            transform-origin: left !important;
+          }
+          .navbar-row-two.show-menu {
+            transform: translate3d(0, 0, 0) !important;
+          }
+          .navbar-nav-links-centered {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 20px !important;
+            width: 100% !important;
+          }
+          .navbar-nav-links-centered .nav-link {
+            width: 100% !important;
+            text-align: left !important;
+            padding: 8px 0 !important;
+            border-bottom: 1px solid #1E2D3D !important;
+            font-size: 14px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+          }
+          .navbar-right-actions {
+            gap: 10px;
+          }
+          .ec-nav-subscribe-btn {
+            padding: 6px 12px;
+            font-size: 10px;
+          }
+        }
 
-          .brand-logo-container img {
-            max-width: 240px !important;
-            height: auto !important;
+        @media (max-width: 480px) {
+          .brand-logo-container.brand-logo-center img {
+            max-width: 130px !important;
+          }
+          .ec-nav-subscribe-btn {
+            padding: 4px 8px;
+            font-size: 9px;
           }
         }
 
@@ -1261,11 +1377,12 @@ const HeaderOne = () => {
         }
 
         .navbar-nav-links .nav-link:hover {
-          color: #D4AF37 !important;
+          color: #0F1923 !important;
           text-decoration: none;
         }
 
-        .nav-link--disabled {
+        .nav-link--disabled,
+        .mobile-nav-link--disabled {
           opacity: 0.45;
           cursor: not-allowed;
           pointer-events: none;
@@ -1377,8 +1494,8 @@ const HeaderOne = () => {
         }
 
         .nav-dropdown-item:hover {
-          color: #D4AF37 !important;
-          background: rgba(212, 175, 55, 0.08);
+          color: #0F1923 !important;
+          background: rgba(15, 25, 35, 0.08);
           text-decoration: none;
         }
 
@@ -1397,259 +1514,132 @@ const HeaderOne = () => {
 
         .navbar-extra-features button:hover,
         .navbar .nav-search-field-toggler:hover {
-          color: #D4AF37 !important;
+          color: #0F1923 !important;
         }
 
-        .navbar .navbar-search-field {
-          background-color: #000 !important;
-          background: #000 !important;
-          color: #fff !important;
-          border: 1px solid #333 !important;
-        }
+        /* ── SEARCH BAR: Component-specific refinements ── */
+        /* Global styles now live in style.css — no more !important battles */
 
-        .navbar-search {
-          pointer-events: none;
-        }
-
-        .navbar-search.show-nav-search {
-          pointer-events: auto;
-        }
-
-        .navbar .navbar-search-field:focus {
-          background-color: #000 !important;
-          background: #000 !important;
-          color: #fff !important;
-          border: 1px solid #333 !important;
-          outline: none !important;
+        @media (max-width: 575px) {
+          .brand-logo-container.search-active-hide-logo {
+            display: none !important;
+          }
         }
 
         .navbar .navbar-search-field::placeholder {
-          color: #999 !important;
-        }
-
-        .navbar .navbar-search-field::-webkit-input-placeholder {
-          color: #999 !important;
-        }
-
-        .navbar .navbar-search-field::-moz-placeholder {
-          color: #999 !important;
-        }
-
-        .navbar .navbar-search-field:-ms-input-placeholder {
-          color: #999 !important;
-        }
-
-        .navbar .navbar-search-btn {
-          color: #fff !important;
+          color: #6B7280;
         }
 
         .navbar .navbar-search-btn:hover {
-          color: #D4AF37 !important;
-        }
-
-        /* Search Suggestions Dropdown */
-        .search-suggestions-dropdown {
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background: #000;
-          border: 1px solid #333;
-          border-top: none;
-          max-height: 300px;
-          overflow-y: auto;
-          z-index: 1000;
-          /* Hide scrollbar for Chrome, Safari and Opera */
-          scrollbar-width: none; /* Firefox */
-          -ms-overflow-style: none; /* Internet Explorer 10+ */
-        }
-
-        .search-suggestions-dropdown::-webkit-scrollbar {
-          display: none; /* Chrome, Safari and Opera */
-        }
-
-        .search-suggestions-header {
-          padding: 10px 20px;
-          border-bottom: 1px solid #333;
-        }
-
-        .search-suggestions-header h4 {
           color: #fff;
-          margin: 0;
-          font-size: var(--type-small);
         }
 
-        .search-suggestions-list {
-          max-height: 250px;
+        /* Suggestions Popover Card aligned with search card */
+        .navbar-search .search-suggestions-dropdown {
+          position: absolute;
+          top: calc(100% + 12px);
+          right: 0;
+          width: 340px;
+          background: #000000 !important;
+          border: 1px solid #2E4057 !important;
+          border-radius: 8px;
+          padding: 8px;
+          z-index: 10000;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+          max-height: 280px;
           overflow-y: auto;
-          /* Hide scrollbar for Chrome, Safari and Opera */
-          scrollbar-width: none; /* Firefox */
-          -ms-overflow-style: none; /* Internet Explorer 10+ */
+          scrollbar-width: none;
+          -ms-overflow-style: none;
         }
 
-        .search-suggestions-list::-webkit-scrollbar {
-          display: none; /* Chrome, Safari and Opera */
+        .navbar-search .search-suggestions-dropdown::-webkit-scrollbar {
+          display: none;
         }
 
-        .search-suggestion-item {
-          padding: 12px 20px;
-          border-bottom: 1px solid #222;
+        .navbar-search .search-suggestions-header {
+          padding: 6px 4px;
+          border-bottom: 1px solid #1E2D3D;
+        }
+
+        .navbar-search .search-suggestions-header h4 {
+          color: #D0C9BF;
+          font-size: 10px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin: 0;
+        }
+
+        .navbar-search .search-suggestion-item {
+          padding: 8px 4px;
+          border-bottom: 1px solid #1E2D3D;
           cursor: pointer;
-          transition: all 0.2s;
+          transition: all 0.2s ease;
+          border-radius: 6px;
         }
 
-        .suggestion-content {
+        .navbar-search .search-suggestion-item:hover {
+          background: #1E2D3D !important;
+          padding-left: 8px;
+        }
+
+        .navbar-search .suggestion-content {
           display: flex;
           align-items: center;
-          gap: 12px;
+          gap: 10px;
         }
 
-        .suggestion-image {
+        .navbar-search .suggestion-image {
           flex-shrink: 0;
-          width: 50px;
-          height: 50px;
-          border-radius: 8px;
+          width: 36px;
+          height: 36px;
+          border-radius: 4px;
           overflow: hidden;
           background: #333;
         }
 
-        .suggestion-img {
+        .navbar-search .suggestion-img {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          border-radius: 8px;
+          border-radius: 4px;
         }
 
-        .suggestion-details {
+        .navbar-search .suggestion-details {
           flex: 1;
           display: flex;
           flex-direction: column;
-          gap: 4px;
+          gap: 2px;
         }
 
-        .search-suggestion-item:hover {
-          background-color: #111;
-          transform: translateX(5px);
-        }
-
-        .search-suggestion-item:last-child {
-          border-bottom: none;
-        }
-
-        .suggestion-type {
-          color: #D4AF37;
-          font-size: var(--type-caption);
-          font-weight: bold;
-          text-transform: uppercase;
+        .navbar-search .suggestion-type {
+          color: #C1121F !important;
+          font-size: 8px;
+          font-weight: 700;
           letter-spacing: 0.5px;
+          text-transform: uppercase;
         }
 
-        /* Different colors for different content types */
-        .search-suggestion-item[data-type="heading"] .suggestion-type {
-          color: #FFD700;
-        }
-
-        .search-suggestion-item[data-type="magazine"] .suggestion-type {
-          color: #FF6B35;
-        }
-
-        .search-suggestion-item[data-type="content"] .suggestion-type {
-          color: #4ECDC4;
-        }
-
-        .search-suggestion-item[data-type="text"] .suggestion-type {
-          color: #45B7D1;
-        }
-
-        .search-suggestion-item[data-type="image"] .suggestion-type {
-          color: #96CEB4;
-        }
-
-        .search-suggestion-item[data-type="magazine-person"] .suggestion-type {
-          color: #FFD700;
-          font-weight: bold;
-        }
-
-        .search-suggestion-item[data-type="hero-magazine"] .suggestion-type {
-          color: #FF6B35;
-          font-weight: bold;
-        }
-
-        .search-suggestion-item[data-type="home-page"] .suggestion-type {
-          color: #9B59B6;
-        }
-
-        .search-suggestion-item[data-type="client-magazine"] .suggestion-type {
-          color: #E74C3C;
-          font-weight: bold;
-        }
-
-        .search-suggestion-item[data-type="navigation"] .suggestion-type {
-          color: #9B59B6;
-          font-weight: bold;
-        }
-
-        .search-suggestion-item[data-type="button"] .suggestion-type {
-          color: #F39C12;
-          font-weight: bold;
-        }
-
-        .search-suggestion-item[data-type="magazine-grid"] .suggestion-type {
-          color: #E67E22;
-          font-weight: bold;
-        }
-
-        .search-suggestion-item[data-type="magazine-image"] .suggestion-type {
-          color: #8E44AD;
-          font-weight: bold;
-        }
-
-        .suggestion-text {
-          color: #fff;
-          font-size: var(--type-small);
-          line-height: 1.3;
+        .navbar-search .suggestion-text {
+          color: #FAF8F5;
+          font-size: 11.5px;
           font-weight: 500;
+          line-height: 1.2;
         }
 
-        .suggestion-link {
-          margin-top: 2px;
-        }
-
-        .suggestion-link span {
-          color: #999;
-          font-size: var(--type-caption);
-          text-decoration: none;
-        }
-
-        .suggestion-description {
-          margin-top: 2px;
-        }
-
-        .suggestion-description span {
-          color: #D4AF37;
-          font-size: var(--type-caption);
-          font-style: italic;
-        }
-
-        .suggestion-page {
-          margin-top: 2px;
-        }
-
-        .suggestion-page span {
-          color: #4ECDC4;
-          font-size: var(--type-caption);
-          font-weight: 500;
-        }
-
-        .no-suggestions {
-          padding: 20px;
+        .navbar-search .no-suggestions {
+          padding: 16px 8px;
           text-align: center;
+          color: #9A9490;
+          font-size: 12px;
         }
 
-        .no-suggestions p {
-          color: #999;
-          margin: 0 0 10px 0;
-          font-size: var(--type-small);
+        @media (max-width: 767px) {
+          .navbar-search .search-suggestions-dropdown {
+            position: absolute;
+            width: calc(100vw - 32px);
+            right: -16px;
+            top: calc(100% + 8px);
+          }
         }
         
         .search-tips {
@@ -1661,7 +1651,7 @@ const HeaderOne = () => {
         }
         
         .search-tips p {
-          color: #D4AF37;
+          color: #0F1923;
           font-size: var(--type-caption);
           font-weight: bold;
           margin: 0 0 8px 0;
@@ -1682,7 +1672,7 @@ const HeaderOne = () => {
 
         /* Search Highlight */
         .search-highlight {
-          background-color: #D4AF37;
+          background-color: #0F1923;
           color: #000;
           padding: 2px 4px;
           border-radius: 2px;
@@ -1707,73 +1697,84 @@ const HeaderOne = () => {
 
 
         @media (min-width: 992px) {
-          .mobile-menu-toggle {
-            display: none;
+          .navbar:not(.scrolled) .mobile-menu-toggle,
+          .navbar:not(.scrolled) .menu-hamburger-btn {
+            display: none !important;
           }
+        }
+
+        .sticky-top {
+          position: sticky !important;
+          top: 0 !important;
+          z-index: 9999 !important;
+          width: 100% !important;
         }
         
         .hamburger {
-          display: flex;
-          flex-direction: column;
-          width: 25px;
-          height: 20px;
+          display: block;
+          width: 22px;
+          height: 16px;
           position: relative;
-          opacity: 1 !important;
-          visibility: visible !important;
-          background: repeating-linear-gradient(
-            to bottom,
-            #fff 0,
-            #fff 2px,
-            transparent 2px,
-            transparent 6px
-          ) !important;
-          border-radius: 2px;
+          cursor: pointer;
+          background: transparent !important;
         }
         
         .hamburger span {
           display: block;
-          height: 3px;
+          position: absolute;
+          height: 2px;
           width: 100%;
           background: #fff !important;
           background-color: #fff !important;
-          opacity: 1 !important;
-          margin: 3px 0;
-          transition: all 0.3s ease;
           border-radius: 2px;
+          opacity: 1;
+          left: 0;
+          transform: rotate(0deg);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .navbar .mobile-menu-toggle .hamburger span {
-          background: #fff !important;
-          background-color: #fff !important;
+        .hamburger span:nth-child(1) {
+          top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+          top: 7px;
+        }
+
+        .hamburger span:nth-child(3) {
+          top: 14px;
         }
         
         .hamburger.active span:nth-child(1) {
-          transform: rotate(45deg) translate(6px, 6px);
+          top: 7px;
+          transform: rotate(135deg);
         }
         
         .hamburger.active span:nth-child(2) {
-          opacity: 0;
+          opacity: 0 !important;
+          left: -40px;
         }
         
         .hamburger.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(6px, -6px);
+          top: 7px;
+          transform: rotate(-135deg);
         }
         
         .mobile-menu-dropdown {
-          position: fixed;
-          top: 52px;
+          position: absolute;
+          top: 100%;
           left: 0;
           right: 0;
-          width: 100vw;
+          width: 100%;
           background: #000;
           border-top: 1px solid #333;
           z-index: 1000;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
         }
         
         .mobile-menu-content {
           padding: 8px 0;
-          max-height: calc(100vh - 52px);
+          max-height: calc(100vh - 120px);
           overflow-y: auto;
         }
         
@@ -1826,7 +1827,7 @@ const HeaderOne = () => {
         
         .mobile-nav-link:hover {
           background: #111;
-          color: #D4AF37;
+          color: #0F1923;
           padding-left: 30px;
         }
         
@@ -2060,7 +2061,7 @@ const HeaderOne = () => {
 
         .navbar,
         .main-navbar {
-          background: #0F1923 !important;
+          background: #000000 !important;
           border-bottom: 1px solid #1E2D3D !important;
         }
 
@@ -2084,17 +2085,16 @@ const HeaderOne = () => {
         .nav-submenu-menu,
         .search-suggestions-dropdown,
         .mobile-menu-dropdown {
-          background: #0F1923 !important;
+          background: #000000 !important;
           border-color: #2E4057 !important;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
         }
 
         .navbar .navbar-search-field,
         .navbar .navbar-search-field:focus {
-          background: #1E2D3D !important;
-          background-color: #1E2D3D !important;
+          background: #111B24 !important;
+          background-color: #111B24 !important;
           color: #FAF8F5 !important;
-          border: 1px solid #2E4057 !important;
         }
 
         .navbar .navbar-search-field::placeholder,
@@ -2139,13 +2139,7 @@ const HeaderOne = () => {
         .suggestion-type { color: #C1121F !important; }
 
         .hamburger {
-          background: repeating-linear-gradient(
-            to bottom,
-            #D0C9BF 0,
-            #D0C9BF 2px,
-            transparent 2px,
-            transparent 6px
-          ) !important;
+          background: transparent !important;
         }
 
         .hamburger span,
@@ -2154,21 +2148,39 @@ const HeaderOne = () => {
           background-color: #D0C9BF !important;
         }
 
+        .navbar-nav-links-centered .nav-link,
         .navbar-nav-links .nav-link {
           color: #D0C9BF !important;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11.5px !important;
-          font-weight: 500;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          border-bottom: 2px solid transparent;
-          transition: color 0.2s, border-color 0.2s;
-          padding: 8px 12px !important;
+          font-family: 'DM Sans', system-ui, -apple-system, sans-serif !important;
+          font-size: 13px !important;
+          font-weight: 600 !important;
+          letter-spacing: 0.08em !important;
+          text-transform: uppercase !important;
+          text-decoration: none !important;
+          border-bottom: 2px solid transparent !important;
+          transition: color 0.25s ease, border-color 0.25s ease !important;
+          padding: 8px 16px !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          background: transparent !important;
+          border-top: none !important;
+          border-left: none !important;
+          border-right: none !important;
+          cursor: pointer !important;
+          gap: 6px !important;
+          line-height: 1.2 !important;
         }
+
+        .navbar-nav-links-centered .nav-link:hover,
         .navbar-nav-links .nav-link:hover {
-          color: #fff !important;
+          color: #FAF8F5 !important;
           border-bottom-color: #C1121F !important;
-          text-decoration: none;
+          text-decoration: none !important;
+        }
+
+        .navbar-nav-links-centered .nav-link:focus,
+        .navbar-nav-links .nav-link:focus {
+          outline: none !important;
         }
 
         

@@ -114,13 +114,13 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           display: flex;
           align-items: center;
           justify-content: center;
-          filter: brightness(0) invert(0.45);
-          transition: filter 0.25s;
+          filter: grayscale(1) opacity(0.55) brightness(1.4);
+          transition: filter 0.25s ease;
           cursor: pointer;
           flex-shrink: 0;
           height: 100px;
         }
-        .ec-partner-logo:hover { filter: brightness(0) invert(1); }
+        .ec-partner-logo:hover { filter: grayscale(0) opacity(1) brightness(1); }
 
         @keyframes partnerScroll {
           from { transform: translateX(0); }

@@ -20,10 +20,10 @@ const AboutUs = ({ aboutData }) => {
     <>
       <HeadMeta
         metaTitle={
-          "Learn About The Entrepreneurial Chronicles | A Leading Global Business Magazine"
+          "Learn About Star Prime | A Leading Global Business Magazine"
         }
         metaDesc={
-          "The Entrepreneurial Chronicles is a global business magazine featuring Visionary business leaders, Industry tycoons, and Entrepreneurial Minds from around the world "
+          "Star Prime is a global business magazine featuring Visionary business leaders, Industry tycoons, and Entrepreneurial Minds from around the world"
         }
       />
       <HeaderOne />
@@ -87,7 +87,7 @@ const AboutUs = ({ aboutData }) => {
               color: "white",
             }}
           >
-            Welcome to The Entrepreneurial Chronicles Magazine, where we
+            Welcome to Star Prime Magazine, where we
             spotlight trailblazers from all sectors transforming the business
             magazine landscape. Our mission is to inspire and empower new
             leaders with groundbreaking ideas worldwide. Count on us for
@@ -97,7 +97,7 @@ const AboutUs = ({ aboutData }) => {
         </div>
       </div>
       {/* <BreadcrumbBanner pageTitle="About Us" /> */}
-      <div className="axil-about-us section-gap-top p-b-xs-20" style={{ backgroundColor: '#000', color: '#fff' }}>
+      <div className="axil-about-us section-gap-top p-b-xs-20" style={{ backgroundColor: '#FAF8F5', color: '#0F1923' }}>
         <div className="container">
           <figure className="m-b-xs-40 text-center">
             <Image
@@ -110,7 +110,7 @@ const AboutUs = ({ aboutData }) => {
           </figure>
           <div className="row">
             <div className="col-lg-8">
-              <div className="about-us-content" style={{ color: '#fff' }}>
+              <div className="about-us-content" style={{ color: '#0F1923' }}>
                 <div
                   dangerouslySetInnerHTML={{ __html: aboutData.content }}
                 ></div>
@@ -125,7 +125,7 @@ const AboutUs = ({ aboutData }) => {
           </div>
         </div>
       </div>
-      <div className="axil-our-team section-gap section-gap-top__with-text" style={{ backgroundColor: '#000', color: '#fff' }}>
+      <div className="axil-our-team section-gap section-gap-top__with-text" style={{ backgroundColor: '#FAF8F5', color: '#0F1923' }}>
         {/* <div className="container">
           <div className="axil-team-grid-wrapper">
             <SectionTitleTwo

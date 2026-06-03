@@ -169,8 +169,7 @@ const GuestPostForm = () => {
                   our readers.
                 </li>
                 <li>
-                  For advertising or marketing opportunities, visit
-                  https://www.theentrepreneurialchronicle.com/contact.
+                  For advertising or marketing opportunities, visit /contact.
                 </li>
               </ul>
             </Col>

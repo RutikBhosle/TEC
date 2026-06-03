@@ -4717,124 +4717,137 @@ input[type="radio"] + label::after {
     padding: 0.5rem 1rem;
   }
 }
+/* ── NAVBAR SEARCH (INLINE FLEX SLIDE-OUT) ── */
 .navbar-search {
-  position: absolute;
-  width: 100vw;
-  height: 100%;
-  background: black;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  /* Collapsed by default: zero-width flex item */
+  flex: 0 0 0px;
+  min-width: 0;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+
+  /* Override legacy absolute overlay */
+  position: relative;
+  width: auto;
+  height: auto;
+  background: transparent;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  transform: none;
+
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 999999;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.5s ease-in-out;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  transition: flex 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              min-width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              max-width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              margin-left 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              visibility 0.25s;
 }
 .navbar-search.show-nav-search {
-  visibility: visible;
+  /* Expanded: grow to fill available gap */
+  flex: 1 1 0%;
+  min-width: 80px;
+  max-width: 100%;
+  margin-left: 24px; /* Beautiful gap spacing from the brand logo */
   opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  overflow: visible;
 }
 .navbar-search .search-field {
-  width: 60%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 @media (max-width: 991px) {
   .navbar-search .search-field {
-    width: 70%;
+    width: 100%;
   }
 }
 .navbar-search input {
   width: 100%;
-  height: 100%;
-  border: none;
-  background: #000 !important;
-  background-color: #000 !important;
-  color: #fff !important;
-  border-bottom: 1px solid var(--grey-dark-one);
+  height: auto;
+  border: 1px solid #2E4057;
+  border-radius: 6px;
+  background: #111B24;
+  background-color: #111B24;
+  color: #FAF8F5;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 8px 36px 8px 12px;
 }
 .navbar-search input:focus {
   outline: 0;
-  background: #000 !important;
-  background-color: #000 !important;
-  color: #fff !important;
-  border-color: var(--primary-color);
+  background: #111B24;
+  background-color: #111B24;
+  color: #FAF8F5;
+  border-color: #C8102E;
+  box-shadow: 0 0 0 2px rgba(200, 16, 46, 0.15);
 }
 .navbar-search .navbar-search-btn {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
   border: none;
   background: transparent;
-  padding: 0.5rem 2rem;
+  padding: 4px 8px;
   cursor: pointer;
 }
 .navbar-search .navbar-search-btn i,
 .navbar-search .navbar-search-btn span {
-  font-size: 1.8rem;
+  font-size: 14px;
   font-weight: 400;
-  color: var(--grey-light-one);
-  transition: all 0.3s;
+  color: #8A9BB0;
+  transition: color 0.2s;
 }
 .navbar-search .navbar-search-btn:hover i,
 .navbar-search .navbar-search-btn:hover span {
-  color: var(--primary-color);
+  color: #C8102E;
 }
 .navbar-search .navbar-search-close {
-  position: absolute;
-  top: 50%;
-  right: 3rem;
-  font-size: 2.4rem;
-  color: #D4AF37 !important;
-  margin-right: 3rem;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
+  display: none;
 }
 @media (max-width: 991px) {
   .navbar-search .navbar-search-close {
-    right: 0;
-    margin-right: 2rem;
-    margin-left: 1rem;
+    display: none;
   }
 }
 .navbar-search .navbar-search-close:hover {
-  color: #FFD700 !important;
+  color: #0F1923;
 }
 .nav-search-field-toggler {
   position: relative;
-  font-size: 2rem;
-  line-height: 4.2rem;
+  font-size: 1.6rem;
+  line-height: 1;
   color: #fff;
-  margin-right: 2rem;
-  transition: all 0.3s ease-in-out;
+  margin-right: 0;
+  transition: color 0.2s ease;
   background-color: transparent;
   border: none;
   padding: 0;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 .nav-search-field-toggler::after {
-  content: " ";
-  position: absolute;
-  width: 4rem;
-  height: 4rem;
-  background: rgba(255, 255, 255, 0.1);
-  top: 50%;
-  left: 50%;
-  margin: -2rem;
-  border-radius: 100%;
-  transform: scale(0);
-  transition: all 0.3s ease-in-out;
+  display: none;
 }
 .nav-search-field-toggler:hover {
-  color: #fff;
+  color: #C8102E;
 }
 .nav-search-field-toggler:hover::after {
-  transform: scale(1);
+  display: none;
 }
 .side-nav-toggler {
   position: relative;
@@ -7818,7 +7831,7 @@ ul.gallery img {
 .join-us {
   margin-top: -1.4rem;
 }
-/* Team social icons: always visible, gold by default, animate on view/hover */
+/* Team social icons: always visible, ink blue by default, animate on view/hover */
 .axil-team-block .axil-team-share-wrapper .social-share__vertical li {
   transform: none !important;
   opacity: 1 !important;
@@ -7842,11 +7855,11 @@ ul.gallery img {
   font-size: 1.6rem !important;
 }
 
-/* Ensure circular background stays gold */
+/* Ensure circular background stays ink blue */
 .axil-team-block .axil-team-share-wrapper .social-share.social-share__with-bg li a,
 .axil-team-block .axil-team-share-wrapper .social-share__with-bg-white li a {
-  background: #D4AF37 !important;
-  border-color: #D4AF37 !important;
+  background: #0F1923 !important;
+  border-color: #0F1923 !important;
 }
 
 /* Hover interaction: slight lift/scale */
@@ -7855,11 +7868,11 @@ ul.gallery img {
   color: #fff !important; /* keep icon white on hover */
 }
 
-/* Keep circle gold on hover as well */
+/* Keep circle ink blue on hover as well */
 .axil-team-block .axil-team-share-wrapper .social-share__with-bg li a:hover,
 .axil-team-block .axil-team-share-wrapper .social-share__with-bg-white li a:hover {
-  background: #D4AF37 !important;
-  border-color: #D4AF37 !important;
+  background: #0F1923 !important;
+  border-color: #0F1923 !important;
 }
 
 /* Brand hover backgrounds (full circle), keeping icon white */
@@ -7893,7 +7906,7 @@ ul.gallery img {
 }
 
 /* Brand hover colors */
-/* Brand colors disabled; using uniform gold on hover */
+/* Brand colors disabled; using uniform ink blue on hover */
 
 @keyframes icon-pop-in {
   0% { opacity: 0; transform: translateY(8px) scale(0.96); }

@@ -28,7 +28,7 @@ const RelatedArticles = ({ currentMagArticle, allMagazinesArticles }) => {
 
       <style jsx global>{`
         .related-articles-light {
-          background: linear-gradient(180deg, #fffdf8 0%, #f6f2e8 100%);
+          background: linear-gradient(180deg, #FAF8F5 0%, #F0EDE8 100%);
         }
 
         .related-articles-light .section-title .title,
@@ -41,8 +41,8 @@ const RelatedArticles = ({ currentMagArticle, allMagazinesArticles }) => {
 
         .related-articles-light .section-title .btn,
         .related-articles-light .section-title a.btn {
-          background: #d4af37 !important;
-          border-color: #d4af37 !important;
+          background: #0F1923 !important;
+          border-color: #0F1923 !important;
           color: #111315 !important;
         }
 
@@ -50,7 +50,7 @@ const RelatedArticles = ({ currentMagArticle, allMagazinesArticles }) => {
         .related-articles-light .section-title a.btn:hover {
           background: #b8891f !important;
           border-color: #b8891f !important;
-          color: #fffdf8 !important;
+          color: #FAF8F5 !important;
         }
 
         .related-articles-light .axil-img-container .grad-overlay__transparent {
@@ -59,7 +59,7 @@ const RelatedArticles = ({ currentMagArticle, allMagazinesArticles }) => {
 
         .related-articles-light .axil-img-container .axil-post-title a,
         .related-articles-light .axil-img-container .axil-post-title {
-          color: #fffdf8 !important;
+          color: #FAF8F5 !important;
         }
 
         .related-articles-light__item {

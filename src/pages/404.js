@@ -14,7 +14,7 @@ const Custom404 = () => {
       textAlign: 'center',
       padding: '20px'
     }}>
-      <h1 style={{ fontSize: '4rem', marginBottom: '1rem', color: '#D4AF37' }}>
+      <h1 style={{ fontSize: '4rem', marginBottom: '1rem', color: '#0F1923' }}>
         404
       </h1>
       <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>
@@ -24,7 +24,7 @@ const Custom404 = () => {
         The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </p>
       <Link href="/" style={{ 
-        background: '#D4AF37', 
+        background: '#0F1923', 
         color: '#000', 
         padding: '12px 24px', 
         textDecoration: 'none', 

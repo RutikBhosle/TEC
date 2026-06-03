@@ -1,115 +1,333 @@
-﻿import SocialLink from "../../data/social/SocialLink.json";
+import SocialLink from "../../data/social/SocialLink.json";
 
 const ContactInfo = () => {
   return (
-    <div className="axil-contact-info-wrapper p-l-md-45 m-b-xs-30 contact-info-wrap">
-      <div className="axil-contact-info-inner contact-info-card">
-        <h2 className="h4 m-b-xs-10">Contact Information</h2>
-        <div className="axil-contact-info">
-          <address className="address">
-            <p className="mid m-b-xs-20">6605 Longshore St, Dublin, OH 43017, USA</p>
+    <div className="liaison-directory">
+      <div className="directory-header">
+        <span className="directory-kicker">Bureau Directory</span>
+        <h2 className="directory-title">The Editorial Desks</h2>
+        <p className="directory-desc">
+          Reach out directly to our specialized desks for editorial submissions, partnerships, or corporate communications.
+        </p>
+      </div>
 
-            <p className="mid m-b-xs-30">
-              Home Branch - office no 328B, Gera imperium Rise, Wipro circle,
-              opp to wipro company, Hinjewadi phase 2, Pune
+      <div className="desks-list">
+        {/* Desk 1 */}
+        <div className="desk-item">
+          <div className="desk-marker" />
+          <div className="desk-details">
+            <span className="desk-category">Press & Submissions</span>
+            <h4 className="desk-name">Editorial Desk</h4>
+            <p className="desk-desc">
+              Pitch your stories, founder breakthroughs, or suggest editorial coverage to our chief editors.
             </p>
+            <a href="mailto:editorial@starprime.com" className="desk-email">
+              editorial@starprime.com
+            </a>
+          </div>
+        </div>
 
-            <div className="h5 m-b-xs-10 contact-availability">
-              We&apos;re available 24/7. Call now.
-            </div>
-            <div>
-              <a className="tel" href="tel:+16146022959">
-                <i className="fas fa-phone" />
-                +1 (614) 602-2959
-              </a>
-            </div>
-          </address>
+        {/* Desk 2 */}
+        <div className="desk-item">
+          <div className="desk-marker" />
+          <div className="desk-details">
+            <span className="desk-category">Advertising & Campaigns</span>
+            <h4 className="desk-name">Partnerships & Brand Desk</h4>
+            <p className="desk-desc">
+              Inquire about campaign rates, collaborative events, and bespoke brand partnerships.
+            </p>
+            <a href="mailto:partnerships@starprime.com" className="desk-email">
+              partnerships@starprime.com
+            </a>
+          </div>
+        </div>
 
-          <div className="contact-social-share m-t-xs-30">
-            <div className="axil-social-title h5">Follow Us</div>
-            <ul className="social-share social-share__with-bg" style={{ gap: "8px" }}>
-              <li>
-                <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer">
-                  <i className={SocialLink.yt.icon} />
-                </a>
-              </li>
-              <li>
-                <a href={SocialLink.instagram.url} target="_blank" rel="noopener noreferrer">
-                  <i className={SocialLink.instagram.icon} />
-                </a>
-              </li>
-              <li>
-                <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer">
-                  <i className={SocialLink.linked.icon} />
-                </a>
-              </li>
-            </ul>
+        {/* Desk 3 */}
+        <div className="desk-item">
+          <div className="desk-marker" />
+          <div className="desk-details">
+            <span className="desk-category">Corporate Office</span>
+            <h4 className="desk-name">Headquarters</h4>
+            <p className="desk-desc">
+              <strong>US Office:</strong> 6605 Longshore St, Dublin, OH 43017, USA
+              <br />
+              <strong>Home Branch:</strong> Office 328B, Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune
+            </p>
           </div>
         </div>
       </div>
 
+      {/* Hotline Panel */}
+      <div className="hotline-panel">
+        <span className="hotline-kicker">Liaison Hotline</span>
+        <a href="tel:+16146022959" className="hotline-number">
+          +1 (614) 602-2959
+        </a>
+        <p className="hotline-note">Available 24/7 for urgent press & media inquiries.</p>
+      </div>
+
+      {/* Social Follow */}
+      <div className="social-follow">
+        <span className="social-kicker">Follow Star Prime</span>
+        <ul className="social-links">
+          <li>
+            <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer" className="social-circle">
+              <i className={SocialLink.yt.icon} />
+            </a>
+          </li>
+          <li>
+            <a href={SocialLink.instagram.url} target="_blank" rel="noopener noreferrer" className="social-circle">
+              <i className={SocialLink.instagram.icon} />
+            </a>
+          </li>
+          <li>
+            <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer" className="social-circle">
+              <i className={SocialLink.linked.icon} />
+            </a>
+          </li>
+        </ul>
+      </div>
+
       <style jsx>{`
-        .contact-info-card {
-          background: linear-gradient(180deg, #fffdf8 0%, #f5eddf 100%) !important;
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 12px;
-          color: #1d2430;
-          font-family: var(--secondary-font);
+        .liaison-directory {
+          display: flex;
+          flex-direction: column;
+          gap: 2.75rem;
+          width: 100%;
+          padding: 0.5rem 0;
+          color: #0F1923;
         }
 
-        .contact-info-card h2 {
-          color: #1d2430;
-          font-family: var(--primary-font);
-          font-size: var(--type-h4);
-          line-height: 1.25;
+        .directory-kicker {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--cardinal, #C1121F);
+          display: block;
+          margin-bottom: 0.5rem;
         }
 
-        .contact-info-card .mid {
-          color: #5e6876;
+        .directory-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 2.35rem;
+          font-weight: 800;
+          line-height: 1.2;
+          color: #0F1923;
+          margin: 0 0 1rem;
+          letter-spacing: -0.01em;
+        }
+
+        .directory-desc {
+          font-family: var(--font-serif-body, 'Libre Baskerville', serif);
+          font-size: 1.05rem;
           line-height: 1.65;
-          font-family: var(--secondary-font);
-          font-size: var(--type-body);
+          color: #555555;
+          margin: 0;
         }
 
-        .contact-info-card .contact-availability {
-          color: #1d2430;
-          font-family: var(--primary-font);
-          font-size: var(--type-h5);
-          line-height: 1.35;
+        .desks-list {
+          display: flex;
+          flex-direction: column;
+          gap: 2.25rem;
         }
 
-        .contact-info-card .tel {
-          color: #8b641d;
+        .desk-item {
+          display: flex;
+          gap: 1.5rem;
+          position: relative;
+        }
+
+        .desk-marker {
+          width: 2px;
+          background: #2E4057;
+          opacity: 0.2;
+          align-self: stretch;
+          transition: all 0.3s ease;
+          position: relative;
+        }
+
+        .desk-item:hover .desk-marker {
+          background: var(--cardinal, #C1121F);
+          opacity: 1;
+        }
+
+        .desk-marker::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 6px;
+          height: 6px;
+          background: #2E4057;
+          border-radius: 999px;
+          opacity: 0.6;
+          transition: all 0.3s ease;
+        }
+
+        .desk-item:hover .desk-marker::before {
+          background: var(--cardinal, #C1121F);
+          opacity: 1;
+        }
+
+        .desk-details {
+          flex: 1;
+        }
+
+        .desk-category {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: var(--cardinal, #C1121F);
+          display: block;
+          margin-bottom: 0.35rem;
+        }
+
+        .desk-name {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 1.45rem;
+          font-weight: 700;
+          line-height: 1.3;
+          margin: 0 0 0.5rem;
+          color: #0F1923;
+        }
+
+        .desk-desc {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 1.05rem;
+          line-height: 1.6;
+          color: #555555;
+          margin: 0 0 0.65rem;
+        }
+
+        .desk-email {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #0F1923;
           text-decoration: none;
-          margin-left: 0;
-          font-weight: 500;
-          font-family: var(--secondary-font);
-          font-size: var(--type-body);
+          transition: all 0.3s ease;
+          border-bottom: 1.5px dashed rgba(15, 25, 35, 0.15);
+          width: fit-content;
+          display: block;
         }
 
-        .contact-info-card .tel i {
-          color: #d4af37;
-          margin-right: 8px;
-          position: static;
+        .desk-email:hover {
+          color: var(--cardinal, #C1121F);
+          border-bottom-color: var(--cardinal, #C1121F);
         }
 
-        .contact-info-card .axil-social-title {
-          color: #1d2430;
-          font-family: var(--primary-font);
-          font-size: var(--type-h5);
-          line-height: 1.35;
+        /* Hotline Panel */
+        .hotline-panel {
+          background: #0F1923;
+          color: #FFFFFF;
+          border-radius: 12px;
+          padding: 1.75rem;
+          box-shadow: 0 8px 30px rgba(15, 25, 35, 0.08);
+          transition: all 0.3s ease;
+          border: 1px solid rgba(255, 255, 255, 0.04);
         }
 
-        .contact-info-card :global(.social-share__with-bg li a) {
-          background: #fffaf1;
-          border: 1px solid rgba(126, 92, 35, 0.16);
-          color: #6b7685;
+        .hotline-panel:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 35px rgba(15, 25, 35, 0.15);
         }
 
-        .contact-info-card :global(.social-share__with-bg li a:hover) {
-          background: #d4af37;
-          border-color: #d4af37;
-          color: #10151c;
+        .hotline-kicker {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.85rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          color: var(--cardinal, #C1121F);
+          text-transform: uppercase;
+          display: block;
+          margin-bottom: 0.5rem;
+        }
+
+        .hotline-number {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 2.2rem;
+          font-weight: 900;
+          color: #FFFFFF;
+          text-decoration: none;
+          display: block;
+          margin-bottom: 0.5rem;
+          transition: color 0.3s ease;
+        }
+
+        .hotline-number:hover {
+          color: #D0C9BF;
+        }
+
+        .hotline-note {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.95rem;
+          color: #9A9490;
+          margin: 0;
+        }
+
+        /* Social Follow */
+        .social-follow {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .social-kicker {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: #718096;
+        }
+
+        .social-links {
+          display: flex;
+          gap: 0.85rem;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+
+        .social-circle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          background: #FFFFFF;
+          border: 1.5px solid rgba(15, 25, 35, 0.08);
+          color: #4a5568;
+          transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+          text-decoration: none;
+        }
+
+        .social-circle:hover {
+          background: var(--cardinal, #C1121F);
+          border-color: var(--cardinal, #C1121F);
+          color: #FFFFFF;
+          transform: translateY(-4px);
+          box-shadow: 0 6px 15px rgba(193, 18, 31, 0.25);
+        }
+
+        .social-circle i {
+          font-size: 1rem;
+        }
+
+        /* Responsive spacing */
+        @media (max-width: 768px) {
+          .directory-title {
+            font-size: 1.95rem;
+          }
+          .hotline-number {
+            font-size: 1.85rem;
+          }
         }
       `}</style>
     </div>
