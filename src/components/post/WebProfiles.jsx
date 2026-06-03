@@ -46,7 +46,7 @@ const WebProfiles = () => {
   const currentMagazine = data[currentIndex] || data[0];
 
   const formatTitle = (title) => {
-    if (!title) return null;
+    if (!title) return "";
     const separators = [" — ", " - ", " : ", ": "];
     for (const sep of separators) {
       if (title.includes(sep)) {
@@ -55,7 +55,7 @@ const WebProfiles = () => {
         const rest = parts.slice(1).join(sep).trim();
         return (
           <>
-            {first} — <span className="ec-italic-title">{rest}</span>
+            {first} — <span className="ec-italic-title" style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{rest}</span>
           </>
         );
       }
@@ -79,18 +79,33 @@ const WebProfiles = () => {
             
             {/* LEFT COLUMN: MAGAZINE COVER MOCKUP */}
             <div className="ec-magazine-cover-side">
-              <div className="ec-magazine-cover-wrapper" key={`cover-${currentIndex}`}>
+              <div className="ec-magazine-cover-wrapper">
                 <div className="ec-magazine-cover-red-bg" />
-                <div className="ec-magazine-cover-card animate-fade">
-                  {currentMagazine.featureImg ? (
-                    <img
-                      src={currentMagazine.featureImg}
-                      alt={currentMagazine.title}
-                      className="ec-cover-img"
-                    />
-                  ) : (
-                    <div className="ec-cover-img-placeholder" />
-                  )}
+                <div className="ec-magazine-cover-card">
+                  {data.map((item, index) => (
+                    <div
+                      key={item.slug?.current || index}
+                      className="ec-cover-img-slide"
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        opacity: currentIndex === index ? 1 : 0,
+                        transition: "opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                        zIndex: currentIndex === index ? 2 : 1,
+                        pointerEvents: currentIndex === index ? "auto" : "none",
+                      }}
+                    >
+                      {item.featureImg ? (
+                        <img
+                          src={item.featureImg}
+                          alt={item.title}
+                          className="ec-cover-img"
+                        />
+                      ) : (
+                        <div className="ec-cover-img-placeholder" />
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -164,28 +179,28 @@ const WebProfiles = () => {
       <style jsx>{`
         .ec-profiles {
           background: #0F1923;
-          padding: 90px 0;
+          padding: 40px 0 60px;
           color: #FAF8F5;
           overflow: hidden;
         }
 
         .ec-profiles-container {
-          max-width: 1200px;
+          max-width: 1240px;
           margin: 0 auto;
           padding: 0 32px;
         }
 
         .ec-profiles-layout {
           display: grid;
-          grid-template-columns: 1fr 1.2fr;
-          gap: 70px;
+          grid-template-columns: 380px 1fr;
+          gap: 60px;
           align-items: center;
         }
 
         /* LEFT SIDE: MAGAZINE COVER */
         .ec-magazine-cover-side {
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           align-items: center;
         }
 
@@ -289,10 +304,10 @@ const WebProfiles = () => {
 
         .ec-magazine-title {
           font-family: 'Playfair Display', serif;
-          font-size: 44px;
+          font-size: clamp(24px, 2.2vw, 30px) !important;
           font-weight: 700;
           color: #FAF8F5;
-          line-height: 1.15;
+          line-height: 1.25;
           margin: 0 0 24px 0;
           letter-spacing: -0.01em;
         }
@@ -301,7 +316,7 @@ const WebProfiles = () => {
           font-family: 'Playfair Display', serif;
           font-style: italic;
           font-weight: 400;
-          color: #FAF8F5;
+          color: #D0C9BF;
         }
 
         .ec-magazine-description {
@@ -362,43 +377,49 @@ const WebProfiles = () => {
           gap: 20px;
         }
 
-        .ec-btn-primary {
+        :global(.ec-btn-primary) {
           display: inline-block;
           background: #C1121F;
           color: #FAF8F5;
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
           font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.2em;
+          font-weight: 600;
+          letter-spacing: 0.18em;
           text-transform: uppercase;
           text-decoration: none;
-          padding: 16px 36px;
-          transition: background 0.2s, color 0.2s;
+          padding: 10px 24px;
+          transition: all 0.2s ease;
           border: none;
           cursor: pointer;
+          opacity: 0.88;
         }
-        .ec-btn-primary:hover {
+        :global(.ec-btn-primary:hover) {
           background: #96010D;
+          color: #FAF8F5 !important;
+          opacity: 1;
         }
 
-        .ec-btn-secondary {
+        :global(.ec-btn-secondary) {
           display: inline-block;
           background: transparent;
           color: #FAF8F5;
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
           font-size: 11px;
-          font-weight: 700;
-          letter-spacing: 0.2em;
+          font-weight: 600;
+          letter-spacing: 0.18em;
           text-transform: uppercase;
           text-decoration: none;
-          padding: 15px 36px;
+          padding: 9px 24px;
           border: 1px solid rgba(250, 248, 245, 0.2);
-          transition: border-color 0.2s, background 0.2s;
+          transition: all 0.2s ease;
           cursor: pointer;
+          opacity: 0.72;
         }
-        .ec-btn-secondary:hover {
+        :global(.ec-btn-secondary:hover) {
           border-color: #FAF8F5;
+          color: #FAF8F5 !important;
           background: rgba(250, 248, 245, 0.05);
+          opacity: 1;
         }
 
         /* ANIMATIONS */
@@ -425,13 +446,17 @@ const WebProfiles = () => {
             font-size: 36px;
           }
           .ec-profiles-layout {
+            grid-template-columns: 320px 1fr;
             gap: 40px;
+          }
+          .ec-magazine-cover-wrapper {
+            max-width: 320px;
           }
         }
 
         @media (max-width: 768px) {
           .ec-profiles {
-            padding: 60px 0;
+            padding: 32px 0 40px;
           }
           .ec-profiles-layout {
             grid-template-columns: 1fr;

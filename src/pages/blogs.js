@@ -1,13 +1,73 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../components/common/Loader";
-import { client } from "../client";
+import { client, urlFor } from "../client";
 import HeaderOne from "../components/header/HeaderOne";
 import FooterTwo from "../components/footer/FooterTwo";
 import HeadMeta from "../components/elements/HeadMeta";
 import Image from "next/image";
+import Link from "next/link";
 import SharedSidebarWidgets from "../components/widget/SharedSidebarWidgets";
 import { useRouter } from "next/router";
+
+const getCategorySvg = (slug) => {
+  const cleanSlug = slug?.toLowerCase() || "";
+  if (cleanSlug.includes("news") || cleanSlug.includes("bulletin")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("magazine")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("interview") || cleanSlug.includes("talk")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("strateg") || cleanSlug.includes("idea") || cleanSlug.includes("insight")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("case") || cleanSlug.includes("stud")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("profile") || cleanSlug.includes("founder") || cleanSlug.includes("people") || cleanSlug.includes("author")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("trend") || cleanSlug.includes("market") || cleanSlug.includes("growth")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+      </svg>
+    );
+  }
+  // Default general grid placeholder (circular icon)
+  return (
+    <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21V9.75M3.284 14.253A8.966 8.966 0 0112 11.25c2.29 0 4.414.858 6.03 2.288M3.284 14.253a8.973 8.973 0 003.541 4.793M18.716 14.253a8.973 8.973 0 01-3.541 4.793m0 0A8.961 8.961 0 0112 21m0-21C6.477 0 2 4.477 2 10c0 1.637.443 3.17 1.216 4.5M12 0c5.523 0 10 4.477 10 10 0 1.637-.443 3.17-1.216 4.5M12 0v3" />
+    </svg>
+  );
+};
 
 const Blogs = () => {
   const router = useRouter();
@@ -39,8 +99,30 @@ const Blogs = () => {
     },
   });
 
+  const { data: categoriesData } = useQuery({
+    queryKey: ["allCategoriesBlogsPage"],
+    queryFn: async () => {
+      return await client.fetch(`*[_type == "category" && slug.current != "trusted-brands"]`);
+    },
+  });
+
   const [isVisible, setIsVisible] = useState(false);
   const posts = Array.isArray(data) ? data : [];
+  const categoriesList = Array.isArray(categoriesData) ? categoriesData : [];
+  const displayCategories = categoriesList.slice(0, 6);
+
+  const feedPosts = posts.slice(7);
+  const gridItems = [];
+
+  if (feedPosts.length > 0) {
+    gridItems.push({ type: "newsletter" });
+    if (feedPosts[0]) gridItems.push({ type: "post", data: feedPosts[0] });
+    if (feedPosts[1]) gridItems.push({ type: "post", data: feedPosts[1] });
+    gridItems.push({ type: "categories" });
+    for (let i = 2; i < feedPosts.length; i++) {
+      gridItems.push({ type: "post", data: feedPosts[i] });
+    }
+  }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -55,6 +137,23 @@ const Blogs = () => {
 
   const handlePostClick = (slug) => {
     router.push(`/post/${slug}`);
+  };
+
+  const renderTitle = (title) => {
+    if (!title) return "";
+    const match = title.match(/\s*(—|–|:)\s*/);
+    if (match) {
+      const separator = match[1];
+      const index = title.indexOf(separator);
+      const mainName = title.substring(0, index).trim();
+      const description = title.substring(index + separator.length).trim();
+      return (
+        <>
+          {mainName} {separator} <em style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{description}</em>
+        </>
+      );
+    }
+    return title;
   };
 
   const formatDate = (dateStr) => {
@@ -124,7 +223,7 @@ const Blogs = () => {
                   </div>
                   <div className="primary-hero-content">
                     <span className="primary-hero-category">{getCategory(posts[0])}</span>
-                    <h2 className="primary-hero-title">{posts[0].title}</h2>
+                    <h2 className="primary-hero-title">{renderTitle(posts[0].title)}</h2>
                     {posts[0].description && (
                       <p className="primary-hero-excerpt">{posts[0].description}</p>
                     )}
@@ -141,8 +240,8 @@ const Blogs = () => {
               {/* CURATED SIDE STACK (RIGHT COLUMN - 1/3) */}
               <div className="secondary-hero-stack">
                 <span className="stack-label">Featured Inside</span>
-                {posts.slice(1, 4).length > 0 ? (
-                  posts.slice(1, 4).map((post, idx) => (
+                {posts.slice(1, 7).length > 0 ? (
+                  posts.slice(1, 7).map((post, idx) => (
                     <div 
                       key={post.slug.current || idx}
                       className="secondary-hero-card"
@@ -182,49 +281,132 @@ const Blogs = () => {
                   </div>
                 ) : error ? (
                   <div className="error-alert">Error fetching latest articles</div>
-                ) : posts.length <= 4 ? (
+                ) : posts.length <= 7 ? (
                   <p className="no-more-posts">More insights are currently being compiled by our newsroom.</p>
                 ) : (
-                  posts.slice(4).map((post, index) => (
-                    <div 
-                      key={post.slug.current || index}
-                      className={`feed-article-card ${isVisible ? 'animate-in' : ''}`}
-                      style={{ animationDelay: `${index * 0.08}s` }}
-                      onClick={() => handlePostClick(post.slug.current)}
-                    >
-                      <div className="feed-card-image-wrapper">
-                        <Image
-                          src={post.featureImg}
-                          alt={post.altText || post.title}
-                          fill
-                          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 380px"
-                        />
-                      </div>
-                      <div className="feed-card-content">
-                        <span className="feed-card-category">{getCategory(post)}</span>
-                        <h4 className="feed-card-title">{post.title}</h4>
-                        {post.description && (
-                          <p className="feed-card-excerpt">{post.description}</p>
-                        )}
-                        <div className="feed-card-meta">
-                          <span>{formatDate(post.publishedAt || post._updatedAt)}</span>
+                  gridItems.map((item, index) => {
+                    if (item.type === "newsletter") {
+                      return (
+                        <div key="newsletter-grid-card" className="feed-newsletter-card">
+                          <div className="newsletter-stamp-wrapper">
+                            <svg className="newsletter-stamp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                            </svg>
+                            <span className="ec-newsletter-label">Newsletter</span>
+                          </div>
+                          <h3 className="ec-newsletter-title">Stay ahead of the story.</h3>
+                          <p className="ec-newsletter-text">
+                            The Star Prime digest — curated business intelligence, fresh profiles, and market insights, delivered weekly.
+                          </p>
+
+                          <ul className="newsletter-features">
+                            <li>
+                              <span className="feature-dot">✦</span>
+                              <span className="feature-text">In-depth founder profiles</span>
+                            </li>
+                            <li>
+                              <span className="feature-dot">✦</span>
+                              <span className="feature-text">Exclusive market sector trends</span>
+                            </li>
+                            <li>
+                              <span className="feature-dot">✦</span>
+                              <span className="feature-text">Weekly curated business digests</span>
+                            </li>
+                          </ul>
+
+                          <div className="ec-newsletter-form">
+                            <input
+                              type="email"
+                              className="ec-newsletter-input"
+                              placeholder="Your email address"
+                              aria-label="Email address"
+                            />
+                            <button className="ec-newsletter-btn" type="button">
+                              Join
+                            </button>
+                          </div>
+
+                          <span className="newsletter-footer-note">
+                            Join 45,000+ industry decision makers. Zero spam.
+                          </span>
                         </div>
-                        <div className="card-hover-border" />
+                      );
+                    }
+
+                    if (item.type === "categories") {
+                      return (
+                        <div key="categories-grid-card" className="feed-categories-card">
+                          <h4 className="categories-card-title">Browse Categories</h4>
+                          <div className="categories-grid">
+                            {displayCategories.map((cat) => (
+                              <Link
+                                key={cat.slug?.current}
+                                href={
+                                  cat.slug?.current === "magazines"
+                                    ? "/magazines"
+                                    : `/category/${cat.slug?.current}`
+                                }
+                                className="cat-grid-item"
+                              >
+                                <div className="cat-grid-thumb">
+                                  {cat.category_image ? (
+                                    <Image
+                                      src={urlFor(cat.category_image).url()}
+                                      alt={cat.title}
+                                      fill
+                                      sizes="(max-width: 768px) 50vw, 150px"
+                                    />
+                                  ) : (
+                                    <div className="cat-grid-placeholder">
+                                      {getCategorySvg(cat.slug?.current)}
+                                    </div>
+                                  )}
+                                </div>
+                                <span className="cat-grid-name">
+                                  {cat.title}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    const post = item.data;
+                    return (
+                      <div 
+                        key={post.slug.current || index}
+                        className={`feed-article-card ${isVisible ? 'animate-in' : ''}`}
+                        style={{ animationDelay: `${index * 0.08}s` }}
+                        onClick={() => handlePostClick(post.slug.current)}
+                      >
+                        <div className="feed-card-image-wrapper">
+                          <Image
+                            src={post.featureImg}
+                            alt={post.altText || post.title}
+                            fill
+                            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 380px"
+                          />
+                        </div>
+                        <div className="feed-card-content">
+                          <span className="feed-card-category">{getCategory(post)}</span>
+                          <h4 className="feed-card-title">{post.title}</h4>
+                          {post.description && (
+                            <p className="feed-card-excerpt">{post.description}</p>
+                          )}
+                          <div className="feed-card-meta">
+                            <span>{formatDate(post.publishedAt || post._updatedAt)}</span>
+                          </div>
+                          <div className="card-hover-border" />
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </div>
 
-            {/* RIGHT SIDEBAR COLUMN (1/3 width) */}
-            <div className="feed-sidebar-column">
-              <SharedSidebarWidgets
-                className="blogs-shared-sidebar"
-                animate
-                isVisible={isVisible}
-              />
-            </div>
+
 
           </div>
         </div>
@@ -257,10 +439,10 @@ const Blogs = () => {
         }
 
         .hero-eyebrow {
-          font-size: 0.85rem;
+          font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           text-transform: uppercase;
           margin-bottom: 0.75rem;
         }
@@ -287,7 +469,7 @@ const Blogs = () => {
         .hero-cover-divider {
           width: 80px;
           height: 3px;
-          background: var(--cardinal, #C1121F);
+          background: #dfc167;
           margin-top: 1.5rem;
           border-radius: 999px;
         }
@@ -313,7 +495,7 @@ const Blogs = () => {
           position: relative;
           width: 100%;
           height: 440px;
-          border-radius: 12px;
+          border-radius: 0;
           overflow: hidden;
           background: #1E2D3D;
           border: 1px solid rgba(250, 248, 245, 0.08);
@@ -345,29 +527,29 @@ const Blogs = () => {
 
         .primary-hero-category {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.75rem;
+          font-size: 10px;
           font-weight: 700;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           margin-bottom: 0.75rem;
           display: block;
         }
 
         .primary-hero-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: clamp(1.75rem, 3vw, 2.5rem);
-          font-weight: 800;
+          font-size: clamp(24px, 2.2vw, 30px) !important;
+          font-weight: 700;
           color: #FFFFFF;
-          line-height: 1.2;
+          line-height: 1.25;
           margin: 0 0 1.25rem 0;
           letter-spacing: -0.01em;
         }
 
         .primary-hero-excerpt {
-          font-family: var(--font-serif-body, 'Libre Baskerville', serif);
-          font-size: 0.95rem;
-          line-height: 1.7;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 15px;
+          line-height: 1.75;
           color: #D0C9BF;
           margin: 0 0 1.5rem 0;
           display: -webkit-box;
@@ -380,7 +562,7 @@ const Blogs = () => {
           display: flex;
           align-items: center;
           gap: 10px;
-          font-size: 0.75rem;
+          font-size: 11px;
           font-weight: 600;
           color: #9A9490;
           text-transform: uppercase;
@@ -398,14 +580,14 @@ const Blogs = () => {
 
         .primary-hero-cta {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.8rem;
-          font-weight: 700;
+          font-size: 11px;
+          font-weight: 600;
           color: #FFFFFF;
           background: var(--cardinal, #C1121F);
-          padding: 12px 24px;
+          padding: 10px 24px;
           width: fit-content;
           text-transform: uppercase;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.18em;
           transition: all 0.3s ease;
         }
 
@@ -427,7 +609,7 @@ const Blogs = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           margin-bottom: 1.75rem;
           padding-bottom: 0.65rem;
           border-bottom: 1px solid #2E4057;
@@ -436,7 +618,7 @@ const Blogs = () => {
         .secondary-hero-card {
           display: flex;
           gap: 1.5rem;
-          padding: 1.75rem 0;
+          padding: 1.15rem 0;
           border-bottom: 1px solid #1E2D3D;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -448,7 +630,7 @@ const Blogs = () => {
 
         .secondary-hero-num {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 2.2rem;
+          font-size: 26px;
           font-weight: 900;
           color: rgba(250, 248, 245, 0.2);
           line-height: 1;
@@ -456,7 +638,7 @@ const Blogs = () => {
         }
 
         .secondary-hero-card:hover .secondary-hero-num {
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
         }
 
         .secondary-hero-details {
@@ -464,23 +646,23 @@ const Blogs = () => {
         }
 
         .secondary-hero-category {
-          font-size: 0.7rem;
+          font-size: 9px;
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           margin-bottom: 0.45rem;
           display: block;
         }
 
         .secondary-hero-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 1.15rem;
+          font-size: 13px;
           font-weight: 700;
           color: #FAF8F5;
           line-height: 1.45;
           margin: 0 0 0.5rem 0;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
@@ -492,7 +674,7 @@ const Blogs = () => {
         }
 
         .secondary-hero-meta {
-          font-size: 0.7rem;
+          font-size: 10px;
           color: #9A9490;
           font-weight: 500;
         }
@@ -512,8 +694,8 @@ const Blogs = () => {
 
         .feed-grid-layout {
           display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: 4.5rem;
+          grid-template-columns: 1fr;
+          gap: 0;
         }
 
         .feed-section-title {
@@ -529,28 +711,263 @@ const Blogs = () => {
 
         .feed-articles-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 2.5rem 2rem;
         }
 
+        /* ── GRID NEWSLETTER CARD ── */
+        .feed-newsletter-card {
+          background: #F5F2EE;
+          border: 1px solid #E2DDD7;
+          border-radius: 0;
+          padding: 2.25rem 2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 460px;
+        }
+
+        .newsletter-stamp-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 0.75rem;
+          color: var(--cardinal, #C1121F);
+        }
+
+        .newsletter-stamp-icon {
+          width: 28px;
+          height: 28px;
+          opacity: 0.85;
+        }
+
+        .feed-newsletter-card .ec-newsletter-label {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: var(--cardinal, #C1121F);
+          margin-bottom: 0;
+          line-height: 1;
+        }
+
+        .feed-newsletter-card .ec-newsletter-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 20px;
+          font-weight: 700;
+          color: #0F1923;
+          line-height: 1.3;
+          margin: 0 0 0.5rem;
+        }
+
+        .feed-newsletter-card .ec-newsletter-text {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 12.5px;
+          color: #5A544F;
+          line-height: 1.55;
+          margin: 0 0 1rem;
+        }
+
+        .newsletter-features {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 1.25rem 0;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .newsletter-features li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .feature-dot {
+          color: var(--cardinal, #C1121F);
+          font-size: 11px;
+        }
+
+        .feature-text {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 12px;
+          color: #333333;
+          font-weight: 500;
+        }
+
+        .feed-newsletter-card .ec-newsletter-form {
+          display: flex;
+          width: 100%;
+          margin-bottom: 0.5rem;
+        }
+
+        .feed-newsletter-card .ec-newsletter-input {
+          flex: 1;
+          border: 1px solid #D0C9BF;
+          border-right: none;
+          padding: 12px 16px;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 13px;
+          background: #FAF8F5;
+          color: #0F1923;
+          outline: none;
+          transition: border-color 0.25s ease;
+        }
+
+        .feed-newsletter-card .ec-newsletter-input:focus {
+          border-color: #8C6D3B;
+        }
+
+        .feed-newsletter-card .ec-newsletter-input::placeholder {
+          color: #9A9490;
+        }
+
+        .feed-newsletter-card .ec-newsletter-btn {
+          background: var(--cardinal, #C1121F);
+          color: #ffffff;
+          border: none;
+          padding: 12px 20px;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: background 0.25s ease;
+        }
+
+        .feed-newsletter-card .ec-newsletter-btn:hover {
+          background: #96010D;
+        }
+
+        .newsletter-footer-note {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 10px;
+          color: #777777;
+          font-weight: 500;
+          display: block;
+        }
+
+        /* ── GRID CATEGORIES CARD ── */
+        .feed-categories-card {
+          background: #FFFFFF;
+          border: 1px solid #E2DDD7;
+          border-radius: 0;
+          padding: 2.25rem 2rem;
+          display: flex;
+          flex-direction: column;
+          min-height: 460px;
+        }
+
+        .categories-card-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 16px;
+          font-weight: 700;
+          color: #0F1923;
+          margin: 0 0 1.15rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 2px solid #0F1923;
+          letter-spacing: -0.01em;
+        }
+
+        .categories-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1rem 0.75rem;
+          flex: 1;
+        }
+
+        .cat-grid-item {
+          display: flex;
+          flex-direction: column;
+          text-decoration: none;
+          color: #0F1923;
+          transition: all 0.25s ease;
+        }
+
+        .cat-grid-thumb {
+          position: relative;
+          width: 100%;
+          height: 75px;
+          overflow: hidden;
+          background: #FAF8F5;
+          border: 1px solid #E2DDD7;
+          margin-bottom: 0.4rem;
+        }
+
+        .cat-grid-thumb :global(img) {
+          object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+
+        .cat-grid-placeholder {
+          width: 100%;
+          height: 100%;
+          background: #E8E3DC;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.25s ease;
+        }
+
+        :global(.cat-grid-svg) {
+          width: 28px;
+          height: 28px;
+          color: #5A544F;
+          transition: all 0.3s ease;
+        }
+
+        .cat-grid-item:hover :global(.cat-grid-svg) {
+          color: #8C6D3B;
+          transform: scale(1.1);
+        }
+
+        .cat-grid-item:hover .cat-grid-placeholder {
+          background-color: #DFD9D0;
+        }
+
+        .cat-grid-name {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 11px;
+          font-weight: 700;
+          line-height: 1.35;
+          color: #0F1923;
+          transition: color 0.25s ease;
+          display: block;
+          text-align: center;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .cat-grid-item:hover .cat-grid-thumb :global(img) {
+          transform: scale(1.08);
+        }
+
+        .cat-grid-item:hover .cat-grid-name {
+          color: #8C6D3B;
+        }
+
+        /* ── ORIGINAL ARTICLE CARD ── */
         .feed-article-card {
           background: #FFFFFF;
-          border: 1px solid rgba(15, 25, 35, 0.05);
-          border-radius: 8px;
+          border: 1px solid #E2DDD7;
+          border-radius: 0;
           overflow: hidden;
           cursor: pointer;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 4px 15px rgba(15, 25, 35, 0.02);
+          box-shadow: none;
           transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
           position: relative;
           min-height: 460px;
         }
 
         .feed-article-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 16px 35px rgba(15, 25, 35, 0.08);
-          border-color: rgba(15, 25, 35, 0.12);
+          background: #FAF8F5;
+          border-color: #C5A059;
         }
 
         .feed-card-image-wrapper {
@@ -579,18 +996,18 @@ const Blogs = () => {
         }
 
         .feed-card-category {
-          font-size: 0.7rem;
+          font-size: 9px;
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #8C6D3B;
           margin-bottom: 0.75rem;
           display: block;
         }
 
         .feed-card-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 1.25rem;
+          font-size: 15px;
           font-weight: 700;
           color: #0F1923;
           line-height: 1.45;
@@ -603,12 +1020,12 @@ const Blogs = () => {
         }
 
         .feed-article-card:hover .feed-card-title {
-          color: var(--cardinal, #C1121F);
+          color: #8C6D3B;
         }
 
         .feed-card-excerpt {
           font-family: var(--font-serif-body, 'Libre Baskerville', serif);
-          font-size: 0.88rem;
+          font-size: 12px;
           line-height: 1.65;
           color: #555555;
           margin: 0 0 1.5rem 0;
@@ -620,7 +1037,7 @@ const Blogs = () => {
 
         .feed-card-meta {
           margin-top: auto;
-          font-size: 0.75rem;
+          font-size: 11px;
           color: #777777;
           font-weight: 600;
           letter-spacing: 0.04em;
@@ -629,11 +1046,11 @@ const Blogs = () => {
 
         .card-hover-border {
           position: absolute;
-          bottom: 0;
+          top: 0;
           left: 0;
           right: 0;
           height: 3px;
-          background: var(--cardinal, #C1121F);
+          background: #8C6D3B;
           transform: scaleX(0);
           transition: transform 0.3s ease;
           transform-origin: left;
@@ -661,47 +1078,152 @@ const Blogs = () => {
 
         /* ── SIDEBAR PREMIUM CUSTOM OVERRIDES ── */
         .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-panel) {
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding: 0 !important;
+          border-radius: 0 !important;
+          margin-bottom: 0 !important;
+          display: flex !important;
+          flex-direction: column !important;
+          gap: 40px !important;
+        }
+
+        .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-section) {
           background: #FFFFFF !important;
-          border: 1px solid rgba(15, 25, 35, 0.05) !important;
-          box-shadow: 0 4px 15px rgba(15, 25, 35, 0.02) !important;
-          padding: 1.75rem !important;
-          border-radius: 8px !important;
-          margin-bottom: 2.25rem !important;
-          transition: all 0.3s ease !important;
+          border: 1px solid #E2DDD7 !important;
+          border-top: 3px solid #0F1923 !important;
+          padding: 24px 20px !important;
+          border-radius: 0 !important;
         }
 
-        .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-panel:hover) {
-          border-color: rgba(15, 25, 35, 0.1) !important;
-          box-shadow: 0 10px 25px rgba(15, 25, 35, 0.05) !important;
-        }
-
-        .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-panel .section-title) {
+        .feed-sidebar-column :global(.blogs-shared-sidebar .section-title),
+        .feed-sidebar-column :global(.blogs-shared-sidebar .category-title) {
           color: #0F1923 !important;
           font-family: var(--font-serif, 'Playfair Display', serif) !important;
-          font-size: 1.25rem !important;
+          font-size: 20px !important;
           font-weight: 700 !important;
-          border-bottom: 1px solid rgba(15, 25, 35, 0.08) !important;
-          padding-bottom: 0.65rem !important;
-          margin-bottom: 1.25rem !important;
-          letter-spacing: normal !important;
+          border-bottom: 2px solid #0F1923 !important;
+          padding-bottom: 8px !important;
+          margin-bottom: 18px !important;
+          letter-spacing: -0.01em !important;
           text-transform: none !important;
         }
 
-        .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-panel input[type="text"]) {
-          border: 1.5px solid rgba(15, 25, 35, 0.1) !important;
-          border-radius: 999px !important;
-          padding: 12px 20px !important;
+        /* Newsletter Override inside sidebar */
+        .feed-sidebar-column :global(.weekly-newsletter) {
+          background-image: none !important;
+          background: #F5F2EE !important;
+          border: 1px solid #E2DDD7 !important;
+          border-top: 3px solid #C1121F !important;
+          border-radius: 0 !important;
+          padding: 28px 20px !important;
+          box-shadow: none !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter::before),
+        .feed-sidebar-column :global(.weekly-newsletter div[style*="radial-gradient"]) {
+          display: none !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter .newsletter-icon) {
+          display: none !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter .section-title) {
+          text-align: left !important;
+          align-items: flex-start !important;
+          margin-bottom: 16px !important;
+          border-bottom: none !important;
+          padding-bottom: 0 !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter .axil-title) {
+          color: #0F1923 !important;
+          font-family: var(--font-serif, 'Playfair Display', serif) !important;
+          font-size: 20px !important;
+          font-weight: 700 !important;
+          background: transparent !important;
+          padding: 0 !important;
+          margin-bottom: 8px !important;
+          border-radius: 0 !important;
+          text-align: left !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter .mid) {
+          color: #5A544F !important;
+          font-family: var(--font-sans, 'DM Sans', sans-serif) !important;
+          font-size: 13px !important;
+          line-height: 1.55 !important;
+          text-align: left !important;
+          max-width: 100% !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter input[type="email"]) {
+          border: 1px solid #D0C9BF !important;
+          border-radius: 0 !important;
+          padding: 12px 16px !important;
+          font-family: var(--font-sans, 'DM Sans', sans-serif) !important;
+          font-size: 13px !important;
           background: #FAF8F5 !important;
           color: #0F1923 !important;
-          font-size: 0.9rem !important;
+          text-align: left !important;
+          outline: none !important;
+        }
+        .feed-sidebar-column :global(.weekly-newsletter input[type="email"]::placeholder) {
+          text-align: left !important;
+          color: #9A9490 !important;
+        }
+        .feed-sidebar-column :global(.weekly-newsletter input[type="email"]:focus) {
+          border-color: #8C6D3B !important;
+          box-shadow: 0 0 0 3px rgba(140, 109, 59, 0.08) !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter button[type="submit"]) {
+          background: #8C6D3B !important;
+          border: none !important;
+          border-radius: 0 !important;
+          padding: 12px 24px !important;
+          font-family: var(--font-sans, 'DM Sans', sans-serif) !important;
+          font-size: 11px !important;
+          font-weight: 700 !important;
+          text-transform: uppercase !important;
+          letter-spacing: 0.12em !important;
+          color: #ffffff !important;
+          width: 100% !important;
+          box-shadow: none !important;
+          transition: background 0.25s ease !important;
+          margin-top: 4px !important;
+        }
+        
+        .feed-sidebar-column :global(.weekly-newsletter button[type="submit"]:hover) {
+          background: #6C542E !important;
+        }
+
+        /* Categories card title override */
+        .feed-sidebar-column :global(.blogs-shared-sidebar .category-item h4.category-card-title) {
+          font-family: var(--font-serif, 'Playfair Display', serif) !important;
+          font-size: 18px !important;
+          font-weight: 700 !important;
+          letter-spacing: -0.01em !important;
+        }
+
+        /* Search input override */
+        .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-section input[type="text"]) {
+          border: 1px solid #D0C9BF !important;
+          border-radius: 0 !important;
+          padding: 12px 16px !important;
+          background: #FAF8F5 !important;
+          color: #0F1923 !important;
+          font-size: 13px !important;
           outline: none !important;
           transition: all 0.3s ease !important;
         }
 
-        .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-panel input[type="text"]:focus) {
-          border-color: var(--cardinal, #C1121F) !important;
+        .feed-sidebar-column :global(.blogs-shared-sidebar .shared-sidebar-section input[type="text"]:focus) {
+          border-color: #8C6D3B !important;
           background: #FFFFFF !important;
-          box-shadow: 0 4px 12px rgba(193, 18, 31, 0.05) !important;
+          box-shadow: 0 4px 12px rgba(140, 109, 59, 0.08) !important;
         }
 
         /* ── LOADING & ERROR STATES ── */
@@ -779,12 +1301,11 @@ const Blogs = () => {
 
           .feed-grid-layout {
             grid-template-columns: 1fr;
-            gap: 4rem;
+            gap: 0;
           }
 
-          .feed-sidebar-column {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          .feed-articles-grid {
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
           }
         }
@@ -816,7 +1337,9 @@ const Blogs = () => {
             gap: 2rem;
           }
 
-          .feed-article-card {
+          .feed-article-card,
+          .feed-newsletter-card,
+          .feed-categories-card {
             min-height: auto;
           }
 

@@ -50,6 +50,23 @@ const MagazineHero = () => {
     return "Cover Story";
   };
 
+  const renderTitle = (title) => {
+    if (!title) return "";
+    const match = title.match(/\s*(—|–|:)\s*/);
+    if (match) {
+      const separator = match[1];
+      const index = title.indexOf(separator);
+      const mainName = title.substring(0, index).trim();
+      const description = title.substring(index + separator.length).trim();
+      return (
+        <>
+          {mainName} {separator} <em style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{description}</em>
+        </>
+      );
+    }
+    return title;
+  };
+
   if (isLoading) return <Loader />;
   if (error) return <div style={{ color: "#0F1923", padding: "40px" }}>Error loading magazines</div>;
 
@@ -72,7 +89,7 @@ const MagazineHero = () => {
             <div className="ec-hero-text">
               <span className="ec-hero-cat">{getCategory(mainMag)}</span>
               <h1 className="ec-hero-title">
-                {mainMag.title}
+                {renderTitle(mainMag.title)}
               </h1>
               {mainMag.description && (
                 <p className="ec-hero-excerpt">{mainMag.description}</p>
@@ -113,7 +130,7 @@ const MagazineHero = () => {
                     className="ec-hero-sidebar-title"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    {mag.title}
+                    {renderTitle(mag.title)}
                   </Link>
                   <div className="ec-hero-sidebar-date">
                     {formatDate(mag.publishedAt || mag._updatedAt)}
@@ -128,7 +145,7 @@ const MagazineHero = () => {
       <style jsx>{`
         .ec-hero {
           background: #0F1923;
-          padding: 40px 0 10px 0;
+          padding: 40px 0 8px 0;
           overflow: hidden;
         }
 
@@ -159,19 +176,21 @@ const MagazineHero = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          padding: 5px 12px;
-          margin-bottom: 24px;
+          padding: 3px 12px;
+          margin-bottom: 12px;
           animation: fadeInUp 0.5s ease 0.1s both;
           width: fit-content;
         }
 
         .ec-hero-img-wrapper {
           width: 100%;
-          height: 480px;
+          height: 500px;
           overflow: hidden;
           margin-bottom: 28px;
           position: relative;
           background: #1E2D3D;
+          border-radius: 0;
+          border-left: 5px solid #C1121F;
         }
 
         .ec-hero-img {
@@ -181,8 +200,6 @@ const MagazineHero = () => {
           opacity: 0.85;
           transition: transform 0.5s ease;
         }
-
-        .ec-hero-img-wrapper:hover .ec-hero-img { transform: scale(1.03); }
 
         .ec-hero-img-placeholder {
           width: 100%;
@@ -214,14 +231,20 @@ const MagazineHero = () => {
 
         .ec-hero-title {
           font-family: 'Playfair Display', serif;
-          font-size: 38px;
+          font-size: clamp(26px, 2.4vw, 32px) !important;
           font-weight: 900;
           color: #fff;
-          line-height: 1.1;
+          line-height: 1.2;
           letter-spacing: -0.02em;
           margin-bottom: 16px;
           max-width: 560px;
           animation: fadeInUp 0.5s ease 0.2s both;
+        }
+
+        .ec-hero-title :global(em) {
+          font-style: italic;
+          color: #D0C9BF;
+          font-weight: 400;
         }
 
         .ec-hero-excerpt {
@@ -258,13 +281,13 @@ const MagazineHero = () => {
           display: inline-block;
           background: #C1121F;
           color: #fff;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11px;
-          font-weight: 700;
+          font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+          font-size: 12px;
+          font-weight: 600;
           letter-spacing: 0.15em;
           text-transform: uppercase;
           text-decoration: none;
-          padding: 12px 24px;
+          padding: 10px 24px;
           transition: background 0.2s;
           width: fit-content;
         }
@@ -285,7 +308,7 @@ const MagazineHero = () => {
           text-transform: uppercase;
           color: #C1121F;
           margin-bottom: 20px;
-          padding-bottom: 12px;
+          padding-bottom: 18px;
           border-bottom: 1px solid #2E4057;
         }
 

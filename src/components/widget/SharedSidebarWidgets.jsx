@@ -7,6 +7,7 @@ const SharedSidebarWidgets = ({
   className = "",
   animate = false,
   isVisible = false,
+  showSocialShare = true,
 }) => {
   const sections = [
     {
@@ -14,22 +15,22 @@ const SharedSidebarWidgets = ({
       title: "Subscribe To Our Weekly Newsletter",
       content: <WidgetNewsletter />,
     },
-    {
-      key: "social-share",
-      title: "Social Share",
-      content: <WidgetSocialShare />,
-    },
+    ...(showSocialShare
+      ? [
+          {
+            key: "social-share",
+            title: "Social Share",
+            content: <WidgetSocialShare />,
+          },
+        ]
+      : []),
     {
       key: "categories",
       title: "Categories",
       content: <WidgetCategory showTitle={true} />,
     },
-    // {
-    //   key: "web-profile",
-    //   title: "Web Profile",
-    //   content: <WidgetPost />,
-    // },
   ];
+
 
   return (
     <div className={className}>

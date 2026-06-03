@@ -19,43 +19,65 @@ const BreakingTicker = () => {
   return (
     <>
       <div className="ec-ticker">
-        <div className="ec-ticker-tag">Breaking</div>
-        <div className="ec-ticker-track-wrapper">
-          <div className="ec-ticker-scroll">
-            {tickerItems.map((item, i) => (
-              <span key={i} className="ec-ticker-item">
-                <strong>{item.headline}</strong>
-                <span className="ec-ticker-detail"> — {item.detail}</span>
-              </span>
-            ))}
+        <div className="ec-ticker-container">
+          <div className="ec-ticker-inner">
+            <div className="ec-ticker-tag">LATEST</div>
+            <div className="ec-ticker-track-wrapper">
+              <div className="ec-ticker-scroll">
+                {tickerItems.map((item, i) => (
+                  <span key={i} className="ec-ticker-item">
+                    <strong>{item.headline}</strong>
+                    <span className="ec-ticker-detail"> — {item.detail}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
         .ec-ticker {
-          background: #C1121F;
+          background: #E8E3DC;
+          border-top: 1px solid #D0C9BF;
+          border-bottom: 1px solid #D0C9BF;
           overflow: hidden;
+          height: 48px;
           display: flex;
           align-items: center;
-          height: 44px;
+        }
+
+        .ec-ticker-container {
+          width: 100%;
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 32px;
+        }
+
+        .ec-ticker-inner {
+          display: flex;
+          align-items: center;
+          width: 100%;
         }
 
         .ec-ticker-tag {
-          background: #0F1923;
+          background: #C1121F;
           color: #fff;
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
           font-size: 10px;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
-          padding: 0 24px;
-          height: 100%;
+          padding: 4px 16px;
+          height: 26px;
           display: flex;
           align-items: center;
+          justify-content: center;
           flex-shrink: 0;
           white-space: nowrap;
-          border-right: 2px solid rgba(193, 18, 31, 0.6);
+          margin-right: 24px;
+          border-radius: 2px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
         }
 
         .ec-ticker-track-wrapper {
@@ -69,7 +91,6 @@ const BreakingTicker = () => {
           animation: tickerScroll 40s linear infinite;
           white-space: nowrap;
           gap: 72px;
-          padding-left: 32px;
         }
 
         .ec-ticker-scroll:hover {
@@ -77,22 +98,40 @@ const BreakingTicker = () => {
         }
 
         .ec-ticker-item {
-          font-family: 'DM Sans', sans-serif;
+          font-family: 'Playfair Display', Georgia, serif;
           font-size: 12px;
-          font-weight: 600;
-          color: #fff;
-          letter-spacing: 0.04em;
+          font-weight: 700;
+          color: #0F1923;
+          letter-spacing: 0.02em;
           flex-shrink: 0;
         }
 
         .ec-ticker-detail {
-          font-weight: 300;
-          opacity: 0.88;
+          font-family: 'Playfair Display', Georgia, serif;
+          font-style: italic;
+          font-weight: 400;
+          color: #5A544F;
+          opacity: 0.9;
+          margin-left: 6px;
         }
 
         @keyframes tickerScroll {
           from { transform: translateX(0); }
           to { transform: translateX(-50%); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+          .ec-ticker-container {
+            padding: 0 18px;
+          }
+          .ec-ticker-tag {
+            padding: 4px 12px;
+            margin-right: 16px;
+          }
+          .ec-ticker-item {
+            font-size: 11px;
+          }
         }
       `}</style>
     </>

@@ -116,14 +116,9 @@ const HeaderOne = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    // Run once on load
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -785,32 +780,37 @@ const HeaderOne = () => {
   };
 
 
+
   return (
     <>
-      {/* ── TOPBAR ── */}
-      <div className="ec-topbar">
-        <div className="ec-topbar-inner">
-          <div className="ec-topbar-left">
-            <span className="ec-topbar-date">
-              {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-            </span>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/magazines" className="ec-topbar-link">Latest Issue</Link>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/magazines" className="ec-topbar-link">Print Edition</Link>
-          </div>
-          <div className="ec-topbar-right">
-            <Link href="/advertise-with-us" className="ec-topbar-link">Advertise</Link>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/contact" className="ec-topbar-link">Contact</Link>
-            <span className="ec-topbar-divider">|</span>
-            <Link href="/magazines" className="ec-topbar-link ec-topbar-link--accent">Subscribe</Link>
+      <header className="page-header" style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 9999 }}>
+        {/* ── TOPBAR ── */}
+        <div className="ec-topbar">
+          <div className="ec-topbar-inner">
+            <div className="ec-topbar-left">
+              <span className="ec-topbar-date">
+                {new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              </span>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/magazines" className="ec-topbar-link">Latest Issue</Link>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/magazines" className="ec-topbar-link">Print Edition</Link>
+            </div>
+            <div className="ec-topbar-right">
+              <Link href="/advertise-with-us" className="ec-topbar-link">Advertise</Link>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/contact" className="ec-topbar-link">Contact</Link>
+              <span className="ec-topbar-divider">|</span>
+              <Link href="/magazines" className="ec-topbar-link ec-topbar-link--accent">Subscribe</Link>
+            </div>
           </div>
         </div>
-      </div>
 
-      <header className="page-header sticky-top">
-        <nav className={`navbar bg-black ${isScrolled ? "scrolled" : ""}`} style={{ position: "relative" }}>
+        <nav className={`navbar bg-black ${isScrolled ? "scrolled" : ""}`}>
+          {/* Mobile Sidebar Backdrop inside same stacking context as rows */}
+          {mobileMenuOpen && (
+            <div className="drawer-backdrop" onClick={closeMobileMenu} />
+          )}
           <div className="container">
             <div className="navbar-rows">
               {/* ROW 1: Centered Logo with Hamburger Left and Actions Right */}
@@ -832,23 +832,20 @@ const HeaderOne = () => {
                 </div>
 
                 {/* Middle: Brand Logo */}
-                <div className="brand-logo-container brand-logo-center">
+                <div className={`brand-logo-container brand-logo-center ${searchshow ? "search-active-hide-logo" : ""}`}>
                   <Link href="/" className="ec-logo-area">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/assets/logowhite.jpg"
+                      src="/assets/logoblack.jpg"
                       alt="Star Prime Logo"
-                      width="260"
-                      height="80"
-                      style={{ objectFit: "contain", width: "260px", height: "auto" }}
+                      style={{ width: "260px", height: "auto", objectFit: "contain" }}
                     />
                   </Link>
                 </div>
 
                 {/* Right Side: Search and Subscribe */}
                 <div className="navbar-right-actions">
-                  
-                  {/* Premium Inline Slide-Out Search Bar */}
+                  {/* Search form - flex:1 fills gap naturally */}
                   <form
                     ref={searchFormRef}
                     onSubmit={handleSearch}
@@ -869,7 +866,6 @@ const HeaderOne = () => {
                       </button>
                     </div>
 
-                    {/* Spotlight search suggestions dropdown inside search card */}
                     {searchshow && showResults && searchResults.length > 0 && (
                       <div className="search-suggestions-dropdown">
                         <div className="search-suggestions-header">
@@ -940,8 +936,8 @@ const HeaderOne = () => {
                 </div>
               </div>
 
-              {/* ROW 2: Desktop Centered Navigation Links */}
-              <div className="navbar-row-two desktop-nav-links-row">
+              {/* ROW 2: Navigation Links controlled by Hamburger */}
+              <div className={`navbar-row-two desktop-nav-links-row ${mobileMenuOpen ? "show-menu" : ""} ${!isScrolled ? "show-nav-at-top" : ""}`}>
                 <div className="navbar-nav-links-centered">
                   <Link href="/" className="nav-link">Home</Link>
                   <Link href="/magazines" className="nav-link">Magazines</Link>
@@ -1056,82 +1052,9 @@ const HeaderOne = () => {
             </div>
           </div>
         </nav>
-
-        {/* Mobile Menu Dropdown */}
-        {mobileMenuOpen && (
-          <div
-            className="mobile-menu-dropdown"
-            onMouseLeave={() => {
-              if (!hoverCapable) return;
-              closeMobileMenu();
-            }}
-          >
-            <div className="mobile-menu-content">
-              <Link href="/" className="mobile-nav-link" onClick={closeMobileMenu}>Home</Link>
-              <Link href="/magazines" className="mobile-nav-link" onClick={closeMobileMenu}>Magazines</Link>
-              <Link href="/blogs" className="mobile-nav-link" onClick={closeMobileMenu}>Blogs</Link>
-
-              <div className="mobile-nav-accordion">
-                <button
-                  type="button"
-                  className={`mobile-nav-accordion-toggle ${mobileIndustriesOpen ? "is-open" : ""}`.trim()}
-                  aria-expanded={mobileIndustriesOpen}
-                  onClick={() => {
-                    setMobileIndustriesOpen((v) => !v);
-                    setMobileTechAiOpen(false);
-                  }}
-                >
-                  Industries
-                  <i className="far fa-chevron-down" aria-hidden="true" />
-                </button>
-
-                {mobileIndustriesOpen && (
-                  <div className="mobile-submenu">
-                    <Link href="/industries/healthcare" className="mobile-nav-link" onClick={closeMobileMenu}>Healthcare</Link>
-                    <Link href="/industries/legal" className="mobile-nav-link" onClick={closeMobileMenu}>Legal</Link>
-
-                    <div className="mobile-nav-accordion">
-                      <button
-                        type="button"
-                        className={`mobile-nav-accordion-toggle ${mobileTechAiOpen ? "is-open" : ""}`.trim()}
-                        aria-expanded={mobileTechAiOpen}
-                        onClick={() => {
-                          setMobileTechAiOpen((v) => !v);
-                        }}
-                      >
-                        Tech/AI
-                        <i className="far fa-chevron-down" aria-hidden="true" />
-                      </button>
-
-                      {mobileTechAiOpen && (
-                        <div className="mobile-submenu">
-                          <Link href="/industries/tech-ai" className="mobile-nav-link" onClick={closeMobileMenu}>All Tech/AI</Link>
-                          <Link href="/industries/tech-ai#ai" className="mobile-nav-link" onClick={closeMobileMenu}>AI</Link>
-                          <Link href="/industries/tech-ai#technology" className="mobile-nav-link" onClick={closeMobileMenu}>Technology</Link>
-                        </div>
-                      )}
-                    </div>
-
-                    <Link href="/industries/manufacturing-products" className="mobile-nav-link" onClick={closeMobileMenu}>Manufacturing/Products</Link>
-                    <Link href="/industries/transportation" className="mobile-nav-link" onClick={closeMobileMenu}>Transportation</Link>
-                    <Link href="/industries/stock-market" className="mobile-nav-link" onClick={closeMobileMenu}>Stock Market</Link>
-                    <Link href="/industries/politics" className="mobile-nav-link" onClick={closeMobileMenu}>Politics</Link>
-                  </div>
-                )}
-              </div>
-
-              {/* <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Media Kit</span>
-              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Podcast</span> */}
-              {/* <Link href="/about-us" className="mobile-nav-link" onClick={closeMobileMenu}>About Us</Link> */}
-              <Link href="/contact" className="mobile-nav-link" onClick={closeMobileMenu}>Contact</Link>
-              <Link href="/advertise-with-us" className="mobile-nav-link" onClick={closeMobileMenu}>Advertise With Us</Link>
-              <span className="mobile-nav-link mobile-nav-link--disabled" aria-disabled="true">Media Kit</span>
-            </div>
-          </div>
-        )}
-
-
       </header>
+      {/* Spacer to prevent content from hiding behind fixed header */}
+      <div className="navbar-fixed-spacer" />
 
       <style jsx global>{`
         /* ── EC TOPBAR ── */
@@ -1167,10 +1090,35 @@ const HeaderOne = () => {
         .ec-topbar-link--accent { color: #C1121F !important; font-weight: 600; }
         .ec-topbar-date { color: #6B6560; }
 
+        /* ── FIXED NAVBAR SPACER ── */
+        .navbar-fixed-spacer {
+          height: 170px; /* topbar + logo row + nav row */
+        }
+        @media (max-width: 991px) {
+          .navbar-fixed-spacer {
+            height: 110px; /* topbar + logo row only on mobile */
+          }
+        }
+
         /* ── NAVBAR ── */
         .navbar {
-          background-color: #0F1923 !important;
+          background-color: #000000 !important;
           border-bottom: 1px solid #1E2D3D;
+        }
+
+        .navbar .container {
+          max-width: 1240px !important;
+          padding-left: 32px !important;
+          padding-right: 32px !important;
+          width: 100% !important;
+          margin: 0 auto !important;
+        }
+
+        @media (max-width: 768px) {
+          .navbar .container {
+            padding-left: 18px !important;
+            padding-right: 18px !important;
+          }
         }
 
         .navbar-rows {
@@ -1230,8 +1178,13 @@ const HeaderOne = () => {
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          gap: 20px;
+          gap: 12px;
           position: relative;
+        }
+
+        .navbar-right-actions .nav-search-field-toggler,
+        .navbar-right-actions .ec-nav-subscribe-btn {
+          flex-shrink: 0 !important;
         }
 
         .navbar-row-two {
@@ -1240,22 +1193,42 @@ const HeaderOne = () => {
           justify-content: center;
           align-items: center;
           border-top: 1px solid #1E2D3D;
-          padding: 10px 0;
+          padding: 0;
+          max-height: 0px;
+          opacity: 0;
+          overflow: hidden;
+          visibility: hidden;
+          pointer-events: none;
+          transform: scaleX(0);
+          transform-origin: left;
           transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
                       opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1),
                       padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                      border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-          max-height: 60px;
-          opacity: 1;
-          overflow: hidden;
+                      transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                      visibility 0.35s;
         }
 
-        .navbar.scrolled .navbar-row-two {
-          max-height: 0px;
-          opacity: 0;
-          padding: 0 !important;
-          border-top-color: transparent !important;
-          pointer-events: none;
+        .navbar-row-two.show-menu {
+          max-height: 60px;
+          opacity: 1;
+          padding: 10px 0;
+          visibility: visible;
+          pointer-events: auto;
+          transform: scaleX(1);
+          overflow: visible !important;
+        }
+
+        @media (min-width: 992px) {
+          .navbar-row-two.show-nav-at-top,
+          .navbar-row-two.show-menu {
+            max-height: 60px !important;
+            opacity: 1 !important;
+            padding: 10px 0 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            transform: scaleX(1) !important;
+            overflow: visible !important;
+          }
         }
 
         .navbar-nav-links-centered {
@@ -1286,6 +1259,29 @@ const HeaderOne = () => {
         }
         .ec-nav-subscribe-btn:hover { background: #96010D; color: #fff !important; }
 
+        .drawer-backdrop {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.6);
+          z-index: 100 !important;
+          animation: drawerFadeIn 0.25s ease-out;
+        }
+
+        @keyframes drawerFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        @media (max-width: 991px) {
+          .drawer-backdrop {
+            display: block !important;
+          }
+        }
+
         @media (max-width: 991px) {
           .ec-topbar { display: none; }
           .navbar-row-one {
@@ -1297,7 +1293,49 @@ const HeaderOne = () => {
             max-width: 160px !important;
           }
           .navbar-row-two {
-            display: none !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            align-items: stretch !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            bottom: 0 !important;
+            width: 280px !important;
+            height: 100vh !important;
+            background: #000000 !important;
+            z-index: 101 !important;
+            padding: 40px 24px !important;
+            border-top: none !important;
+            border-right: 1px solid #1E2D3D !important;
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.6) !important;
+            overflow-y: auto !important;
+            transform: translate3d(-100%, 0, 0) !important;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            max-height: none !important;
+            transform-origin: left !important;
+          }
+          .navbar-row-two.show-menu {
+            transform: translate3d(0, 0, 0) !important;
+          }
+          .navbar-nav-links-centered {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 20px !important;
+            width: 100% !important;
+          }
+          .navbar-nav-links-centered .nav-link {
+            width: 100% !important;
+            text-align: left !important;
+            padding: 8px 0 !important;
+            border-bottom: 1px solid #1E2D3D !important;
+            font-size: 14px !important;
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
           }
           .navbar-right-actions {
             gap: 10px;
@@ -1479,110 +1517,21 @@ const HeaderOne = () => {
           color: #0F1923 !important;
         }
 
-        /* ── PREMIUM INLINE SLIDE-OUT SEARCH BAR ── */
-        .navbar-search {
-          display: flex !important;
-          align-items: center !important;
-          width: 0 !important;
-          max-width: 0 !important;
-          height: auto !important;
-          background: transparent !important;
-          position: relative !important;
-          top: auto !important;
-          left: auto !important;
-          right: auto !important;
-          bottom: auto !important;
-          transform: none !important;
-          opacity: 0 !important;
-          visibility: hidden !important;
-          pointer-events: none !important;
-          overflow: hidden !important;
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          z-index: 1000 !important;
-        }
+        /* ── SEARCH BAR: Component-specific refinements ── */
+        /* Global styles now live in style.css — no more !important battles */
 
-        .navbar-search.show-nav-search {
-          width: 280px !important;
-          max-width: 280px !important;
-          opacity: 1 !important;
-          visibility: visible !important;
-          pointer-events: auto !important;
-          margin-right: 12px !important;
-          overflow: visible !important;
-        }
-
-        @media (max-width: 1199px) {
-          .navbar-search.show-nav-search {
-            width: 200px !important;
-            max-width: 200px !important;
+        @media (max-width: 575px) {
+          .brand-logo-container.search-active-hide-logo {
+            display: none !important;
           }
-        }
-
-        @media (max-width: 991px) {
-          .navbar-search.show-nav-search {
-            width: 140px !important;
-            max-width: 140px !important;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .navbar-search.show-nav-search {
-            width: 100px !important;
-            max-width: 100px !important;
-          }
-        }
-
-        .navbar-search .search-field {
-          width: 100% !important;
-          margin: 0 !important;
-          position: relative !important;
-          display: flex !important;
-          align-items: center !important;
-        }
-
-        .navbar .navbar-search-field,
-        .navbar .navbar-search-field:focus {
-          width: 100%;
-          background: #111B24 !important;
-          border: 1px solid #2E4057 !important;
-          border-radius: 6px;
-          color: #FAF8F5 !important;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px !important;
-          font-weight: 400;
-          padding: 8px 36px 8px 12px !important;
-          transition: border-color 0.2s ease, box-shadow 0.2s ease;
-          outline: none !important;
-        }
-
-        .navbar .navbar-search-field:focus {
-          border-color: #C1121F !important;
-          box-shadow: 0 0 0 2px rgba(193, 18, 31, 0.15);
         }
 
         .navbar .navbar-search-field::placeholder {
-          color: #6B7280 !important;
-        }
-
-        .navbar .navbar-search-btn {
-          position: absolute;
-          right: 12px;
-          background: transparent !important;
-          border: none !important;
-          color: #D0C9BF !important;
-          font-size: 13px;
-          cursor: pointer;
-          transition: color 0.2s ease;
-          padding: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          color: #6B7280;
         }
 
         .navbar .navbar-search-btn:hover {
-          color: #fff !important;
+          color: #fff;
         }
 
         /* Suggestions Popover Card aligned with search card */
@@ -1591,7 +1540,7 @@ const HeaderOne = () => {
           top: calc(100% + 12px);
           right: 0;
           width: 340px;
-          background: #0F1923 !important;
+          background: #000000 !important;
           border: 1px solid #2E4057 !important;
           border-radius: 8px;
           padding: 8px;
@@ -1748,56 +1697,67 @@ const HeaderOne = () => {
 
 
         @media (min-width: 992px) {
-          .mobile-menu-toggle {
-            display: inline-flex !important;
+          .navbar:not(.scrolled) .mobile-menu-toggle,
+          .navbar:not(.scrolled) .menu-hamburger-btn {
+            display: none !important;
           }
+        }
+
+        .sticky-top {
+          position: sticky !important;
+          top: 0 !important;
+          z-index: 9999 !important;
+          width: 100% !important;
         }
         
         .hamburger {
-          display: flex;
-          flex-direction: column;
-          width: 25px;
-          height: 20px;
+          display: block;
+          width: 22px;
+          height: 16px;
           position: relative;
-          opacity: 1 !important;
-          visibility: visible !important;
-          background: repeating-linear-gradient(
-            to bottom,
-            #fff 0,
-            #fff 2px,
-            transparent 2px,
-            transparent 6px
-          ) !important;
-          border-radius: 2px;
+          cursor: pointer;
+          background: transparent !important;
         }
         
         .hamburger span {
           display: block;
-          height: 3px;
+          position: absolute;
+          height: 2px;
           width: 100%;
           background: #fff !important;
           background-color: #fff !important;
-          opacity: 1 !important;
-          margin: 3px 0;
-          transition: all 0.3s ease;
           border-radius: 2px;
+          opacity: 1;
+          left: 0;
+          transform: rotate(0deg);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .navbar .mobile-menu-toggle .hamburger span {
-          background: #fff !important;
-          background-color: #fff !important;
+        .hamburger span:nth-child(1) {
+          top: 0px;
+        }
+
+        .hamburger span:nth-child(2) {
+          top: 7px;
+        }
+
+        .hamburger span:nth-child(3) {
+          top: 14px;
         }
         
         .hamburger.active span:nth-child(1) {
-          transform: rotate(45deg) translate(6px, 6px);
+          top: 7px;
+          transform: rotate(135deg);
         }
         
         .hamburger.active span:nth-child(2) {
-          opacity: 0;
+          opacity: 0 !important;
+          left: -40px;
         }
         
         .hamburger.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(6px, -6px);
+          top: 7px;
+          transform: rotate(-135deg);
         }
         
         .mobile-menu-dropdown {
@@ -2101,7 +2061,7 @@ const HeaderOne = () => {
 
         .navbar,
         .main-navbar {
-          background: #0F1923 !important;
+          background: #000000 !important;
           border-bottom: 1px solid #1E2D3D !important;
         }
 
@@ -2125,7 +2085,7 @@ const HeaderOne = () => {
         .nav-submenu-menu,
         .search-suggestions-dropdown,
         .mobile-menu-dropdown {
-          background: #0F1923 !important;
+          background: #000000 !important;
           border-color: #2E4057 !important;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
         }
@@ -2179,13 +2139,7 @@ const HeaderOne = () => {
         .suggestion-type { color: #C1121F !important; }
 
         .hamburger {
-          background: repeating-linear-gradient(
-            to bottom,
-            #D0C9BF 0,
-            #D0C9BF 2px,
-            transparent 2px,
-            transparent 6px
-          ) !important;
+          background: transparent !important;
         }
 
         .hamburger span,
@@ -2194,21 +2148,39 @@ const HeaderOne = () => {
           background-color: #D0C9BF !important;
         }
 
+        .navbar-nav-links-centered .nav-link,
         .navbar-nav-links .nav-link {
           color: #D0C9BF !important;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 11.5px !important;
-          font-weight: 500;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          border-bottom: 2px solid transparent;
-          transition: color 0.2s, border-color 0.2s;
-          padding: 8px 12px !important;
+          font-family: 'DM Sans', system-ui, -apple-system, sans-serif !important;
+          font-size: 13px !important;
+          font-weight: 600 !important;
+          letter-spacing: 0.08em !important;
+          text-transform: uppercase !important;
+          text-decoration: none !important;
+          border-bottom: 2px solid transparent !important;
+          transition: color 0.25s ease, border-color 0.25s ease !important;
+          padding: 8px 16px !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          background: transparent !important;
+          border-top: none !important;
+          border-left: none !important;
+          border-right: none !important;
+          cursor: pointer !important;
+          gap: 6px !important;
+          line-height: 1.2 !important;
         }
+
+        .navbar-nav-links-centered .nav-link:hover,
         .navbar-nav-links .nav-link:hover {
-          color: #fff !important;
+          color: #FAF8F5 !important;
           border-bottom-color: #C1121F !important;
-          text-decoration: none;
+          text-decoration: none !important;
+        }
+
+        .navbar-nav-links-centered .nav-link:focus,
+        .navbar-nav-links .nav-link:focus {
+          outline: none !important;
         }
 
         

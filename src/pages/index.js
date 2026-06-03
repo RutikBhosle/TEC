@@ -34,8 +34,8 @@ const Home = () => {
       {/* 1 — HEADER (Top Bar + Ink Navy Sticky Nav) */}
       <HeaderOne />
 
-      {/* 2 — HERO (Split: large cover + numbered sidebar) */}
-      <MagazineHero />
+      {/* 2 — WEB PROFILES (Featured + list stack) */}
+      <WebProfiles />
 
       {/* 3 — BREAKING TICKER */}
       <BreakingTicker />
@@ -49,8 +49,8 @@ const Home = () => {
       {/* 6 — BUSINESS BULLETIN (2-col split with newsletter) */}
       <BusinessBulletin />
 
-      {/* 7 — WEB PROFILES (Featured + list stack) */}
-      <WebProfiles />
+      {/* 7 — HERO (Split: large cover + numbered sidebar) */}
+      <MagazineHero />
 
       {/* 8 — MASTER TALKS (Featured + 4-col numbered grid) */}
       <MasterTalks />

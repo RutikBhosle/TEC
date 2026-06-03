@@ -6,9 +6,74 @@ import FooterTwo from "../../components/footer/FooterTwo";
 import Loader from "../../components/common/Loader";
 import HeadMeta from "../../components/elements/HeadMeta";
 import { client } from "../../client";
-import WidgetNewsletter from "../../components/widget/WidgetNewsletter";
-import WidgetSocialShare from "../../components/widget/WidgetSocialShare";
 import Image from "next/image";
+import Link from "next/link";
+
+const getCategorySvg = (slug) => {
+  const cleanSlug = slug?.toLowerCase() || "";
+  if (cleanSlug.includes("finance")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12h-15M9 21h6M3 9v12m18-12v12" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("health")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("legal")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18M3 8.25h18M3 8.25c0 3.75 4.5 4.5 4.5 4.5S12 12 12 8.25M21 8.25c0 3.75-4.5 4.5-4.5 4.5S12 12 12 8.25M6.75 12.75v5.25a2.25 2.25 0 004.5 0v-5.25m6 0v5.25a2.25 2.25 0 004.5 0v-5.25" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("manufactur")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0a7.5 7.5 0 00-1.5-4.5m1.5 4.5a7.5 7.5 0 01-1.5 4.5M3 12h1.5M12 3v1.5m0 15V21m-6-1.5l1.061-1.061M16.939 5.061L18 4m-12 0l1.061 1.061M16.939 18.939L18 20" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("tech") || cleanSlug.includes("ai")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-10.5-3.75h10.5a2.25 2.25 0 002.25-2.25V7.5a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 7.5v8.25a2.25 2.25 0 002.25 2.25zM9 9h6v6H9V9z" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("transport")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124l-.317-5.072a2.25 2.25 0 00-2.247-2.11H14.25M6.5 10.5H3.375c-.621 0-1.125.504-1.125 1.125v2.25m6.5-3.375v3.375m0-3.375h3.75a1.125 1.125 0 011.125 1.125v3.375m0-3.375h1.5a1.125 1.125 0 011.125 1.125v3.375m-9.75 3.375h14.25M12 10.5V6m0 0L9.75 8.25M12 6l2.25 2.25" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("stock") || cleanSlug.includes("market")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+      </svg>
+    );
+  }
+  if (cleanSlug.includes("polit")) {
+    return (
+      <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21V9.75M3.284 14.253A8.966 8.966 0 0112 11.25c2.29 0 4.414.858 6.03 2.288M3.284 14.253a8.973 8.973 0 003.541 4.793M18.716 14.253a8.973 8.973 0 01-3.541 4.793m0 0A8.961 8.961 0 0112 21m0-21C6.477 0 2 4.477 2 10c0 1.637.443 3.17 1.216 4.5M12 0c5.523 0 10 4.477 10 10 0 1.637-.443 3.17-1.216 4.5M12 0v3" />
+      </svg>
+    );
+  }
+  // Default general industry card (newspaper style)
+  return (
+    <svg className="cat-grid-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+    </svg>
+  );
+};
 
 const fetchIndustryPostsByIndustry = async (industrySlug) => {
   const query = `
@@ -41,8 +106,36 @@ const IndustryPosts = () => {
     enabled: !!slug,
   });
 
+  const { data: categoriesData } = useQuery({
+    queryKey: ["allIndustryCategories"],
+    queryFn: async () => {
+      return await client.fetch(`
+        *[_type == "industryCategory"]{
+          title,
+          slug,
+          "imageUrl": image.asset->url
+        } | order(title asc)
+      `);
+    },
+  });
+
   const [isVisible, setIsVisible] = useState(false);
   const posts = Array.isArray(data) ? data : [];
+  const categoriesList = Array.isArray(categoriesData) ? categoriesData : [];
+  const displayCategories = categoriesList.slice(0, 6);
+
+  const feedPosts = posts.slice(7);
+  const gridItems = [];
+
+  if (feedPosts.length > 0) {
+    gridItems.push({ type: "newsletter" });
+    if (feedPosts[0]) gridItems.push({ type: "post", data: feedPosts[0] });
+    if (feedPosts[1]) gridItems.push({ type: "post", data: feedPosts[1] });
+    gridItems.push({ type: "categories" });
+    for (let i = 2; i < feedPosts.length; i++) {
+      gridItems.push({ type: "post", data: feedPosts[i] });
+    }
+  }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -56,6 +149,23 @@ const IndustryPosts = () => {
 
   const handlePostClick = (postSlug) => {
     router.push(`/industry-post/${postSlug}`);
+  };
+
+  const renderTitle = (title) => {
+    if (!title) return "";
+    const match = title.match(/\s*(—|–|:)\s*/);
+    if (match) {
+      const separator = match[1];
+      const index = title.indexOf(separator);
+      const mainName = title.substring(0, index).trim();
+      const description = title.substring(index + separator.length).trim();
+      return (
+        <>
+          {mainName} {separator} <em style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{description}</em>
+        </>
+      );
+    }
+    return title;
   };
 
   const formatDate = (dateStr) => {
@@ -121,7 +231,7 @@ const IndustryPosts = () => {
                   </div>
                   <div className="primary-hero-content">
                     <span className="primary-hero-category">{categoryTitle} Highlight</span>
-                    <h2 className="primary-hero-title">{posts[0].title}</h2>
+                    <h2 className="primary-hero-title">{renderTitle(posts[0].title)}</h2>
                     {posts[0].description && (
                       <p className="primary-hero-excerpt">{posts[0].description}</p>
                     )}
@@ -138,8 +248,8 @@ const IndustryPosts = () => {
               {/* CURATED SIDE STACK (RIGHT COLUMN - 1/3) */}
               <div className="secondary-hero-stack">
                 <span className="stack-label">Featured Inside</span>
-                {posts.slice(1, 4).length > 0 ? (
-                  posts.slice(1, 4).map((post, idx) => (
+                {posts.slice(1, 7).length > 0 ? (
+                  posts.slice(1, 7).map((post, idx) => (
                     <div 
                       key={post.slug.current || idx}
                       className="secondary-hero-card"
@@ -169,7 +279,7 @@ const IndustryPosts = () => {
         <div className="feed-container">
           <div className="feed-grid-layout">
             
-            {/* LEFT FEED COLUMN (2/3 width) */}
+            {/* LEFT FEED COLUMN (2/3 width -> stretches to full width) */}
             <div className="feed-articles-column">
               <h3 className="feed-section-title">Latest Publications</h3>
               <div className="feed-articles-grid">
@@ -179,51 +289,124 @@ const IndustryPosts = () => {
                   </div>
                 ) : error ? (
                   <div className="error-alert">Error fetching latest articles</div>
-                ) : posts.length <= 4 ? (
+                ) : posts.length <= 7 ? (
                   <p className="no-more-posts">More insights are currently being compiled by our newsroom.</p>
                 ) : (
-                  posts.slice(4).map((post, index) => (
-                    <div 
-                      key={post.slug.current || index}
-                      className={`feed-article-card ${isVisible ? 'animate-in' : ''}`}
-                      style={{ animationDelay: `${index * 0.08}s` }}
-                      onClick={() => handlePostClick(post.slug.current)}
-                    >
-                      <div className="feed-card-image-wrapper">
-                        <Image
-                          src={post.featureImg}
-                          alt={post.altText || post.title}
-                          fill
-                          sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 380px"
-                        />
-                      </div>
-                      <div className="feed-card-content">
-                        <span className="feed-card-category">{categoryTitle}</span>
-                        <h4 className="feed-card-title">{post.title}</h4>
-                        {post.description && (
-                          <p className="feed-card-excerpt">{post.description}</p>
-                        )}
-                        <div className="feed-card-meta">
-                          <span>{formatDate(post.publishedAt || post._updatedAt)}</span>
-                        </div>
-                        <div className="card-hover-border" />
-                      </div>
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
+                  gridItems.map((item, index) => {
+                    if (item.type === "newsletter") {
+                      return (
+                        <div key="newsletter-grid-card" className="feed-newsletter-card">
+                          <div className="newsletter-stamp-wrapper">
+                            <svg className="newsletter-stamp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                            </svg>
+                            <span className="ec-newsletter-label">Newsletter</span>
+                          </div>
+                          <h3 className="ec-newsletter-title">Stay ahead of the story.</h3>
+                          <p className="ec-newsletter-text">
+                            The Star Prime digest — curated business intelligence, fresh profiles, and market insights, delivered weekly.
+                          </p>
 
-            {/* RIGHT SIDEBAR COLUMN (1/3 width) */}
-            <div className="feed-sidebar-column">
-              <div className="sidebar-section">
-                <div className={`${isVisible ? "animate-in" : ""}`} style={{ animationDelay: "0.2s" }}>
-                  <WidgetNewsletter />
-                </div>
-                <div className={`sidebar-widget ${isVisible ? "animate-in" : ""}`} style={{ animationDelay: "0.3s" }}>
-                  <h4 className="widget-title">Social Share</h4>
-                  <WidgetSocialShare />
-                </div>
+                          <ul className="newsletter-features">
+                            <li>
+                              <span className="feature-dot">✦</span>
+                              <span className="feature-text">In-depth founder profiles</span>
+                            </li>
+                            <li>
+                              <span className="feature-dot">✦</span>
+                              <span className="feature-text">Exclusive market sector trends</span>
+                            </li>
+                            <li>
+                              <span className="feature-dot">✦</span>
+                              <span className="feature-text">Weekly curated business digests</span>
+                            </li>
+                          </ul>
+
+                          <div className="ec-newsletter-form">
+                            <input
+                              type="email"
+                              className="ec-newsletter-input"
+                              placeholder="Your email address"
+                              aria-label="Email address"
+                            />
+                            <button className="ec-newsletter-btn" type="button">
+                              Join
+                            </button>
+                          </div>
+
+                          <span className="newsletter-footer-note">
+                            Join 45,000+ industry decision makers. Zero spam.
+                          </span>
+                        </div>
+                      );
+                    }
+
+                    if (item.type === "categories") {
+                      return (
+                        <div key="categories-grid-card" className="feed-categories-card">
+                          <h4 className="categories-card-title">Browse Industries</h4>
+                          <div className="categories-grid">
+                            {displayCategories.map((cat) => (
+                              <Link
+                                key={cat.slug?.current}
+                                href={`/industries/${cat.slug?.current}`}
+                                className="cat-grid-item"
+                              >
+                                <div className="cat-grid-thumb">
+                                  {cat.imageUrl ? (
+                                    <Image
+                                      src={cat.imageUrl}
+                                      alt={cat.title}
+                                      fill
+                                      sizes="(max-width: 768px) 50vw, 150px"
+                                    />
+                                  ) : (
+                                    <div className="cat-grid-placeholder">
+                                      {getCategorySvg(cat.slug?.current)}
+                                    </div>
+                                  )}
+                                </div>
+                                <span className="cat-grid-name">
+                                  {cat.title}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    }
+
+                    const post = item.data;
+                    return (
+                      <div 
+                        key={post.slug.current || index}
+                        className={`feed-article-card ${isVisible ? 'animate-in' : ''}`}
+                        style={{ animationDelay: `${index * 0.08}s` }}
+                        onClick={() => handlePostClick(post.slug.current)}
+                      >
+                        <div className="feed-card-image-wrapper">
+                          <Image
+                            src={post.featureImg}
+                            alt={post.altText || post.title}
+                            fill
+                            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 380px"
+                          />
+                        </div>
+                        <div className="feed-card-content">
+                          <span className="feed-card-category">{categoryTitle}</span>
+                          <h4 className="feed-card-title">{post.title}</h4>
+                          {post.description && (
+                            <p className="feed-card-excerpt">{post.description}</p>
+                          )}
+                          <div className="feed-card-meta">
+                            <span>{formatDate(post.publishedAt || post._updatedAt)}</span>
+                          </div>
+                          <div className="card-hover-border" />
+                        </div>
+                      </div>
+                    );
+                  })
+                )}
               </div>
             </div>
 
@@ -258,10 +441,10 @@ const IndustryPosts = () => {
         }
 
         .hero-eyebrow {
-          font-size: 0.85rem;
+          font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           text-transform: uppercase;
           margin-bottom: 0.75rem;
         }
@@ -288,7 +471,7 @@ const IndustryPosts = () => {
         .hero-cover-divider {
           width: 80px;
           height: 3px;
-          background: var(--cardinal, #C1121F);
+          background: #dfc167;
           margin-top: 1.5rem;
           border-radius: 999px;
         }
@@ -314,7 +497,7 @@ const IndustryPosts = () => {
           position: relative;
           width: 100%;
           height: 440px;
-          border-radius: 12px;
+          border-radius: 0;
           overflow: hidden;
           background: #1E2D3D;
           border: 1px solid rgba(250, 248, 245, 0.08);
@@ -346,29 +529,29 @@ const IndustryPosts = () => {
 
         .primary-hero-category {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.75rem;
+          font-size: 10px;
           font-weight: 700;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           margin-bottom: 0.75rem;
           display: block;
         }
 
         .primary-hero-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: clamp(1.75rem, 3vw, 2.5rem);
-          font-weight: 800;
+          font-size: clamp(24px, 2.2vw, 30px) !important;
+          font-weight: 700;
           color: #FFFFFF;
-          line-height: 1.2;
+          line-height: 1.25;
           margin: 0 0 1.25rem 0;
           letter-spacing: -0.01em;
         }
 
         .primary-hero-excerpt {
-          font-family: var(--font-serif-body, 'Libre Baskerville', serif);
-          font-size: 0.95rem;
-          line-height: 1.7;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 15px;
+          line-height: 1.75;
           color: #D0C9BF;
           margin: 0 0 1.5rem 0;
           display: -webkit-box;
@@ -381,7 +564,7 @@ const IndustryPosts = () => {
           display: flex;
           align-items: center;
           gap: 10px;
-          font-size: 0.75rem;
+          font-size: 11px;
           font-weight: 600;
           color: #9A9490;
           text-transform: uppercase;
@@ -399,14 +582,14 @@ const IndustryPosts = () => {
 
         .primary-hero-cta {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.8rem;
-          font-weight: 700;
+          font-size: 11px;
+          font-weight: 600;
           color: #FFFFFF;
           background: var(--cardinal, #C1121F);
-          padding: 12px 24px;
+          padding: 10px 24px;
           width: fit-content;
           text-transform: uppercase;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.18em;
           transition: all 0.3s ease;
         }
 
@@ -428,7 +611,7 @@ const IndustryPosts = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           margin-bottom: 1.75rem;
           padding-bottom: 0.65rem;
           border-bottom: 1px solid #2E4057;
@@ -437,7 +620,7 @@ const IndustryPosts = () => {
         .secondary-hero-card {
           display: flex;
           gap: 1.5rem;
-          padding: 1.75rem 0;
+          padding: 1.15rem 0;
           border-bottom: 1px solid #1E2D3D;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -449,7 +632,7 @@ const IndustryPosts = () => {
 
         .secondary-hero-num {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 2.2rem;
+          font-size: 26px;
           font-weight: 900;
           color: rgba(250, 248, 245, 0.2);
           line-height: 1;
@@ -457,7 +640,7 @@ const IndustryPosts = () => {
         }
 
         .secondary-hero-card:hover .secondary-hero-num {
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
         }
 
         .secondary-hero-details {
@@ -465,23 +648,23 @@ const IndustryPosts = () => {
         }
 
         .secondary-hero-category {
-          font-size: 0.7rem;
+          font-size: 9px;
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           margin-bottom: 0.45rem;
           display: block;
         }
 
         .secondary-hero-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 1.15rem;
+          font-size: 13px;
           font-weight: 700;
           color: #FAF8F5;
           line-height: 1.45;
           margin: 0 0 0.5rem 0;
-          transition: color 0.3s ease;
+          transition: all 0.3s ease;
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
@@ -493,7 +676,7 @@ const IndustryPosts = () => {
         }
 
         .secondary-hero-meta {
-          font-size: 0.7rem;
+          font-size: 10px;
           color: #9A9490;
           font-weight: 500;
         }
@@ -513,8 +696,8 @@ const IndustryPosts = () => {
 
         .feed-grid-layout {
           display: grid;
-          grid-template-columns: 2fr 1fr;
-          gap: 4.5rem;
+          grid-template-columns: 1fr;
+          gap: 0;
         }
 
         .feed-section-title {
@@ -530,28 +713,263 @@ const IndustryPosts = () => {
 
         .feed-articles-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 2.5rem 2rem;
         }
 
+        /* ── GRID NEWSLETTER CARD ── */
+        .feed-newsletter-card {
+          background: #F5F2EE;
+          border: 1px solid #E2DDD7;
+          border-radius: 0;
+          padding: 2.25rem 2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          min-height: 460px;
+        }
+
+        .newsletter-stamp-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 0.75rem;
+          color: var(--cardinal, #C1121F);
+        }
+
+        .newsletter-stamp-icon {
+          width: 28px;
+          height: 28px;
+          opacity: 0.85;
+        }
+
+        .feed-newsletter-card .ec-newsletter-label {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.25em;
+          text-transform: uppercase;
+          color: var(--cardinal, #C1121F);
+          margin-bottom: 0;
+          line-height: 1;
+        }
+
+        .feed-newsletter-card .ec-newsletter-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 20px;
+          font-weight: 700;
+          color: #0F1923;
+          line-height: 1.3;
+          margin: 0 0 0.5rem;
+        }
+
+        .feed-newsletter-card .ec-newsletter-text {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 12.5px;
+          color: #5A544F;
+          line-height: 1.55;
+          margin: 0 0 1rem;
+        }
+
+        .newsletter-features {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 1.25rem 0;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .newsletter-features li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .feature-dot {
+          color: var(--cardinal, #C1121F);
+          font-size: 11px;
+        }
+
+        .feature-text {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 12px;
+          color: #333333;
+          font-weight: 500;
+        }
+
+        .feed-newsletter-card .ec-newsletter-form {
+          display: flex;
+          width: 100%;
+          margin-bottom: 0.5rem;
+        }
+
+        .feed-newsletter-card .ec-newsletter-input {
+          flex: 1;
+          border: 1px solid #D0C9BF;
+          border-right: none;
+          padding: 12px 16px;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 13px;
+          background: #FAF8F5;
+          color: #0F1923;
+          outline: none;
+          transition: border-color 0.25s ease;
+        }
+
+        .feed-newsletter-card .ec-newsletter-input:focus {
+          border-color: #8C6D3B;
+        }
+
+        .feed-newsletter-card .ec-newsletter-input::placeholder {
+          color: #9A9490;
+        }
+
+        .feed-newsletter-card .ec-newsletter-btn {
+          background: var(--cardinal, #C1121F);
+          color: #ffffff;
+          border: none;
+          padding: 12px 20px;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: background 0.25s ease;
+        }
+
+        .feed-newsletter-card .ec-newsletter-btn:hover {
+          background: #96010D;
+        }
+
+        .newsletter-footer-note {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 10px;
+          color: #777777;
+          font-weight: 500;
+          display: block;
+        }
+
+        /* ── GRID CATEGORIES CARD ── */
+        .feed-categories-card {
+          background: #FFFFFF;
+          border: 1px solid #E2DDD7;
+          border-radius: 0;
+          padding: 2.25rem 2rem;
+          display: flex;
+          flex-direction: column;
+          min-height: 460px;
+        }
+
+        .categories-card-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 16px;
+          font-weight: 700;
+          color: #0F1923;
+          margin: 0 0 1.15rem;
+          padding-bottom: 0.75rem;
+          border-bottom: 2px solid #0F1923;
+          letter-spacing: -0.01em;
+        }
+
+        .categories-grid {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1rem 0.75rem;
+          flex: 1;
+        }
+
+        .cat-grid-item {
+          display: flex;
+          flex-direction: column;
+          text-decoration: none;
+          color: #0F1923;
+          transition: all 0.25s ease;
+        }
+
+        .cat-grid-thumb {
+          position: relative;
+          width: 100%;
+          height: 75px;
+          overflow: hidden;
+          background: #FAF8F5;
+          border: 1px solid #E2DDD7;
+          margin-bottom: 0.4rem;
+        }
+
+        .cat-grid-thumb :global(img) {
+          object-fit: cover;
+          transition: transform 0.4s ease;
+        }
+
+        .cat-grid-placeholder {
+          width: 100%;
+          height: 100%;
+          background: #E8E3DC;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: background-color 0.25s ease;
+        }
+
+        :global(.cat-grid-svg) {
+          width: 28px;
+          height: 28px;
+          color: #5A544F;
+          transition: all 0.3s ease;
+        }
+
+        .cat-grid-item:hover :global(.cat-grid-svg) {
+          color: #8C6D3B;
+          transform: scale(1.1);
+        }
+
+        .cat-grid-item:hover .cat-grid-placeholder {
+          background-color: #DFD9D0;
+        }
+
+        .cat-grid-name {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-size: 11px;
+          font-weight: 700;
+          line-height: 1.35;
+          color: #0F1923;
+          transition: color 0.25s ease;
+          display: block;
+          text-align: center;
+          width: 100%;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .cat-grid-item:hover .cat-grid-thumb :global(img) {
+          transform: scale(1.08);
+        }
+
+        .cat-grid-item:hover .cat-grid-name {
+          color: #8C6D3B;
+        }
+
+        /* ── ORIGINAL ARTICLE CARD ── */
         .feed-article-card {
           background: #FFFFFF;
-          border: 1px solid rgba(15, 25, 35, 0.05);
-          border-radius: 8px;
+          border: 1px solid #E2DDD7;
+          border-radius: 0;
           overflow: hidden;
           cursor: pointer;
           display: flex;
           flex-direction: column;
-          box-shadow: 0 4px 15px rgba(15, 25, 35, 0.02);
+          box-shadow: none;
           transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
           position: relative;
           min-height: 460px;
         }
 
         .feed-article-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 16px 35px rgba(15, 25, 35, 0.08);
-          border-color: rgba(15, 25, 35, 0.12);
+          background: #FAF8F5;
+          border-color: #C5A059;
         }
 
         .feed-card-image-wrapper {
@@ -580,18 +998,18 @@ const IndustryPosts = () => {
         }
 
         .feed-card-category {
-          font-size: 0.7rem;
+          font-size: 9px;
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #8C6D3B;
           margin-bottom: 0.75rem;
           display: block;
         }
 
         .feed-card-title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 1.25rem;
+          font-size: 15px;
           font-weight: 700;
           color: #0F1923;
           line-height: 1.45;
@@ -604,12 +1022,12 @@ const IndustryPosts = () => {
         }
 
         .feed-article-card:hover .feed-card-title {
-          color: var(--cardinal, #C1121F);
+          color: #8C6D3B;
         }
 
         .feed-card-excerpt {
           font-family: var(--font-serif-body, 'Libre Baskerville', serif);
-          font-size: 0.88rem;
+          font-size: 12px;
           line-height: 1.65;
           color: #555555;
           margin: 0 0 1.5rem 0;
@@ -621,7 +1039,7 @@ const IndustryPosts = () => {
 
         .feed-card-meta {
           margin-top: auto;
-          font-size: 0.75rem;
+          font-size: 11px;
           color: #777777;
           font-weight: 600;
           letter-spacing: 0.04em;
@@ -630,11 +1048,11 @@ const IndustryPosts = () => {
 
         .card-hover-border {
           position: absolute;
-          bottom: 0;
+          top: 0;
           left: 0;
           right: 0;
           height: 3px;
-          background: var(--cardinal, #C1121F);
+          background: #8C6D3B;
           transform: scaleX(0);
           transition: transform 0.3s ease;
           transform-origin: left;
@@ -658,36 +1076,6 @@ const IndustryPosts = () => {
           color: #D0C9BF;
           text-align: center;
           width: 100%;
-        }
-
-        /* ── SIDEBAR PREMIUM CUSTOM OVERRIDES ── */
-        .sidebar-section > div,
-        .sidebar-widget {
-          background: #FFFFFF !important;
-          border: 1px solid rgba(15, 25, 35, 0.05) !important;
-          box-shadow: 0 4px 15px rgba(15, 25, 35, 0.02) !important;
-          padding: 1.75rem !important;
-          border-radius: 8px !important;
-          margin-bottom: 2.25rem !important;
-          transition: all 0.3s ease !important;
-        }
-
-        .sidebar-section > div:hover,
-        .sidebar-widget:hover {
-          border-color: rgba(15, 25, 35, 0.1) !important;
-          box-shadow: 0 10px 25px rgba(15, 25, 35, 0.05) !important;
-        }
-
-        .widget-title {
-          color: #0F1923 !important;
-          font-family: var(--font-serif, 'Playfair Display', serif) !important;
-          font-size: 1.25rem !important;
-          font-weight: 700 !important;
-          border-bottom: 1px solid rgba(15, 25, 35, 0.08) !important;
-          padding-bottom: 0.65rem !important;
-          margin-bottom: 1.25rem !important;
-          letter-spacing: normal !important;
-          text-transform: none !important;
         }
 
         /* ── LOADING & ERROR STATES ── */
@@ -765,12 +1153,11 @@ const IndustryPosts = () => {
 
           .feed-grid-layout {
             grid-template-columns: 1fr;
-            gap: 4rem;
+            gap: 0;
           }
 
-          .feed-sidebar-column {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          .feed-articles-grid {
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
           }
         }
@@ -802,16 +1189,14 @@ const IndustryPosts = () => {
             gap: 2rem;
           }
 
-          .feed-article-card {
+          .feed-article-card,
+          .feed-newsletter-card,
+          .feed-categories-card {
             min-height: auto;
           }
 
           .feed-card-image-wrapper {
             height: 200px;
-          }
-
-          .feed-sidebar-column {
-            grid-template-columns: 1fr;
           }
         }
 

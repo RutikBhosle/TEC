@@ -68,7 +68,7 @@ const AdvertiseWithUs = () => {
                 <span className="section-eyebrow">Market Influence</span>
                 <h2 className="section-title">Why Brands Advertise Here</h2>
                 <p className="advertise-copy italic-quote">
-                  "The toothpaste you use, the shiny shoes you wear, the car you drive, the bed you sleep in—all of it is advertised."
+                  {'"The toothpaste you use, the shiny shoes you wear, the car you drive, the bed you sleep in—all of it is advertised."'}
                 </p>
                 <p className="advertise-copy">
                   Being a prime digital and print journal that brings trailblazing new-age businesses to light, Star Prime makes the perfect, trusted ecosystem for high-value brands to secure visibility.
@@ -123,7 +123,7 @@ const AdvertiseWithUs = () => {
                 <span className="section-eyebrow">Digital Channels</span>
                 <h2 className="showcase-title">Website Placements</h2>
                 <p className="advertise-copy italic-quote">
-                  "Connect yourself with the brand leaders of the paradigm shift in the business world."
+                  {'"Connect yourself with the brand leaders of the paradigm shift in the business world."'}
                 </p>
                 <p className="advertise-copy">
                   Position your brand natively alongside top-performing global features, break-out founder stories, and trending sector reports.
@@ -179,7 +179,7 @@ const AdvertiseWithUs = () => {
             <div className="cta-wrap">
               <span className="cta-kicker">Request Media Kit</span>
               <h2>Ready to Advertise Your Brand?</h2>
-              <p>Let's align your campaign with the right target audience and premium placements.</p>
+              <p>{"Let's align your campaign with the right target audience and premium placements."}</p>
               <Link href="/contact" className="btn btn-primary-cta">
                 Get In Touch
               </Link>

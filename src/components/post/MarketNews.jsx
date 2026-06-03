@@ -17,16 +17,17 @@ const MarketNews = () => {
   'featureImg': mainImage.asset->url,
   publishedAt,
   _updatedAt,
+  body,
   description,
   'category': {
     'title': categories[0]->title,
     'slug': categories[0]->slug.current
   }
-} | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...7]
+} | order(publishedAt desc, _createdAt desc)[0...7]
 `;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["market-news-home-v5"],
+    queryKey: ["market-news-home-v6"],
     queryFn: async () => client.fetch(query),
     refetchOnMount: "always",
     refetchOnWindowFocus: true,
@@ -50,15 +51,32 @@ const MarketNews = () => {
     }
   };
 
+  const toPlainText = (blocks = []) => {
+    if (!blocks || !Array.isArray(blocks)) return "";
+    return blocks
+      .map(block => {
+        if (block._type !== 'block' || !block.children) {
+          return '';
+        }
+        return block.children.map(child => child.text).join('');
+      })
+      .filter(Boolean)
+      .join('\n\n');
+  };
+
   const mainPost = data[0];
   const middlePosts = data.slice(1, 4);
   const rightPosts = data.slice(4, 7);
 
+  const mainPostContent = mainPost && mainPost.body && mainPost.body.length > 0
+    ? toPlainText(mainPost.body)
+    : (mainPost ? mainPost.description : "");
+
   // ─── Inline style objects ────────────────────────────────────────────────────
   const S = {
     section: {
-      background: "#F5F2EE",
-      padding: "64px 0 56px",
+      background: "#FAF8F5", // Changed to warm white to match the screenshot backdrop
+      padding: "24px 0 16px",
     },
     container: {
       maxWidth: "1240px",
@@ -106,9 +124,9 @@ const MarketNews = () => {
     // GRID
     grid: {
       display: "grid",
-      gridTemplateColumns: "1.6fr 1fr 1fr",
+      gridTemplateColumns: "3fr 1fr 1fr",
       border: "1px solid #E2DDD7",
-      background: "#fff",
+      background: "#FAF8F5",
     },
     // MAIN LEFT COLUMN
     mainLink: {
@@ -116,13 +134,14 @@ const MarketNews = () => {
       flexDirection: "column",
       textDecoration: "none",
       color: "inherit",
-      background: "#fff",
-      borderRight: "1px solid #E2DDD7",
+      background: "#FAF8F5",
       cursor: "pointer",
+      transition: "background 0.2s ease",
+      borderRight: "1px solid #E2DDD7",
     },
     mainImgWrapper: {
       width: "100%",
-      height: "260px",
+      height: "270px", // Increased main image height for prominent presentation
       overflow: "hidden",
       background: "#1A2535",
       flexShrink: 0,
@@ -132,10 +151,13 @@ const MarketNews = () => {
       height: "100%",
       objectFit: "cover",
       display: "block",
+      transition: "transform 0.5s ease",
     },
     mainBody: {
-      padding: "22px 24px 24px 24px",
+      padding: "28px",
       flex: 1,
+      display: "flex",
+      flexDirection: "column",
     },
     mainTag: {
       fontFamily: "'DM Sans', sans-serif",
@@ -150,82 +172,84 @@ const MarketNews = () => {
     mainTitle: {
       fontFamily: "'Playfair Display', serif",
       fontSize: "24px",
-      fontWeight: 900,
+      fontWeight: 700,
       color: "#0F1923",
       lineHeight: 1.25,
-      margin: "0 0 14px",
+      margin: "0 0 12px",
     },
     mainExcerpt: {
       fontFamily: "'DM Sans', sans-serif",
       fontSize: "13.5px",
       color: "#6B6560",
-      lineHeight: 1.7,
-      margin: "0 0 18px",
+      lineHeight: 1.65,
+      margin: "0 0 24px",
       display: "-webkit-box",
-      WebkitLineClamp: 4,
+      WebkitLineClamp: 5,
       WebkitBoxOrient: "vertical",
       overflow: "hidden",
+    },
+    mainFooter: {
+      marginTop: "auto", // Anchors the entire footer block at the absolute bottom of the card
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      paddingTop: "16px",
+      borderTop: "1px solid rgba(15, 25, 35, 0.08)", // Softer border line
     },
     mainMeta: {
       fontFamily: "'DM Sans', sans-serif",
       fontSize: "11px",
       color: "#9A9490",
     },
+    mainCta: {
+      fontFamily: "'DM Sans', sans-serif",
+      fontSize: "11px",
+      fontWeight: 700,
+      letterSpacing: "0.15em",
+      textTransform: "uppercase",
+      color: "#C1121F",
+      transition: "color 0.2s ease",
+    },
     // SECONDARY COLUMNS
     listCol: {
       display: "flex",
       flexDirection: "column",
-      background: "#fff",
+      background: "#FAF8F5",
       borderRight: "1px solid #E2DDD7",
     },
     listColLast: {
       display: "flex",
       flexDirection: "column",
-      background: "#fff",
+      background: "#FAF8F5",
     },
-    // ROW ITEMS
+    // STACKED CARD ITEMS
     rowItem: {
       display: "flex",
-      flexDirection: "row",
-      flexWrap: "nowrap",
-      alignItems: "flex-start",
-      gap: "12px",
-      padding: "12px 16px",
-      borderBottom: "1px solid #E2DDD7",
+      flexDirection: "column",
+      alignItems: "stretch",
+      gap: "8px",
+      padding: "12px 18px",
       textDecoration: "none",
       color: "inherit",
-      background: "#fff",
+      background: "#FAF8F5",
       cursor: "pointer",
       flex: 1,
       minHeight: 0,
-    },
-    rowItemLast: {
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "nowrap",
-      alignItems: "flex-start",
-      gap: "12px",
-      padding: "12px 16px",
-      textDecoration: "none",
-      color: "inherit",
-      background: "#fff",
-      cursor: "pointer",
-      flex: 1,
-      minHeight: 0,
+      transition: "background 0.2s ease",
     },
     thumb: {
-      width: "68px",
-      height: "56px",
+      width: "100%",
+      height: "90px", // Balanced height to match the main card perfectly without empty space
       background: "#1A2535",
       flexShrink: 0,
       overflow: "hidden",
-      marginTop: "2px",
     },
     thumbImg: {
       width: "100%",
       height: "100%",
       objectFit: "cover",
       display: "block",
+      transition: "transform 0.5s ease",
     },
     rowContent: {
       flex: 1,
@@ -240,16 +264,16 @@ const MarketNews = () => {
       letterSpacing: "0.16em",
       textTransform: "uppercase",
       color: "#C1121F",
-      marginBottom: "5px",
+      marginBottom: "3px",
       display: "block",
     },
     rowTitle: {
       fontFamily: "'Libre Baskerville', serif",
-      fontSize: "13.5px",
+      fontSize: "12px",
       fontWeight: 400,
       color: "#0F1923",
-      lineHeight: 1.45,
-      marginBottom: "8px",
+      lineHeight: 1.35,
+      marginBottom: "4px",
       display: "-webkit-box",
       WebkitLineClamp: 3,
       WebkitBoxOrient: "vertical",
@@ -267,9 +291,13 @@ const MarketNews = () => {
     <Link
       key={post.slug?.current || i}
       href={`/post/${post.slug?.current}`}
-      style={isLast ? S.rowItemLast : S.rowItem}
+      style={{
+        ...S.rowItem,
+        borderBottom: isLast ? "none" : "1px solid #E2DDD7",
+      }}
+      className="ec-market-card"
     >
-      <div style={S.thumb}>
+      <div style={S.thumb} className="ec-market-card-img">
         {post.featureImg ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={post.featureImg} alt={post.altText || post.title} style={S.thumbImg} />
@@ -286,66 +314,119 @@ const MarketNews = () => {
   );
 
   return (
-    <section style={S.section}>
-      <div style={S.container}>
-        {/* HEADER */}
-        <div style={S.header}>
-          <div>
-            <span style={S.label}>Global Business Intelligence</span>
-            <h2 style={S.sectionTitle}>Market News</h2>
-          </div>
-          <Link
-            href={`/category/${data[0]?.category?.slug || "market-news"}`}
-            style={S.viewAll}
-          >
-            All Market News
-          </Link>
-        </div>
-
-        {/* GRID */}
-        <div style={S.grid}>
-          {/* COLUMN 1 — MAIN FEATURE */}
-          {mainPost && (
-            <Link href={`/post/${mainPost.slug?.current}`} style={S.mainLink}>
-              <div style={S.mainImgWrapper}>
-                {mainPost.featureImg ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={mainPost.featureImg}
-                    alt={mainPost.altText || mainPost.title}
-                    style={S.mainImg}
-                  />
-                ) : (
-                  <div style={{ width: "100%", height: "100%", background: "#1A2535" }} />
-                )}
-              </div>
-              <div style={S.mainBody}>
-                <span style={S.mainTag}>{mainPost.category?.title || "Market News"}</span>
-                <h3 style={S.mainTitle}>{mainPost.title}</h3>
-                {mainPost.description && (
-                  <p style={S.mainExcerpt}>{mainPost.description}</p>
-                )}
-                <div style={S.mainMeta}>{formatDate(mainPost)} · 4 min read</div>
-              </div>
+    <>
+      <section style={S.section}>
+        <div style={S.container}>
+          {/* HEADER */}
+          <div style={S.header}>
+            <div>
+              <span style={S.label}>Global Business Intelligence</span>
+              <h2 style={S.sectionTitle}>Market News</h2>
+            </div>
+            <Link
+              href={`/category/${data[0]?.category?.slug || "market-news"}`}
+              style={S.viewAll}
+            >
+              All Market News
             </Link>
-          )}
-
-          {/* COLUMN 2 — MIDDLE ROWS */}
-          <div style={S.listCol}>
-            {middlePosts.map((post, i) =>
-              renderRowItem(post, i, i === middlePosts.length - 1)
-            )}
           </div>
 
-          {/* COLUMN 3 — RIGHT ROWS */}
-          <div style={S.listColLast}>
-            {rightPosts.map((post, i) =>
-              renderRowItem(post, i, i === rightPosts.length - 1)
+          {/* GRID */}
+          <div style={S.grid} className="ec-market-grid">
+            {/* COLUMN 1 — MAIN FEATURE */}
+            {mainPost && (
+              <Link href={`/post/${mainPost.slug?.current}`} style={S.mainLink} className="ec-market-main-card">
+                <div style={S.mainImgWrapper} className="ec-market-main-img">
+                  {mainPost.featureImg ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={mainPost.featureImg}
+                      alt={mainPost.altText || mainPost.title}
+                      style={S.mainImg}
+                    />
+                  ) : (
+                    <div style={{ width: "100%", height: "100%", background: "#1A2535" }} />
+                  )}
+                </div>
+                <div style={S.mainBody}>
+                  <span style={S.mainTag}>{mainPost.category?.title || "Market News"}</span>
+                  <h3 style={S.mainTitle}>{mainPost.title}</h3>
+                  {mainPostContent && (
+                    <p style={S.mainExcerpt}>{mainPostContent}</p>
+                  )}
+                  <div style={S.mainFooter}>
+                    <div style={S.mainMeta}>{formatDate(mainPost)} · 4 min read</div>
+                    <span style={S.mainCta} className="ec-market-main-cta">View More →</span>
+                  </div>
+                </div>
+              </Link>
             )}
+            {/* COLUMN 2 — MIDDLE ROWS */}
+            <div style={S.listCol} className="ec-market-col-middle">
+              {middlePosts.map((post, i) =>
+                renderRowItem(post, i, i === middlePosts.length - 1)
+              )}
+            </div>
+
+            {/* COLUMN 3 — RIGHT ROWS */}
+            <div style={S.listColLast} className="ec-market-col-last">
+              {rightPosts.map((post, i) =>
+                renderRowItem(post, i, i === rightPosts.length - 1)
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <style jsx global>{`
+        /* ─── Premium Market News Hover Micro-animations ─── */
+        :global(.ec-market-main-card:hover) {
+          background: #F5F2EE !important;
+        }
+        :global(.ec-market-main-card:hover .ec-market-main-img img) {
+          transform: scale(1.04);
+        }
+        :global(.ec-market-main-card:hover .ec-market-main-cta) {
+          color: #96010D !important;
+          text-decoration: underline;
+        }
+        :global(.ec-market-card:hover) {
+          background: #F5F2EE !important;
+        }
+        :global(.ec-market-card:hover .ec-market-card-img img) {
+          transform: scale(1.04);
+        }
+
+        /* ─── Responsive Media Queries ─── */
+        @media (max-width: 1024px) {
+          :global(.ec-market-grid) {
+            grid-template-columns: 1.2fr 1fr 1fr !important;
+          }
+        }
+        @media (max-width: 768px) {
+          :global(.ec-market-grid) {
+            grid-template-columns: 1fr !important;
+            gap: 16px !important;
+            background: transparent !important;
+            border: none !important;
+          }
+          :global(.ec-market-main-card) {
+            border: 1px solid #E2DDD7 !important;
+            border-right: 1px solid #E2DDD7 !important;
+            margin-bottom: 8px;
+          }
+          :global(.ec-market-card) {
+            border: 1px solid #E2DDD7 !important;
+            border-bottom: 1px solid #E2DDD7 !important;
+            margin-bottom: 8px;
+          }
+          :global(.ec-market-col-middle), :global(.ec-market-col-last) {
+            border-right: none !important;
+            background: transparent !important;
+          }
+        }
+      `}</style>
+    </>
   );
 };
 
