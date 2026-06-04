@@ -109,14 +109,14 @@ const ContactPage = () => {
             <div id="germany-map" className="location-map-item">
               <div className="location-map-wrapper">
                 <iframe
-                  src="https://www.google.com/maps?q=6605+Longshore+St,+Dublin,+OH+43017,+USA&output=embed"
+                  src="https://www.google.com/maps?q=Office+328B,+Gera+Imperium+Rise,+Wipro+Circle,+Hinjewadi+Phase+2,+Pune&output=embed"
                   width="100%"
                   height={380}
                   style={{ border: 0, width: "100%", display: "block" }}
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="6605 Longshore St, Dublin, OH 43017, USA"
+                  title="Office 328B, Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune"
                 />
               </div>
             </div>

@@ -54,7 +54,7 @@ const WidgetCategory = ({ showTitle = true }) => {
             <div key={data.slug?.current} className="category-item mb-4">
               {data.slug?.current === "trusted-brands" ? null : (
                 <Link
-                  className="d-block position-relative overflow-hidden rounded shadow"
+                  className="d-block position-relative overflow-hidden rounded-0"
                   href={
                     data.slug?.current === "magazines"
                       ? "/magazines"
@@ -113,7 +113,7 @@ const WidgetCategory = ({ showTitle = true }) => {
         }
 
         .category-title {
-          color: #1d2430;
+          color: var(--ink);
           font-family: var(--primary-font);
           font-size: var(--type-small);
           line-height: 1.35;
@@ -129,14 +129,15 @@ const WidgetCategory = ({ showTitle = true }) => {
 
         .category-widget .owl-nav button.custom-owl-prev,
         .category-widget .owl-nav button.custom-owl-next {
-          background-color: #fffaf1;
-          border: 1px solid rgba(126, 92, 35, 0.22);
-          box-shadow: 0 6px 16px rgba(126, 92, 35, 0.12);
+          background-color: var(--warm-white);
+          border: 1px solid var(--rule);
+          box-shadow: none;
+          border-radius: 0;
         }
 
         .category-widget .owl-nav button.custom-owl-prev i,
         .category-widget .owl-nav button.custom-owl-next i {
-          color: #4d5b6c !important;
+          color: var(--text-muted) !important;
         }
 
         .category-widget .owl-nav button.custom-owl-prev:hover,
