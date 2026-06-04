@@ -1054,7 +1054,7 @@ const HeaderOne = () => {
         </nav>
       </header>
       {/* Spacer to prevent content from hiding behind fixed header */}
-      <div className="navbar-fixed-spacer" />
+      <div className={`navbar-fixed-spacer ${isScrolled ? "scrolled" : ""}`} />
 
       <style jsx global>{`
         /* ── EC TOPBAR ── */
@@ -1093,10 +1093,19 @@ const HeaderOne = () => {
         /* ── FIXED NAVBAR SPACER ── */
         .navbar-fixed-spacer {
           height: 170px; /* topbar + logo row + nav row */
+          transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @media (min-width: 992px) {
+          .navbar-fixed-spacer.scrolled {
+            height: 90px;
+          }
         }
         @media (max-width: 991px) {
           .navbar-fixed-spacer {
             height: 110px; /* topbar + logo row only on mobile */
+          }
+          .navbar-fixed-spacer.scrolled {
+            height: 110px;
           }
         }
 
