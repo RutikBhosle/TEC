@@ -77,6 +77,20 @@ a:hover {
 ================================================== --*/
 /*--Custom Variables--*/
 :root {
+  --ink: #0F1923;
+  --ink-mid: #1E2D3D;
+  --ink-light: #2E4057;
+  --slate: #F5F2EE;
+  --slate-mid: #E8E3DC;
+  --slate-dark: #D0C9BF;
+  --cardinal: #C1121F;
+  --cardinal-dark: #96010D;
+  --warm-white: #FAF8F5;
+  --text-body: #2C2C2C;
+  --text-muted: #6B6560;
+  --text-light: #9A9490;
+  --rule: #D0C9BF;
+
   --primary-font: 'Playfair Display', Georgia, serif;
   --secondary-font: 'DM Sans', system-ui, sans-serif;
   --tertiary-font: 'Libre Baskerville', Georgia, serif;

@@ -6,14 +6,14 @@ const PostComment = () => {
     <div className="post-comment-area">
       <style jsx global>{`
         .post-comment-area .comment-box h2 {
-          color: #1d2430 !important;
+          color: var(--ink) !important;
           font-size: clamp(var(--type-h3), 3vw, var(--type-h2));
           font-family: var(--primary-font);
           margin-bottom: 0.5rem;
         }
 
         .post-comment-area .comment-box p {
-          color: #5e6876 !important;
+          color: var(--text-muted) !important;
           font-size: var(--type-body);
           font-family: var(--secondary-font);
           line-height: 2.4rem;
@@ -22,27 +22,28 @@ const PostComment = () => {
         .comment-form input[type="text"],
         .comment-form input[type="email"],
         .comment-form textarea {
-          color: #1d2430 !important;
-          background: rgba(255, 250, 241, 0.96) !important;
-          border-color: rgba(126, 92, 35, 0.2) !important;
+          color: var(--text-body) !important;
+          background: var(--warm-white) !important;
+          border-color: var(--slate-dark) !important;
           border-width: 1px !important;
+          border-radius: 0 !important;
         }
         .comment-form input[type="text"]::placeholder,
         .comment-form input[type="email"]::placeholder,
         .comment-form textarea::placeholder {
-          color: #8b8f96 !important;
+          color: var(--text-light) !important;
           opacity: 1 !important;
         }
         .comment-form input[type="text"]:focus,
         .comment-form input[type="email"]:focus,
         .comment-form textarea:focus {
-          color: #1d2430 !important;
-          background: #FAF8F5 !important;
-          border-color: #0F1923 !important;
-          box-shadow: 0 0 0 2px rgba(15, 25, 35, 0.2) !important;
+          color: var(--text-body) !important;
+          background: var(--warm-white) !important;
+          border-color: var(--ink) !important;
+          box-shadow: none !important;
         }
         .comment-form .form-group label {
-          color: #5e6876 !important;
+          color: var(--text-muted) !important;
           background: transparent !important;
         }
         .comment-form .form-group:not(.focused) label {
@@ -51,8 +52,8 @@ const PostComment = () => {
           z-index: -1 !important;
         }
         .comment-form .form-group.focused label {
-          background: #FAF8F5 !important;
-          color: #0F1923 !important;
+          background: var(--warm-white) !important;
+          color: var(--ink) !important;
           opacity: 1 !important;
           z-index: 10 !important;
         }
@@ -63,7 +64,23 @@ const PostComment = () => {
         }
 
         .post-comment-area .comment-form .btn.btn-primary {
+          background: var(--cardinal) !important;
+          border-color: var(--cardinal) !important;
+          color: #fff !important;
+          font-family: var(--secondary-font) !important;
+          font-weight: 700 !important;
+          font-size: 11px !important;
+          letter-spacing: 0.15em !important;
+          text-transform: uppercase !important;
+          border-radius: 0 !important;
           min-width: 170px;
+          transition: background-color 0.2s, border-color 0.2s !important;
+        }
+
+        .post-comment-area .comment-form .btn.btn-primary:hover {
+          background: var(--cardinal-dark) !important;
+          border-color: var(--cardinal-dark) !important;
+          color: #fff !important;
         }
       `}</style>
       <div className="comment-box">

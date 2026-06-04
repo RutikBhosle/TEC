@@ -53,8 +53,8 @@ const PostFormatText = ({ postData, allData }) => {
         </div>
         <style jsx global>{`
           .post-detail-page {
-            background: #f6f2e8;
-            color: #1d2430;
+            background: var(--warm-white);
+            color: var(--text-body);
             font-family: var(--secondary-font);
           }
 
@@ -82,11 +82,12 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .single-blog-wrapper .axil-post-title {
-            color: #1d2430;
-            font-size: var(--type-h3);
+            color: var(--ink);
+            font-size: clamp(28px, 4.5vw, 42px);
             font-family: var(--primary-font);
-            line-height: 1.2;
-            margin-bottom: 1rem;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
           }
 
           .post-detail-page .single-blog-wrapper .axil-post-title a {
@@ -94,24 +95,42 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .single-blog-wrapper .axil-post-title a:hover {
-            color: #0F1923;
+            color: var(--cardinal);
           }
 
+          .post-detail-page .post-details img,
           .post-detail-page .post-details > span img,
           .post-detail-page .post-details img.mb-4 {
-            border-radius: 10px;
+            border-radius: 0 !important;
           }
 
           .post-detail-page .rich-text-content,
           .post-detail-page .post-details p,
           .post-detail-page .post-details li,
           .post-detail-page .rich-text-content p,
-          .post-detail-page .rich-text-content li,
-          .post-detail-page .rich-text-content blockquote {
-            color: #4d5b6c;
-            font-size: var(--type-body-lg);
+          .post-detail-page .rich-text-content li {
+            color: var(--text-muted);
+            font-size: var(--type-body);
             font-family: var(--secondary-font);
-            line-height: 2.9rem;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+          }
+
+          .post-detail-page .rich-text-content blockquote {
+            background: var(--slate);
+            border-left: 4px solid var(--cardinal);
+            border-radius: 0;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+          }
+
+          .post-detail-page .rich-text-content blockquote p {
+            font-family: var(--tertiary-font);
+            font-style: italic;
+            font-size: var(--type-body-lg);
+            color: var(--text-body);
+            line-height: 1.6;
+            margin-bottom: 0;
           }
 
           .post-detail-page .rich-text-content h1,
@@ -121,48 +140,43 @@ const PostFormatText = ({ postData, allData }) => {
           .post-detail-page .post-details h2,
           .post-detail-page .post-details h3,
           .post-detail-page .post-details h4 {
-            color: #1d2430;
-            line-height: 1.28;
+            color: var(--ink);
+            line-height: 1.25;
+            font-family: var(--primary-font);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
           }
 
           .post-detail-page .rich-text-content h2,
           .post-detail-page .post-details h2 {
             font-size: var(--type-h2);
-            font-family: var(--primary-font);
           }
 
           .post-detail-page .rich-text-content h3,
           .post-detail-page .post-details h3 {
             font-size: var(--type-h3);
-            font-family: var(--primary-font);
           }
 
           .post-detail-page .rich-text-content h4,
           .post-detail-page .post-details h4 {
             font-size: var(--type-h5);
-            font-family: var(--primary-font);
           }
 
           .post-detail-page .post-details a:not(.btn) {
-            color: #7a5a24;
+            color: var(--cardinal);
+            text-decoration: underline;
           }
 
           .post-detail-page .post-details a:not(.btn):hover {
-            color: #0F1923;
+            color: var(--cardinal-dark);
           }
 
           .post-detail-page .post-details strong {
-            color: #1d2430;
-          }
-
-          .post-detail-page .post-details blockquote {
-            border-left: 3px solid rgba(15, 25, 35, 0.15);
-            padding-left: 0.85rem;
-            margin: 1.1rem 0;
+            color: var(--ink);
           }
 
           .post-detail-page .post-shares .title {
-            color: #4d5b6c;
+            color: var(--text-muted);
             font-size: var(--type-small);
             font-family: var(--secondary-font);
             letter-spacing: 0.06em;
@@ -174,7 +188,7 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .post-shares li a {
-            border-radius: 8px;
+            border-radius: 0;
             width: 38px;
             height: 38px;
             min-width: 38px;
@@ -185,11 +199,17 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .post-shares li a.bg-color-facebook {
-            background: linear-gradient(135deg, #1877f2 0%, #0f5cc0 100%) !important;
+            background: var(--ink) !important;
+          }
+          .post-detail-page .post-shares li a.bg-color-facebook:hover {
+            background: var(--cardinal) !important;
           }
 
           .post-detail-page .post-shares li a.bg-color-linkedin {
-            background: linear-gradient(135deg, #0a66c2 0%, #084b8f 100%) !important;
+            background: var(--ink) !important;
+          }
+          .post-detail-page .post-shares li a.bg-color-linkedin:hover {
+            background: var(--cardinal) !important;
           }
 
           .post-detail-page .post-shares li a i {
@@ -198,19 +218,20 @@ const PostFormatText = ({ postData, allData }) => {
             margin: 0;
             transform: translateY(0);
             font-size: 1.7rem;
+            color: #fff;
           }
 
           .post-detail-page hr {
-            border-color: rgba(126, 92, 35, 0.14);
+            border-color: var(--rule);
             margin-top: 1.6rem !important;
             margin-bottom: 2rem !important;
           }
 
           .post-detail-page .post-sidebar > * {
-            background: linear-gradient(180deg, #FAF8F5 0%, #F0EDE8 100%);
-            border: 1px solid rgba(126, 92, 35, 0.14);
-            border-radius: 12px;
-            padding: 8px;
+            background: var(--slate);
+            border: 1px solid var(--rule);
+            border-radius: 0;
+            padding: 24px;
           }
 
           .post-detail-page .post-sidebar .shared-sidebar-panel {
@@ -244,7 +265,7 @@ const PostFormatText = ({ postData, allData }) => {
           .post-detail-page .post-sidebar .sidebar-post-widget .nav-pills .nav-item a {
             font-size: 10px !important;
             padding: 0.65rem 0.35rem !important;
-            border-radius: 10px !important;
+            border-radius: 0 !important;
           }
 
           .post-detail-page .post-sidebar .sidebar-post-widget .tab-content {
@@ -269,7 +290,7 @@ const PostFormatText = ({ postData, allData }) => {
           .post-detail-page .post-sidebar .category-widget .category-title {
             font-size: var(--type-small) !important;
             line-height: 1.35 !important;
-            color: #1d2430 !important;
+            color: var(--ink) !important;
             font-family: var(--primary-font) !important;
             margin-bottom: 0 !important;
           }
@@ -318,7 +339,7 @@ const PostFormatText = ({ postData, allData }) => {
           .post-detail-page .post-sidebar .category-widget .category-item > a,
           .post-detail-page .post-sidebar .category-widget .category-item :global(a.d-block.position-relative) {
             height: 145px !important;
-            border-radius: 10px !important;
+            border-radius: 0 !important;
           }
 
           .post-detail-page .post-sidebar .category-widget .category-card-title {
@@ -329,13 +350,14 @@ const PostFormatText = ({ postData, allData }) => {
 
           .post-detail-page .category-widget .owl-nav button.custom-owl-prev,
           .post-detail-page .category-widget .owl-nav button.custom-owl-next {
-            background: #fffaf1 !important;
-            border: 1px solid rgba(126, 92, 35, 0.14);
+            background: var(--warm-white) !important;
+            border: 1px solid var(--rule) !important;
+            border-radius: 0 !important;
           }
 
           .post-detail-page .category-widget .owl-nav button.custom-owl-prev i,
           .post-detail-page .category-widget .owl-nav button.custom-owl-next i {
-            color: #4d5b6c !important;
+            color: var(--text-muted) !important;
           }
 
           @media (max-width: 991px) {

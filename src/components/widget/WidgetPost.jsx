@@ -139,48 +139,49 @@ const WidgetPost = () => {
       </Tab.Container>
       <style jsx>{`
         :global(.sidebar-post-widget) {
-          background: linear-gradient(180deg, #FAF8F5 0%, #F0EDE8 100%);
-          border: 1px solid rgba(126, 92, 35, 0.14);
-          border-radius: 16px;
-          padding: 14px;
-          box-shadow: 0 12px 28px rgba(126, 92, 35, 0.12);
+          background: transparent;
+          border: none;
+          border-radius: 0;
+          padding: 0;
+          box-shadow: none;
           font-family: var(--secondary-font);
         }
 
         :global(.sidebar-post-widget .nav-pills) {
-          border-color: rgba(126, 92, 35, 0.14);
+          border-color: var(--rule);
           margin-bottom: 1.25rem;
           gap: 8px;
         }
 
         :global(.sidebar-post-widget .nav-pills .nav-item a) {
-          background: #fffaf1;
-          border: 1px solid rgba(126, 92, 35, 0.16);
-          border-radius: 12px;
-          color: #5e6876;
-          font-size: var(--type-small);
+          background: var(--warm-white);
+          border: 1px solid var(--slate-dark);
+          border-radius: 0;
+          color: var(--text-muted);
+          font-size: 11px;
           font-family: var(--secondary-font);
           letter-spacing: 0.05em;
           padding: 0.9rem 0.5rem;
           font-weight: 600;
+          text-align: center;
         }
 
         :global(.sidebar-post-widget .nav-pills .nav-item a:hover),
         :global(.sidebar-post-widget .nav-pills .nav-item a.active) {
-          background-color: rgba(15, 25, 35, 0.08);
-          border-color: rgba(15, 25, 35, 0.15);
-          color: #7a5a24;
+          background-color: var(--slate);
+          border-color: var(--slate-dark);
+          color: var(--cardinal);
         }
 
         :global(.sidebar-post-widget .tab-content) {
-          border-top: 1px solid rgba(126, 92, 35, 0.14);
+          border-top: 1px solid var(--rule);
           padding-top: 0.45rem;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small) {
           margin-bottom: 0.35rem;
           padding-bottom: 0.35rem;
-          border-bottom: 1px solid rgba(126, 92, 35, 0.12);
+          border-bottom: 1px solid var(--rule);
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small:last-child) {
@@ -190,21 +191,23 @@ const WidgetPost = () => {
         }
 
         :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a) {
-          color: #1d2430;
+          color: var(--ink);
         }
 
         :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a:hover) {
-          color: #0F1923;
+          color: var(--cardinal);
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small .bg-color-blue-one) {
-          color: #0F1923;
-          background: rgba(15, 25, 35, 0.08);
-          border: 1px solid rgba(15, 25, 35, 0.15);
-          border-radius: 999px;
-          padding: 0.25rem 0.65rem;
-          font-size: var(--type-caption);
+          color: var(--cardinal);
+          background: transparent;
+          border: none;
+          padding: 0;
+          font-size: 9px;
           font-family: var(--secondary-font);
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title) {
@@ -217,6 +220,11 @@ const WidgetPost = () => {
 
         :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title a) {
           font-family: var(--primary-font);
+          color: var(--ink);
+        }
+
+        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title a:hover) {
+          color: var(--cardinal);
         }
 
         :global(.sidebar-post-widget .post-block.post-block__small .media-body) {
@@ -227,10 +235,11 @@ const WidgetPost = () => {
 
         :global(.sidebar-post-widget .post-block.post-block__small .post-cat-group) {
           font-family: var(--secondary-font);
+          margin-bottom: 4px;
         }
 
         :global(.sidebar-post-widget .tab-pane > p) {
-          color: #5e6876;
+          color: var(--text-muted);
           margin: 0.5rem 0;
           font-family: var(--secondary-font);
           font-size: var(--type-small);
