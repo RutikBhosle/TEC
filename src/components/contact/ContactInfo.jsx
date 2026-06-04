@@ -49,8 +49,6 @@ const ContactInfo = () => {
             <span className="desk-category">Corporate Office</span>
             <h4 className="desk-name">Headquarters</h4>
             <p className="desk-desc">
-              <strong>US Office:</strong> 6605 Longshore St, Dublin, OH 43017, USA
-              <br />
               <strong>Home Branch:</strong> Office 328B, Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune
             </p>
           </div>

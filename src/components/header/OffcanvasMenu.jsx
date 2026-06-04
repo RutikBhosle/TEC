@@ -63,9 +63,9 @@ const OffcanvasMenu = ({ ofcshow, ofcHandleClose }) => {
                   <div className="axil-contact-info">
                     <address className="address">
                       <p className="m-b-xs-30  mid grey-dark-three ">
-                        6605 Longshore St, Dublin,
+                        Office 328B, Gera Imperium Rise,
                         <br />
-                        OH 43017, USA
+                        Wipro Circle, Hinjewadi Phase 2, Pune
                       </p>
                       <div className="h5 m-b-xs-5">
                         We&apos;re Available 24/ 7. Call Now.
