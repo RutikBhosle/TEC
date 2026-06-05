@@ -299,7 +299,7 @@ const SliderOne = () => {
         }
 
         .featured-magazine-title a:hover {
-          color: #0F1923 !important;
+          color: #0f1923 !important;
         }
 
         .featured-magazine-desc {
@@ -328,14 +328,14 @@ const SliderOne = () => {
 
         .featured-magazine-btn-outline {
           border: 1px solid rgba(15, 25, 35, 0.15);
-          color: #0F1923;
+          color: #0f1923;
           background: rgba(255, 250, 241, 0.8);
         }
 
         .featured-magazine-btn-outline:hover {
-          background: #0F1923;
+          background: #0f1923;
           color: #111315;
-          border-color: #0F1923;
+          border-color: #0f1923;
         }
 
         .featured-magazine-controls {
@@ -361,8 +361,8 @@ const SliderOne = () => {
         }
 
         .featured-magazine-arrow:hover {
-          background: #0F1923;
-          border-color: #0F1923;
+          background: #0f1923;
+          border-color: #0f1923;
           color: #111315;
           transform: translateY(-1px);
         }

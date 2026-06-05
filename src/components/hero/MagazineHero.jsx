@@ -52,15 +52,17 @@ const MagazineHero = () => {
 
   const renderTitle = (title) => {
     if (!title) return "";
-    const match = title.match(/\s*(—|–|:)\s*/);
+    const match = title.match(/\s*(—|–|:|―)\s*|\s+-\s+/);
     if (match) {
-      const separator = match[1];
+      const separator = match[0];
       const index = title.indexOf(separator);
       const mainName = title.substring(0, index).trim();
       const description = title.substring(index + separator.length).trim();
       return (
         <>
-          {mainName} {separator} <em style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{description}</em>
+          {mainName} —
+          <br />
+          <em style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{description}</em>
         </>
       );
     }
@@ -68,7 +70,7 @@ const MagazineHero = () => {
   };
 
   if (isLoading) return <Loader />;
-  if (error) return <div style={{ color: "#0F1923", padding: "40px" }}>Error loading magazines</div>;
+  if (error) return <div style={{ color: "#0f1923", padding: "40px" }}>Error loading magazines</div>;
 
   return (
     <>
@@ -102,7 +104,7 @@ const MagazineHero = () => {
                 <span>8 min read</span>
               </div>
               <Link
-                href={`/magazine/${mainMag.slug?.current || mainMag.slug}`}
+                href={`/post/${mainMag.slug?.current || mainMag.slug}`}
                 className="ec-hero-cta"
               >
                 Read Cover Story →
@@ -126,7 +128,7 @@ const MagazineHero = () => {
                 <div className="ec-hero-sidebar-content">
                   <div className="ec-hero-sidebar-cat">{getCategory(mag)}</div>
                   <Link
-                    href={`/magazine/${mag.slug?.current || mag.slug}`}
+                    href={`/post/${mag.slug?.current || mag.slug}`}
                     className="ec-hero-sidebar-title"
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -144,7 +146,7 @@ const MagazineHero = () => {
 
       <style jsx>{`
         .ec-hero {
-          background: #0F1923;
+          background: #0f1923;
           padding: 40px 0 8px 0;
           overflow: hidden;
         }
@@ -169,7 +171,7 @@ const MagazineHero = () => {
 
         .ec-hero-kicker {
           display: inline-block;
-          background: #C1121F;
+          background: #7A0F23;
           color: #fff;
           font-family: 'DM Sans', sans-serif;
           font-size: 10px;
@@ -190,7 +192,7 @@ const MagazineHero = () => {
           position: relative;
           background: #1E2D3D;
           border-radius: 0;
-          border-left: 5px solid #C1121F;
+          border-left: 5px solid #7A0F23;
         }
 
         .ec-hero-img {
@@ -213,7 +215,7 @@ const MagazineHero = () => {
           left: 0;
           right: 0;
           height: 50%;
-          background: linear-gradient(to top, #0F1923 0%, transparent 100%);
+          background: linear-gradient(to top, #0f1923 0%, transparent 100%);
         }
 
         .ec-hero-text { flex: 1; }
@@ -225,7 +227,7 @@ const MagazineHero = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 10px;
         }
 
@@ -279,7 +281,7 @@ const MagazineHero = () => {
 
         .ec-hero-cta {
           display: inline-block;
-          background: #C1121F;
+          background: #7A0F23;
           color: #fff;
           font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
           font-size: 12px;
@@ -306,7 +308,7 @@ const MagazineHero = () => {
           font-weight: 700;
           letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 20px;
           padding-bottom: 18px;
           border-bottom: 1px solid #2E4057;
@@ -321,7 +323,7 @@ const MagazineHero = () => {
           transition: border-color 0.2s;
         }
         .ec-hero-sidebar-item:last-child { border-bottom: none; }
-        .ec-hero-sidebar-item.is-active { border-left: 2px solid #C1121F; padding-left: 10px; margin-left: -12px; }
+        .ec-hero-sidebar-item.is-active { border-left: 2px solid #7A0F23; padding-left: 10px; margin-left: -12px; }
         .ec-hero-sidebar-item:hover { border-bottom-color: #2E4057; }
 
         .ec-hero-sidebar-num {
@@ -334,7 +336,7 @@ const MagazineHero = () => {
           width: 36px;
           transition: color 0.2s;
         }
-        .ec-hero-sidebar-item.is-active .ec-hero-sidebar-num { color: #C1121F; }
+        .ec-hero-sidebar-item.is-active .ec-hero-sidebar-num { color: #7A0F23; }
 
         .ec-hero-sidebar-cat {
           font-family: 'DM Sans', sans-serif;
@@ -342,7 +344,7 @@ const MagazineHero = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 4px;
         }
 

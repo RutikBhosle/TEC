@@ -9,13 +9,16 @@ import { client } from "../../client";
 
 const fetchIndustryPost = async (slug) => {
   const query = `*[_type == "industryPost" && slug.current == $slug][0]{
+    _id,
+    _type,
     title,
     altText,
     keywords,
     slug,
     "featureImg": mainImage.asset->url,
     body,
-    description
+    description,
+    "industryCategory": industryCategory->{_id, title, slug}
   }`;
   return client.fetch(query, { slug });
 };

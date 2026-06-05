@@ -59,7 +59,7 @@ class MyDocument extends Document {
                       "@id":
                         "https://www.starprime.com/#logo",
                       inLanguage: "en-US",
-                      url: "https://www.starprime.com/next/image?url=%2Fassets%2Flogoblack.jpg&w=384&q=75",
+                      url: "https://www.starprime.com/next/image?url=%2Fassets%2Flogowhite.png&w=384&q=75",
                       width: 300,
                       height: 150,
                       caption: "Star Prime",

@@ -133,7 +133,7 @@ const FooterTwo = () => {
                 <Link href="/" className="ft-logo-link">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/assets/logoblack.jpg"
+                    src="/assets/logoblack.png"
                     alt="Star Prime"
                     className="ft-logo-img"
                   />
@@ -141,20 +141,7 @@ const FooterTwo = () => {
                 <p className="ft-brand-desc">
                   {"Star Prime is an independent editorial platform chronicling the minds, markets, and movements shaping tomorrow's economy."}
                 </p>
-                <div className="ft-socials">
-                  <a href={SocialLink.fb.url} target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="Facebook">
-                    <i className={SocialLink.fb.icon} />
-                  </a>
-                  <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="LinkedIn">
-                    <i className={SocialLink.linked.icon} />
-                  </a>
-                  <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="YouTube">
-                    <i className={SocialLink.yt.icon} />
-                  </a>
-                  <a href={SocialLink.instagram.url} target="_blank" rel="noopener noreferrer" className="ft-social" aria-label="Instagram">
-                    <i className={SocialLink.instagram.icon} />
-                  </a>
-                </div>
+
               </div>
 
               {/* Nav columns */}
@@ -263,7 +250,7 @@ const FooterTwo = () => {
 
         /* ── NEWSLETTER BAND ── */
         .ft-newsletter-band {
-          background: #C1121F;
+          background: #7A0F23;
           padding: 72px 0;
           position: relative;
           overflow: hidden;
@@ -375,7 +362,7 @@ const FooterTwo = () => {
 
         .ft-nl-btn {
           background: #ffffff;
-          color: #C1121F;
+          color: #7A0F23;
           border: none;
           font-family: var(--secondary-font);
           font-size: 12px;
@@ -388,7 +375,7 @@ const FooterTwo = () => {
           white-space: nowrap;
         }
         .ft-nl-btn:hover {
-          background: #0F1923;
+          background: #0f1923;
           color: #ffffff;
         }
 
@@ -418,7 +405,7 @@ const FooterTwo = () => {
 
         /* ── MAIN SECTION ── */
         .ft-main {
-          background: #0F1923;
+          background: #0f1923;
           padding: 60px 0 0;
         }
 
@@ -457,30 +444,7 @@ const FooterTwo = () => {
           font-weight: 400 !important;
         }
 
-        .ft-socials {
-          display: flex;
-          gap: 8px;
-        }
 
-        /* Lock social icon anchors — they must not inherit parent link colours */
-        :global(a.ft-social) {
-          width: 34px;
-          height: 34px;
-          border: 1px solid rgba(255,255,255,0.18);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 14px !important;
-          color: rgba(255,255,255,0.65) !important;
-          text-decoration: none !important;
-          transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
-          background: transparent;
-        }
-        :global(a.ft-social:hover) {
-          border-color: #C1121F !important;
-          color: #ffffff !important;
-          background: #C1121F !important;
-        }
 
         /* ────────────────────────────────────────────────────
          * NAV COLUMN HIERARCHY SYSTEM
@@ -496,7 +460,7 @@ const FooterTwo = () => {
          *
          * SPECIFICITY FIX:
          *   Global a { color: inherit } = specificity (0,0,1)
-         *   Global a:hover { color: #C1121F } = (0,0,2)
+         *   Global a:hover { color: #7A0F23 } = (0,0,2)
          *   Using :global(a.ft-nav-link) = (0,1,1) — always wins.
          *   Using :global(a.ft-nav-link:hover) = (0,1,2) — always wins.
          * ──────────────────────────────────────────────────── */
@@ -681,7 +645,7 @@ const FooterTwo = () => {
           transition: color 0.2s ease;
         }
         .ft-copy :global(a:hover) {
-          color: #C1121F !important;
+          color: #7A0F23 !important;
         }
 
         .ft-bottom-links {

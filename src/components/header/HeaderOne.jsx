@@ -3,10 +3,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { client } from "../../client";
 
-import SocialLink from "../../data/social/SocialLink.json";
 
 const HeaderOne = () => {
- 
+
 
 
   // Header Search
@@ -139,9 +138,9 @@ const HeaderOne = () => {
     // Find first match and scroll to it
     const firstMatch = findFirstMatch(searchQuery.toLowerCase());
     if (firstMatch) {
-      firstMatch.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center' 
+      firstMatch.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center'
       });
     }
 
@@ -154,7 +153,7 @@ const HeaderOne = () => {
   const handleSearchInput = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-    
+
     // Simple: search ONLY magazines by title from Sanity, show suggestions, navigate on click
     if (query.trim().length > 0) {
       const pattern = `*${query}*`;
@@ -181,7 +180,7 @@ const HeaderOne = () => {
       setShowResults(false);
       return;
     }
-    
+
     if (query.trim().length > 0) {
       // Global search through entire website content
       const searchTerm = query.toLowerCase();
@@ -265,9 +264,9 @@ const HeaderOne = () => {
         // Search in all text elements
         const textElements = document.querySelectorAll('span, div, strong, em, li, td, th');
         textElements.forEach((element, index) => {
-          if (element.textContent.toLowerCase().includes(searchTerm) && 
-              element.textContent.trim().length > 0 && 
-              element.textContent.trim().length < 150) {
+          if (element.textContent.toLowerCase().includes(searchTerm) &&
+            element.textContent.trim().length > 0 &&
+            element.textContent.trim().length < 150) {
             results.push({
               type: 'text',
               element: element,
@@ -330,10 +329,10 @@ const HeaderOne = () => {
           // Extract magazine title or person name
           const titleElement = card.querySelector('h1, h2, h3, h4, h5, h6, .title, .magazine-title, .post-title');
           const imageElement = card.querySelector('img');
-          const magazineTitle = titleElement ? titleElement.textContent.trim() : 
-                               card.textContent.trim().split('\n')[0] || 
-                               card.textContent.trim().substring(0, 50);
-          
+          const magazineTitle = titleElement ? titleElement.textContent.trim() :
+            card.textContent.trim().split('\n')[0] ||
+            card.textContent.trim().substring(0, 50);
+
           results.push({
             type: 'magazine',
             element: card,
@@ -392,9 +391,9 @@ const HeaderOne = () => {
       // Search in spans and divs for person names
       const textElements = document.querySelectorAll('span, div, strong, em');
       textElements.forEach((element, index) => {
-        if (element.textContent.toLowerCase().includes(searchTerm) && 
-            element.textContent.trim().length > 0 && 
-            element.textContent.trim().length < 100) {
+        if (element.textContent.toLowerCase().includes(searchTerm) &&
+          element.textContent.trim().length > 0 &&
+          element.textContent.trim().length < 100) {
           results.push({
             type: 'text',
             element: element,
@@ -406,10 +405,10 @@ const HeaderOne = () => {
 
       // Search ALL magazine people from the carousel data
       const allMagazinePeople = [
-        'Anchel Gupta', 'Jorden', 'Manuel', 'Suzanne', 'Nilmini', 
+        'Anchel Gupta', 'Jorden', 'Manuel', 'Suzanne', 'Nilmini',
         'Shabnam', 'Valenia', 'Ross', 'Khalid'
       ];
-      
+
       // Always show ALL magazine people that match the search
       allMagazinePeople.forEach((person, index) => {
         if (person.toLowerCase().includes(searchTerm)) {
@@ -427,17 +426,17 @@ const HeaderOne = () => {
       const searchForClientMagazines = (searchTerm) => {
         // Look for magazine cards and carousel items that contain the search term
         const magazineElements = document.querySelectorAll('.magazine-card, .carousel-item, .post-container, .carousel-track .carousel-item');
-        
+
         magazineElements.forEach((element, index) => {
           const elementText = element.textContent.toLowerCase();
           const elementHTML = element.innerHTML.toLowerCase();
-          
+
           // Check if the search term appears in the magazine content
           if (elementText.includes(searchTerm) || elementHTML.includes(searchTerm)) {
             // Extract the magazine title/name
             const titleElement = element.querySelector('h1, h2, h3, h4, h5, h6, .title, .magazine-title');
             const magazineTitle = titleElement ? titleElement.textContent.trim() : elementText.substring(0, 50);
-            
+
             results.push({
               type: 'client-magazine',
               element: element,
@@ -471,12 +470,12 @@ const HeaderOne = () => {
       const searchMagazinesPage = (searchTerm) => {
         // Look for magazine grid items and post containers
         const magazineGridItems = document.querySelectorAll('[style*="grid"], .post-container, [class*="magazine"], [class*="post"]');
-        
+
         magazineGridItems.forEach((item, index) => {
           if (item.textContent.toLowerCase().includes(searchTerm)) {
             const imageElement = item.querySelector('img');
             const titleElement = item.querySelector('h1, h2, h3, h4, h5, h6, .title');
-            
+
             results.push({
               type: 'magazine-grid',
               element: item,
@@ -515,16 +514,16 @@ const HeaderOne = () => {
       const searchMagazineContent = (searchTerm) => {
         // Search in all elements that might contain magazine information
         const allElements = document.querySelectorAll('*');
-        
+
         allElements.forEach((element, index) => {
-          if (element.textContent && 
-              element.textContent.toLowerCase().includes(searchTerm) && 
-              element.textContent.trim().length > 0 && 
-              element.textContent.trim().length < 200) {
-            
+          if (element.textContent &&
+            element.textContent.toLowerCase().includes(searchTerm) &&
+            element.textContent.trim().length > 0 &&
+            element.textContent.trim().length < 200) {
+
             // Check if it's magazine-related content
             const isMagazineContent = element.closest('.magazine-card, .carousel-item, .post-container, .carousel-track, .magazine-hero, .carousel-container, .magazine-content, .magazine-section');
-            
+
             if (isMagazineContent) {
               results.push({
                 type: 'client-magazine',
@@ -585,15 +584,15 @@ const HeaderOne = () => {
       // Enhanced search for magazine content - look for any text containing the search term
       const allElements = document.querySelectorAll('*');
       allElements.forEach((element, index) => {
-        if (element.textContent && 
-            element.textContent.toLowerCase().includes(searchTerm) && 
-            element.textContent.trim().length > 0 && 
-            element.textContent.trim().length < 200 &&
-            !element.querySelector('*')) { // Only leaf nodes to avoid duplicates
-          
+        if (element.textContent &&
+          element.textContent.toLowerCase().includes(searchTerm) &&
+          element.textContent.trim().length > 0 &&
+          element.textContent.trim().length < 200 &&
+          !element.querySelector('*')) { // Only leaf nodes to avoid duplicates
+
           // Check if it's magazine-related content
           const isMagazineContent = element.closest('.carousel-item, .magazine-card, .carousel-track, .magazine-hero');
-          
+
           if (isMagazineContent) {
             results.push({
               type: 'magazine',
@@ -622,14 +621,14 @@ const HeaderOne = () => {
       if (results.length === 0) {
         // Try searching for partial matches
         const partialMatches = [];
-        
+
         // Search for partial matches in all text content
         const allTextElements = document.querySelectorAll('*');
         allTextElements.forEach((element, index) => {
-          if (element.textContent && 
-              element.textContent.toLowerCase().includes(searchTerm.substring(0, 3)) && 
-              element.textContent.trim().length > 0 && 
-              element.textContent.trim().length < 200) {
+          if (element.textContent &&
+            element.textContent.toLowerCase().includes(searchTerm.substring(0, 3)) &&
+            element.textContent.trim().length > 0 &&
+            element.textContent.trim().length < 200) {
             partialMatches.push({
               type: 'partial-match',
               element: element,
@@ -639,7 +638,7 @@ const HeaderOne = () => {
             });
           }
         });
-        
+
         // If still no results, add some default suggestions
         if (partialMatches.length === 0) {
           const defaultSuggestions = [
@@ -654,7 +653,7 @@ const HeaderOne = () => {
       }
 
       // Remove duplicates and sort by relevance
-      const uniqueResults = results.filter((result, index, self) => 
+      const uniqueResults = results.filter((result, index, self) =>
         index === self.findIndex(r => r.text === result.text)
       );
 
@@ -806,7 +805,7 @@ const HeaderOne = () => {
           </div>
         </div>
 
-        <nav className={`navbar bg-black ${isScrolled ? "scrolled" : ""}`}>
+        <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
           {/* Mobile Sidebar Backdrop inside same stacking context as rows */}
           {mobileMenuOpen && (
             <div className="drawer-backdrop" onClick={closeMobileMenu} />
@@ -817,7 +816,7 @@ const HeaderOne = () => {
               <div className="navbar-row-one">
                 {/* Left Side: Hamburger Menu Button */}
                 <div className="navbar-left-menu">
-                  <button 
+                  <button
                     className="mobile-menu-toggle menu-hamburger-btn"
                     onClick={toggleMobileMenu}
                     aria-label="Toggle menu"
@@ -836,7 +835,7 @@ const HeaderOne = () => {
                   <Link href="/" className="ec-logo-area">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/assets/logoblack.jpg"
+                      src="/assets/logowhite.png"
                       alt="Star Prime Logo"
                       style={{ width: "260px", height: "auto", objectFit: "contain" }}
                     />
@@ -849,9 +848,8 @@ const HeaderOne = () => {
                   <form
                     ref={searchFormRef}
                     onSubmit={handleSearch}
-                    className={`navbar-search ${
-                      searchshow ? "show-nav-search" : ""
-                    }`}
+                    className={`navbar-search ${searchshow ? "show-nav-search" : ""
+                      }`}
                   >
                     <div className="search-field">
                       <input
@@ -873,8 +871,8 @@ const HeaderOne = () => {
                         </div>
                         <div className="search-suggestions-list">
                           {searchResults.map((result, index) => (
-                            <div 
-                              key={result.id} 
+                            <div
+                              key={result.id}
                               className="search-suggestion-item"
                               data-type={result.type}
                               onClick={() => handleSuggestionClick(result)}
@@ -884,7 +882,7 @@ const HeaderOne = () => {
                                   <div className="suggestion-image">
                                     {/* eslint-disable-next-line @next/next/no-img-element */}
                                     <img
-                                      src={result.imageSrc} 
+                                      src={result.imageSrc}
                                       alt={result.imageAlt || result.text}
                                       width={40}
                                       height={40}
@@ -1054,7 +1052,7 @@ const HeaderOne = () => {
         </nav>
       </header>
       {/* Spacer to prevent content from hiding behind fixed header */}
-      <div className="navbar-fixed-spacer" />
+      <div className={`navbar-fixed-spacer ${isScrolled ? "scrolled" : ""}`} />
 
       <style jsx global>{`
         /* ── EC TOPBAR ── */
@@ -1086,24 +1084,33 @@ const HeaderOne = () => {
           text-decoration: none;
           transition: color 0.2s;
         }
-        .ec-topbar-link:hover { color: #C1121F; }
-        .ec-topbar-link--accent { color: #C1121F !important; font-weight: 600; }
+        .ec-topbar-link:hover { color: #7A0F23; }
+        .ec-topbar-link--accent { color: #7A0F23 !important; font-weight: 600; }
         .ec-topbar-date { color: #6B6560; }
 
         /* ── FIXED NAVBAR SPACER ── */
         .navbar-fixed-spacer {
           height: 170px; /* topbar + logo row + nav row */
+          transition: height 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @media (min-width: 992px) {
+          .navbar-fixed-spacer.scrolled {
+            height: 90px;
+          }
         }
         @media (max-width: 991px) {
           .navbar-fixed-spacer {
             height: 110px; /* topbar + logo row only on mobile */
           }
+          .navbar-fixed-spacer.scrolled {
+            height: 110px;
+          }
         }
 
         /* ── NAVBAR ── */
         .navbar {
-          background-color: #000000 !important;
-          border-bottom: 1px solid #1E2D3D;
+          background-color: #FAF8F5 !important;
+          border-bottom: 1px solid #E8E3DC;
         }
 
         .navbar .container {
@@ -1242,7 +1249,7 @@ const HeaderOne = () => {
 
         /* Subscribe CTA in nav */
         .ec-nav-subscribe-btn {
-          background: #C1121F;
+          background: #7A0F23;
           color: #fff !important;
           padding: 8px 20px;
           font-family: 'DM Sans', sans-serif;
@@ -1303,11 +1310,11 @@ const HeaderOne = () => {
             bottom: 0 !important;
             width: 280px !important;
             height: 100vh !important;
-            background: #000000 !important;
+            background: #FAF8F5 !important;
             z-index: 101 !important;
             padding: 40px 24px !important;
             border-top: none !important;
-            border-right: 1px solid #1E2D3D !important;
+            border-right: 1px solid #E8E3DC !important;
             box-shadow: 5px 0 30px rgba(0, 0, 0, 0.6) !important;
             overflow-y: auto !important;
             transform: translate3d(-100%, 0, 0) !important;
@@ -1377,7 +1384,7 @@ const HeaderOne = () => {
         }
 
         .navbar-nav-links .nav-link:hover {
-          color: #0F1923 !important;
+          color: #0f1923 !important;
           text-decoration: none;
         }
 
@@ -1494,7 +1501,7 @@ const HeaderOne = () => {
         }
 
         .nav-dropdown-item:hover {
-          color: #0F1923 !important;
+          color: #0f1923 !important;
           background: rgba(15, 25, 35, 0.08);
           text-decoration: none;
         }
@@ -1514,7 +1521,7 @@ const HeaderOne = () => {
 
         .navbar-extra-features button:hover,
         .navbar .nav-search-field-toggler:hover {
-          color: #0F1923 !important;
+          color: #0f1923 !important;
         }
 
         /* ── SEARCH BAR: Component-specific refinements ── */
@@ -1612,7 +1619,7 @@ const HeaderOne = () => {
         }
 
         .navbar-search .suggestion-type {
-          color: #C1121F !important;
+          color: #7A0F23 !important;
           font-size: 8px;
           font-weight: 700;
           letter-spacing: 0.5px;
@@ -1651,7 +1658,7 @@ const HeaderOne = () => {
         }
         
         .search-tips p {
-          color: #0F1923;
+          color: #0f1923;
           font-size: var(--type-caption);
           font-weight: bold;
           margin: 0 0 8px 0;
@@ -1672,7 +1679,7 @@ const HeaderOne = () => {
 
         /* Search Highlight */
         .search-highlight {
-          background-color: #0F1923;
+          background-color: #0f1923;
           color: #000;
           padding: 2px 4px;
           border-radius: 2px;
@@ -1827,7 +1834,7 @@ const HeaderOne = () => {
         
         .mobile-nav-link:hover {
           background: #111;
-          color: #0F1923;
+          color: #0f1923;
           padding-left: 30px;
         }
         
@@ -2061,8 +2068,8 @@ const HeaderOne = () => {
 
         .navbar,
         .main-navbar {
-          background: #000000 !important;
-          border-bottom: 1px solid #1E2D3D !important;
+          background: #FAF8F5 !important;
+          border-bottom: 1px solid #E8E3DC !important;
         }
 
         .navbar .nav-link,
@@ -2070,7 +2077,7 @@ const HeaderOne = () => {
         .navbar .nav-submenu-toggle,
         .navbar .nav-search-field-toggler,
         .navbar-extra-features button {
-          color: #D0C9BF !important;
+          color: #0f1923 !important;
         }
 
         .navbar .nav-link:hover,
@@ -2078,23 +2085,24 @@ const HeaderOne = () => {
         .navbar .nav-submenu-toggle:hover,
         .navbar .nav-search-field-toggler:hover,
         .navbar-extra-features button:hover {
-          color: #fff !important;
+          color: #7A0F23 !important;
         }
 
         .nav-dropdown-menu,
         .nav-submenu-menu,
         .search-suggestions-dropdown,
         .mobile-menu-dropdown {
-          background: #000000 !important;
-          border-color: #2E4057 !important;
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4) !important;
+          background: #FAF8F5 !important;
+          border-color: #E8E3DC !important;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
         }
 
         .navbar .navbar-search-field,
         .navbar .navbar-search-field:focus {
-          background: #111B24 !important;
-          background-color: #111B24 !important;
-          color: #FAF8F5 !important;
+          background: #F0EDE8 !important;
+          background-color: #F0EDE8 !important;
+          color: #0f1923 !important;
+          border: 1px solid #D0C9BF !important;
         }
 
         .navbar .navbar-search-field::placeholder,
@@ -2109,34 +2117,34 @@ const HeaderOne = () => {
         .mobile-nav-link,
         .mobile-nav-accordion,
         .mobile-nav-accordion-toggle {
-          border-color: #1E2D3D !important;
+          border-color: #E8E3DC !important;
         }
 
         .search-suggestions-header h4,
         .suggestion-text,
         .mobile-nav-link,
         .mobile-nav-accordion-toggle {
-          color: #FAF8F5 !important;
+          color: #0f1923 !important;
         }
 
         .search-suggestion-item:hover,
         .mobile-nav-link:hover {
-          background: #1E2D3D !important;
-          color: #fff !important;
+          background: #F5F2EE !important;
+          color: #7A0F23 !important;
         }
 
         .suggestion-image,
         .search-tips,
         .mobile-submenu {
-          background: #1E2D3D !important;
-          border-color: #2E4057 !important;
+          background: #FAF8F5 !important;
+          border-color: #E8E3DC !important;
         }
 
         .suggestion-link span {
           color: #9A9490 !important;
         }
 
-        .suggestion-type { color: #C1121F !important; }
+        .suggestion-type { color: #7A0F23 !important; }
 
         .hamburger {
           background: transparent !important;
@@ -2144,13 +2152,13 @@ const HeaderOne = () => {
 
         .hamburger span,
         .navbar .mobile-menu-toggle .hamburger span {
-          background: #D0C9BF !important;
-          background-color: #D0C9BF !important;
+          background: #0f1923 !important;
+          background-color: #0f1923 !important;
         }
 
         .navbar-nav-links-centered .nav-link,
         .navbar-nav-links .nav-link {
-          color: #D0C9BF !important;
+          color: #0f1923 !important;
           font-family: 'DM Sans', system-ui, -apple-system, sans-serif !important;
           font-size: 13px !important;
           font-weight: 600 !important;
@@ -2173,8 +2181,8 @@ const HeaderOne = () => {
 
         .navbar-nav-links-centered .nav-link:hover,
         .navbar-nav-links .nav-link:hover {
-          color: #FAF8F5 !important;
-          border-bottom-color: #C1121F !important;
+          color: #7A0F23 !important;
+          border-bottom-color: #7A0F23 !important;
           text-decoration: none !important;
         }
 

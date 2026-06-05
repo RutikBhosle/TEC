@@ -48,31 +48,7 @@ const ComimgSoon = () => {
                                         {/* End of .subscription-form */}
                                     </div>
                                     {/* End of .subscription-form-wrapper */}
-                                    <div className="contact-social-share m-t-xs-20">
-                                        <div className="axil-social-title h5">Follow Us</div>
-                                        <ul className="social-share social-share__with-bg">
-                                            <li>
-                                                <a href={SocialLink.fb.url}>
-                                                <i className={SocialLink.fb.icon} />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href={SocialLink.twitter.url}>
-                                                <i className={SocialLink.twitter.icon} />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href={SocialLink.yt.url}>
-                                                <i className={SocialLink.yt.icon} />
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href={SocialLink.linked.url}>
-                                                <i className={SocialLink.linked.icon} />
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>

@@ -32,7 +32,7 @@ const FAQSection = () => {
         <div className="faq-container">
           <h1 className="faq-title">Visionaries, stories, and how to join</h1>
           <p className="faq-subtitle">
-            Wondering how to explore our animated magazine, discover inspiring leaders, or share your own story? 
+            Wondering how to explore our animated magazine, discover inspiring leaders, or share your own story?
             Find all the details you need below—let&apos;s make your journey unforgettable.
           </p>
 
@@ -100,7 +100,7 @@ const FAQSection = () => {
           transform: translateX(-50%);
           width: 80px;
           height: 3px;
-          background: linear-gradient(90deg, #0F1923, rgba(15, 25, 35, 0.4), #0F1923);
+          background: linear-gradient(90deg, #0f1923, rgba(15, 25, 35, 0.4), #0f1923);
           border-radius: 2px;
         }
 
@@ -227,7 +227,7 @@ const FAQSection = () => {
         }
 
         .faq-item:focus-within {
-          outline: 2px solid #0F1923;
+          outline: 2px solid #0f1923;
           outline-offset: 2px;
         }
       `}</style>

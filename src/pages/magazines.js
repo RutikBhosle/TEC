@@ -36,7 +36,7 @@ const Magazines = () => {
   if (isLoading) return <Loader />;
   if (error)
     return (
-      <div style={{ color: "#C1121F", textAlign: "center", background: "#FAF8F5", padding: "3rem 1rem", fontFamily: "var(--font-sans)" }}>
+      <div style={{ color: "#7A0F23", textAlign: "center", background: "#FAF8F5", padding: "3rem 1rem", fontFamily: "var(--font-sans)" }}>
         Error fetching magazines. Please try again later.
       </div>
     );
@@ -44,8 +44,8 @@ const Magazines = () => {
 
   const filteredMagazines = searchValue
     ? data.filter((mag) =>
-        (mag.title || "").toLowerCase().includes(searchValue.toLowerCase())
-      )
+      (mag.title || "").toLowerCase().includes(searchValue.toLowerCase())
+    )
     : data;
 
   return (
@@ -63,7 +63,7 @@ const Magazines = () => {
             width: 100%;
             min-height: 100vh;
             background: #FAF8F5;
-            color: #0F1923;
+            color: #0f1923;
             padding-bottom: 5rem;
           }
 
@@ -83,7 +83,7 @@ const Magazines = () => {
             font-size: 0.85rem;
             font-weight: 700;
             letter-spacing: 0.18em;
-            color: var(--cardinal, #C1121F);
+            color: var(--cardinal, #7A0F23);
             text-transform: uppercase;
             margin-bottom: 0.75rem;
           }
@@ -93,7 +93,7 @@ const Magazines = () => {
             font-size: clamp(2.5rem, 5vw, 3.75rem);
             font-weight: 800;
             line-height: 1.15;
-            color: #0F1923;
+            color: #0f1923;
             margin: 0 0 1.25rem;
           }
 
@@ -109,7 +109,7 @@ const Magazines = () => {
           .hero-divider {
             width: 80px;
             height: 3px;
-            background: var(--cardinal, #C1121F);
+            background: var(--cardinal, #7A0F23);
             margin-top: 1.5rem;
             border-radius: 999px;
           }
@@ -130,7 +130,7 @@ const Magazines = () => {
           .magazines-search {
             width: 100%;
             background: #FFFFFF;
-            color: #0F1923;
+            color: #0f1923;
             border: 1.5px solid rgba(15, 25, 35, 0.1);
             outline: none;
             padding: 14px 20px 14px 45px;
@@ -142,7 +142,7 @@ const Magazines = () => {
           }
 
           .magazines-search:focus {
-            border-color: var(--cardinal, #C1121F);
+            border-color: var(--cardinal, #7A0F23);
             box-shadow: 0 8px 25px rgba(193, 18, 31, 0.08);
             transform: translateY(-1px);
           }
@@ -161,7 +161,7 @@ const Magazines = () => {
           }
 
           .magazines-search:focus + .search-icon {
-            color: var(--cardinal, #C1121F);
+            color: var(--cardinal, #7A0F23);
           }
 
           /* Magazine Grid */

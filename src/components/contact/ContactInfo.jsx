@@ -49,7 +49,7 @@ const ContactInfo = () => {
             <span className="desk-category">Corporate Office</span>
             <h4 className="desk-name">Headquarters</h4>
             <p className="desk-desc">
-              <strong>Home Branch:</strong> Office 328B, Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune
+              Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune
             </p>
           </div>
         </div>
@@ -64,27 +64,7 @@ const ContactInfo = () => {
         <p className="hotline-note">Available 24/7 for urgent press & media inquiries.</p>
       </div>
 
-      {/* Social Follow */}
-      <div className="social-follow">
-        <span className="social-kicker">Follow Star Prime</span>
-        <ul className="social-links">
-          <li>
-            <a href={SocialLink.yt.url} target="_blank" rel="noopener noreferrer" className="social-circle">
-              <i className={SocialLink.yt.icon} />
-            </a>
-          </li>
-          <li>
-            <a href={SocialLink.instagram.url} target="_blank" rel="noopener noreferrer" className="social-circle">
-              <i className={SocialLink.instagram.icon} />
-            </a>
-          </li>
-          <li>
-            <a href={SocialLink.linked.url} target="_blank" rel="noopener noreferrer" className="social-circle">
-              <i className={SocialLink.linked.icon} />
-            </a>
-          </li>
-        </ul>
-      </div>
+
 
       <style jsx>{`
         .liaison-directory {
@@ -93,7 +73,7 @@ const ContactInfo = () => {
           gap: 2.75rem;
           width: 100%;
           padding: 0.5rem 0;
-          color: #0F1923;
+          color: #0f1923;
         }
 
         .directory-kicker {
@@ -102,7 +82,7 @@ const ContactInfo = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           display: block;
           margin-bottom: 0.5rem;
         }
@@ -112,7 +92,7 @@ const ContactInfo = () => {
           font-size: 2.35rem;
           font-weight: 800;
           line-height: 1.2;
-          color: #0F1923;
+          color: #0f1923;
           margin: 0 0 1rem;
           letter-spacing: -0.01em;
         }
@@ -147,7 +127,7 @@ const ContactInfo = () => {
         }
 
         .desk-item:hover .desk-marker {
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           opacity: 1;
         }
 
@@ -166,7 +146,7 @@ const ContactInfo = () => {
         }
 
         .desk-item:hover .desk-marker::before {
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           opacity: 1;
         }
 
@@ -180,7 +160,7 @@ const ContactInfo = () => {
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           display: block;
           margin-bottom: 0.35rem;
         }
@@ -191,7 +171,7 @@ const ContactInfo = () => {
           font-weight: 700;
           line-height: 1.3;
           margin: 0 0 0.5rem;
-          color: #0F1923;
+          color: #0f1923;
         }
 
         .desk-desc {
@@ -206,7 +186,7 @@ const ContactInfo = () => {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           font-size: 1.05rem;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           text-decoration: none;
           transition: all 0.3s ease;
           border-bottom: 1.5px dashed rgba(15, 25, 35, 0.15);
@@ -215,13 +195,13 @@ const ContactInfo = () => {
         }
 
         .desk-email:hover {
-          color: var(--cardinal, #C1121F);
-          border-bottom-color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
+          border-bottom-color: var(--cardinal, #7A0F23);
         }
 
         /* Hotline Panel */
         .hotline-panel {
-          background: #0F1923;
+          background: #0f1923;
           color: #FFFFFF;
           border-radius: 12px;
           padding: 1.75rem;
@@ -240,7 +220,7 @@ const ContactInfo = () => {
           font-size: 0.85rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           display: block;
           margin-bottom: 0.5rem;
@@ -268,55 +248,7 @@ const ContactInfo = () => {
           margin: 0;
         }
 
-        /* Social Follow */
-        .social-follow {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
 
-        .social-kicker {
-          font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.9rem;
-          font-weight: 700;
-          letter-spacing: 0.15em;
-          text-transform: uppercase;
-          color: #718096;
-        }
-
-        .social-links {
-          display: flex;
-          gap: 0.85rem;
-          padding: 0;
-          margin: 0;
-          list-style: none;
-        }
-
-        .social-circle {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 44px;
-          height: 44px;
-          border-radius: 999px;
-          background: #FFFFFF;
-          border: 1.5px solid rgba(15, 25, 35, 0.08);
-          color: #4a5568;
-          transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-          text-decoration: none;
-        }
-
-        .social-circle:hover {
-          background: var(--cardinal, #C1121F);
-          border-color: var(--cardinal, #C1121F);
-          color: #FFFFFF;
-          transform: translateY(-4px);
-          box-shadow: 0 6px 15px rgba(193, 18, 31, 0.25);
-        }
-
-        .social-circle i {
-          font-size: 1rem;
-        }
 
         /* Responsive spacing */
         @media (max-width: 768px) {

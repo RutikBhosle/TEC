@@ -137,7 +137,7 @@ const MasterTalks = () => {
           justify-content: space-between;
           margin-bottom: 32px;
           padding-bottom: 12px;
-          border-bottom: 2px solid #0F1923;
+          border-bottom: 2px solid #0f1923;
         }
 
         .ec-section-label {
@@ -146,7 +146,7 @@ const MasterTalks = () => {
           font-weight: 700;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 6px;
         }
 
@@ -154,7 +154,7 @@ const MasterTalks = () => {
           font-family: 'Playfair Display', serif;
           font-size: 24px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           letter-spacing: -0.01em;
           margin: 0;
         }
@@ -165,9 +165,9 @@ const MasterTalks = () => {
           font-weight: 600;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           text-decoration: none;
-          border-bottom: 1px solid #C1121F;
+          border-bottom: 1px solid #7A0F23;
           padding-bottom: 1px;
           transition: color 0.25s ease, border-color 0.25s ease;
           white-space: nowrap;
@@ -226,7 +226,7 @@ const MasterTalks = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 10px;
           display: block;
         }
@@ -235,13 +235,13 @@ const MasterTalks = () => {
           font-family: 'Playfair Display', serif;
           font-size: clamp(28px, 2.5vw, 32px) !important;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.25;
           margin: 0 0 10px;
           transition: color 0.25s ease;
         }
         .ec-talks-featured:hover .ec-talks-featured-title {
-          color: #C1121F;
+          color: #7A0F23;
         }
 
         .ec-talks-featured-excerpt {
@@ -271,9 +271,9 @@ const MasterTalks = () => {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           text-decoration: none;
-          border-bottom: 1px solid #C1121F;
+          border-bottom: 1px solid #7A0F23;
           padding-bottom: 2px;
           width: fit-content;
           transition: color 0.25s ease, border-color 0.25s ease;
@@ -316,8 +316,8 @@ const MasterTalks = () => {
           transition: color 0.25s ease, border-top-color 0.25s ease;
         }
         .ec-talk-item:hover .ec-talk-num {
-          color: #C1121F;
-          border-top-color: #C1121F;
+          color: #7A0F23;
+          border-top-color: #7A0F23;
         }
 
         .ec-talk-tag {
@@ -326,7 +326,7 @@ const MasterTalks = () => {
           font-weight: 700;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 8px;
           display: block;
         }
@@ -335,14 +335,14 @@ const MasterTalks = () => {
           font-family: 'Libre Baskerville', serif;
           font-size: 13.5px;
           font-weight: 400;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.45;
           margin-bottom: 8px;
           transition: color 0.2s ease;
           flex: 1;
         }
         .ec-talk-item:hover .ec-talk-title {
-          color: #C1121F;
+          color: #7A0F23;
         }
 
         .ec-talk-excerpt {

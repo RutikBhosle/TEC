@@ -28,9 +28,8 @@ const fetchPostsByCategory = async (category, page) => {
       'title': categories[0]->title,
       'slug': categories[0]->slug.current
     }
-  } | order(publishedAt desc)[${page * POSTS_PER_PAGE}...${
-    (page + 1) * POSTS_PER_PAGE
-  }]`;
+  } | order(publishedAt desc)[${page * POSTS_PER_PAGE}...${(page + 1) * POSTS_PER_PAGE
+    }]`;
 
   const posts = await client.fetch(query);
   return posts;
@@ -71,7 +70,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
   }, [page]);
 
   const totalPages = totalPosts ? Math.ceil(totalPosts / POSTS_PER_PAGE) : 1;
-  
+
   const handlePageClick = (pageNumber) => {
     setPage(pageNumber);
   };
@@ -91,7 +90,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
         className="axil-video-posts"
         style={{
           background: '#FAF8F5',
-          color: '#0F1923',
+          color: '#0f1923',
           paddingTop: '2rem',
           paddingBottom: '0',
           fontFamily: 'var(--secondary-font)',
@@ -136,7 +135,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       position: 'relative',
-                      color: page === pageNumber - 1 ? '#0F1923' : '#5e6876',
+                      color: page === pageNumber - 1 ? '#0f1923' : '#5e6876',
                       fontSize: 'var(--type-body-lg)',
                       fontFamily: 'var(--secondary-font)',
                       fontWeight: page === pageNumber - 1 ? 'bold' : 'normal',
@@ -144,13 +143,13 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                     }}
                   >
                     <span style={{ lineHeight: '1.2', display: 'block', marginBottom: '0' }}>{pageNumber}</span>
-                    <span 
+                    <span
                       className="pagination-underline"
                       style={{
                         marginTop: '6px',
                         width: '30px',
                         height: '3px',
-                        backgroundColor: page === pageNumber - 1 ? '#0F1923' : '#8b97a3',
+                        backgroundColor: page === pageNumber - 1 ? '#0f1923' : '#8b97a3',
                         display: 'block',
                         visibility: 'visible',
                         opacity: 1,
@@ -201,7 +200,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
         .axil-video-posts .section-title .axil-title {
           text-align: left !important;
           margin-bottom: 0 !important;
-          color: #0F1923 !important;
+          color: #0f1923 !important;
         }
         
         .axil-video-posts .section-title .btn-link {

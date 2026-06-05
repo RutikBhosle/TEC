@@ -29,7 +29,10 @@ const HeadMetaDynamic = ({ metaData }) => {
           ? `${metaData.title}`
           : "Star Prime: A Business Magazine for Inspiring Entrepreneur Stories"}
       </title>
-      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+      <link rel="shortcut icon" href="/assets/emblem.png?v=2" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/emblem.png?v=2" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/emblem.png?v=2" />
+      <link rel="apple-touch-icon" href="/assets/emblem.png?v=2" />
     </Head>
   );
 };

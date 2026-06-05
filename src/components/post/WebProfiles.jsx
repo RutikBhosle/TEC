@@ -40,25 +40,26 @@ const WebProfiles = () => {
   }, [data]);
 
   if (isLoading) return <Loader />;
-  if (error) return <div style={{ color: "#fff", background: "#0F1923", padding: "40px" }}>Error fetching posts</div>;
+  if (error) return <div style={{ color: "#fff", background: "#0f1923", padding: "40px" }}>Error fetching posts</div>;
   if (!data?.length) return null;
 
   const currentMagazine = data[currentIndex] || data[0];
 
   const formatTitle = (title) => {
     if (!title) return "";
-    const separators = [" — ", " - ", " : ", ": "];
-    for (const sep of separators) {
-      if (title.includes(sep)) {
-        const parts = title.split(sep);
-        const first = parts[0].trim();
-        const rest = parts.slice(1).join(sep).trim();
-        return (
-          <>
-            {first} — <span className="ec-italic-title" style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{rest}</span>
-          </>
-        );
-      }
+    const match = title.match(/\s*(—|–|:|―)\s*|\s+-\s+/);
+    if (match) {
+      const separator = match[0];
+      const index = title.indexOf(separator);
+      const first = title.substring(0, index).trim();
+      const rest = title.substring(index + separator.length).trim();
+      return (
+        <>
+          {first} —
+          <br />
+          <span className="ec-italic-title" style={{ color: "#6B6560", fontStyle: "italic", fontWeight: 400 }}>{rest}</span>
+        </>
+      );
     }
     return title;
   };
@@ -76,7 +77,7 @@ const WebProfiles = () => {
       <section className="ec-profiles">
         <div className="ec-profiles-container">
           <div className="ec-profiles-layout">
-            
+
             {/* LEFT COLUMN: MAGAZINE COVER MOCKUP */}
             <div className="ec-magazine-cover-side">
               <div className="ec-magazine-cover-wrapper">
@@ -136,7 +137,7 @@ const WebProfiles = () => {
               </h2>
 
               <p className="ec-magazine-description animate-slideUp">
-                {currentMagazine.description || 
+                {currentMagazine.description ||
                   "This landmark issue explores their philosophy, their impact on learning systems, and why education remains the most powerful lever for societal transformation."}
               </p>
 
@@ -178,10 +179,11 @@ const WebProfiles = () => {
 
       <style jsx>{`
         .ec-profiles {
-          background: #0F1923;
+          background: #FAF8F5;
           padding: 40px 0 60px;
-          color: #FAF8F5;
+          color: #0f1923;
           overflow: hidden;
+          border-bottom: 1px solid #E8E3DC;
         }
 
         .ec-profiles-container {
@@ -215,7 +217,7 @@ const WebProfiles = () => {
           position: absolute;
           inset: 0;
           transform: translate(24px, 24px);
-          background: #C1121F;
+          background: #7A0F23;
           z-index: 1;
         }
 
@@ -223,15 +225,15 @@ const WebProfiles = () => {
           position: relative;
           width: 100%;
           height: 100%;
-          background: #17222E;
+          background: #E8E3DC;
           z-index: 2;
           overflow: hidden;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          border: 1px solid rgba(250, 248, 245, 0.05);
+          border: 1px solid #D0C9BF;
         }
 
         .ec-cover-img {
@@ -244,7 +246,7 @@ const WebProfiles = () => {
         .ec-cover-img-placeholder {
           width: 100%;
           height: 100%;
-          background: #17222E;
+          background: #E8E3DC;
         }
 
         /* RIGHT SIDE: MAGAZINE DETAILS */
@@ -265,7 +267,7 @@ const WebProfiles = () => {
           font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.25em;
-          color: #C1121F;
+          color: #7A0F23;
           text-transform: uppercase;
           white-space: nowrap;
         }
@@ -273,7 +275,7 @@ const WebProfiles = () => {
         .ec-magazine-header-line {
           height: 1px;
           flex-grow: 1;
-          background: rgba(250, 248, 245, 0.15);
+          background: rgba(15, 25, 35, 0.15);
         }
 
         /* NAV BUTTONS */
@@ -285,8 +287,8 @@ const WebProfiles = () => {
 
         .ec-nav-btn {
           background: transparent;
-          border: 1px solid rgba(250, 248, 245, 0.15);
-          color: #FAF8F5;
+          border: 1px solid rgba(15, 25, 35, 0.15);
+          color: #0f1923;
           cursor: pointer;
           width: 34px;
           height: 34px;
@@ -298,15 +300,16 @@ const WebProfiles = () => {
         }
 
         .ec-nav-btn:hover {
-          background: #C1121F;
-          border-color: #C1121F;
+          background: #7A0F23;
+          border-color: #7A0F23;
+          color: #FAF8F5;
         }
 
         .ec-magazine-title {
           font-family: 'Playfair Display', serif;
           font-size: clamp(24px, 2.2vw, 30px) !important;
           font-weight: 700;
-          color: #FAF8F5;
+          color: #0f1923;
           line-height: 1.25;
           margin: 0 0 24px 0;
           letter-spacing: -0.01em;
@@ -316,20 +319,20 @@ const WebProfiles = () => {
           font-family: 'Playfair Display', serif;
           font-style: italic;
           font-weight: 400;
-          color: #D0C9BF;
+          color: #5A544F;
         }
 
         .ec-magazine-description {
           font-family: 'DM Sans', sans-serif;
           font-size: 15px;
-          color: #D0C9BF;
+          color: #5A544F;
           line-height: 1.75;
           margin: 0 0 32px 0;
         }
 
         .ec-magazine-divider {
           height: 1px;
-          background: rgba(250, 248, 245, 0.1);
+          background: rgba(15, 25, 35, 0.1);
           margin-bottom: 32px;
         }
 
@@ -343,7 +346,7 @@ const WebProfiles = () => {
         }
 
         .ec-stat-col {
-          border-left: 1px solid rgba(250, 248, 245, 0.15);
+          border-left: 1px solid rgba(15, 25, 35, 0.15);
           padding-left: 20px;
         }
 
@@ -356,7 +359,7 @@ const WebProfiles = () => {
           font-family: 'Playfair Display', serif;
           font-size: 32px;
           font-weight: 900;
-          color: #C1121F;
+          color: #7A0F23;
           line-height: 1;
           margin-bottom: 8px;
         }
@@ -366,7 +369,7 @@ const WebProfiles = () => {
           font-size: 9px;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: rgba(250, 248, 245, 0.4);
+          color: rgba(15, 25, 35, 0.45);
           text-transform: uppercase;
         }
 
@@ -379,7 +382,7 @@ const WebProfiles = () => {
 
         :global(.ec-btn-primary) {
           display: inline-block;
-          background: #C1121F;
+          background: #7A0F23;
           color: #FAF8F5;
           font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
           font-size: 11px;
@@ -402,7 +405,7 @@ const WebProfiles = () => {
         :global(.ec-btn-secondary) {
           display: inline-block;
           background: transparent;
-          color: #FAF8F5;
+          color: #0f1923;
           font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
           font-size: 11px;
           font-weight: 600;
@@ -410,15 +413,15 @@ const WebProfiles = () => {
           text-transform: uppercase;
           text-decoration: none;
           padding: 9px 24px;
-          border: 1px solid rgba(250, 248, 245, 0.2);
+          border: 1px solid rgba(15, 25, 35, 0.2);
           transition: all 0.2s ease;
           cursor: pointer;
-          opacity: 0.72;
+          opacity: 0.8;
         }
         :global(.ec-btn-secondary:hover) {
-          border-color: #FAF8F5;
-          color: #FAF8F5 !important;
-          background: rgba(250, 248, 245, 0.05);
+          border-color: #0f1923;
+          color: #0f1923 !important;
+          background: rgba(15, 25, 35, 0.05);
           opacity: 1;
         }
 
@@ -489,7 +492,7 @@ const WebProfiles = () => {
           .ec-stat-col {
             border-left: none;
             padding-left: 0;
-            border-bottom: 1px solid rgba(250, 248, 245, 0.1);
+            border-bottom: 1px solid rgba(15, 25, 35, 0.1);
             padding-bottom: 12px;
           }
           .ec-stat-col:last-child {

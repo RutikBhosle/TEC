@@ -36,14 +36,14 @@ const ContactPage = () => {
       <section className="contact-hero animate-fade">
         <div className="contact-hero-shell">
           <div className="contact-hero-grid">
-            
+
             {/* LEFT COLUMN: HERO COPY */}
             <div className="contact-hero__left">
               <span className="contact-hero__eyebrow">Get In Touch</span>
               <h1 className="contact-hero__title">Connect With Star Prime</h1>
               <p className="contact-hero__desc">
                 Welcome to Star Prime, where we spotlight trailblazers
-                shaping the global business landscape. Whether you have a visionary story to share, 
+                shaping the global business landscape. Whether you have a visionary story to share,
                 a collaborative proposal, or an advertising inquiry, our editors want to hear from you.
               </p>
               <div className="contact-hero__divider" />
@@ -104,7 +104,7 @@ const ContactPage = () => {
             <h2 className="location-title">Corporate Presence</h2>
             <div className="location-divider" />
           </header>
-          
+
           <div className="location-grid location-grid--single">
             <div id="germany-map" className="location-map-item">
               <div className="location-map-wrapper">
@@ -116,7 +116,7 @@ const ContactPage = () => {
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Office 328B, Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune"
+                  title="Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune"
                 />
               </div>
             </div>
@@ -129,7 +129,7 @@ const ContactPage = () => {
       <style jsx>{`
         .contact-page {
           background: #FAF8F5;
-          color: #0F1923;
+          color: #0f1923;
           min-height: 100vh;
           font-family: var(--font-sans, 'DM Sans', sans-serif);
         }
@@ -144,7 +144,7 @@ const ContactPage = () => {
 
         /* Immersive Dark Hero Cover with Asymmetric Split */
         .contact-hero {
-          background: #0F1923;
+          background: #0f1923;
           color: #FFFFFF;
           padding: 6.5rem 0;
           position: relative;
@@ -178,7 +178,7 @@ const ContactPage = () => {
           font-size: 0.85rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           margin-bottom: 0.75rem;
         }
@@ -204,7 +204,7 @@ const ContactPage = () => {
         .contact-hero__divider {
           width: 80px;
           height: 3px;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           margin-bottom: 2.25rem;
           border-radius: 999px;
         }
@@ -229,7 +229,7 @@ const ContactPage = () => {
         }
 
         .contact-hero__actions :global(.btn-primary) {
-          background-color: var(--cardinal, #C1121F) !important;
+          background-color: var(--cardinal, #7A0F23) !important;
           border: none !important;
           color: #FFFFFF !important;
           box-shadow: 0 4px 15px rgba(193, 18, 31, 0.25) !important;
@@ -237,7 +237,7 @@ const ContactPage = () => {
 
         .contact-hero__actions :global(.btn-primary:hover) {
           background-color: #FFFFFF !important;
-          color: var(--ink, #0F1923) !important;
+          color: var(--ink, #0f1923) !important;
           transform: translateY(-2px) !important;
           box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
         }
@@ -251,7 +251,7 @@ const ContactPage = () => {
         .contact-hero__actions :global(.btn-secondary:hover) {
           background: #FFFFFF !important;
           border-color: #FFFFFF !important;
-          color: var(--ink, #0F1923) !important;
+          color: var(--ink, #0f1923) !important;
           transform: translateY(-2px) !important;
           box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
         }
@@ -321,7 +321,7 @@ const ContactPage = () => {
           font-size: 0.7rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
         }
 
@@ -357,7 +357,7 @@ const ContactPage = () => {
           font-size: 0.8rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           margin-bottom: 0.5rem;
         }
@@ -366,7 +366,7 @@ const ContactPage = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 2rem;
           font-weight: 800;
-          color: #0F1923;
+          color: #0f1923;
           margin: 0;
           letter-spacing: -0.01em;
         }
@@ -374,7 +374,7 @@ const ContactPage = () => {
         .location-divider {
           width: 50px;
           height: 2px;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           margin-top: 1rem;
         }
 

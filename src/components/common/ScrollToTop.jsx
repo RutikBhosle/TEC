@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
+
   // Debug: Show button immediately for testing
   useEffect(() => {
     setIsVisible(true);
@@ -52,7 +52,7 @@ const ScrollToTop = () => {
           right: 30px;
           width: 50px;
           height: 50px;
-          background: #0F1923;
+          background: #0f1923;
           color: #000;
           border: none;
           border-radius: 50%;
@@ -71,7 +71,7 @@ const ScrollToTop = () => {
         }
 
         .scroll-to-top:hover {
-          background: #0F1923;
+          background: #0f1923;
           transform: translateY(-3px);
           box-shadow: 0 6px 25px rgba(15, 25, 35, 0.4);
         }

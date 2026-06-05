@@ -15,15 +15,6 @@ const SharedSidebarWidgets = ({
       title: "Subscribe To Our Weekly Newsletter",
       content: <WidgetNewsletter />,
     },
-    ...(showSocialShare
-      ? [
-          {
-            key: "social-share",
-            title: "Social Share",
-            content: <WidgetSocialShare />,
-          },
-        ]
-      : []),
     {
       key: "categories",
       title: "Categories",

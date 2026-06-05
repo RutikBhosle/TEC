@@ -61,11 +61,11 @@ const ContactForm = () => {
       <form className="correspondence-form" ref={form} onSubmit={sendEmail}>
         <div className="letter-input-group">
           <span className="letter-label">Your Full Name</span>
-          <input 
-            type="text" 
-            name="contact-name" 
-            placeholder="E.g. Alexander Hamilton" 
-            required 
+          <input
+            type="text"
+            name="contact-name"
+            placeholder="E.g. Alexander Hamilton"
+            required
             autoComplete="name"
           />
           <div className="input-focus-line" />
@@ -73,11 +73,11 @@ const ContactForm = () => {
 
         <div className="letter-input-group">
           <span className="letter-label">Your Phone Number</span>
-          <input 
-            type="tel" 
-            name="contact-phone" 
-            placeholder="E.g. +1 (614) 602-2959" 
-            required 
+          <input
+            type="tel"
+            name="contact-phone"
+            placeholder="E.g. +1 (614) 602-2959"
+            required
             autoComplete="tel"
           />
           <div className="input-focus-line" />
@@ -85,11 +85,11 @@ const ContactForm = () => {
 
         <div className="letter-input-group">
           <span className="letter-label">Your Email Address</span>
-          <input 
-            type="email" 
-            name="contact-email" 
-            placeholder="E.g. alexander@example.com" 
-            required 
+          <input
+            type="email"
+            name="contact-email"
+            placeholder="E.g. alexander@example.com"
+            required
             autoComplete="email"
           />
           <div className="input-focus-line" />
@@ -97,11 +97,11 @@ const ContactForm = () => {
 
         <div className="letter-input-group message-group">
           <span className="letter-label">Your Message</span>
-          <textarea 
-            name="contact-message" 
-            rows={5} 
-            placeholder="Type your correspondence here..." 
-            required 
+          <textarea
+            name="contact-message"
+            rows={5}
+            placeholder="Type your correspondence here..."
+            required
           />
           <div className="notebook-lines">
             <div className="notebook-line" />
@@ -129,7 +129,7 @@ const ContactForm = () => {
           box-shadow: 0 12px 40px rgba(15, 25, 35, 0.04);
           width: 100%;
           position: relative;
-          color: #0F1923;
+          color: #0f1923;
         }
 
         .correspondence-header {
@@ -141,7 +141,7 @@ const ContactForm = () => {
           font-size: 0.85rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           display: block;
           margin-bottom: 0.5rem;
@@ -153,7 +153,7 @@ const ContactForm = () => {
           font-weight: 800;
           line-height: 1.3;
           margin: 0 0 0.75rem 0;
-          color: #0F1923;
+          color: #0f1923;
           letter-spacing: -0.01em;
         }
 
@@ -195,7 +195,7 @@ const ContactForm = () => {
           border-bottom: 1.5px solid rgba(15, 25, 35, 0.08) !important;
           padding: 10px 0 !important;
           font-size: 1.15rem;
-          color: #0F1923 !important;
+          color: #0f1923 !important;
           outline: none !important;
           transition: all 0.3s ease !important;
           border-radius: 0 !important;
@@ -211,7 +211,7 @@ const ContactForm = () => {
           left: 0;
           right: 0;
           height: 1.5px;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           transform: scaleX(0);
           transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
           transform-origin: left;
@@ -224,7 +224,7 @@ const ContactForm = () => {
 
         .letter-input-group input:focus ~ .letter-label,
         .letter-input-group textarea:focus ~ .letter-label {
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
         }
 
         /* Message area designed like a notebook page */
@@ -240,7 +240,7 @@ const ContactForm = () => {
           padding: 8px 0 !important;
           font-size: 1.15rem;
           line-height: 2.2 !important;
-          color: #0F1923 !important;
+          color: #0f1923 !important;
           outline: none !important;
           resize: none;
           z-index: 2;
@@ -273,7 +273,7 @@ const ContactForm = () => {
         /* Submit Button */
         .btn-submit-correspondence {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          background: var(--cardinal, #C1121F) !important;
+          background: var(--cardinal, #7A0F23) !important;
           color: #FFFFFF !important;
           font-size: 1rem !important;
           font-weight: 700 !important;
@@ -291,7 +291,7 @@ const ContactForm = () => {
         }
 
         .btn-submit-correspondence:hover {
-          background: #0F1923 !important;
+          background: #0f1923 !important;
           transform: translateY(-2px);
           box-shadow: 0 8px 25px rgba(15, 25, 35, 0.15) !important;
         }
