@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../styles/style.css";
 import "../styles/magazines.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ScrollToTop from "../components/common/ScrollToTop";
 import Script from "next/script";
 import { Inter, Merriweather } from "next/font/google";
@@ -71,9 +70,6 @@ function MyApp({ Component, pageProps }) {
         />
         <Component {...pageProps} />
         <ScrollToTop />
-        {process.env.NODE_ENV === "development" ? (
-          <ReactQueryDevtools initialIsOpen={false} />
-        ) : null}
       </QueryClientProvider>
     </div>
   );

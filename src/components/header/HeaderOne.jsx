@@ -1432,7 +1432,7 @@ const HeaderOne = () => {
           min-width: 180px;
           background: #000;
           border: 1px solid #333;
-          border-radius: 10px;
+          border-radius: 0px;
           padding: 8px;
           display: none;
           flex-direction: column;
@@ -1477,7 +1477,7 @@ const HeaderOne = () => {
           min-width: 200px;
           background: #000;
           border: 1px solid #333;
-          border-radius: 10px;
+          border-radius: 0px;
           padding: 8px;
           display: none;
           flex-direction: column;
@@ -1494,7 +1494,7 @@ const HeaderOne = () => {
           font-size: var(--type-small) !important;
           font-weight: 500;
           padding: 10px 12px;
-          border-radius: 8px;
+          border-radius: 0px;
           text-decoration: none;
           transition: all 0.2s ease;
           white-space: nowrap;
@@ -1547,12 +1547,12 @@ const HeaderOne = () => {
           top: calc(100% + 12px);
           right: 0;
           width: 340px;
-          background: #000000 !important;
-          border: 1px solid #2E4057 !important;
+          background: #FAF8F5 !important;
+          border: 1px solid #E8E3DC !important;
           border-radius: 8px;
           padding: 8px;
           z-index: 10000;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
           max-height: 280px;
           overflow-y: auto;
           scrollbar-width: none;
@@ -1565,11 +1565,11 @@ const HeaderOne = () => {
 
         .navbar-search .search-suggestions-header {
           padding: 6px 4px;
-          border-bottom: 1px solid #1E2D3D;
+          border-bottom: 1px solid #E8E3DC;
         }
 
         .navbar-search .search-suggestions-header h4 {
-          color: #D0C9BF;
+          color: #9A9490;
           font-size: 10px;
           text-transform: uppercase;
           letter-spacing: 0.05em;
@@ -1578,14 +1578,14 @@ const HeaderOne = () => {
 
         .navbar-search .search-suggestion-item {
           padding: 8px 4px;
-          border-bottom: 1px solid #1E2D3D;
+          border-bottom: 1px solid #E8E3DC;
           cursor: pointer;
           transition: all 0.2s ease;
           border-radius: 6px;
         }
 
         .navbar-search .search-suggestion-item:hover {
-          background: #1E2D3D !important;
+          background: #F5F2EE !important;
           padding-left: 8px;
         }
 
@@ -1601,7 +1601,7 @@ const HeaderOne = () => {
           height: 36px;
           border-radius: 4px;
           overflow: hidden;
-          background: #333;
+          background: #F5F2EE;
         }
 
         .navbar-search .suggestion-img {
@@ -1627,7 +1627,7 @@ const HeaderOne = () => {
         }
 
         .navbar-search .suggestion-text {
-          color: #FAF8F5;
+          color: #0f1923;
           font-size: 11.5px;
           font-weight: 500;
           line-height: 1.2;
