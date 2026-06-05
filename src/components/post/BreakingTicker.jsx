@@ -61,7 +61,7 @@ const BreakingTicker = () => {
         }
 
         .ec-ticker-tag {
-          background: #C1121F;
+          background: #7A0F23;
           color: #fff;
           font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
           font-size: 10px;
@@ -101,7 +101,7 @@ const BreakingTicker = () => {
           font-family: 'Playfair Display', Georgia, serif;
           font-size: 12px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           letter-spacing: 0.02em;
           flex-shrink: 0;
         }

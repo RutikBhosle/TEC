@@ -128,11 +128,20 @@ const IndustryPosts = () => {
   const gridItems = [];
 
   if (feedPosts.length > 0) {
-    gridItems.push({ type: "newsletter" });
+    // Row 1 (all blogs)
     if (feedPosts[0]) gridItems.push({ type: "post", data: feedPosts[0] });
     if (feedPosts[1]) gridItems.push({ type: "post", data: feedPosts[1] });
+    if (feedPosts[2]) gridItems.push({ type: "post", data: feedPosts[2] });
+    if (feedPosts[3]) gridItems.push({ type: "post", data: feedPosts[3] });
+
+    // Row 2 (newsletter, 2 blogs, categories)
+    gridItems.push({ type: "newsletter" });
+    if (feedPosts[4]) gridItems.push({ type: "post", data: feedPosts[4] });
+    if (feedPosts[5]) gridItems.push({ type: "post", data: feedPosts[5] });
     gridItems.push({ type: "categories" });
-    for (let i = 2; i < feedPosts.length; i++) {
+
+    // Remaining rows
+    for (let i = 6; i < feedPosts.length; i++) {
       gridItems.push({ type: "post", data: feedPosts[i] });
     }
   }
@@ -161,7 +170,7 @@ const IndustryPosts = () => {
       const description = title.substring(index + separator.length).trim();
       return (
         <>
-          {mainName} {separator} <em style={{ color: "#D0C9BF", fontStyle: "italic", fontWeight: 400 }}>{description}</em>
+          {mainName} {separator} <em style={{ color: "#6B6560", fontStyle: "italic", fontWeight: 400 }}>{description}</em>
         </>
       );
     }
@@ -185,7 +194,7 @@ const IndustryPosts = () => {
 
   return (
     <>
-      <HeadMeta 
+      <HeadMeta
         metaTitle={`${categoryTitle} - Business Industry News, Profiles & Analysis | Star Prime`}
         metaDesc={`Read the latest featured articles, founder interviews, and in-depth business case studies on our ${categoryTitle} feed.`}
       />
@@ -215,7 +224,7 @@ const IndustryPosts = () => {
             <div className="hero-cover-grid">
               {/* PRIMARY HIGHLIGHT (LEFT COLUMN - 2/3) */}
               {posts[0] && (
-                <div 
+                <div
                   className="primary-hero-card"
                   onClick={() => handlePostClick(posts[0].slug.current)}
                 >
@@ -250,7 +259,7 @@ const IndustryPosts = () => {
                 <span className="stack-label">Featured Inside</span>
                 {posts.slice(1, 7).length > 0 ? (
                   posts.slice(1, 7).map((post, idx) => (
-                    <div 
+                    <div
                       key={post.slug.current || idx}
                       className="secondary-hero-card"
                       onClick={() => handlePostClick(post.slug.current)}
@@ -263,6 +272,18 @@ const IndustryPosts = () => {
                           <span>{formatDate(post.publishedAt || post._updatedAt)}</span>
                         </div>
                       </div>
+                      {post.featureImg && (
+                        <div className="secondary-hero-img-wrapper">
+                          <Image
+                            src={post.featureImg}
+                            alt={post.altText || post.title}
+                            width={90}
+                            height={60}
+                            style={{ objectFit: "cover" }}
+                            className="secondary-hero-img"
+                          />
+                        </div>
+                      )}
                     </div>
                   ))
                 ) : (
@@ -278,7 +299,7 @@ const IndustryPosts = () => {
       <section className="industry-feed-section">
         <div className="feed-container">
           <div className="feed-grid-layout">
-            
+
             {/* LEFT FEED COLUMN (2/3 width -> stretches to full width) */}
             <div className="feed-articles-column">
               <h3 className="feed-section-title">Latest Publications</h3>
@@ -353,18 +374,9 @@ const IndustryPosts = () => {
                                 className="cat-grid-item"
                               >
                                 <div className="cat-grid-thumb">
-                                  {cat.imageUrl ? (
-                                    <Image
-                                      src={cat.imageUrl}
-                                      alt={cat.title}
-                                      fill
-                                      sizes="(max-width: 768px) 50vw, 150px"
-                                    />
-                                  ) : (
-                                    <div className="cat-grid-placeholder">
-                                      {getCategorySvg(cat.slug?.current)}
-                                    </div>
-                                  )}
+                                  <div className="cat-grid-placeholder">
+                                    {getCategorySvg(cat.slug?.current)}
+                                  </div>
                                 </div>
                                 <span className="cat-grid-name">
                                   {cat.title}
@@ -378,7 +390,7 @@ const IndustryPosts = () => {
 
                     const post = item.data;
                     return (
-                      <div 
+                      <div
                         key={post.slug.current || index}
                         className={`feed-article-card ${isVisible ? 'animate-in' : ''}`}
                         style={{ animationDelay: `${index * 0.08}s` }}
@@ -419,11 +431,11 @@ const IndustryPosts = () => {
       <style jsx>{`
         /* ── EDITORIAL COVER STYLING ── */
         .industry-hero-cover {
-          background: #0F1923;
-          color: #FFFFFF;
+          background: #FAF8F5;
+          color: #0f1923;
           padding: 5rem 0 6rem 0;
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          border-bottom: 1px solid #1E2D3D;
+          border-bottom: 1px solid #E8E3DC;
         }
 
         .hero-cover-container {
@@ -444,7 +456,7 @@ const IndustryPosts = () => {
           font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: #dfc167;
+          color: #7A0F23;
           text-transform: uppercase;
           margin-bottom: 0.75rem;
         }
@@ -454,7 +466,7 @@ const IndustryPosts = () => {
           font-size: clamp(2.25rem, 4.5vw, 3.5rem);
           font-weight: 800;
           line-height: 1.15;
-          color: #FFFFFF;
+          color: #0f1923;
           margin: 0 0 1.25rem 0;
           letter-spacing: -0.02em;
         }
@@ -463,7 +475,7 @@ const IndustryPosts = () => {
           font-family: var(--font-serif-body, 'Libre Baskerville', serif);
           font-size: clamp(0.95rem, 1.8vw, 1.15rem);
           line-height: 1.7;
-          color: #D0C9BF;
+          color: #5A544F;
           max-width: 720px;
           margin: 0 auto;
         }
@@ -471,7 +483,7 @@ const IndustryPosts = () => {
         .hero-cover-divider {
           width: 80px;
           height: 3px;
-          background: #dfc167;
+          background: #7A0F23;
           margin-top: 1.5rem;
           border-radius: 999px;
         }
@@ -489,7 +501,7 @@ const IndustryPosts = () => {
           cursor: pointer;
           display: flex;
           flex-direction: column;
-          border-right: 1px solid #2E4057;
+          border-right: 1px solid #E8E3DC;
           padding-right: 4.5rem;
         }
 
@@ -499,9 +511,9 @@ const IndustryPosts = () => {
           height: 440px;
           border-radius: 0;
           overflow: hidden;
-          background: #1E2D3D;
-          border: 1px solid rgba(250, 248, 245, 0.08);
-          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+          background: #E8E3DC;
+          border: 1px solid #D0C9BF;
+          box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
           margin-bottom: 2rem;
         }
 
@@ -517,7 +529,7 @@ const IndustryPosts = () => {
         .primary-hero-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(to top, rgba(15, 25, 35, 0.4) 0%, transparent 100%);
+          background: linear-gradient(to top, rgba(15, 25, 35, 0.1) 0%, transparent 100%);
           pointer-events: none;
         }
 
@@ -533,7 +545,7 @@ const IndustryPosts = () => {
           font-weight: 700;
           letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: #dfc167;
+          color: #7A0F23;
           margin-bottom: 0.75rem;
           display: block;
         }
@@ -542,7 +554,7 @@ const IndustryPosts = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: clamp(24px, 2.2vw, 30px) !important;
           font-weight: 700;
-          color: #FFFFFF;
+          color: #0f1923;
           line-height: 1.25;
           margin: 0 0 1.25rem 0;
           letter-spacing: -0.01em;
@@ -552,7 +564,7 @@ const IndustryPosts = () => {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           font-size: 15px;
           line-height: 1.75;
-          color: #D0C9BF;
+          color: #5A544F;
           margin: 0 0 1.5rem 0;
           display: -webkit-box;
           -webkit-line-clamp: 3;
@@ -573,11 +585,11 @@ const IndustryPosts = () => {
         }
 
         .meta-author {
-          color: #D0C9BF;
+          color: #0f1923;
         }
 
         .meta-dot {
-          color: #2E4057;
+          color: #E8E3DC;
         }
 
         .primary-hero-cta {
@@ -585,7 +597,7 @@ const IndustryPosts = () => {
           font-size: 11px;
           font-weight: 600;
           color: #FFFFFF;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           padding: 10px 24px;
           width: fit-content;
           text-transform: uppercase;
@@ -611,19 +623,40 @@ const IndustryPosts = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #dfc167;
+          color: #7A0F23;
           margin-bottom: 1.75rem;
           padding-bottom: 0.65rem;
-          border-bottom: 1px solid #2E4057;
+          border-bottom: 1px solid #E8E3DC;
         }
 
         .secondary-hero-card {
           display: flex;
           gap: 1.5rem;
           padding: 1.15rem 0;
-          border-bottom: 1px solid #1E2D3D;
+          border-bottom: 1px solid #E8E3DC;
           cursor: pointer;
           transition: all 0.3s ease;
+          align-items: flex-start;
+        }
+
+        .secondary-hero-img-wrapper {
+          width: 90px;
+          height: 60px;
+          flex-shrink: 0;
+          overflow: hidden;
+          background: #E8E3DC;
+          border: 1px solid #D0C9BF;
+        }
+
+        .secondary-hero-img-wrapper :global(.secondary-hero-img) {
+          width: 100% !important;
+          height: 100% !important;
+          object-fit: cover !important;
+          transition: transform 0.4s ease !important;
+        }
+
+        .secondary-hero-card:hover .secondary-hero-img-wrapper :global(.secondary-hero-img) {
+          transform: scale(1.05);
         }
 
         .secondary-hero-card:last-of-type {
@@ -634,13 +667,13 @@ const IndustryPosts = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 26px;
           font-weight: 900;
-          color: rgba(250, 248, 245, 0.2);
+          color: rgba(15, 25, 35, 0.15);
           line-height: 1;
           transition: color 0.3s ease;
         }
 
         .secondary-hero-card:hover .secondary-hero-num {
-          color: #dfc167;
+          color: #7A0F23;
         }
 
         .secondary-hero-details {
@@ -652,7 +685,7 @@ const IndustryPosts = () => {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #dfc167;
+          color: #7A0F23;
           margin-bottom: 0.45rem;
           display: block;
         }
@@ -661,7 +694,7 @@ const IndustryPosts = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 13px;
           font-weight: 700;
-          color: #FAF8F5;
+          color: #0f1923;
           line-height: 1.45;
           margin: 0 0 0.5rem 0;
           transition: all 0.3s ease;
@@ -672,12 +705,12 @@ const IndustryPosts = () => {
         }
 
         .secondary-hero-card:hover .secondary-hero-title {
-          color: #D0C9BF;
+          color: #7A0F23;
         }
 
         .secondary-hero-meta {
           font-size: 10px;
-          color: #9A9490;
+          color: #6B6560;
           font-weight: 500;
         }
 
@@ -685,7 +718,7 @@ const IndustryPosts = () => {
         .industry-feed-section {
           background: #FAF8F5;
           padding: 6rem 0;
-          color: #0F1923;
+          color: #0f1923;
         }
 
         .feed-container {
@@ -704,9 +737,9 @@ const IndustryPosts = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 2rem;
           font-weight: 800;
-          color: #0F1923;
+          color: #0f1923;
           margin-bottom: 2.5rem;
-          border-bottom: 2px solid #0F1923;
+          border-bottom: 2px solid #0f1923;
           padding-bottom: 0.85rem;
           letter-spacing: -0.01em;
         }
@@ -719,8 +752,8 @@ const IndustryPosts = () => {
 
         /* ── GRID NEWSLETTER CARD ── */
         .feed-newsletter-card {
-          background: #F5F2EE;
-          border: 1px solid #E2DDD7;
+          background: #0f1923;
+          border: 1px solid #1E2D3D;
           border-radius: 0;
           padding: 2.25rem 2rem;
           display: flex;
@@ -734,13 +767,13 @@ const IndustryPosts = () => {
           align-items: center;
           gap: 12px;
           margin-bottom: 0.75rem;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
         }
 
         .newsletter-stamp-icon {
           width: 28px;
           height: 28px;
-          opacity: 0.85;
+          opacity: 0.95;
         }
 
         .feed-newsletter-card .ec-newsletter-label {
@@ -749,7 +782,7 @@ const IndustryPosts = () => {
           font-weight: 700;
           letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           margin-bottom: 0;
           line-height: 1;
         }
@@ -758,7 +791,7 @@ const IndustryPosts = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 20px;
           font-weight: 700;
-          color: #0F1923;
+          color: #FAF8F5;
           line-height: 1.3;
           margin: 0 0 0.5rem;
         }
@@ -766,7 +799,7 @@ const IndustryPosts = () => {
         .feed-newsletter-card .ec-newsletter-text {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           font-size: 12.5px;
-          color: #5A544F;
+          color: #D0C9BF;
           line-height: 1.55;
           margin: 0 0 1rem;
         }
@@ -787,14 +820,14 @@ const IndustryPosts = () => {
         }
 
         .feature-dot {
-          color: var(--cardinal, #C1121F);
+          color: #dfc167;
           font-size: 11px;
         }
 
         .feature-text {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           font-size: 12px;
-          color: #333333;
+          color: #D0C9BF;
           font-weight: 500;
         }
 
@@ -806,19 +839,19 @@ const IndustryPosts = () => {
 
         .feed-newsletter-card .ec-newsletter-input {
           flex: 1;
-          border: 1px solid #D0C9BF;
+          border: 1px solid #2E4057;
           border-right: none;
           padding: 12px 16px;
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           font-size: 13px;
-          background: #FAF8F5;
-          color: #0F1923;
+          background: #111B24;
+          color: #FAF8F5;
           outline: none;
           transition: border-color 0.25s ease;
         }
 
         .feed-newsletter-card .ec-newsletter-input:focus {
-          border-color: #8C6D3B;
+          border-color: #dfc167;
         }
 
         .feed-newsletter-card .ec-newsletter-input::placeholder {
@@ -826,8 +859,8 @@ const IndustryPosts = () => {
         }
 
         .feed-newsletter-card .ec-newsletter-btn {
-          background: var(--cardinal, #C1121F);
-          color: #ffffff;
+          background: #dfc167;
+          color: #0f1923;
           border: none;
           padding: 12px 20px;
           font-family: var(--font-sans, 'DM Sans', sans-serif);
@@ -840,13 +873,13 @@ const IndustryPosts = () => {
         }
 
         .feed-newsletter-card .ec-newsletter-btn:hover {
-          background: #96010D;
+          background: #f5d57b;
         }
 
         .newsletter-footer-note {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           font-size: 10px;
-          color: #777777;
+          color: #9A9490;
           font-weight: 500;
           display: block;
         }
@@ -866,10 +899,10 @@ const IndustryPosts = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 16px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           margin: 0 0 1.15rem;
           padding-bottom: 0.75rem;
-          border-bottom: 2px solid #0F1923;
+          border-bottom: 2px solid #0f1923;
           letter-spacing: -0.01em;
         }
 
@@ -884,7 +917,7 @@ const IndustryPosts = () => {
           display: flex;
           flex-direction: column;
           text-decoration: none;
-          color: #0F1923;
+          color: #0f1923;
           transition: all 0.25s ease;
         }
 
@@ -934,7 +967,7 @@ const IndustryPosts = () => {
           font-size: 11px;
           font-weight: 700;
           line-height: 1.35;
-          color: #0F1923;
+          color: #0f1923;
           transition: color 0.25s ease;
           display: block;
           text-align: center;
@@ -1011,7 +1044,7 @@ const IndustryPosts = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 15px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.45;
           margin: 0 0 0.85rem 0;
           transition: color 0.3s ease;

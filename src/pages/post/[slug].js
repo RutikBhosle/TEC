@@ -10,13 +10,16 @@ import HeadMetaDynamic from "../../components/elements/HeadMetaDynamic";
 
 const fetchPostData = async (slug) => {
   const postQuery = `*[_type == "post" && slug.current == '${slug}'][0] {
+    _id,
+    _type,
     title,
     altText,
     keywords,
     slug,
     'featureImg': mainImage.asset->url,
     body,
-    description 
+    description,
+    'categories': categories[]->{_id, title, slug}
   }`;
   const postData = await client.fetch(postQuery);
   return postData;

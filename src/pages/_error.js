@@ -33,7 +33,7 @@ const CustomError = ({ statusCode }) => {
           margin: 0 0 10px;
           font-size: 4rem;
           line-height: 1;
-          color: #0F1923;
+          color: #0f1923;
         }
 
         p {
@@ -50,7 +50,7 @@ const CustomError = ({ statusCode }) => {
           padding: 0 18px;
           border-radius: 999px;
           text-decoration: none;
-          background: #0F1923;
+          background: #0f1923;
           color: #111315;
           font-weight: 600;
         }

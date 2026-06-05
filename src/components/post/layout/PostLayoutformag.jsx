@@ -4,9 +4,9 @@ import Link from "next/link";
 const PostLayoutformag = ({ data }) => {
   const publishDate = data.publishedAt || data._createdAt
     ? new Date(data.publishedAt || data._createdAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-      })
+      year: "numeric",
+      month: "long",
+    })
     : null;
 
   return (
@@ -71,7 +71,7 @@ const PostLayoutformag = ({ data }) => {
           font-size: 0.75rem;
           text-transform: uppercase;
           letter-spacing: 0.12em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           font-weight: 600;
           margin-bottom: 0.5rem;
         }
@@ -81,25 +81,25 @@ const PostLayoutformag = ({ data }) => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           line-height: 1.4;
           font-weight: 700;
-          color: var(--ink, #0F1923);
+          color: var(--ink, #0f1923);
           margin: 0 0 0.75rem;
           transition: color 0.3s ease;
         }
 
         .magazine-title :global(a) {
-          color: var(--ink, #0F1923);
+          color: var(--ink, #0f1923);
           text-decoration: none;
           transition: color 0.3s ease;
         }
 
         .magazine-title :global(a:hover) {
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
         }
 
         .accent-line {
           width: 40px;
           height: 2px;
-          background-color: var(--ink, #0F1923);
+          background-color: var(--ink, #0f1923);
           margin-top: 0.25rem;
           transition: width 0.3s ease;
         }

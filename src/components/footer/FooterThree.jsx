@@ -20,7 +20,7 @@ const FooterTwo = () => {
               <div className="footer-logo-container">
                 <Link href="/">
                   <Image
-                    src="/assets/logoblack.jpg"
+                    src="/assets/logoblack.png"
                     alt="footer logo"
                     className="footer-logo"
                     width={86}
@@ -32,31 +32,7 @@ const FooterTwo = () => {
               {/* End of .brand-logo-container */}
             </div>
             {/* End of .col-md-6 */}
-            <div className="col-md-auto">
-              <div className="footer-social-share-wrapper">
-                <div className="footer-social-share">
-                  <div className="axil-social-title">Find us here</div>
-                  <ul className="social-share social-share__with-bg">
-                    <li>
-                      <a href={SocialLink.fb.url}>
-                        <i className={SocialLink.fb.icon} />
-                      </a>
-                    </li>
-                    <li>
-                      <a href={SocialLink.yt.url}>
-                        <i className={SocialLink.yt.icon} />
-                      </a>
-                    </li>
-                    <li>
-                      <a href={SocialLink.linked.url}>
-                        <i className={SocialLink.linked.icon} />
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              {/* End of .footer-social-share-wrapper */}
-            </div>
+
             {/* End of .col-md-6 */}
           </div>
           {/* End of .row */}

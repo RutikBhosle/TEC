@@ -97,17 +97,17 @@ const PortableTextComponent = {
   },
   block: {
     h1: ({ children }) => (
-      <h1 className="display-4 fw-bold my-3">{children}</h1>
+      <h1 className="rich-h1">{children}</h1>
     ),
     h2: ({ children }) => (
-      <h2 className="display-5 fw-bold my-3">{children}</h2>
+      <h2 className="rich-h2">{children}</h2>
     ),
     h3: ({ children }) => (
-      <h3 className="display-6 fw-bold my-3">{children}</h3>
+      <h3 className="rich-h3">{children}</h3>
     ),
-    h4: ({ children }) => <h4 className="h2 fw-bold my-3">{children}</h4>,
-    h5: ({ children }) => <h5 className="h3 fw-bold my-3">{children}</h5>,
-    h6: ({ children }) => <h6 className="h4 fw-bold my-3">{children}</h6>,
+    h4: ({ children }) => <h4 className="rich-h4">{children}</h4>,
+    h5: ({ children }) => <h5 className="rich-h5">{children}</h5>,
+    h6: ({ children }) => <h6 className="rich-h6">{children}</h6>,
     blockquote: ({ children }) => (
       <blockquote className="border-start border-4 border-secondary ps-3 py-3 my-3 fst-italic">
         {children}

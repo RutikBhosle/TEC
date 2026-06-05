@@ -3,18 +3,18 @@ import Link from 'next/link';
 
 const Custom404 = () => {
   return (
-    <div style={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'center', 
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
       minHeight: '100vh',
       background: '#000',
       color: '#fff',
       textAlign: 'center',
       padding: '20px'
     }}>
-      <h1 style={{ fontSize: '4rem', marginBottom: '1rem', color: '#0F1923' }}>
+      <h1 style={{ fontSize: '4rem', marginBottom: '1rem', color: '#0f1923' }}>
         404
       </h1>
       <h2 style={{ fontSize: '2rem', marginBottom: '2rem' }}>
@@ -23,11 +23,11 @@ const Custom404 = () => {
       <p style={{ fontSize: '1.2rem', marginBottom: '2rem', maxWidth: '600px' }}>
         The page you&apos;re looking for doesn&apos;t exist or has been moved.
       </p>
-      <Link href="/" style={{ 
-        background: '#0F1923', 
-        color: '#000', 
-        padding: '12px 24px', 
-        textDecoration: 'none', 
+      <Link href="/" style={{
+        background: '#0f1923',
+        color: '#000',
+        padding: '12px 24px',
+        textDecoration: 'none',
         borderRadius: '8px',
         fontWeight: 'bold',
         fontSize: '1.1rem'

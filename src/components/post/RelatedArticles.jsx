@@ -41,8 +41,8 @@ const RelatedArticles = ({ currentMagArticle, allMagazinesArticles }) => {
 
         .related-articles-light .section-title .btn,
         .related-articles-light .section-title a.btn {
-          background: #0F1923 !important;
-          border-color: #0F1923 !important;
+          background: #0f1923 !important;
+          border-color: #0f1923 !important;
           color: #111315 !important;
         }
 

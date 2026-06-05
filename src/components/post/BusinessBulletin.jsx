@@ -132,7 +132,7 @@ const BusinessBulletin = () => {
                 {/* Editor's Pick Section */}
                 <div className="ec-bsc" style={{ background: "transparent", padding: 0, borderLeft: "none", boxShadow: "none" }}>
                   <div className="ec-bsc-overline">Editor&apos;s Pick</div>
-                  <h3 className="ec-bsc-title" style={{ color: "#0F1923" }}>
+                  <h3 className="ec-bsc-title" style={{ color: "#0f1923" }}>
                     The Most Influential Businesses Shaping Our Digital World
                   </h3>
                   <p className="ec-bsc-text" style={{ color: "#6B6560" }}>
@@ -230,7 +230,7 @@ const BusinessBulletin = () => {
           justify-content: space-between;
           margin-bottom: 32px;
           padding-bottom: 12px;
-          border-bottom: 2px solid #0F1923;
+          border-bottom: 2px solid #0f1923;
         }
 
         .ec-section-label {
@@ -239,7 +239,7 @@ const BusinessBulletin = () => {
           font-weight: 700;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 6px;
         }
 
@@ -247,7 +247,7 @@ const BusinessBulletin = () => {
           font-family: 'Playfair Display', serif;
           font-size: 24px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           letter-spacing: -0.01em;
           margin: 0;
         }
@@ -258,9 +258,9 @@ const BusinessBulletin = () => {
           font-weight: 600;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           text-decoration: none;
-          border-bottom: 1px solid #C1121F;
+          border-bottom: 1px solid #7A0F23;
           padding-bottom: 1px;
           transition: color 0.25s ease, border-color 0.25s ease;
           white-space: nowrap;
@@ -329,7 +329,7 @@ const BusinessBulletin = () => {
           font-weight: 700;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 8px;
           display: block;
         }
@@ -338,14 +338,14 @@ const BusinessBulletin = () => {
           font-family: 'Playfair Display', serif;
           font-size: 16px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.35;
           margin: 0 0 10px;
           transition: color 0.2s ease;
         }
 
         .ec-bfi:hover .ec-bfi-title {
-          color: #C1121F;
+          color: #7A0F23;
         }
 
         .ec-bfi-excerpt {
@@ -399,7 +399,7 @@ const BusinessBulletin = () => {
         }
 
         .ec-bli:hover .ec-bli-num {
-          color: #C1121F;
+          color: #7A0F23;
         }
 
         .ec-bli-content {
@@ -413,7 +413,7 @@ const BusinessBulletin = () => {
           font-weight: 700;
           letter-spacing: 0.18em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 4px;
           display: block;
         }
@@ -422,14 +422,14 @@ const BusinessBulletin = () => {
           font-family: 'Libre Baskerville', serif;
           font-size: 13.5px;
           font-weight: 400;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.45;
           margin: 0 0 6px;
           transition: color 0.2s ease;
         }
 
         .ec-bli:hover .ec-bli-title {
-          color: #C1121F;
+          color: #7A0F23;
         }
 
         .ec-bli-excerpt {
@@ -455,7 +455,7 @@ const BusinessBulletin = () => {
         .ec-bsc {
           background: #000000;
           padding: 32px;
-          border-left: 3px solid #C1121F;
+          border-left: 3px solid #7A0F23;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
         }
 
@@ -465,7 +465,7 @@ const BusinessBulletin = () => {
           font-weight: 700;
           letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 12px;
           display: block;
         }
@@ -493,9 +493,9 @@ const BusinessBulletin = () => {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           text-decoration: none;
-          border-bottom: 1px solid #C1121F;
+          border-bottom: 1px solid #7A0F23;
           padding-bottom: 2px;
           transition: color 0.25s ease, border-color 0.25s ease;
         }
@@ -517,7 +517,7 @@ const BusinessBulletin = () => {
           font-weight: 700;
           letter-spacing: 0.25em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 12px;
           display: block;
         }
@@ -526,7 +526,7 @@ const BusinessBulletin = () => {
           font-family: 'Playfair Display', serif;
           font-size: 18px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.3;
           margin: 0 0 8px;
         }
@@ -551,19 +551,19 @@ const BusinessBulletin = () => {
           font-family: 'DM Sans', sans-serif;
           font-size: 13px;
           background: #FAF8F5;
-          color: #0F1923;
+          color: #0f1923;
           outline: none;
           transition: border-color 0.25s ease;
         }
         .ec-newsletter-input:focus {
-          border-color: #0F1923;
+          border-color: #0f1923;
         }
         .ec-newsletter-input::placeholder {
           color: #9A9490;
         }
 
         .ec-newsletter-btn {
-          background: #C1121F;
+          background: #7A0F23;
           color: #ffffff;
           border: none;
           padding: 12px 20px;

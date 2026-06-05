@@ -15,19 +15,19 @@ const AdvertiseWithUs = () => {
       <HeaderOne />
 
       <main className="advertise-page animate-fade">
-        
+
         {/* ULTRA-PREMIUM ASYMMETRIC SPLIT DARK HERO COVER */}
         <section className="advertise-hero">
           <div className="advertise-hero-shell">
             <div className="advertise-hero-grid">
-              
+
               {/* LEFT COLUMN: HERO COPY */}
               <div className="advertise-hero__left">
                 <span className="advertise-hero__eyebrow">Brand Amplification</span>
                 <h1 className="advertise-hero__title">Advertise With Star Prime</h1>
                 <p className="advertise-hero__desc">
                   Welcome to Star Prime, where we spotlight trailblazers
-                  shaping the global business landscape. Connect your brand with an elite circle 
+                  shaping the global business landscape. Connect your brand with an elite circle
                   of founders, executives, and high-net-worth innovators.
                 </p>
                 <div className="advertise-hero__divider" />
@@ -194,7 +194,7 @@ const AdvertiseWithUs = () => {
       <style jsx>{`
         .advertise-page {
           background: #FAF8F5;
-          color: #0F1923;
+          color: #0f1923;
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           min-height: 100vh;
         }
@@ -209,7 +209,7 @@ const AdvertiseWithUs = () => {
 
         /* Immersive Dark Hero Cover with Asymmetric Split */
         .advertise-hero {
-          background: #0F1923;
+          background: #0f1923;
           color: #FFFFFF;
           padding: 6.5rem 0;
           position: relative;
@@ -243,7 +243,7 @@ const AdvertiseWithUs = () => {
           font-size: 0.9rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           margin-bottom: 0.75rem;
         }
@@ -269,7 +269,7 @@ const AdvertiseWithUs = () => {
         .advertise-hero__divider {
           width: 80px;
           height: 3px;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           margin-bottom: 2.25rem;
           border-radius: 999px;
         }
@@ -327,7 +327,7 @@ const AdvertiseWithUs = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           margin-bottom: 0.25rem;
         }
 
@@ -371,7 +371,7 @@ const AdvertiseWithUs = () => {
           font-size: 0.85rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           margin-bottom: 0.5rem;
           display: block;
@@ -381,7 +381,7 @@ const AdvertiseWithUs = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: clamp(1.85rem, 3.5vw, 2.5rem);
           font-weight: 800;
-          color: #0F1923;
+          color: #0f1923;
           margin: 0 0 1.5rem;
           line-height: 1.2;
           letter-spacing: -0.01em;
@@ -411,7 +411,7 @@ const AdvertiseWithUs = () => {
           bottom: 0;
           left: 0;
           width: 4px;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           border-top-left-radius: 16px;
           border-bottom-left-radius: 16px;
         }
@@ -432,7 +432,7 @@ const AdvertiseWithUs = () => {
           font-family: var(--font-serif-body, 'Libre Baskerville', serif);
           font-size: 1.25rem;
           font-style: italic;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.7;
           border-left: 2px dashed rgba(15, 25, 35, 0.15);
           padding-left: 1.25rem;
@@ -475,11 +475,11 @@ const AdvertiseWithUs = () => {
         }
 
         .metric-card:hover .metric-num {
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
         }
 
         .metric-card h3 {
-          color: #0F1923;
+          color: #0f1923;
           font-size: 1.35rem;
           line-height: 1.35;
           font-family: var(--font-serif, 'Playfair Display', serif);
@@ -525,7 +525,7 @@ const AdvertiseWithUs = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: clamp(1.85rem, 3.5vw, 2.5rem);
           font-weight: 800;
-          color: #0F1923;
+          color: #0f1923;
           margin: 0 0 1.5rem;
           line-height: 1.2;
           letter-spacing: -0.01em;
@@ -556,7 +556,7 @@ const AdvertiseWithUs = () => {
         .showcase-divider {
           width: 50px;
           height: 2px;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           margin-top: 1.25rem;
         }
 
@@ -573,7 +573,7 @@ const AdvertiseWithUs = () => {
         }
 
         .cta-wrap {
-          background: #0F1923;
+          background: #0f1923;
           border: 1px solid rgba(255, 255, 255, 0.04);
           border-radius: 16px;
           padding: 4rem 2rem;
@@ -598,7 +598,7 @@ const AdvertiseWithUs = () => {
           font-size: 0.9rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           margin-bottom: 0.75rem;
         }
@@ -631,7 +631,7 @@ const AdvertiseWithUs = () => {
           text-transform: uppercase !important;
           transition: all 0.3s ease !important;
           cursor: pointer !important;
-          background-color: var(--cardinal, #C1121F) !important;
+          background-color: var(--cardinal, #7A0F23) !important;
           border: none !important;
           color: #FFFFFF !important;
           box-shadow: 0 4px 15px rgba(193, 18, 31, 0.25) !important;
@@ -640,7 +640,7 @@ const AdvertiseWithUs = () => {
 
         .cta-wrap :global(.btn-primary-cta:hover) {
           background-color: #FFFFFF !important;
-          color: var(--ink, #0F1923) !important;
+          color: var(--ink, #0f1923) !important;
           transform: translateY(-2px) !important;
           box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
         }

@@ -65,9 +65,9 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
 
       <style jsx>{`
         .ec-partners {
-          background: #0F1923;
+          background: #0f1923;
           padding: 52px 0;
-          border-top: 4px solid #C1121F;
+          border-top: 4px solid #7A0F23;
         }
 
         .ec-partners-header {
@@ -82,7 +82,7 @@ const LogoSlider = ({ title = "Our Partner Brands", showTitle = true, wrapperCla
           font-weight: 600;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 10px;
         }
 

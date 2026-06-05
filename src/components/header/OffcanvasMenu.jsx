@@ -63,7 +63,7 @@ const OffcanvasMenu = ({ ofcshow, ofcHandleClose }) => {
                   <div className="axil-contact-info">
                     <address className="address">
                       <p className="m-b-xs-30  mid grey-dark-three ">
-                        Office 328B, Gera Imperium Rise,
+                        Gera Imperium Rise,
                         <br />
                         Wipro Circle, Hinjewadi Phase 2, Pune
                       </p>
@@ -78,26 +78,7 @@ const OffcanvasMenu = ({ ofcshow, ofcHandleClose }) => {
                       </div>
                     </address>
                     {/* End of address */}
-                    <div className="contact-social-share m-t-xs-30">
-                      <div className="axil-social-title h5">Follow Us</div>
-                      <ul className="social-share social-share__with-bg">
-                        <li>
-                          <a href={SocialLink.fb.url}>
-                            <i className={SocialLink.fb.icon} />
-                          </a>
-                        </li>
-                        <li>
-                          <a href={SocialLink.behance.url}>
-                            <i className={SocialLink.behance.icon} />
-                          </a>
-                        </li>
-                        <li>
-                          <a href={SocialLink.linked.url}>
-                            <i className={SocialLink.linked.icon} />
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
+
                     {/* End of .contact-shsdf */}
                   </div>
                   {/* End of .axil-contact-info */}

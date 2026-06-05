@@ -111,7 +111,7 @@ const Magazines = () => {
           justify-content: space-between;
           margin-bottom: 28px;
           padding-bottom: 12px;
-          border-bottom: 2px solid #0F1923;
+          border-bottom: 2px solid #0f1923;
         }
 
         .ec-section-label {
@@ -120,7 +120,7 @@ const Magazines = () => {
           font-weight: 600;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 6px;
         }
 
@@ -128,7 +128,7 @@ const Magazines = () => {
           font-family: 'Playfair Display', serif;
           font-size: 22px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           letter-spacing: -0.01em;
           margin: 0;
         }
@@ -139,14 +139,14 @@ const Magazines = () => {
           font-weight: 600;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           text-decoration: none;
-          border-bottom: 1px solid #C1121F;
+          border-bottom: 1px solid #7A0F23;
           padding-bottom: 1px;
           transition: opacity 0.2s;
           white-space: nowrap;
         }
-        .ec-view-all:hover { opacity: 0.7; color: #C1121F; }
+        .ec-view-all:hover { opacity: 0.7; color: #7A0F23; }
 
         /* 4-COLUMN GRID */
         .ec-magazines-grid {
@@ -194,7 +194,7 @@ const Magazines = () => {
           position: absolute;
           top: 12px;
           left: 12px;
-          background: #C1121F;
+          background: #7A0F23;
           color: #fff;
           font-family: 'DM Sans', sans-serif;
           font-size: 9px;
@@ -215,7 +215,7 @@ const Magazines = () => {
           font-weight: 700;
           letter-spacing: 0.2em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           margin-bottom: 8px;
         }
 
@@ -223,7 +223,7 @@ const Magazines = () => {
           font-family: 'Playfair Display', serif;
           font-size: 15px;
           font-weight: 700;
-          color: #0F1923;
+          color: #0f1923;
           line-height: 1.3;
           margin-bottom: 8px;
         }
@@ -259,11 +259,11 @@ const Magazines = () => {
           font-weight: 700;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #C1121F;
+          color: #7A0F23;
           text-decoration: none;
           transition: opacity 0.2s;
         }
-        .ec-mag-cta:hover { opacity: 0.75; color: #C1121F; }
+        .ec-mag-cta:hover { opacity: 0.75; color: #7A0F23; }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {

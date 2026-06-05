@@ -15,13 +15,13 @@ import ScrollToTop from "../components/common/ScrollToTop";
 
 const Home = () => {
   useEffect(() => {
-    return () => {};
+    return () => { };
   }, []);
 
   return (
     <div
       suppressHydrationWarning
-      style={{ background: "#FAF8F5", color: "#0F1923", minHeight: "100vh" }}
+      style={{ background: "#FAF8F5", color: "#0f1923", minHeight: "100vh" }}
     >
       <Head>
         <meta name="google-site-verification" content="Hb-PBtfDrWImSPQKiNhfbw0JxtOLWsPKDEbfz_WJ8ZE" />
@@ -65,9 +65,9 @@ const Home = () => {
       <style jsx global>{`
         /* ── EDITORIAL GLOBAL VARIABLES ── */
         :root {
-          --ink: #0F1923;
+          --ink: #0f1923;
           --warm-white: #FAF8F5;
-          --cardinal: #C1121F;
+          --cardinal: #7A0F23;
           --font-serif: 'Playfair Display', Georgia, serif;
           --font-serif-body: 'Libre Baskerville', Georgia, serif;
           --font-sans: 'DM Sans', system-ui, sans-serif;

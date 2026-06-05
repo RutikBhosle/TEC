@@ -95,7 +95,7 @@ const MediaKit = () => {
           display: block;
           width: 100%;
           height: 3px;
-          background: #0F1923;
+          background: #0f1923;
           margin: 30px 0;
         }
 
@@ -161,28 +161,28 @@ const MediaKit = () => {
       `}</style>
 
       <div className="media-kit-grid">
-            {mediaKitImages.map((item) => (
-              <div key={item.id} className="media-kit-card">
-                <img 
-                  src={item.image} 
-                  alt={item.title}
-                  className="media-kit-image"
-                  onError={(e) => {
-                    e.target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vMC9zIiB2aWQ9IjEwIiBoZWlnaHQ9IjEwIiB2aWV3PSIxMDAlIj48L3N2Zz4K';
-                  }}
-                />
-                <div className="media-kit-content">
-                  <h3 className="media-kit-title">{item.title}</h3>
-                  <p className="media-kit-description">{item.description}</p>
-                  <a href="#" className="media-kit-action">
-                    View Details
-                    <svg viewBox="0 0 24 24" fill="none">
-                      <path d="M5 12H19M19 12L12 5M12 19L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            ))}
+        {mediaKitImages.map((item) => (
+          <div key={item.id} className="media-kit-card">
+            <img
+              src={item.image}
+              alt={item.title}
+              className="media-kit-image"
+              onError={(e) => {
+                e.target.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vMC9zIiB2aWQ9IjEwIiBoZWlnaHQ9IjEwIiB2aWV3PSIxMDAlIj48L3N2Zz4K';
+              }}
+            />
+            <div className="media-kit-content">
+              <h3 className="media-kit-title">{item.title}</h3>
+              <p className="media-kit-description">{item.description}</p>
+              <a href="#" className="media-kit-action">
+                View Details
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12H19M19 12L12 5M12 19L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

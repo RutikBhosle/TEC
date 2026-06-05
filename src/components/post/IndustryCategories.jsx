@@ -28,7 +28,7 @@ const IndustryCategories = () => {
   return (
     <div className="industries-page-wrap">
       <div className="industries-page-shell">
-        
+
         {/* Editorial Hero Header */}
         <header className="editorial-hero">
           <span className="hero-eyebrow">Industry Focus</span>
@@ -75,7 +75,7 @@ const IndustryCategories = () => {
       <style jsx>{`
         .industries-page-wrap {
           background: #FAF8F5;
-          color: #0F1923;
+          color: #0f1923;
           font-family: var(--font-sans, 'DM Sans', sans-serif);
           padding-bottom: 5rem;
         }
@@ -104,7 +104,7 @@ const IndustryCategories = () => {
           font-size: 0.85rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
           margin-bottom: 0.75rem;
         }
@@ -114,7 +114,7 @@ const IndustryCategories = () => {
           font-size: clamp(2.5rem, 5vw, 3.75rem);
           font-weight: 800;
           line-height: 1.15;
-          color: #0F1923;
+          color: #0f1923;
           margin: 0 0 1.25rem;
           letter-spacing: -0.02em;
         }
@@ -131,7 +131,7 @@ const IndustryCategories = () => {
         .hero-divider {
           width: 80px;
           height: 3px;
-          background: var(--cardinal, #C1121F);
+          background: var(--cardinal, #7A0F23);
           margin-top: 1.5rem;
           border-radius: 999px;
         }
@@ -193,7 +193,7 @@ const IndustryCategories = () => {
         }
 
         .industry-card-title {
-          color: #0F1923;
+          color: #0f1923;
           font-weight: 700;
           font-size: 1.2rem;
           line-height: 1.35;
@@ -203,20 +203,20 @@ const IndustryCategories = () => {
         }
 
         .industry-card:hover .industry-card-title {
-          color: var(--cardinal, #C1121F);
+          color: var(--cardinal, #7A0F23);
         }
 
         .accent-line {
           width: 30px;
           height: 2px;
-          background-color: #0F1923;
+          background-color: #0f1923;
           margin-top: auto;
           transition: all 0.3s ease;
         }
 
         .industry-card:hover .accent-line {
           width: 60px;
-          background-color: var(--cardinal, #C1121F);
+          background-color: var(--cardinal, #7A0F23);
         }
 
         .industry-state {
