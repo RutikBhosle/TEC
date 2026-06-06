@@ -97,6 +97,7 @@ const BusinessBulletin = () => {
                       {post.description && (
                         <p className="ec-bfi-excerpt">{post.description}</p>
                       )}
+                      <div className="ec-bfi-date">{formatDate(post)}</div>
                     </div>
                   </Link>
                 ))}
@@ -119,6 +120,7 @@ const BusinessBulletin = () => {
                       {post.description && (
                         <p className="ec-bli-excerpt">{post.description}</p>
                       )}
+                      <div className="ec-bli-date">{formatDate(post)}</div>
                     </div>
                   </Link>
                 ))}
@@ -187,6 +189,7 @@ const BusinessBulletin = () => {
                         {post.description && (
                           <p className="ec-bli-excerpt">{post.description}</p>
                         )}
+                        <div className="ec-bli-date">{formatDate(post)}</div>
                       </div>
                     </Link>
                   ))}
@@ -360,6 +363,14 @@ const BusinessBulletin = () => {
           overflow: hidden;
         }
 
+        .ec-bfi-date {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          color: #9A9490;
+          margin-top: 8px;
+          display: block;
+        }
+
         /* PRIMARY VS SECONDARY CARD TYPOGRAPHY SCALING */
         .ec-bfi-primary .ec-bfi-title {
           font-size: 18px;
@@ -442,6 +453,14 @@ const BusinessBulletin = () => {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        .ec-bli-date {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          color: #9A9490;
+          margin-top: 8px;
+          display: block;
         }
 
         /* SIDEBAR COMPONENTS */
