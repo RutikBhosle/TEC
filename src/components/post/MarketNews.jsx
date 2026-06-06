@@ -141,13 +141,14 @@ const MarketNews = () => {
     },
     mainImgWrapper: {
       width: "100%",
+      aspectRatio: "16 / 10",
       overflow: "hidden",
       background: "#1A2535",
       flexShrink: 0,
     },
     mainImg: {
       width: "100%",
-      height: "auto",
+      height: "100%",
       objectFit: "cover",
       display: "block",
       transition: "transform 0.5s ease",
@@ -238,13 +239,14 @@ const MarketNews = () => {
     },
     thumb: {
       width: "100%",
+      aspectRatio: "16 / 9",
       background: "#1A2535",
       flexShrink: 0,
       overflow: "hidden",
     },
     thumbImg: {
       width: "100%",
-      height: "auto",
+      height: "100%",
       objectFit: "cover",
       display: "block",
       transition: "transform 0.5s ease",
