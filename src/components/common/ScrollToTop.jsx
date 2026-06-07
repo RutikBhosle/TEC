@@ -55,7 +55,7 @@ const ScrollToTop = () => {
           background: #FAF8F5;
           color: #0f1923;
           border: 1px solid #E8E3DC;
-          border-radius: 50%;
+          border-radius: 0;
           cursor: pointer;
           display: flex;
           align-items: center;

@@ -207,13 +207,13 @@ const AdvertiseWithUs = () => {
           margin: 0 auto;
         }
 
-        /* Immersive Dark Hero Cover with Asymmetric Split */
+        /* Immersive Light Hero Cover with Asymmetric Split */
         .advertise-hero {
-          background: #0f1923;
-          color: #FFFFFF;
+          background: #FAF8F5;
+          color: #0f1923;
           padding: 6.5rem 0;
           position: relative;
-          border-bottom: 1px solid #1E2D3D;
+          border-bottom: 1px solid #E8E3DC;
         }
 
         .advertise-hero-shell {
@@ -253,7 +253,7 @@ const AdvertiseWithUs = () => {
           font-size: clamp(2.25rem, 4.5vw, 3.5rem);
           font-weight: 800;
           line-height: 1.15;
-          color: #FFFFFF;
+          color: #0f1923;
           margin: 0 0 1.25rem;
           letter-spacing: -0.02em;
         }
@@ -262,7 +262,7 @@ const AdvertiseWithUs = () => {
           font-family: var(--font-serif-body, 'Libre Baskerville', serif);
           font-size: clamp(1.05rem, 1.8vw, 1.25rem);
           line-height: 1.75;
-          color: #D0C9BF;
+          color: #5A544F;
           margin: 0 0 1.5rem;
         }
 
@@ -271,7 +271,7 @@ const AdvertiseWithUs = () => {
           height: 3px;
           background: var(--cardinal, #7A0F23);
           margin-bottom: 2.25rem;
-          border-radius: 999px;
+          border-radius: 0;
         }
 
         /* Right Column: Premium Masthead Card */
@@ -282,29 +282,29 @@ const AdvertiseWithUs = () => {
         }
 
         .media-masthead-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1.5px solid rgba(255, 255, 255, 0.08);
-          border-radius: 16px;
+          background: #FFFFFF;
+          border: 1.5px solid rgba(15, 25, 35, 0.08);
+          border-radius: 0;
           padding: 2.5rem;
           width: 100%;
           max-width: 380px;
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 15px 35px rgba(15, 25, 35, 0.05);
           position: relative;
           overflow: hidden;
           transition: all 0.3s ease;
         }
 
         .media-masthead-card:hover {
-          border-color: rgba(255, 255, 255, 0.15);
+          border-color: rgba(15, 25, 35, 0.15);
           transform: translateY(-3px);
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 20px 45px rgba(15, 25, 35, 0.1);
         }
 
         .masthead-seal {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 5.5rem;
           font-weight: 900;
-          color: rgba(255, 255, 255, 0.03);
+          color: rgba(15, 25, 35, 0.03);
           line-height: 1;
           position: absolute;
           right: -10px;
@@ -335,7 +335,7 @@ const AdvertiseWithUs = () => {
           display: flex;
           flex-direction: column;
           gap: 0.35rem;
-          border-bottom: 1.5px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1.5px solid rgba(15, 25, 35, 0.08);
           padding-bottom: 0.75rem;
         }
 
@@ -349,7 +349,7 @@ const AdvertiseWithUs = () => {
           font-size: 0.85rem;
           font-weight: 700;
           letter-spacing: 0.18em;
-          color: #9A9490;
+          color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
         }
 
@@ -357,7 +357,7 @@ const AdvertiseWithUs = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 1.45rem;
           font-weight: 700;
-          color: #FFFFFF;
+          color: #0f1923;
         }
 
         /* ── SECTIONS GENERAL ── */
@@ -396,7 +396,7 @@ const AdvertiseWithUs = () => {
         .intro-block {
           background: #FFFFFF;
           border: 1px solid rgba(15, 25, 35, 0.06);
-          border-radius: 16px;
+          border-radius: 0;
           padding: 2.75rem;
           box-shadow: 0 8px 30px rgba(15, 25, 35, 0.03);
           display: flex;
@@ -412,8 +412,6 @@ const AdvertiseWithUs = () => {
           left: 0;
           width: 4px;
           background: var(--cardinal, #7A0F23);
-          border-top-left-radius: 16px;
-          border-bottom-left-radius: 16px;
         }
 
         .advertise-copy {
@@ -449,7 +447,7 @@ const AdvertiseWithUs = () => {
         .metric-card {
           background: #FFFFFF;
           border: 1px solid rgba(15, 25, 35, 0.05);
-          border-radius: 12px;
+          border-radius: 0;
           padding: 1.75rem;
           box-shadow: 0 4px 15px rgba(15, 25, 35, 0.02);
           transition: all 0.3s ease;
@@ -510,7 +508,7 @@ const AdvertiseWithUs = () => {
         .showcase-image-card {
           background: #FFFFFF;
           border: 1px solid rgba(15, 25, 35, 0.06);
-          border-radius: 16px;
+          border-radius: 0;
           overflow: hidden;
           box-shadow: 0 12px 35px rgba(15, 25, 35, 0.04);
           transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -575,7 +573,7 @@ const AdvertiseWithUs = () => {
         .cta-wrap {
           background: #0f1923;
           border: 1px solid rgba(255, 255, 255, 0.04);
-          border-radius: 16px;
+          border-radius: 0;
           padding: 4rem 2rem;
           text-align: center;
           color: #FFFFFF;
@@ -622,7 +620,7 @@ const AdvertiseWithUs = () => {
         }
 
         .cta-wrap :global(.btn-primary-cta) {
-          border-radius: 999px !important;
+          border-radius: 0 !important;
           padding: 16px 44px !important;
           font-family: var(--font-sans, 'DM Sans', sans-serif) !important;
           font-size: 1rem !important;

@@ -61,9 +61,6 @@ const BusinessBulletin = () => {
               <div className="ec-section-label">Curated Intelligence</div>
               <h2 className="ec-section-title">Business Bulletin</h2>
             </div>
-            <Link href="/category/business-bulletin" className="ec-view-all">
-              View All Bulletin
-            </Link>
           </div>
 
           <div className="ec-bulletin-grid">
@@ -197,6 +194,25 @@ const BusinessBulletin = () => {
               )}
             </div>
           </div>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "24px" }}>
+            <Link
+              href="/category/business-bulletin"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "#7A0F23",
+                textDecoration: "none",
+                borderBottom: "1px solid #7A0F23",
+                paddingBottom: "1px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              View All Bulletin
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -299,7 +315,7 @@ const BusinessBulletin = () => {
 
         .ec-bfi-img {
           width: 100%;
-          height: 220px;
+          aspect-ratio: 16 / 10;
           overflow: hidden;
           background: #1A2535;
           position: relative;
@@ -616,9 +632,6 @@ const BusinessBulletin = () => {
           .ec-bulletin-featured {
             grid-template-columns: 1fr;
             gap: 28px;
-          }
-          .ec-bfi-img {
-            height: 200px;
           }
         }
       `}</style>

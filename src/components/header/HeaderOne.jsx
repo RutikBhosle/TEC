@@ -1100,10 +1100,10 @@ const HeaderOne = () => {
         }
         @media (max-width: 991px) {
           .navbar-fixed-spacer {
-            height: 110px; /* topbar + logo row only on mobile */
+            height: 77px; /* adjusted to match actual header height on mobile */
           }
           .navbar-fixed-spacer.scrolled {
-            height: 110px;
+            height: 73px; /* adjusted to match scrolled header height on mobile */
           }
         }
 

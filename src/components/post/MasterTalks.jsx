@@ -60,9 +60,6 @@ const MasterTalks = () => {
               <div className="ec-section-label">Insights &amp; Analysis</div>
               <h2 className="ec-section-title">Master Talks</h2>
             </div>
-            <Link href="/category/master-talks" className="ec-view-all">
-              All Master Talks
-            </Link>
           </div>
 
           {/* FEATURED TALK */}
@@ -115,6 +112,25 @@ const MasterTalks = () => {
                 )}
               </Link>
             ))}
+          </div>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "24px" }}>
+            <Link
+              href="/category/master-talks"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "#7A0F23",
+                textDecoration: "none",
+                borderBottom: "1px solid #7A0F23",
+                paddingBottom: "1px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              All Master Talks
+            </Link>
           </div>
         </div>
       </section>
@@ -192,7 +208,7 @@ const MasterTalks = () => {
         .ec-talks-featured-img {
           overflow: hidden;
           background: #1A2535;
-          height: 250px;
+          aspect-ratio: 16 / 9;
           position: relative;
         }
 
@@ -377,9 +393,6 @@ const MasterTalks = () => {
           }
           .ec-talks-featured {
             grid-template-columns: 1fr;
-          }
-          .ec-talks-featured-img {
-            height: 240px;
           }
           .ec-talks-grid {
             grid-template-columns: repeat(2, 1fr);

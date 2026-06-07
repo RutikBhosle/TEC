@@ -72,7 +72,8 @@ const ContactInfo = () => {
           flex-direction: column;
           gap: 2.75rem;
           width: 100%;
-          padding: 0.5rem 0;
+          height: 100%;
+          padding: 0.5rem 0 0 0;
           color: #0f1923;
         }
 
@@ -203,11 +204,12 @@ const ContactInfo = () => {
         .hotline-panel {
           background: #0f1923;
           color: #FFFFFF;
-          border-radius: 12px;
+          border-radius: 0;
           padding: 1.75rem;
           box-shadow: 0 8px 30px rgba(15, 25, 35, 0.08);
           transition: all 0.3s ease;
           border: 1px solid rgba(255, 255, 255, 0.04);
+          margin-top: auto;
         }
 
         .hotline-panel:hover {

@@ -12,7 +12,7 @@ const WebProfiles = () => {
   title,
   slug,
   'featureImg': mainImage.asset->url,
-  description,
+  'description': coalesce(linkedArticle[0]->description, description),
   publishedAt,
   _updatedAt,
   _createdAt,
@@ -21,9 +21,10 @@ const WebProfiles = () => {
 `;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["magazine-profiles-v4"],
+    queryKey: ["magazine-profiles-v6"],
     queryFn: async () => {
       const response = await client.fetch(query);
+      console.log("Fetched WebProfiles from Sanity:", response);
       return response;
     },
     refetchOnMount: "always",
@@ -61,7 +62,39 @@ const WebProfiles = () => {
         </>
       );
     }
-    return title;
+  };
+
+  const formatDescription = (desc) => {
+    if (!desc) return "";
+    let cleaned = desc.trim();
+    // Locate the first colon or dash that appears in the first 80 characters (to avoid splitting much later inside sentences)
+    const splitIndex = cleaned.search(/(?<=^[^:\-]{2,80})[:\-]/);
+    if (splitIndex !== -1) {
+      cleaned = cleaned.substring(splitIndex + 1).trim();
+    }
+    if (cleaned.length > 0) {
+      cleaned = cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+    }
+    const maxLen = 180;
+    if (cleaned.length <= maxLen) return cleaned;
+    const truncated = cleaned.substring(0, maxLen);
+    const lastSpace = truncated.lastIndexOf(" ");
+    if (lastSpace > 0) {
+      return truncated.substring(0, lastSpace).trim() + " ...";
+    }
+  };
+
+  const formatPublishDate = (dateString) => {
+    if (!dateString) return "";
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        year: "numeric",
+      }).toUpperCase();
+    } catch {
+      return "";
+    }
   };
 
   const handlePrev = () => {
@@ -137,7 +170,7 @@ const WebProfiles = () => {
               </h2>
 
               <p className="ec-magazine-description animate-slideUp">
-                {currentMagazine.description ||
+                {formatDescription(currentMagazine.description) ||
                   "This landmark issue explores their philosophy, their impact on learning systems, and why education remains the most powerful lever for societal transformation."}
               </p>
 
@@ -146,16 +179,18 @@ const WebProfiles = () => {
               {/* STATS SECTION */}
               <div className="ec-magazine-stats animate-slideUp">
                 <div className="ec-stat-col">
-                  <div className="ec-stat-num">10+</div>
-                  <div className="ec-stat-label">COUNTRIES REACHED</div>
+                  <div className="ec-stat-num" style={{ fontSize: "24px" }}>Vol. 0{data.length - currentIndex}</div>
+                  <div className="ec-stat-label">EDITION VOLUME</div>
                 </div>
                 <div className="ec-stat-col">
-                  <div className="ec-stat-num">50K</div>
-                  <div className="ec-stat-label">STUDENTS IMPACTED</div>
+                  <div className="ec-stat-num" style={{ fontSize: "24px" }}>
+                    {formatPublishDate(currentMagazine.publishedAt || currentMagazine._createdAt)}
+                  </div>
+                  <div className="ec-stat-label">PUBLISHED DATE</div>
                 </div>
                 <div className="ec-stat-col">
-                  <div className="ec-stat-num">12</div>
-                  <div className="ec-stat-label">INDUSTRY AWARDS</div>
+                  <div className="ec-stat-num" style={{ fontSize: "24px" }}>COVER</div>
+                  <div className="ec-stat-label">EDITORIAL TYPE</div>
                 </div>
               </div>
 
@@ -470,6 +505,9 @@ const WebProfiles = () => {
           }
           .ec-magazine-cover-red-bg {
             transform: translate(16px, 16px);
+          }
+          .ec-magazine-stats {
+            display: none !important;
           }
         }
 

@@ -10880,3 +10880,13 @@ address .tel i {
 .splide__pagination__page.is-active {
   background: var(--primary-color) !important;
 }
+
+/* Enforce sharp corner editorial style on all buttons globally */
+button,
+.btn,
+.button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  border-radius: 0 !important;
+}

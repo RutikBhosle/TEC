@@ -142,13 +142,13 @@ const ContactPage = () => {
           padding-right: 32px !important;
         }
 
-        /* Immersive Dark Hero Cover with Asymmetric Split */
+        /* Immersive Light Hero Cover with Asymmetric Split */
         .contact-hero {
-          background: #0f1923;
-          color: #FFFFFF;
+          background: #FAF8F5;
+          color: #0f1923;
           padding: 6.5rem 0;
           position: relative;
-          border-bottom: 1px solid #1E2D3D;
+          border-bottom: 1px solid #E8E3DC;
         }
 
         .contact-hero-shell {
@@ -188,7 +188,7 @@ const ContactPage = () => {
           font-size: clamp(2.25rem, 4.5vw, 3.5rem);
           font-weight: 800;
           line-height: 1.15;
-          color: #FFFFFF;
+          color: #0f1923;
           margin: 0 0 1.25rem;
           letter-spacing: -0.02em;
         }
@@ -197,7 +197,7 @@ const ContactPage = () => {
           font-family: var(--font-serif-body, 'Libre Baskerville', serif);
           font-size: clamp(0.95rem, 1.8vw, 1.15rem);
           line-height: 1.75;
-          color: #D0C9BF;
+          color: #5A544F;
           margin: 0 0 1.5rem;
         }
 
@@ -206,7 +206,7 @@ const ContactPage = () => {
           height: 3px;
           background: var(--cardinal, #7A0F23);
           margin-bottom: 2.25rem;
-          border-radius: 999px;
+          border-radius: 0;
         }
 
         .contact-hero__actions {
@@ -217,7 +217,7 @@ const ContactPage = () => {
         }
 
         .contact-hero__actions :global(.btn) {
-          border-radius: 999px !important;
+          border-radius: 0 !important;
           padding: 15px 36px !important;
           font-family: var(--font-sans, 'DM Sans', sans-serif) !important;
           font-size: 0.85rem !important;
@@ -236,24 +236,24 @@ const ContactPage = () => {
         }
 
         .contact-hero__actions :global(.btn-primary:hover) {
-          background-color: #FFFFFF !important;
-          color: var(--ink, #0f1923) !important;
+          background-color: var(--ink, #0f1923) !important;
+          color: #FFFFFF !important;
           transform: translateY(-2px) !important;
-          box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+          box-shadow: 0 8px 25px rgba(15, 25, 35, 0.15) !important;
         }
 
         .contact-hero__actions :global(.btn-secondary) {
-          background: rgba(255, 255, 255, 0.08) !important;
-          border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
-          color: #FFFFFF !important;
+          background: transparent !important;
+          border: 1.5px solid rgba(15, 25, 35, 0.15) !important;
+          color: var(--ink, #0f1923) !important;
         }
 
         .contact-hero__actions :global(.btn-secondary:hover) {
-          background: #FFFFFF !important;
-          border-color: #FFFFFF !important;
-          color: var(--ink, #0f1923) !important;
+          background: var(--ink, #0f1923) !important;
+          border-color: var(--ink, #0f1923) !important;
+          color: #FFFFFF !important;
           transform: translateY(-2px) !important;
-          box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2) !important;
+          box-shadow: 0 8px 25px rgba(15, 25, 35, 0.15) !important;
         }
 
         /* Right Column: Premium Masthead Card */
@@ -264,29 +264,29 @@ const ContactPage = () => {
         }
 
         .masthead-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1.5px solid rgba(255, 255, 255, 0.08);
-          border-radius: 16px;
+          background: #FFFFFF;
+          border: 1.5px solid rgba(15, 25, 35, 0.08);
+          border-radius: 0;
           padding: 2.5rem;
           width: 100%;
           max-width: 380px;
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 15px 35px rgba(15, 25, 35, 0.05);
           position: relative;
           overflow: hidden;
           transition: all 0.3s ease;
         }
 
         .masthead-card:hover {
-          border-color: rgba(255, 255, 255, 0.15);
+          border-color: rgba(15, 25, 35, 0.15);
           transform: translateY(-3px);
-          box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 20px 45px rgba(15, 25, 35, 0.1);
         }
 
         .masthead-seal {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 5.5rem;
           font-weight: 900;
-          color: rgba(255, 255, 255, 0.03);
+          color: rgba(15, 25, 35, 0.03);
           line-height: 1;
           position: absolute;
           right: -10px;
@@ -307,7 +307,7 @@ const ContactPage = () => {
           display: flex;
           flex-direction: column;
           gap: 0.35rem;
-          border-bottom: 1.5px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1.5px solid rgba(15, 25, 35, 0.08);
           padding-bottom: 0.75rem;
         }
 
@@ -329,7 +329,7 @@ const ContactPage = () => {
           font-family: var(--font-serif, 'Playfair Display', serif);
           font-size: 1.35rem;
           font-weight: 700;
-          color: #FFFFFF;
+          color: #0f1923;
         }
 
         /* Form section */
@@ -395,7 +395,7 @@ const ContactPage = () => {
         .location-map-wrapper {
           width: 100%;
           border: 1px solid rgba(15, 25, 35, 0.08);
-          border-radius: 12px;
+          border-radius: 0;
           overflow: hidden;
           box-shadow: 0 8px 30px rgba(15, 25, 35, 0.04);
         }

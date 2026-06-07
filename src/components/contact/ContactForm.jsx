@@ -12,7 +12,7 @@ const Result = () => {
         .success-msg {
           font-family: var(--font-sans, 'DM Sans', sans-serif) !important;
           font-size: 1.05rem !important;
-          border-radius: 8px !important;
+          border-radius: 0 !important;
           margin: 0 !important;
         }
       `}</style>
@@ -124,7 +124,7 @@ const ContactForm = () => {
         .correspondence-card {
           background: #FFFFFF;
           border: 1px solid rgba(15, 25, 35, 0.06);
-          border-radius: 16px;
+          border-radius: 0;
           padding: 3.5rem;
           box-shadow: 0 12px 40px rgba(15, 25, 35, 0.04);
           width: 100%;
@@ -280,7 +280,7 @@ const ContactForm = () => {
           letter-spacing: 0.12em !important;
           text-transform: uppercase !important;
           border: none !important;
-          border-radius: 999px !important;
+          border-radius: 0 !important;
           padding: 16px 40px !important;
           transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
           cursor: pointer !important;

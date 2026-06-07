@@ -48,7 +48,7 @@ const CustomError = ({ statusCode }) => {
           justify-content: center;
           min-height: 44px;
           padding: 0 18px;
-          border-radius: 999px;
+          border-radius: 0;
           text-decoration: none;
           background: #0f1923;
           color: #111315;

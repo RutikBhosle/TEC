@@ -323,12 +323,6 @@ const MarketNews = () => {
               <span style={S.label}>Global Business Intelligence</span>
               <h2 style={S.sectionTitle}>Market News</h2>
             </div>
-            <Link
-              href={`/category/${data[0]?.category?.slug || "market-news"}`}
-              style={S.viewAll}
-            >
-              All Market News
-            </Link>
           </div>
 
           {/* GRID */}
@@ -374,6 +368,14 @@ const MarketNews = () => {
                 renderRowItem(post, i, i === rightPosts.length - 1)
               )}
             </div>
+          </div>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "24px" }}>
+            <Link
+              href={`/category/${data[0]?.category?.slug || "market-news"}`}
+              style={S.viewAll}
+            >
+              All Market News
+            </Link>
           </div>
         </div>
       </section>

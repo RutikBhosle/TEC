@@ -186,7 +186,7 @@ const MagazineHero = () => {
 
         .ec-hero-img-wrapper {
           width: 100%;
-          height: 500px;
+          aspect-ratio: 16 / 10;
           overflow: hidden;
           margin-bottom: 28px;
           position: relative;
@@ -399,7 +399,6 @@ const MagazineHero = () => {
             padding-top: 32px;
           }
           .ec-hero-title { font-size: 26px; }
-          .ec-hero-img-wrapper { height: 360px; }
         }
 
         @media (max-width: 480px) {

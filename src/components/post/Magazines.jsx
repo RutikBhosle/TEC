@@ -56,7 +56,6 @@ const Magazines = () => {
               <div className="ec-section-label">Fresh off the Press</div>
               <h2 className="ec-section-title">Latest Magazines</h2>
             </div>
-            <Link href="/magazines" className="ec-view-all">View All Magazines</Link>
           </div>
 
           <div className="ec-magazines-grid">
@@ -89,6 +88,25 @@ const Magazines = () => {
                 </div>
               </div>
             ))}
+          </div>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "24px" }}>
+            <Link
+              href="/magazines"
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "11px",
+                fontWeight: 600,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: "#7A0F23",
+                textDecoration: "none",
+                borderBottom: "1px solid #7A0F23",
+                paddingBottom: "1px",
+                whiteSpace: "nowrap",
+              }}
+            >
+              View All Magazines
+            </Link>
           </div>
         </div>
       </section>
@@ -169,7 +187,7 @@ const Magazines = () => {
 
         .ec-mag-card-img {
           width: 100%;
-          height: 380px;
+          aspect-ratio: 3 / 4;
           background: #1E2D3D;
           overflow: hidden;
           position: relative;
@@ -280,7 +298,6 @@ const Magazines = () => {
           .ec-magazines-grid {
             grid-template-columns: repeat(2, 1fr);
           }
-          .ec-mag-card-img { height: 320px; }
         }
 
         @media (max-width: 480px) {
