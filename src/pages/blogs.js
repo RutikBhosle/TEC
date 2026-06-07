@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Loader from "../components/common/Loader";
 import { client, urlFor } from "../client";
+import DataErrorPlaceholder from "../components/common/DataErrorPlaceholder";
 import HeaderOne from "../components/header/HeaderOne";
 import FooterTwo from "../components/footer/FooterTwo";
 import HeadMeta from "../components/elements/HeadMeta";
@@ -91,7 +92,7 @@ const Blogs = () => {
     } | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)
   `;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["allPosts"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -209,7 +210,9 @@ const Blogs = () => {
               <Loader />
             </div>
           ) : error ? (
-            <div className="error-alert-dark">Error fetching featured articles</div>
+            <div className="error-alert-dark" style={{ border: "none", background: "transparent", padding: 0 }}>
+              <DataErrorPlaceholder section="Featured Articles" refetch={refetch} />
+            </div>
           ) : posts.length === 0 ? (
             <p className="no-posts-dark">No publications found. Please check back later.</p>
           ) : (
@@ -301,7 +304,7 @@ const Blogs = () => {
                     <Loader />
                   </div>
                 ) : error ? (
-                  <div className="error-alert">Error fetching latest articles</div>
+                  null
                 ) : posts.length <= 7 ? (
                   <p className="no-more-posts">More insights are currently being compiled by our newsroom.</p>
                 ) : (

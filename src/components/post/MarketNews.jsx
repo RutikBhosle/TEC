@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
 const MarketNews = () => {
   const query = `
@@ -26,7 +27,7 @@ const MarketNews = () => {
 } | order(publishedAt desc, _createdAt desc)[0...7]
 `;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["market-news-home-v6"],
     queryFn: async () => client.fetch(query),
     refetchOnMount: "always",
@@ -34,7 +35,7 @@ const MarketNews = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return null;
+  if (error) return <DataErrorPlaceholder section="Market News" refetch={refetch} />;
   if (!data || data.length === 0) return null;
 
   const formatDate = (post) => {

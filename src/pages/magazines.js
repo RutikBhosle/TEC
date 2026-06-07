@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "../client";
 import Loader from "../components/common/Loader";
 import HeaderOne from "../components/header/HeaderOne";
+import DataErrorPlaceholder from "../components/common/DataErrorPlaceholder";
 import Faq from "../components/FAQ/Faq";
 import FooterTwo from "../components/footer/FooterTwo";
 import PostLayoutformag from "../components/post/layout/PostLayoutformag";
@@ -21,7 +22,7 @@ const Magazines = () => {
     } | order(publishedAt desc)
   `;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["allMagazinesPage"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -36,8 +37,8 @@ const Magazines = () => {
   if (isLoading) return <Loader />;
   if (error)
     return (
-      <div style={{ color: "#7A0F23", textAlign: "center", background: "#FAF8F5", padding: "3rem 1rem", fontFamily: "var(--font-sans)" }}>
-        Error fetching magazines. Please try again later.
+      <div className="container py-5">
+        <DataErrorPlaceholder section="Magazines" refetch={refetch} />
       </div>
     );
   if (!data) return null;

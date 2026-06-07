@@ -1,5 +1,6 @@
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import FooterTwo from "../../components/footer/FooterTwo";
+import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 import HeaderOne from "../../components/header/HeaderOne";
 import Breadcrumb from "../../components/common/Breadcrumb";
 import HeadMeta from "../../components/elements/HeadMeta";
@@ -36,6 +37,8 @@ const PostCategory = ({ initialPosts }) => {
   const {
     data: postData,
     isLoading,
+    error,
+    refetch,
     isFetching,
     isPreviousData,
   } = useQuery({
@@ -58,6 +61,19 @@ const PostCategory = ({ initialPosts }) => {
   const handlePreviousPage = () => {
     setPage((old) => Math.max(old - 1, 0));
   };
+
+  if (error) {
+    return (
+      <div>
+        <HeadMeta metaTitle="Error" />
+        <HeaderOne />
+        <div className="container py-5" style={{ background: "#FAF8F5", minHeight: "50vh", display: "flex", alignItems: "center" }}>
+          <DataErrorPlaceholder section="Video Interviews" refetch={refetch} />
+        </div>
+        <FooterTwo />
+      </div>
+    );
+  }
 
   if (isLoading || !postData) {
     return <Loader />;
@@ -139,9 +155,10 @@ const PostCategory = ({ initialPosts }) => {
 // Server-side data fetching using dehydrate for initial data hydration
 export async function getServerSideProps() {
   const queryClient = new QueryClient();
-  await queryClient.prefetchQuery(["postData", 0], () =>
-    fetchPostsByCategory(0)
-  );
+  await queryClient.prefetchQuery({
+    queryKey: ["postData", 0],
+    queryFn: () => fetchPostsByCategory(0),
+  });
 
   return {
     props: {

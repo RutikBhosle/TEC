@@ -6,6 +6,7 @@ import Magazines from "../../components/post/Magazines";
 import FooterTwo from "../../components/footer/FooterTwo";
 import Loader from "../../components/common/Loader";
 import { client } from "../../client";
+import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 import HeadMetaDynamic from "../../components/elements/HeadMetaDynamic";
 
 const fetchPostData = async (slug) => {
@@ -33,6 +34,7 @@ const PostDetails = ({ initialData }) => {
     data: postData,
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["currentPost", slug],
     queryFn: () => fetchPostData(slug),
@@ -41,7 +43,17 @@ const PostDetails = ({ initialData }) => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error fetching post: {error.message}</div>;
+  if (error) {
+    return (
+      <div>
+        <HeaderOne />
+        <div className="container py-5" style={{ background: "#FAF8F5", minHeight: "50vh", display: "flex", alignItems: "center" }}>
+          <DataErrorPlaceholder section="Post Details" refetch={refetch} />
+        </div>
+        <FooterTwo />
+      </div>
+    );
+  }
   if (!postData) return <div>No data found</div>;
 
   return (

@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../../components/common/Loader";
 import HeadMetaDynamic from "../../components/elements/HeadMetaDynamic";
+import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 
 const getEmbeddedPublicationUrl = (publicationUrl) => {
   if (!publicationUrl) return "";
@@ -84,6 +85,7 @@ const MagazineDetails = ({
     data: magazineContent,
     isLoading: isLoadingMagazine,
     error: errorMagazine,
+    refetch: refetchMagazine,
   } = useQuery({
     queryKey: ["magazineContent", slug],
     queryFn: () => fetchMagazineContent(slug),
@@ -95,6 +97,7 @@ const MagazineDetails = ({
     data: allArticles,
     isLoading: isLoadingAllArticles,
     error: errorAllArticles,
+    refetch: refetchAllArticles,
   } = useQuery({
     queryKey: ["web-profiles"],
     queryFn: fetchAllArticles,
@@ -105,6 +108,7 @@ const MagazineDetails = ({
     data: currentMagArticle,
     isLoading: isLoadingCurrentArticle,
     error: errorCurrentArticle,
+    refetch: refetchCurrentArticle,
   } = useQuery({
     queryKey: ["currentMagArticle", slug],
     queryFn: () => fetchCurrentMagArticle(slug),
@@ -114,16 +118,22 @@ const MagazineDetails = ({
 
   if (isLoadingMagazine || isLoadingAllArticles || isLoadingCurrentArticle)
     return <Loader />;
-  if (errorMagazine)
-    return <div>Error fetching magazine content: {errorMagazine.message}</div>;
-  if (errorAllArticles)
-    return <div>Error fetching articles: {errorAllArticles.message}</div>;
-  if (errorCurrentArticle)
+  if (errorMagazine || errorAllArticles || errorCurrentArticle) {
+    const handleRefetchAll = () => {
+      refetchMagazine();
+      refetchAllArticles();
+      refetchCurrentArticle();
+    };
     return (
       <div>
-        Error fetching current magazine article: {errorCurrentArticle.message}
+        <HeaderOne />
+        <div className="container py-5" style={{ background: "#FAF8F5", minHeight: "50vh", display: "flex", alignItems: "center" }}>
+          <DataErrorPlaceholder section="Magazine Details" refetch={handleRefetchAll} />
+        </div>
+        <FooterTwo />
       </div>
     );
+  }
   if (!magazineContent || magazineContent.length === 0)
     return <div>No magazine content found</div>;
 

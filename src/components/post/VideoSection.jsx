@@ -2,6 +2,7 @@ import SectionTitle from "../elements/SectionTitle";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 import YoutubeVideo from "./layout/YoutubeVideo";
 
 const VideoSection = () => {
@@ -15,7 +16,7 @@ const VideoSection = () => {
         } | order(publishedAt desc)[0...4] 
 `;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["video-interviews"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -24,7 +25,7 @@ const VideoSection = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error fetching posts</div>;
+  if (error) return <DataErrorPlaceholder section="Video Interviews" refetch={refetch} />;
 
   if (!data) return null;
 

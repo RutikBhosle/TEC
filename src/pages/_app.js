@@ -3,6 +3,7 @@ import "../styles/style.css";
 import "../styles/magazines.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ScrollToTop from "../components/common/ScrollToTop";
+import OfflineBanner from "../components/common/OfflineBanner";
 import Script from "next/script";
 import { Inter, Merriweather } from "next/font/google";
 
@@ -70,6 +71,7 @@ function MyApp({ Component, pageProps }) {
         />
         <Component {...pageProps} />
         <ScrollToTop />
+        <OfflineBanner />
       </QueryClientProvider>
     </div>
   );

@@ -4,6 +4,7 @@ import HeaderOne from "../../components/header/HeaderOne";
 import FooterTwo from "../../components/footer/FooterTwo";
 import Loader from "../../components/common/Loader";
 import HeadMetaDynamic from "../../components/elements/HeadMetaDynamic";
+import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 import PostFormatText from "../../components/post/post-format/PostFormatText";
 import { client } from "../../client";
 
@@ -27,14 +28,24 @@ const IndustryPostDetails = () => {
   const router = useRouter();
   const { slug } = router.query;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["industryPost", slug],
     queryFn: () => fetchIndustryPost(slug),
     enabled: !!slug,
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error fetching post</div>;
+  if (error) {
+    return (
+      <div>
+        <HeaderOne />
+        <div className="container py-5" style={{ background: "#FAF8F5", minHeight: "50vh", display: "flex", alignItems: "center" }}>
+          <DataErrorPlaceholder section="Industry Post Details" refetch={refetch} />
+        </div>
+        <FooterTwo />
+      </div>
+    );
+  }
   if (!data) return <div>No data found</div>;
 
   return (

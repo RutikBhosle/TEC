@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
 const IndustryCategories = () => {
   const query = `*[_type == "industryCategory"]{
@@ -13,7 +14,7 @@ const IndustryCategories = () => {
     "imageUrl": image.asset->url
   } | order(title asc)`;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["industry-categories"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -22,7 +23,7 @@ const IndustryCategories = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div className="industry-state">Error fetching industry verticals. Please try again.</div>;
+  if (error) return <DataErrorPlaceholder section="Industry Verticals" refetch={refetch} />;
   if (!data) return null;
 
   return (

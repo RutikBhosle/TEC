@@ -3,11 +3,12 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
 const MagazineHero = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const { data: magazineData, isLoading, error } = useQuery({
+  const { data: magazineData, isLoading, error, refetch } = useQuery({
     queryKey: ["web-profiles-hero"],
     queryFn: async () => {
       const query = `*[
@@ -70,7 +71,7 @@ const MagazineHero = () => {
   };
 
   if (isLoading) return <Loader />;
-  if (error) return <div style={{ color: "#0f1923", padding: "40px" }}>Error loading magazines</div>;
+  if (error) return <DataErrorPlaceholder section="Featured Magazine" refetch={refetch} height="400px" />;
 
   return (
     <>

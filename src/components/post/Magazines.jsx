@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
 const Magazines = () => {
   const query = `
@@ -20,7 +21,7 @@ const Magazines = () => {
 } | order(coalesce(publishedAt, _updatedAt, _createdAt) desc)[0...8]
 `;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["allMagazines-grid"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -29,7 +30,7 @@ const Magazines = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error fetching magazines</div>;
+  if (error) return <DataErrorPlaceholder section="Latest Magazines" refetch={refetch} />;
   if (!data) return null;
 
   const formatDate = (item) => {

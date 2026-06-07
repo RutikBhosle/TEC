@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
 import Image from "next/image";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 import Link from "next/link";
 
 const IndustryPosts = () => {
@@ -19,7 +20,7 @@ const IndustryPosts = () => {
     }
   } | order(publishedAt desc)[0...6]`;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["industry-posts"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -28,7 +29,7 @@ const IndustryPosts = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error fetching industry posts</div>;
+  if (error) return <DataErrorPlaceholder section="Industry Articles" refetch={refetch} />;
   if (!data) return null;
 
   return (

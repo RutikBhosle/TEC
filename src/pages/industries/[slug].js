@@ -5,6 +5,7 @@ import HeaderOne from "../../components/header/HeaderOne";
 import FooterTwo from "../../components/footer/FooterTwo";
 import Loader from "../../components/common/Loader";
 import HeadMeta from "../../components/elements/HeadMeta";
+import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 import { client } from "../../client";
 import Image from "next/image";
 import Link from "next/link";
@@ -100,7 +101,7 @@ const IndustryPosts = () => {
   const router = useRouter();
   const { slug } = router.query;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["industryPosts", slug],
     queryFn: () => fetchIndustryPostsByIndustry(slug),
     enabled: !!slug,
@@ -217,7 +218,9 @@ const IndustryPosts = () => {
               <Loader />
             </div>
           ) : error ? (
-            <div className="error-alert-dark">Error fetching industry articles</div>
+            <div className="error-alert-dark" style={{ border: "none", background: "transparent", padding: 0 }}>
+              <DataErrorPlaceholder section="Industry Articles" refetch={refetch} />
+            </div>
           ) : posts.length === 0 ? (
             <p className="no-posts-dark">No publications found in this category. Please check back later.</p>
           ) : (
@@ -309,7 +312,7 @@ const IndustryPosts = () => {
                     <Loader />
                   </div>
                 ) : error ? (
-                  <div className="error-alert">Error fetching latest articles</div>
+                  null
                 ) : posts.length <= 7 ? (
                   <p className="no-more-posts">More insights are currently being compiled by our newsroom.</p>
                 ) : (

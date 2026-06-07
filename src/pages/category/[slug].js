@@ -1,5 +1,6 @@
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import FooterTwo from "../../components/footer/FooterTwo";
+import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 import HeaderOne from "../../components/header/HeaderOne";
 import Breadcrumb from "../../components/common/Breadcrumb";
 import HeadMeta from "../../components/elements/HeadMeta";
@@ -47,6 +48,8 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
   const {
     data: postData,
     isLoading,
+    error,
+    refetch,
     isPreviousData,
   } = useQuery({
     queryKey: ["postData", initialCategory, page],
@@ -74,6 +77,19 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
   const handlePageClick = (pageNumber) => {
     setPage(pageNumber);
   };
+
+  if (error) {
+    return (
+      <div>
+        <HeadMeta metaTitle="Error" />
+        <HeaderOne />
+        <div className="container py-5" style={{ background: "#FAF8F5", minHeight: "50vh", display: "flex", alignItems: "center" }}>
+          <DataErrorPlaceholder section="Category Posts" refetch={refetch} />
+        </div>
+        <FooterTwo />
+      </div>
+    );
+  }
 
   if (isLoading || !postData) {
     return <Loader />;
@@ -238,12 +254,14 @@ export const getStaticProps = async ({ params }) => {
   const queryClient = new QueryClient();
   const category = params.slug;
 
-  await queryClient.prefetchQuery(["postData", category, 0], () =>
-    fetchPostsByCategory(category, 0)
-  );
-  await queryClient.prefetchQuery(["allPosts"], () =>
-    fetchPostsByCategory(category, 0)
-  );
+  await queryClient.prefetchQuery({
+    queryKey: ["postData", category, 0],
+    queryFn: () => fetchPostsByCategory(category, 0),
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["allPosts"],
+    queryFn: () => fetchPostsByCategory(category, 0),
+  });
 
   return {
     props: {

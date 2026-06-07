@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
 const BusinessBulletin = () => {
   const query = `
@@ -25,7 +26,7 @@ const BusinessBulletin = () => {
 } | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...7]
 `;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["business-bulletin-home-v2"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -36,7 +37,7 @@ const BusinessBulletin = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error fetching posts</div>;
+  if (error) return <DataErrorPlaceholder section="Business Bulletin" refetch={refetch} />;
   if (!data) return null;
 
   const featuredPosts = data.slice(0, 2);

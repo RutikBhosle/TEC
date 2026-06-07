@@ -3,6 +3,7 @@ import PostLayoutThree from "./layout/PostLayoutThree";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
 const BlogAndArticle = () => {
   const query = `
@@ -20,7 +21,7 @@ const BlogAndArticle = () => {
 } | order(publishedAt desc)[0...3] 
 
 `;
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["blog-articles-posts"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -29,7 +30,7 @@ const BlogAndArticle = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <div>Error fetching posts</div>;
+  if (error) return <DataErrorPlaceholder section="Blogs & Articles" refetch={refetch} />;
 
   if (!data) return null;
 

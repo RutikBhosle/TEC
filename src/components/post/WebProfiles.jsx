@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../common/Loader";
+import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
 const WebProfiles = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,7 +21,7 @@ const WebProfiles = () => {
 }
 `;
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ["magazine-profiles-v6"],
     queryFn: async () => {
       const response = await client.fetch(query);
@@ -41,7 +42,7 @@ const WebProfiles = () => {
   }, [data]);
 
   if (isLoading) return <Loader />;
-  if (error) return <div style={{ color: "#fff", background: "#0f1923", padding: "40px" }}>Error fetching posts</div>;
+  if (error) return <DataErrorPlaceholder section="Web Profiles" refetch={refetch} height="400px" />;
   if (!data?.length) return null;
 
   const currentMagazine = data[currentIndex] || data[0];

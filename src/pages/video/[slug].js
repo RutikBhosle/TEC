@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
 import Loader from "../../components/common/Loader";
 import VideoDetailLayout from "../../components/post/post-format/VideoDetailLayout";
+import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 import HeadMetaDynamic from "../../components/elements/HeadMetaDynamic";
 import HeaderOne from "../../components/header/HeaderOne";
 import FooterTwo from "../../components/footer/FooterTwo";
@@ -34,6 +35,7 @@ const VideoDetail = () => {
     data: video,
     isLoading: videoLoading,
     error: videoError,
+    refetch: refetchVideo,
   } = useQuery({
     queryKey: ["video", slug],
     queryFn: async () => {
@@ -46,6 +48,7 @@ const VideoDetail = () => {
     data: allVideos,
     isLoading: allVideosLoading,
     error: allVideosError,
+    refetch: refetchAllVideos,
   } = useQuery({
     queryKey: ["all-videos"],
     queryFn: async () => {
@@ -55,7 +58,17 @@ const VideoDetail = () => {
   });
 
   if (videoLoading || allVideosLoading) return <Loader />;
-  if (videoError || allVideosError) return <div>Error fetching data</div>;
+  if (videoError || allVideosError) {
+    return (
+      <div>
+        <HeaderOne />
+        <div className="container py-5" style={{ background: "#FAF8F5", minHeight: "50vh", display: "flex", alignItems: "center" }}>
+          <DataErrorPlaceholder section="Video Details" refetch={() => { refetchVideo(); refetchAllVideos(); }} />
+        </div>
+        <FooterTwo />
+      </div>
+    );
+  }
 
   if (!video) return <div>Video not found</div>;
 
