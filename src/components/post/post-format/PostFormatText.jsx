@@ -321,8 +321,8 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .single-blog-wrapper {
-            max-width: 800px;
-            margin: 0 auto 2.5rem 0;
+            max-width: 100%;
+            margin: 0 0 2.5rem 0;
             position: relative;
           }
 
@@ -361,8 +361,8 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .rich-text-content {
-            max-width: 720px;
-            margin: 2.5rem auto 0 0;
+            max-width: 100%;
+            margin: 2.5rem 0 0 0;
           }
 
           .post-detail-page .rich-text-content p,
@@ -385,14 +385,14 @@ const PostFormatText = ({ postData, allData }) => {
           }
 
           .post-detail-page .rich-text-content > p:first-of-type::first-letter {
-            float: left;
-            font-size: 3.6em;
-            line-height: 0.8;
-            margin-right: 0.15em;
-            margin-top: 0.1em;
+            font-size: 3.2em;
+            line-height: 0.85;
+            margin-right: 0.05em;
             font-weight: 800;
             color: var(--cardinal, #7A0F23);
             font-family: var(--primary-font), serif;
+            display: inline-block;
+            vertical-align: baseline;
           }
 
           /* Fallback general post details paragraphs */
