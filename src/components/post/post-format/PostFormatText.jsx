@@ -192,7 +192,7 @@ const RelatedSidebarPosts = ({ postData }) => {
             excerpt = excerpt.length > 120 ? excerpt.substring(0, 120) + "..." : excerpt;
           }
 
-          const categoryTitle = post.category?.title || (type === "industryPost" ? "Industry" : "Market News");
+          const categoryTitle = post.category?.title || (type === "industryPost" ? "Industry" : "Market Pulse");
 
           return (
             <Link
@@ -261,7 +261,7 @@ const PostFormatText = ({ postData, allData }) => {
 
                   <Image
                     className="mb-4 w-full h-auto object-cover"
-                    src={postData?.featureImg}
+                    src={postData?.featureImg || "/images/placeholder.png"}
                     alt={postData?.altText || postData?.title}
                     width={500}
                     height={300}

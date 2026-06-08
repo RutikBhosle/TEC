@@ -6,7 +6,7 @@ const PostLayoutSeven = ({ data }) => {
     <div className="content-block m-b-xs-30">
       <Link href={`/post/${data.slug.current}`}>
         <Image
-          src={data.featureImg}
+          src={data.featureImg || "/images/placeholder.png"}
           alt={data?.altText || data.title}
           width={255}
           height={255}

@@ -1,16 +1,13 @@
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import FooterTwo from "../../components/footer/FooterTwo";
 import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
 import HeaderOne from "../../components/header/HeaderOne";
-import Breadcrumb from "../../components/common/Breadcrumb";
 import HeadMeta from "../../components/elements/HeadMeta";
-import AdBanner from "../../components/common/AdBanner";
 import WidgetAd from "../../components/widget/WidgetAd";
 import WidgetSocialShare from "../../components/widget/WidgetSocialShare";
 import WidgetPost from "../../components/widget/WidgetPost";
-import PostLayoutTwo from "../../components/post/layout/PostLayoutTwo";
 import WidgetCategory from "../../components/widget/WidgetCategory";
-import SectionTitle from "../../components/elements/SectionTitle";
 import { client } from "../../client";
 import Loader from "../../components/common/Loader";
 import { useState, useEffect } from "react";
@@ -24,13 +21,14 @@ const fetchPostsByCategory = async (category, page) => {
     altText,
     'featureImg': mainImage.asset->url,
     publishedAt,
+    _updatedAt,
+    _createdAt,
     description,
     'category': {
       'title': categories[0]->title,
       'slug': categories[0]->slug.current
     }
-  } | order(publishedAt desc)[${page * POSTS_PER_PAGE}...${(page + 1) * POSTS_PER_PAGE
-    }]`;
+  } | order(publishedAt desc)[${page * POSTS_PER_PAGE}...${(page + 1) * POSTS_PER_PAGE}]`;
 
   const posts = await client.fetch(query);
   return posts;
@@ -78,6 +76,28 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
     setPage(pageNumber);
   };
 
+  const getCategoryTitleFallback = (slug) => {
+    if (!slug) return "Category";
+    return slug
+      .split("-")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  const formatDate = (post) => {
+    const d = post.publishedAt || post._updatedAt || post._createdAt;
+    if (!d) return "";
+    try {
+      return new Date(d).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    } catch {
+      return "";
+    }
+  };
+
   if (error) {
     return (
       <div>
@@ -96,95 +116,92 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
   }
 
   const cateContent = postData[0];
+  const categoryTitle = cateContent?.category?.title || getCategoryTitleFallback(initialCategory);
 
   return (
-    <div>
-      <HeadMeta metaTitle={cateContent?.category?.title || "Category"} />
+    <div style={{ background: "#FAF8F5", color: "#0f1923", minHeight: "100vh" }}>
+      <HeadMeta metaTitle={categoryTitle} />
       <HeaderOne />
 
-      <div
-        className="axil-video-posts"
-        style={{
-          background: '#FAF8F5',
-          color: '#0f1923',
-          paddingTop: '2rem',
-          paddingBottom: '0',
-          fontFamily: 'var(--secondary-font)',
-        }}
-      >
-        <div className="container">
-          <SectionTitle
-            btnUrl={`/category/${cateContent?.category?.slug || initialCategory}`}
-            title={cateContent?.category?.title || "Category"}
-            btnText="Read all Articles"
-            pClass="title-white m-b-xs-40"
-          />
-        </div>
-      </div>
-      {/* Banner End here */}
-      <div className="random-posts section-gap">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-8">
-              <div className="axil-content">
-                {postData.map((data) => (
-                  <PostLayoutTwo
-                    data={data}
-                    postSizeMd={true}
-                    key={data.slug.current}
-                  />
-                ))}
-              </div>
-              <div className="pagination" style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '2rem', alignItems: 'center' }}>
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
-                  <button
-                    key={pageNumber}
-                    onClick={() => handlePageClick(pageNumber - 1)}
-                    disabled={isPreviousData && page === pageNumber - 1}
-                    style={{
-                      background: 'transparent',
-                      border: 'none',
-                      padding: '0',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      position: 'relative',
-                      color: page === pageNumber - 1 ? '#0f1923' : '#5e6876',
-                      fontSize: 'var(--type-body-lg)',
-                      fontFamily: 'var(--secondary-font)',
-                      fontWeight: page === pageNumber - 1 ? 'bold' : 'normal',
-                      minWidth: '30px'
-                    }}
-                  >
-                    <span style={{ lineHeight: '1.2', display: 'block', marginBottom: '0' }}>{pageNumber}</span>
-                    <span
-                      className="pagination-underline"
-                      style={{
-                        marginTop: '6px',
-                        width: '30px',
-                        height: '3px',
-                        backgroundColor: page === pageNumber - 1 ? '#0f1923' : '#8b97a3',
-                        display: 'block',
-                        visibility: 'visible',
-                        opacity: 1,
-                        flexShrink: 0,
-                        minHeight: '3px',
-                        minWidth: '30px',
-                        border: 'none',
-                        padding: '0'
-                      }}
-                    ></span>
-                  </button>
-                ))}
-              </div>
+      <main className="ec-category-section">
+        <div className="ec-category-container">
+          
+          {/* Section Header */}
+          <div className="ec-section-header">
+            <div>
+              <div className="ec-section-label">Category Archive</div>
+              <h1 className="ec-section-title">{categoryTitle}</h1>
             </div>
+          </div>
+
+          <div className="row">
+            {/* Left side: list of posts */}
+            <div className="col-lg-8">
+              <div className="ec-cat-posts-list">
+                {postData.length > 0 ? (
+                  postData.map((data, index) => (
+                    <Link
+                      key={data.slug?.current || index}
+                      href={`/post/${data.slug?.current}`}
+                      className="ec-cat-card"
+                    >
+                      <div className="ec-cat-card-img-wrapper">
+                        {data.featureImg ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={data.featureImg}
+                            alt={data.altText || data.title}
+                            className="ec-cat-card-img"
+                          />
+                        ) : (
+                          <div className="ec-cat-card-placeholder" />
+                        )}
+                      </div>
+                      <div className="ec-cat-card-content">
+                        <span className="ec-cat-card-tag">{data.category?.title || categoryTitle}</span>
+                        <h3 className="ec-cat-card-title">{data.title}</h3>
+                        {data.description && (
+                          <p className="ec-cat-card-excerpt">
+                            {data.description.length > 160
+                              ? `${data.description.slice(0, 157).trimEnd()}...`
+                              : data.description}
+                          </p>
+                        )}
+                        <div className="ec-cat-card-date">{formatDate(data)}</div>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <div className="py-5 text-center" style={{ fontFamily: "var(--secondary-font)", color: "var(--text-muted)" }}>
+                    No articles found in this category.
+                  </div>
+                )}
+              </div>
+
+              {/* Pagination */}
+              {totalPages > 1 && (
+                <div className="ec-pagination">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+                    <button
+                      key={pageNumber}
+                      onClick={() => handlePageClick(pageNumber - 1)}
+                      disabled={isPreviousData && page === pageNumber - 1}
+                      className={`ec-pagination-btn ${page === pageNumber - 1 ? "active" : ""}`}
+                    >
+                      <span>{pageNumber}</span>
+                      <span className="ec-pagination-underline"></span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Right side: Sidebar */}
             <div className="col-lg-4">
               <div className="post-sidebar">
                 <WidgetAd />
                 <WidgetSocialShare />
-                <WidgetCategory cateData={allPosts} />
+                <WidgetCategory />
                 <WidgetPost dataPost={allPosts} />
                 <WidgetAd
                   img="/images/clientbanner/clientbanner3.jpg"
@@ -194,54 +211,256 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
               </div>
             </div>
           </div>
+
         </div>
-      </div>
+      </main>
+      
       <FooterTwo />
+
       <style jsx global>{`
-        /* Hide breadcrumb on category pages */
+        /* Hide default breadcrumb on category pages */
         .breadcrumb {
           display: none !important;
         }
-        
-        /* Heading section styling */
-        .axil-video-posts .section-title {
-          display: flex !important;
-          flex-direction: row !important;
-          align-items: center !important;
-          justify-content: space-between !important;
-          position: relative !important;
-          margin-bottom: 0 !important;
+
+        .ec-category-section {
+          background: #FAF8F5;
+          padding: 36px 0 64px;
         }
-        
-        .axil-video-posts .section-title .axil-title {
-          text-align: left !important;
-          margin-bottom: 0 !important;
-          color: #0f1923 !important;
+
+        .ec-category-container {
+          max-width: 1240px;
+          margin: 0 auto;
+          padding: 0 32px;
         }
-        
-        .axil-video-posts .section-title .btn-link {
-          margin-top: 0 !important;
-          align-self: center !important;
-          font-size: var(--type-small) !important;
-          font-family: var(--secondary-font) !important;
-          color: #7a5a24 !important;
+
+        .ec-section-header {
+          display: flex;
+          align-items: baseline;
+          justify-content: space-between;
+          margin-bottom: 36px;
+          padding-bottom: 12px;
+          border-bottom: 2px solid #0f1923;
         }
-        
-        /* Pagination Underline Styles - Force visibility */
-        .pagination button .pagination-underline,
-        .pagination button span:last-child {
-          display: block !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          height: 3px !important;
-          min-height: 3px !important;
-          width: 30px !important;
+
+        .ec-section-label {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: #7A0F23;
+          margin-bottom: 6px;
         }
-        
-        .pagination button {
-          background: transparent !important;
-          border: none !important;
-          padding: 0 !important;
+
+        .ec-section-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 28px;
+          font-weight: 700;
+          color: #0f1923;
+          letter-spacing: -0.01em;
+          margin: 0;
+        }
+
+        /* POST CARDS */
+        .ec-cat-posts-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .ec-cat-card {
+          display: flex;
+          gap: 28px;
+          padding: 28px 0;
+          border-bottom: 1px solid #E2DDD7;
+          text-decoration: none;
+          color: inherit;
+          cursor: pointer;
+          transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .ec-cat-card:first-child {
+          padding-top: 0;
+        }
+
+        .ec-cat-card:last-child {
+          border-bottom: none;
+        }
+
+        .ec-cat-card:hover {
+          background-color: #FAF8F5;
+          padding-left: 12px;
+          padding-right: 12px;
+          margin-left: -12px;
+          margin-right: -12px;
+        }
+
+        .ec-cat-card-img-wrapper {
+          width: 240px;
+          aspect-ratio: 16 / 10;
+          overflow: hidden;
+          background: #1A2535;
+          flex-shrink: 0;
+          border-radius: 4px;
+        }
+
+        .ec-cat-card-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .ec-cat-card:hover .ec-cat-card-img {
+          transform: scale(1.04);
+        }
+
+        .ec-cat-card-placeholder {
+          width: 100%;
+          height: 100%;
+          background: #1A2535;
+        }
+
+        .ec-cat-card-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+        }
+
+        .ec-cat-card-tag {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 8.5px;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: #7A0F23;
+          margin-bottom: 8px;
+          display: block;
+        }
+
+        .ec-cat-card-title {
+          font-family: 'Playfair Display', serif;
+          font-size: 20px;
+          font-weight: 700;
+          color: #0f1923;
+          line-height: 1.35;
+          margin: 0 0 10px;
+          transition: color 0.25s ease;
+        }
+
+        .ec-cat-card:hover .ec-cat-card-title {
+          color: #7A0F23;
+        }
+
+        .ec-cat-card-excerpt {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px;
+          color: #6B6560;
+          line-height: 1.6;
+          margin: 0 0 12px;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .ec-cat-card-date {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          color: #9A9490;
+          margin-top: auto;
+        }
+
+        /* PAGINATION */
+        .ec-pagination {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 48px;
+          align-items: center;
+        }
+
+        .ec-pagination-btn {
+          background: transparent;
+          border: none;
+          padding: 8px 12px;
+          cursor: pointer;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          color: #5E6876;
+          position: relative;
+          transition: color 0.2s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .ec-pagination-btn:hover {
+          color: #7A0F23;
+        }
+
+        .ec-pagination-btn.active {
+          color: #0f1923;
+          font-weight: 700;
+        }
+
+        .ec-pagination-underline {
+          display: block;
+          margin-top: 6px;
+          width: 0;
+          height: 3px;
+          background-color: #7A0F23;
+          transition: width 0.25s ease;
+        }
+
+        .ec-pagination-btn:hover .ec-pagination-underline {
+          width: 16px;
+        }
+
+        .ec-pagination-btn.active .ec-pagination-underline {
+          width: 24px;
+          background-color: #0f1923;
+        }
+
+        /* SIDEBAR SPACING */
+        .post-sidebar {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+          .ec-category-container {
+            padding: 0 24px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .ec-category-section {
+            padding: 24px 0 48px;
+          }
+          .ec-category-container {
+            padding: 0 18px;
+          }
+          .ec-cat-card {
+            flex-direction: column;
+            gap: 16px;
+            padding: 24px 0;
+          }
+          .ec-cat-card:hover {
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 0;
+            margin-right: 0;
+            background-color: transparent;
+          }
+          .ec-cat-card-img-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+          }
         }
       `}</style>
     </div>

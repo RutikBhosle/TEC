@@ -14,7 +14,7 @@ const PostLayoutTwo1 = ({ data, postSizeMd, postBgDark }) => {
           // className={
           //   postSizeMd == true ? "object-fit-contain" : "object-fit-cover"
           // }
-          src={data.featureImg}
+          src={data.featureImg || "/images/placeholder.png"}
           alt={data.altText || data.title}
           width={postSizeMd === true ? 285 : 150}
           height={postSizeMd === true ? 285 : 150}

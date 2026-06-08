@@ -39,7 +39,7 @@ const PostLayoutTwo = ({
         href={`/post/${data.slug.current}`}
       >
         <Image
-          src={data.featureImg}
+          src={data.featureImg || "/images/placeholder.png"}
           alt={data.altText || data.title}
           width={postSizeMd === true ? 285 : 150}
           height={postSizeMd === true ? 285 : 150}

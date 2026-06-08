@@ -225,7 +225,7 @@ const Blogs = () => {
                 >
                   <div className="primary-hero-image-wrapper">
                     <Image
-                      src={posts[0].featureImg}
+                      src={posts[0].featureImg || "/images/placeholder.png"}
                       alt={posts[0].altText || posts[0].title}
                       fill
                       priority
@@ -397,7 +397,7 @@ const Blogs = () => {
                       >
                         <div className="feed-card-image-wrapper">
                           <Image
-                            src={post.featureImg}
+                            src={post.featureImg || "/images/placeholder.png"}
                             alt={post.altText || post.title}
                             fill
                             sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 380px"

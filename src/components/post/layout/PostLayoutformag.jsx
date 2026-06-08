@@ -14,7 +14,7 @@ const PostLayoutformag = ({ data }) => {
       <Link href={`/magazine/${data.slug.current}`}>
         <div className="image-container">
           <Image
-            src={data.featureImg}
+            src={data.featureImg || "/images/placeholder.png"}
             alt={data?.altText || data.title}
             width={750}
             height={900}

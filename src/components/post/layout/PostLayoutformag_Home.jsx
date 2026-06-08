@@ -18,7 +18,7 @@ const PostLayoutformag_Home = ({ data }) => {
         >
           <div style={{ marginBottom: "10px" }}>
             <Image
-              src={data.featureImg}
+              src={data.featureImg || "/images/placeholder.png"}
               alt={data?.altText || data.title}
               width={1000}
               height={1000}

@@ -35,7 +35,7 @@ const MarketNews = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <DataErrorPlaceholder section="Market News" refetch={refetch} />;
+  if (error) return <DataErrorPlaceholder section="Market Pulse" refetch={refetch} />;
   if (!data || data.length === 0) return null;
 
   const formatDate = (post) => {
@@ -307,7 +307,7 @@ const MarketNews = () => {
         )}
       </div>
       <div style={S.rowContent}>
-        <span style={S.rowTag}>{post.category?.title || "Market News"}</span>
+        <span style={S.rowTag}>{post.category?.title || "Market Pulse"}</span>
         <div style={S.rowTitle}>{post.title}</div>
         <div style={S.rowDate}>{formatDate(post)}</div>
       </div>
@@ -322,7 +322,7 @@ const MarketNews = () => {
           <div style={S.header}>
             <div>
               <span style={S.label}>Global Business Intelligence</span>
-              <h2 style={S.sectionTitle}>Market News</h2>
+              <h2 style={S.sectionTitle}>Market Pulse</h2>
             </div>
           </div>
 
@@ -344,7 +344,7 @@ const MarketNews = () => {
                   )}
                 </div>
                 <div style={S.mainBody}>
-                  <span style={S.mainTag}>{mainPost.category?.title || "Market News"}</span>
+                  <span style={S.mainTag}>{mainPost.category?.title || "Market Pulse"}</span>
                   <h3 style={S.mainTitle}>{mainPost.title}</h3>
                   {mainPostContent && (
                     <p style={S.mainExcerpt}>{mainPostContent}</p>
@@ -375,7 +375,7 @@ const MarketNews = () => {
               href={`/category/${data[0]?.category?.slug || "market-news"}`}
               style={S.viewAll}
             >
-              All Market News
+              All Market Pulse
             </Link>
           </div>
         </div>

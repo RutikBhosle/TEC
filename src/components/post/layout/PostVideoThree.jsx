@@ -7,7 +7,7 @@ const PostVideoThree = ({ data, imgWidth, imgHeight }) => {
     <div className="axil-img-container flex-height-container video-container__type-2 m-b-xs-30">
       <Link className="d-block h-100" href={`/post/${data.slug.current}`}>
         <Image
-          src={data.featureImg}
+          src={data.featureImg || "/images/placeholder.png"}
           alt={data?.altText || data.title}
           width={imgWidth ?? 540}
           height={imgHeight ?? 690}

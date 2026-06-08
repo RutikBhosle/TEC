@@ -67,7 +67,7 @@ const WidgetPost = () => {
     slug,
     'featureImg': mainImage.asset->url,
      'category': {
-    'title': "Business Bulletin",
+    'title': "The Briefing",
     altText,
     'slug': "business-bulletin",
     },
@@ -94,10 +94,10 @@ const WidgetPost = () => {
             <Nav.Link eventKey="recent">Web Profiles</Nav.Link>
           </Nav.Item>
           <Nav.Item className="col">
-            <Nav.Link eventKey="popular">Market News</Nav.Link>
+            <Nav.Link eventKey="popular">Market Pulse</Nav.Link>
           </Nav.Item>
           <Nav.Item className="col">
-            <Nav.Link eventKey="comments">Business Bulletins</Nav.Link>
+            <Nav.Link eventKey="comments">The Briefing</Nav.Link>
           </Nav.Item>
         </Nav>
 

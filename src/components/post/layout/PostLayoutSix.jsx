@@ -7,7 +7,7 @@ const PostLayoutSix = ({ data }) => {
     <div className="axil-img-container m-b-xs-15 m-b-sm-30">
       <Link className="d-block" href={`/post/${data?.slug.current}`}>
         <Image
-          src={data?.featureImg}
+          src={data?.featureImg || "/images/placeholder.png"}
           alt={data?.altText || data?.title}
           width={390}
           height={390}

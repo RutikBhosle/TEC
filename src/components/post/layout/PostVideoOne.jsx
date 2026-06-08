@@ -6,7 +6,7 @@ const PostVideoOne = ({ data }) => {
     <div className="axil-img-container flex-height-container">
       <Link className="d-block h-100" href={`/post/${data.slug.current}`}>
         <Image
-          src={data.featureImg}
+          src={data.featureImg || "/images/placeholder.png"}
           alt={data?.altText || data.title}
           width={1000}
           height={1000}

@@ -18,7 +18,7 @@ const Magazines = () => {
   _createdAt,
   description,
   'categories': categories[]->{title}
-} | order(coalesce(publishedAt, _updatedAt, _createdAt) desc)[0...8]
+} | order(coalesce(publishedAt, _updatedAt, _createdAt) desc)[0...4]
 `;
 
   const { data, isLoading, error, refetch } = useQuery({
@@ -30,7 +30,7 @@ const Magazines = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <DataErrorPlaceholder section="Latest Magazines" refetch={refetch} />;
+  if (error) return <DataErrorPlaceholder section="Premium Editions" refetch={refetch} />;
   if (!data) return null;
 
   const formatDate = (item) => {
@@ -55,7 +55,7 @@ const Magazines = () => {
           <div className="ec-section-header">
             <div>
               <div className="ec-section-label">Fresh off the Press</div>
-              <h2 className="ec-section-title">Latest Magazines</h2>
+              <h2 className="ec-section-title">Premium Editions</h2>
             </div>
           </div>
 
@@ -171,20 +171,25 @@ const Magazines = () => {
         .ec-magazines-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 1px;
-          background: #D0C9BF;
-          border: 1px solid #D0C9BF;
+          gap: 28px;
         }
 
         .ec-mag-card {
-          background: #FAF8F5;
+          background: #FFFFFF;
           display: flex;
           flex-direction: column;
           overflow: hidden;
           cursor: pointer;
-          transition: background 0.2s;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          border: 1px solid rgba(15, 25, 35, 0.06);
+          border-radius: 6px;
+          box-shadow: 0 4px 20px rgba(15, 25, 35, 0.02);
         }
-        .ec-mag-card:hover { background: #F5F2EE; }
+        .ec-mag-card:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 35px rgba(15, 25, 35, 0.08);
+          border-color: rgba(15, 25, 35, 0.12);
+        }
 
         .ec-mag-card-img {
           width: 100%;

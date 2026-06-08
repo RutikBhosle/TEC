@@ -3,14 +3,17 @@ import Link from "next/link";
 import React from "react";
 
 const PostLayoutYT = ({ data, postSizeMd, postBgDark }) => {
-  let thumbnailUrl = "";
+  const videoUrl = data?.videoUrl || "";
+  const videoId = videoUrl
+    ? (videoUrl.includes("watch?v=")
+        ? videoUrl.split("v=")[1]?.split("&")[0]
+        : videoUrl.split("/").pop())
+    : "";
 
-  const videoId = data.videoUrl.includes("watch?v=")
-    ? data.videoUrl.split("v=")[1]
-    : data.videoUrl.split("/").pop();
-
-  // Construct the thumbnail URL using the extracted video ID
-  thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+  // Construct the thumbnail URL using the extracted video ID, fallback to placeholder if none
+  const thumbnailUrl = videoId
+    ? `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`
+    : "/images/placeholder.png";
 
   return (
     <div

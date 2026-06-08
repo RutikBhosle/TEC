@@ -19,7 +19,7 @@ const MasterTalks = () => {
   description,
   _updatedAt,
   'category': {
-    'title': "Master Talks",
+    'title': "Executive Perspectives",
     'slug': "master-talks"
   },
   publishedAt
@@ -37,7 +37,7 @@ const MasterTalks = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <DataErrorPlaceholder section="Master Talks" refetch={refetch} />;
+  if (error) return <DataErrorPlaceholder section="Executive Perspectives" refetch={refetch} />;
   if (!data) return null;
 
   const featuredTalk = data[0];
@@ -59,7 +59,7 @@ const MasterTalks = () => {
           <div className="ec-section-header">
             <div>
               <div className="ec-section-label">Insights &amp; Analysis</div>
-              <h2 className="ec-section-title">Master Talks</h2>
+              <h2 className="ec-section-title">Executive Perspectives</h2>
             </div>
           </div>
 
@@ -79,7 +79,7 @@ const MasterTalks = () => {
                 )}
               </div>
               <div className="ec-talks-featured-body">
-                <span className="ec-talks-featured-tag">Master Talks · Featured</span>
+                <span className="ec-talks-featured-tag">Executive Perspectives · Featured</span>
                 <h3 className="ec-talks-featured-title">{featuredTalk.title}</h3>
                 {featuredTalk.description && (
                   <p className="ec-talks-featured-excerpt">{featuredTalk.description}</p>
@@ -106,7 +106,7 @@ const MasterTalks = () => {
                 className="ec-talk-item"
               >
                 <div className="ec-talk-num">0{i + 1}</div>
-                <span className="ec-talk-tag">{talk.category?.title || "Master Talks"}</span>
+                <span className="ec-talk-tag">{talk.category?.title || "Executive Perspectives"}</span>
                 <h4 className="ec-talk-title">{talk.title}</h4>
                 {talk.description && (
                   <p className="ec-talk-excerpt">{talk.description}</p>
@@ -130,7 +130,7 @@ const MasterTalks = () => {
                 whiteSpace: "nowrap",
               }}
             >
-              All Master Talks
+              All Executive Perspectives
             </Link>
           </div>
         </div>

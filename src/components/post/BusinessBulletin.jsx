@@ -20,7 +20,7 @@ const BusinessBulletin = () => {
   _updatedAt,
   description,
   'category': {
-    'title': "Business Bulletin",
+    'title': "The Briefing",
     'slug': "business-bulletin"
   }
 } | order(coalesce(publishedAt, _updatedAt) desc, _updatedAt desc)[0...7]
@@ -37,7 +37,7 @@ const BusinessBulletin = () => {
   });
 
   if (isLoading) return <Loader />;
-  if (error) return <DataErrorPlaceholder section="Business Bulletin" refetch={refetch} />;
+  if (error) return <DataErrorPlaceholder section="The Briefing" refetch={refetch} />;
   if (!data) return null;
 
   const featuredPosts = data.slice(0, 2);
@@ -60,7 +60,7 @@ const BusinessBulletin = () => {
           <div className="ec-section-header">
             <div>
               <div className="ec-section-label">Curated Intelligence</div>
-              <h2 className="ec-section-title">Business Bulletin</h2>
+              <h2 className="ec-section-title">The Briefing</h2>
             </div>
           </div>
 
@@ -89,7 +89,7 @@ const BusinessBulletin = () => {
                     </div>
                     <div className="ec-bfi-body">
                       <span className="ec-bfi-tag">
-                        {post.category?.title || "Business Bulletin"}
+                        {post.category?.title || "The Briefing"}
                       </span>
                       <h3 className="ec-bfi-title">{post.title}</h3>
                       {post.description && (
@@ -112,7 +112,7 @@ const BusinessBulletin = () => {
                     <span className="ec-bli-num">0{i + 1}</span>
                     <div className="ec-bli-content">
                       <span className="ec-bli-tag">
-                        {post.category?.title || "Business Bulletin"}
+                        {post.category?.title || "The Briefing"}
                       </span>
                       <h4 className="ec-bli-title">{post.title}</h4>
                       {post.description && (
@@ -181,7 +181,7 @@ const BusinessBulletin = () => {
                       <span className="ec-bli-num">0{i + 4}</span>
                       <div className="ec-bli-content">
                         <span className="ec-bli-tag">
-                          {post.category?.title || "Business Bulletin"}
+                          {post.category?.title || "The Briefing"}
                         </span>
                         <h4 className="ec-bli-title">{post.title}</h4>
                         {post.description && (
@@ -211,7 +211,7 @@ const BusinessBulletin = () => {
                 whiteSpace: "nowrap",
               }}
             >
-              View All Bulletin
+              View The Briefing
             </Link>
           </div>
         </div>

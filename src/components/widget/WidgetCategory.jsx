@@ -70,6 +70,15 @@ const getCategorySvg = (slug) => {
   );
 };
 
+const getCategoryDisplayName = (title, slug) => {
+  const cleanSlug = slug?.toLowerCase() || "";
+  if (cleanSlug === "market-news") return "Market Pulse";
+  if (cleanSlug === "business-bulletin") return "The Briefing";
+  if (cleanSlug === "master-talks") return "Executive Perspectives";
+  if (cleanSlug === "magazines") return "Premium Editions";
+  return title;
+};
+
 const WidgetCategory = ({ showTitle = true }) => {
   const {
     isLoading,
@@ -109,7 +118,9 @@ const WidgetCategory = ({ showTitle = true }) => {
                   {getCategorySvg(data.slug?.current)}
                 </div>
               </div>
-              <span className="cat-grid-name">{data.title}</span>
+              <span className="cat-grid-name">
+                {getCategoryDisplayName(data.title, data.slug?.current || data.slug)}
+              </span>
             </Link>
           );
         })}

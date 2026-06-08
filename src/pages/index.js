@@ -40,19 +40,19 @@ const Home = () => {
       {/* 3 — BREAKING TICKER */}
       <BreakingTicker />
 
-      {/* 4 — MARKET NEWS (Asymmetric 3-col) */}
+      {/* 4 — MARKET PULSE (Asymmetric 3-col) */}
       <MarketNews />
 
       {/* 5 — HERO (Split: large cover + numbered sidebar) */}
       <MagazineHero />
 
-      {/* 6 — BUSINESS BULLETIN (2-col split with newsletter) */}
+      {/* 6 — THE BRIEFING (2-col split with newsletter) */}
       <BusinessBulletin />
 
-      {/* 7 — MASTER TALKS (Featured + 4-col numbered grid) */}
+      {/* 7 — EXECUTIVE PERSPECTIVES (Featured + 4-col numbered grid) */}
       <MasterTalks />
 
-      {/* 8 — LATEST MAGAZINES (4-col grid) */}
+      {/* 8 — PREMIUM EDITIONS (4-col grid) */}
       <Magazines />
 
       {/* 9 — PARTNER BRANDS (Dark strip, logo scroll) */}

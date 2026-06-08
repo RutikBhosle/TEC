@@ -9,7 +9,7 @@ const PostLayoutFive = ({ data, index }) => {
         <a className="align-self-center w-100">
           <Image
             className="w-100 m-b-xs-30"
-            src={data.featureImg}
+            src={data.featureImg || "/images/placeholder.png"}
             alt={data?.altText || data.title}
             width={528}
             height={index % 2 == 1 ? 782 : 586}

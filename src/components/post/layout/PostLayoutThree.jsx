@@ -9,7 +9,7 @@ const PostLayoutThree = ({ data, postSizeLg, pClass, videoPost }) => {
         href={`/post/${data.slug.current}`}
       >
         <Image
-          src={data.featureImg}
+          src={data.featureImg || "/images/placeholder.png"}
           alt={data?.altText || data.title}
           width={postSizeLg === true ? 730 : 350}
           height={postSizeLg === true ? 550 : 260}

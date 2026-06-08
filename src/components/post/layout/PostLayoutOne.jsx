@@ -25,7 +25,7 @@ const PostLayoutOne = ({
         <figure className="fig-container" style={{ position: "relative", display: "inline-block", margin: 0 }}>
           <Link href={`/post/${data?.slug.current}`}>
             <Image
-              src={data?.featureImg}
+              src={data?.featureImg || "/images/placeholder.png"}
               alt={data?.altText || data?.title}
               width={0}
               height={0}

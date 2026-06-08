@@ -58,7 +58,7 @@ const IndustryPosts = () => {
                 <Link href={`/industry-post/${post.slug?.current}`} style={{ display: "block" }}>
                   <div style={{ position: "relative", width: "100%", height: 180, overflow: "hidden" }}>
                     <Image
-                      src={post.featureImg}
+                      src={post.featureImg || "/images/placeholder.png"}
                       alt={post.altText || post.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
