@@ -28,6 +28,7 @@ const HeaderOne = () => {
 
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [techAiOpen, setTechAiOpen] = useState(false);
+  const [blogsOpen, setBlogsOpen] = useState(false);
 
   const headerSearchShow = () => {
     setSearchShow(true);
@@ -57,6 +58,7 @@ const HeaderOne = () => {
       if (target.closest(".nav-dropdown")) return;
       setIndustriesOpen(false);
       setTechAiOpen(false);
+      setBlogsOpen(false);
     };
 
     document.addEventListener("mousedown", handleOutsideClick);
@@ -939,7 +941,87 @@ const HeaderOne = () => {
                 <div className="navbar-nav-links-centered">
                   <Link href="/" className="nav-link">Home</Link>
                   <Link href="/magazines" className="nav-link">Magazines</Link>
-                  <Link href="/blogs" className="nav-link">Blogs</Link>
+                  <div className="nav-dropdown">
+                    <button
+                      type="button"
+                      className="nav-link nav-dropdown-toggle"
+                      aria-expanded={blogsOpen}
+                      onClick={() => {
+                        setBlogsOpen((v) => !v);
+                        setIndustriesOpen(false);
+                      }}
+                    >
+                      Blogs
+                      <span className={`nav-dropdown-arrow ${blogsOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
+                        <i className="far fa-chevron-down" />
+                      </span>
+                    </button>
+                    <div className={`nav-dropdown-menu ${blogsOpen ? "is-open" : ""}`.trim()}>
+                      <Link
+                        href="/blogs"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setBlogsOpen(false);
+                        }}
+                      >
+                        All Blogs
+                      </Link>
+                      <Link
+                        href="/category/web-profiles"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setBlogsOpen(false);
+                        }}
+                      >
+                        Featured Articles
+                      </Link>
+                      <Link
+                        href="/category/blogs-and-articles"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setBlogsOpen(false);
+                        }}
+                      >
+                        Blogs & Articles
+                      </Link>
+                      <Link
+                        href="/category/market-news"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setBlogsOpen(false);
+                        }}
+                      >
+                        Market Pulse
+                      </Link>
+                      <Link
+                        href="/magazines"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setBlogsOpen(false);
+                        }}
+                      >
+                        Premium Editions
+                      </Link>
+                      <Link
+                        href="/category/business-bulletin"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setBlogsOpen(false);
+                        }}
+                      >
+                        The Briefing
+                      </Link>
+                      <Link
+                        href="/category/master-talks"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setBlogsOpen(false);
+                        }}
+                      >
+                        Executive Perspectives
+                      </Link>
+                    </div>
+                  </div>
                   <div className="nav-dropdown">
                     <button
                       type="button"
@@ -948,6 +1030,7 @@ const HeaderOne = () => {
                       onClick={() => {
                         setIndustriesOpen((v) => !v);
                         setTechAiOpen(false);
+                        setBlogsOpen(false);
                       }}
                     >
                       Industries
@@ -975,53 +1058,15 @@ const HeaderOne = () => {
                         Legal
                       </Link>
 
-                      <div className="nav-submenu">
-                        <button
-                          type="button"
-                          className="nav-dropdown-item nav-submenu-toggle"
-                          aria-expanded={techAiOpen}
-                          onClick={() => {
-                            setTechAiOpen((v) => !v);
-                          }}
-                        >
-                          Tech/AI
-                          <span className={`nav-submenu-arrow ${techAiOpen ? "is-open" : ""}`.trim()} aria-hidden="true">
-                            <i className="far fa-chevron-right" />
-                          </span>
-                        </button>
-                        <div className={`nav-submenu-menu ${techAiOpen ? "is-open" : ""}`.trim()}>
-                          <Link
-                            href="/industries/tech-ai"
-                            className="nav-dropdown-item"
-                            onClick={() => {
-                              setIndustriesOpen(false);
-                              setTechAiOpen(false);
-                            }}
-                          >
-                            All Tech/AI
-                          </Link>
-                          <Link
-                            href="/industries/tech-ai#ai"
-                            className="nav-dropdown-item"
-                            onClick={() => {
-                              setIndustriesOpen(false);
-                              setTechAiOpen(false);
-                            }}
-                          >
-                            AI
-                          </Link>
-                          <Link
-                            href="/industries/tech-ai#technology"
-                            className="nav-dropdown-item"
-                            onClick={() => {
-                              setIndustriesOpen(false);
-                              setTechAiOpen(false);
-                            }}
-                          >
-                            Technology
-                          </Link>
-                        </div>
-                      </div>
+                      <Link
+                        href="/industries/tech-ai"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setIndustriesOpen(false);
+                        }}
+                      >
+                        Tech/AI
+                      </Link>
                       <Link
                         href="/industries/stock-market"
                         className="nav-dropdown-item"

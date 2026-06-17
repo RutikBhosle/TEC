@@ -1,76 +1,68 @@
-import SocialLink from "../../data/social/SocialLink.json";
-
 const ContactInfo = () => {
+  const desks = [
+    {
+      name: "Admin",
+      email: "admin@thestarprime.com",
+      desc: "Billing, corporate operations, and business inquiries."
+    },
+    {
+      name: "Contact",
+      email: "contact@thestarprime.com",
+      desc: "General support, reader feedback, and general questions."
+    },
+    {
+      name: "HR",
+      email: "hr@thestarprime.com",
+      desc: "Career opportunities, recruitment, and freelance applications."
+    },
+    {
+      name: "Editorial",
+      email: "editorial@thestarprime.com",
+      desc: "Story pitches, press releases, and editorial submissions."
+    },
+    {
+      name: "Support",
+      email: "support@thestarprime.com",
+      desc: "Digital subscriptions, account assistance, and technical help."
+    },
+    {
+      name: "Partnership",
+      email: "partnership@thestarprime.com",
+      desc: "Sponsorships, custom media campaigns, and brand partnerships."
+    }
+  ];
+
   return (
     <div className="liaison-directory">
       <div className="directory-header">
         <span className="directory-kicker">Bureau Directory</span>
-        <h2 className="directory-title">The Editorial Desks</h2>
+        <h2 className="directory-title">Direct Liaison Desks</h2>
         <p className="directory-desc">
-          Reach out directly to our specialized desks for editorial submissions, partnerships, or corporate communications.
+          Reach out directly to our departments for swift responses. Select the appropriate desk below.
         </p>
       </div>
 
       <div className="desks-list">
-        {/* Desk 1 */}
-        <div className="desk-item">
-          <div className="desk-marker" />
-          <div className="desk-details">
-            <span className="desk-category">Press & Submissions</span>
-            <h4 className="desk-name">Editorial Desk</h4>
-            <p className="desk-desc">
-              Pitch your stories, founder breakthroughs, or suggest editorial coverage to our chief editors.
-            </p>
-            <a href="mailto:editorial@starprime.com" className="desk-email">
-              editorial@starprime.com
-            </a>
+        {desks.map((desk, i) => (
+          <div key={i} className="desk-item">
+            <div className="desk-marker" />
+            <div className="desk-details">
+              <span className="desk-category">Department</span>
+              <h4 className="desk-name">{desk.name}</h4>
+              <p className="desk-desc">{desk.desc}</p>
+              <a href={`mailto:${desk.email}`} className="desk-email">
+                {desk.email}
+              </a>
+            </div>
           </div>
-        </div>
-
-        {/* Desk 2 */}
-        <div className="desk-item">
-          <div className="desk-marker" />
-          <div className="desk-details">
-            <span className="desk-category">Advertising & Campaigns</span>
-            <h4 className="desk-name">Partnerships & Brand Desk</h4>
-            <p className="desk-desc">
-              Inquire about campaign rates, collaborative events, and bespoke brand partnerships.
-            </p>
-            <a href="mailto:partnerships@starprime.com" className="desk-email">
-              partnerships@starprime.com
-            </a>
-          </div>
-        </div>
-
-        {/* Desk 3 */}
-        <div className="desk-item">
-          <div className="desk-marker" />
-          <div className="desk-details">
-            <span className="desk-category">Corporate Office</span>
-            <h4 className="desk-name">Headquarters</h4>
-            <p className="desk-desc">
-              Gera Imperium Rise, Wipro Circle, Hinjewadi Phase 2, Pune
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
-
-      {/* Hotline Panel */}
-      <div className="hotline-panel">
-        <span className="hotline-kicker">Liaison Hotline</span>
-        <a href="tel:+16146022959" className="hotline-number">
-          +1 (614) 602-2959
-        </a>
-        <p className="hotline-note">Available 24/7 for urgent press & media inquiries.</p>
-      </div>
-
-
 
       <style jsx>{`
         .liaison-directory {
           display: flex;
           flex-direction: column;
-          gap: 2.75rem;
+          gap: 2.5rem;
           width: 100%;
           height: 100%;
           padding: 0.5rem 0 0 0;
@@ -109,12 +101,12 @@ const ContactInfo = () => {
         .desks-list {
           display: flex;
           flex-direction: column;
-          gap: 2.25rem;
+          gap: 1.5rem;
         }
 
         .desk-item {
           display: flex;
-          gap: 1.5rem;
+          gap: 1.25rem;
           position: relative;
         }
 
@@ -157,35 +149,35 @@ const ContactInfo = () => {
 
         .desk-category {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.85rem;
+          font-size: 0.75rem;
           font-weight: 700;
           letter-spacing: 0.15em;
           text-transform: uppercase;
           color: var(--cardinal, #7A0F23);
           display: block;
-          margin-bottom: 0.35rem;
+          margin-bottom: 0.25rem;
         }
 
         .desk-name {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 1.45rem;
+          font-size: 1.25rem;
           font-weight: 700;
           line-height: 1.3;
-          margin: 0 0 0.5rem;
+          margin: 0 0 0.25rem;
           color: #0f1923;
         }
 
         .desk-desc {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 1.05rem;
-          line-height: 1.6;
+          font-size: 0.95rem;
+          line-height: 1.5;
           color: #555555;
-          margin: 0 0 0.65rem;
+          margin: 0 0 0.5rem;
         }
 
         .desk-email {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 1.05rem;
+          font-size: 0.95rem;
           font-weight: 700;
           color: #0f1923;
           text-decoration: none;
@@ -200,65 +192,9 @@ const ContactInfo = () => {
           border-bottom-color: var(--cardinal, #7A0F23);
         }
 
-        /* Hotline Panel */
-        .hotline-panel {
-          background: #0f1923;
-          color: #FFFFFF;
-          border-radius: 0;
-          padding: 1.75rem;
-          box-shadow: 0 8px 30px rgba(15, 25, 35, 0.08);
-          transition: all 0.3s ease;
-          border: 1px solid rgba(255, 255, 255, 0.04);
-          margin-top: auto;
-        }
-
-        .hotline-panel:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 12px 35px rgba(15, 25, 35, 0.15);
-        }
-
-        .hotline-kicker {
-          font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.85rem;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          color: var(--cardinal, #7A0F23);
-          text-transform: uppercase;
-          display: block;
-          margin-bottom: 0.5rem;
-        }
-
-        .hotline-number {
-          font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 2.2rem;
-          font-weight: 900;
-          color: #FFFFFF;
-          text-decoration: none;
-          display: block;
-          margin-bottom: 0.5rem;
-          transition: color 0.3s ease;
-        }
-
-        .hotline-number:hover {
-          color: #D0C9BF;
-        }
-
-        .hotline-note {
-          font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.95rem;
-          color: #9A9490;
-          margin: 0;
-        }
-
-
-
-        /* Responsive spacing */
         @media (max-width: 768px) {
           .directory-title {
             font-size: 1.95rem;
-          }
-          .hotline-number {
-            font-size: 1.85rem;
           }
         }
       `}</style>

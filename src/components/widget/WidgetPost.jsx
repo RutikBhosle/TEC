@@ -1,8 +1,7 @@
 import { Tab, Nav } from "react-bootstrap";
-import PostVideoTwo from "../post/layout/PostVideoTwo";
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "../../client";
-import Loader from "../common/Loader";
 
 const WidgetPost = () => {
   const queryWebProfiles = `
@@ -86,12 +85,63 @@ const WidgetPost = () => {
     refetchOnWindowFocus: true,
   });
 
+  const formatDate = (dateStr) => {
+    if (!dateStr) return "";
+    try {
+      return new Date(dateStr).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      });
+    } catch {
+      return "";
+    }
+  };
+
+  const renderPostList = (posts, defaultCategory) => {
+    if (!posts || posts.length === 0) {
+      return <p className="widget-no-posts">No posts found.</p>;
+    }
+    return (
+      <div className="widget-pane-content">
+        {posts.slice(0, 4).map((data, index) => {
+          const categoryName = data.category?.title || defaultCategory;
+          const postSlug = data.slug?.current || data.slug;
+          return (
+            <Link
+              key={postSlug || index}
+              href={`/post/${postSlug}`}
+              className="widget-post-row"
+            >
+              <div className="widget-post-thumb">
+                {data.featureImg ? (
+                  <img
+                    src={data.featureImg}
+                    alt={data.title}
+                    className="widget-post-img"
+                  />
+                ) : (
+                  <div className="widget-post-placeholder" />
+                )}
+              </div>
+              <div className="widget-post-body">
+                <span className="widget-post-category">{categoryName}</span>
+                <h4 className="widget-post-title">{data.title}</h4>
+                <span className="widget-post-date">{formatDate(data.publishedAt)}</span>
+              </div>
+            </Link>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
     <div className="post-widget sidebar-post-widget">
       <Tab.Container id="widget-post" defaultActiveKey="recent">
         <Nav variant="pills" className="row no-gutters">
           <Nav.Item className="col">
-            <Nav.Link eventKey="recent">Web Profiles</Nav.Link>
+            <Nav.Link eventKey="recent">Featured Articles</Nav.Link>
           </Nav.Item>
           <Nav.Item className="col">
             <Nav.Link eventKey="popular">Market Pulse</Nav.Link>
@@ -103,146 +153,198 @@ const WidgetPost = () => {
 
         <Tab.Content>
           <Tab.Pane eventKey="recent">
-            {webProfileData && webProfileData?.length > 0 ? (
-              webProfileData
-                .slice(0, 4)
-                .map((data, index) => (
-                  <PostVideoTwo data={data} key={index} hideCategory />
-                ))
-            ) : (
-              <p>No posts found.</p>
-            )}
+            {renderPostList(webProfileData, "Featured Articles")}
           </Tab.Pane>
           <Tab.Pane eventKey="popular">
-            {marketNewsData && marketNewsData?.length > 0 ? (
-              marketNewsData
-                .slice(0, 4)
-                .map((data, index) => (
-                  <PostVideoTwo data={data} key={index} hideCategory />
-                ))
-            ) : (
-              <p>No posts found.</p>
-            )}
+            {renderPostList(marketNewsData, "Market Pulse")}
           </Tab.Pane>
           <Tab.Pane eventKey="comments">
-            {businessBulletinData && businessBulletinData.length > 0 ? (
-              businessBulletinData
-                .slice(0, 4)
-                .map((data, index) => (
-                  <PostVideoTwo data={data} key={index} hideCategory />
-                ))
-            ) : (
-              <p>No posts found.</p>
-            )}
+            {renderPostList(businessBulletinData, "The Briefing")}
           </Tab.Pane>
         </Tab.Content>
       </Tab.Container>
       <style jsx>{`
-        :global(.sidebar-post-widget) {
-          background: transparent;
-          border: none;
-          border-radius: 0;
-          padding: 0;
-          box-shadow: none;
+        .sidebar-post-widget {
+          background: #FAF8F5;
+          border: 1px solid #E8E3DC;
+          padding: 1.5rem;
+          margin-bottom: 2rem;
           font-family: var(--secondary-font);
         }
 
         :global(.sidebar-post-widget .nav-pills) {
-          border-color: var(--rule);
-          margin-bottom: 1.25rem;
-          gap: 8px;
-        }
-
-        :global(.sidebar-post-widget .nav-pills .nav-item a) {
-          background: var(--warm-white);
-          border: 1px solid var(--slate-dark);
-          border-radius: 0;
-          color: var(--text-muted);
-          font-size: 11px;
-          font-family: var(--secondary-font);
-          letter-spacing: 0.05em;
-          padding: 0.9rem 0.5rem;
-          font-weight: 600;
-          text-align: center;
-        }
-
-        :global(.sidebar-post-widget .nav-pills .nav-item a:hover),
-        :global(.sidebar-post-widget .nav-pills .nav-item a.active) {
-          background-color: var(--slate);
-          border-color: var(--slate-dark);
-          color: var(--cardinal);
-        }
-
-        :global(.sidebar-post-widget .tab-content) {
-          border-top: 1px solid var(--rule);
-          padding-top: 0.45rem;
-        }
-
-        :global(.sidebar-post-widget .post-block.post-block__small) {
-          margin-bottom: 0.35rem;
-          padding-bottom: 0.35rem;
-          border-bottom: 1px solid var(--rule);
-        }
-
-        :global(.sidebar-post-widget .post-block.post-block__small:last-child) {
-          margin-bottom: 0;
+          display: flex;
+          border-bottom: 1.5px solid #E8E3DC;
+          margin-bottom: 1.5rem;
           padding-bottom: 0;
-          border-bottom: none;
+          gap: 0;
+          justify-content: space-between;
+          border-radius: 0;
         }
 
-        :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a) {
-          color: var(--ink);
+        :global(.sidebar-post-widget .nav-pills .nav-item) {
+          flex: 1;
+          text-align: center;
+          margin: 0;
         }
 
-        :global(.sidebar-post-widget .post-block__on-dark-bg .axil-post-title a:hover) {
-          color: var(--cardinal);
-        }
-
-        :global(.sidebar-post-widget .post-block.post-block__small .bg-color-blue-one) {
-          color: var(--cardinal);
-          background: transparent;
-          border: none;
-          padding: 0;
-          font-size: 9px;
+        :global(.sidebar-post-widget .nav-pills .nav-item .nav-link) {
+          display: block;
           font-family: var(--secondary-font);
+          font-size: 10.5px;
           font-weight: 700;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
+          color: rgba(15, 25, 35, 0.45) !important;
+          padding: 0.75rem 0.25rem !important;
+          border-bottom: 2px solid transparent !important;
+          margin-bottom: -1.5px;
+          transition: all 0.25s ease;
+          text-decoration: none;
+          cursor: pointer;
+          background: transparent !important;
+          border-radius: 0 !important;
+          border-top: none !important;
+          border-left: none !important;
+          border-right: none !important;
         }
 
-        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title) {
-          font-size: var(--type-small);
-          font-family: var(--primary-font);
-          font-weight: 700;
-          line-height: 1.45;
-          margin-bottom: 0;
+        :global(.sidebar-post-widget .nav-pills .nav-item .nav-link:hover) {
+          color: var(--cardinal) !important;
         }
 
-        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title a) {
-          font-family: var(--primary-font);
-          color: var(--ink);
+        :global(.sidebar-post-widget .nav-pills .nav-item .nav-link.active) {
+          color: var(--cardinal) !important;
+          border-bottom-color: var(--cardinal) !important;
         }
 
-        :global(.sidebar-post-widget .post-block.post-block__small .axil-post-title a:hover) {
-          color: var(--cardinal);
-        }
-
-        :global(.sidebar-post-widget .post-block.post-block__small .media-body) {
+        :global(.sidebar-post-widget .widget-pane-content) {
           display: flex;
           flex-direction: column;
-          justify-content: center;
+          gap: 1.25rem;
         }
 
-        :global(.sidebar-post-widget .post-block.post-block__small .post-cat-group) {
-          font-family: var(--secondary-font);
-          margin-bottom: 4px;
+        :global(.sidebar-post-widget a.widget-post-row) {
+          display: flex;
+          align-items: flex-start;
+          gap: 1.15rem;
+          text-decoration: none !important;
+          color: inherit;
+          padding-bottom: 1.15rem;
+          border-bottom: 1px solid rgba(15, 25, 35, 0.05);
+          transition: all 0.2s ease;
         }
 
-        :global(.sidebar-post-widget .tab-pane > p) {
-          color: var(--text-muted);
-          margin: 0.5rem 0;
+        :global(.sidebar-post-widget a.widget-post-row:last-child) {
+          border-bottom: none;
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+
+        :global(.sidebar-post-widget .widget-post-thumb) {
+          position: relative;
+          width: 90px;
+          height: 60px;
+          flex-shrink: 0;
+          overflow: hidden;
+          background: var(--warm-white);
+          border: 1px solid rgba(15, 25, 35, 0.08);
+          transition: all 0.25s ease;
+        }
+
+        :global(.sidebar-post-widget .widget-post-img) {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        :global(.sidebar-post-widget .widget-post-placeholder) {
+          width: 100%;
+          height: 100%;
+          background: var(--slate-mid);
+        }
+
+        :global(.sidebar-post-widget .widget-post-body) {
+          flex: 1;
+          min-width: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+        }
+
+        :global(.sidebar-post-widget .widget-post-category) {
           font-family: var(--secondary-font);
-          font-size: var(--type-small);
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          color: var(--cardinal);
+          margin-bottom: 0.35rem;
+          line-height: 1;
+          display: block;
+        }
+
+        :global(.sidebar-post-widget .widget-post-title) {
+          font-family: var(--primary-font);
+          font-size: 13px;
+          font-weight: 700;
+          line-height: 1.4;
+          color: var(--ink);
+          margin: 0 0 0.4rem 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          transition: color 0.2s ease;
+        }
+
+        :global(.sidebar-post-widget .widget-post-date) {
+          font-family: var(--secondary-font);
+          font-size: 10px;
+          color: rgba(15, 25, 35, 0.45);
+          line-height: 1;
+          display: block;
+        }
+
+        :global(.sidebar-post-widget a.widget-post-row:hover) {
+          text-decoration: none !important;
+        }
+
+        :global(.sidebar-post-widget a.widget-post-row:hover .widget-post-img) {
+          transform: scale(1.08);
+        }
+
+        :global(.sidebar-post-widget a.widget-post-row:hover .widget-post-title) {
+          color: var(--cardinal);
+        }
+
+        :global(.sidebar-post-widget a.widget-post-row:hover .widget-post-thumb) {
+          border-color: rgba(122, 15, 35, 0.3);
+        }
+
+        :global(.sidebar-post-widget .tab-pane) {
+          animation: widgetFadeIn 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes widgetFadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        :global(.sidebar-post-widget .widget-no-posts) {
+          color: rgba(15, 25, 35, 0.5);
+          font-size: 12px;
+          text-align: center;
+          padding: 1.5rem 0;
+          margin: 0;
         }
       `}</style>
     </div>

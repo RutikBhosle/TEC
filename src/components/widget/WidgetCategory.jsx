@@ -72,6 +72,8 @@ const getCategorySvg = (slug) => {
 
 const getCategoryDisplayName = (title, slug) => {
   const cleanSlug = slug?.toLowerCase() || "";
+  const cleanTitle = title?.toLowerCase() || "";
+  if (cleanSlug === "web-profiles" || cleanTitle === "web profiles") return "Featured Articles";
   if (cleanSlug === "market-news") return "Market Pulse";
   if (cleanSlug === "business-bulletin") return "The Briefing";
   if (cleanSlug === "master-talks") return "Executive Perspectives";

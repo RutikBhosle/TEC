@@ -42,7 +42,7 @@ const WebProfiles = () => {
   }, [data]);
 
   if (isLoading) return <Loader />;
-  if (error) return <DataErrorPlaceholder section="Web Profiles" refetch={refetch} height="400px" />;
+  if (error) return <DataErrorPlaceholder section="Featured Articles" refetch={refetch} height="400px" />;
   if (!data?.length) return null;
 
   const currentMagazine = data[currentIndex] || data[0];

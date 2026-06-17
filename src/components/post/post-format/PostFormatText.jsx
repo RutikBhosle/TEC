@@ -27,6 +27,7 @@ const toPlainText = (blocks = []) => {
 const getCategoryDisplayName = (title, slug) => {
   const cleanSlug = slug?.toLowerCase() || "";
   const cleanTitle = title?.toLowerCase() || "";
+  if (cleanSlug === "web-profiles" || cleanTitle === "web profiles") return "Featured Articles";
   if (cleanSlug === "master-talks" || cleanTitle === "master talks") return "Executive Perspectives";
   if (cleanSlug === "market-news" || cleanTitle === "market news") return "Market Pulse";
   if (cleanSlug === "business-bulletin" || cleanTitle === "business bulletin") return "The Briefing";

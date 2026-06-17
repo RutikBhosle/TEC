@@ -18,38 +18,78 @@ const AdvertiseWithUs = () => {
 
         {/* ULTRA-PREMIUM ASYMMETRIC SPLIT DARK HERO COVER */}
         <section className="advertise-hero">
+          <div className="hero-bg-grid" />
+          <div className="hero-bg-radial" />
           <div className="advertise-hero-shell">
             <div className="advertise-hero-grid">
 
               {/* LEFT COLUMN: HERO COPY */}
               <div className="advertise-hero__left">
                 <span className="advertise-hero__eyebrow">Brand Amplification</span>
-                <h1 className="advertise-hero__title">Advertise With Star Prime</h1>
+                <h1 className="advertise-hero__title">
+                  Advertise With <span className="accent-text">Star Prime</span>
+                </h1>
                 <p className="advertise-hero__desc">
                   Welcome to Star Prime, where we spotlight trailblazers
                   shaping the global business landscape. Connect your brand with an elite circle
                   of founders, executives, and high-net-worth innovators.
                 </p>
-                <div className="advertise-hero__divider" />
+                <div className="advertise-hero__actions">
+                  <button 
+                    onClick={() => {
+                      document.querySelector('.website-showcase')?.scrollIntoView({ behavior: 'smooth' });
+                    }} 
+                    className="hero-btn-primary"
+                  >
+                    Explore Placements
+                  </button>
+                  <button 
+                    onClick={() => {
+                      document.querySelector('.advertise-cta')?.scrollIntoView({ behavior: 'smooth' });
+                    }} 
+                    className="hero-btn-secondary"
+                  >
+                    Request Media Kit
+                  </button>
+                </div>
               </div>
 
               {/* RIGHT COLUMN: PREMIUM EDITORIAL MASTHEAD BADGES */}
               <div className="advertise-hero__right">
                 <div className="media-masthead-card">
+                  <div className="masthead-border-accent" />
                   <div className="masthead-seal">T.S.P</div>
                   <div className="masthead-info">
                     <span className="masthead-label">Audience Scale</span>
+                    
                     <div className="masthead-badge">
-                      <span className="badge-kicker">Print Circulation</span>
-                      <span className="badge-value">85,000+</span>
+                      <div className="badge-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3.5A2.5 2.5 0 0 1 6.5 1V17H4"/></svg>
+                      </div>
+                      <div className="badge-content">
+                        <span className="badge-kicker">Print Circulation</span>
+                        <span className="badge-value">85,000+</span>
+                      </div>
                     </div>
+                    
                     <div className="masthead-badge">
-                      <span className="badge-kicker">Monthly Digital</span>
-                      <span className="badge-value">420,000+</span>
+                      <div className="badge-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                      </div>
+                      <div className="badge-content">
+                        <span className="badge-kicker">Monthly Digital</span>
+                        <span className="badge-value">420,000+</span>
+                      </div>
                     </div>
+                    
                     <div className="masthead-badge">
-                      <span className="badge-kicker">Decision Makers</span>
-                      <span className="badge-value">78% Executive</span>
+                      <div className="badge-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      </div>
+                      <div className="badge-content">
+                        <span className="badge-kicker">Decision Makers</span>
+                        <span className="badge-value">78% Executive</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -156,6 +196,41 @@ const AdvertiseWithUs = () => {
                 <p className="advertise-copy">
                   We offer premium header banners, inline editorial placements, and sidebar campaign sponsorships designed for seamless visibility with highly optimized CTRs.
                 </p>
+
+                <div className="web-spec-list">
+                  <div className="web-spec-item">
+                    <div className="web-spec-header">
+                      <span className="web-spec-marker"></span>
+                      <h4 className="web-spec-title">Header & Footer Banners</h4>
+                      <span className="web-spec-dim">980px × 110px</span>
+                    </div>
+                    <p className="web-spec-desc">
+                      Prime top-of-page and bottom-of-page placements offering maximum visual share-of-voice across high-traffic landing pages.
+                    </p>
+                  </div>
+                  
+                  <div className="web-spec-item">
+                    <div className="web-spec-header">
+                      <span className="web-spec-marker"></span>
+                      <h4 className="web-spec-title">Sticky Sidebar Display</h4>
+                      <span className="web-spec-dim">280px × 280px</span>
+                    </div>
+                    <p className="web-spec-desc">
+                      An interactive square banner that stays locked in the reader&apos;s viewport as they scroll through in-depth editorial articles.
+                    </p>
+                  </div>
+
+                  <div className="web-spec-item">
+                    <div className="web-spec-header">
+                      <span className="web-spec-marker"></span>
+                      <h4 className="web-spec-title">Editorial Inline Native</h4>
+                      <span className="web-spec-dim">640px × 180px</span>
+                    </div>
+                    <p className="web-spec-desc">
+                      Seamlessly integrated horizontal slots placed natively between article paragraphs for high engagement.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -177,23 +252,23 @@ const AdvertiseWithUs = () => {
               {/* Box 1: Trim, Bleed, Safety specs */}
               <div className="ad-specs-container">
                 <div className="ad-specs-box bleed-box">
-                  <div className="spec-label bleed-lbl">Bleed Size: 8.5" × 11"</div>
+                  <div className="spec-label bleed-lbl">Bleed Size: 8.5&quot; × 11&quot;</div>
                   
                   <div className="ad-specs-box trim-box">
-                    <div className="spec-label trim-lbl">Trim Size: 8" × 10.5"</div>
+                    <div className="spec-label trim-lbl">Trim Size: 8&quot; × 10.5&quot;</div>
                     
                     <div className="ad-specs-box live-box">
-                      <div className="spec-label live-lbl">Live Area / Type Safety: 7.25" × 10"</div>
+                      <div className="spec-label live-lbl">Live Area / Type Safety: 7.25&quot; × 10&quot;</div>
                       
                       <div className="ad-specs-content">
                         <h4 className="specs-title-red">Trim Size</h4>
-                        <p className="specs-val">8" × 10.5"</p>
+                        <p className="specs-val">8&quot; × 10.5&quot;</p>
                         
                         <h4 className="specs-title-red">Bleed Size</h4>
-                        <p className="specs-val">8.5" × 11"</p>
+                        <p className="specs-val">8.5&quot; × 11&quot;</p>
                         
                         <h4 className="specs-title-red">Type Safety</h4>
-                        <p className="specs-val">7.25" × 10"</p>
+                        <p className="specs-val">7.25&quot; × 10&quot;</p>
                         
                         <p className="specs-notice">(keep all copy within this area on bleed ads)</p>
                         
@@ -229,7 +304,7 @@ const AdvertiseWithUs = () => {
                       <div className="shaded-area full-page">Full Page</div>
                     </div>
                     <span className="ad-size-label">Full Page</span>
-                    <span className="ad-size-dim">8" × 10.5"</span>
+                    <span className="ad-size-dim">8&quot; × 10.5&quot;</span>
                   </div>
                   
                   <div className="ad-size-card spread-card">
@@ -237,7 +312,7 @@ const AdvertiseWithUs = () => {
                       <div className="shaded-area spread-page">Spread Page</div>
                     </div>
                     <span className="ad-size-label">Spread Page</span>
-                    <span className="ad-size-dim">16" × 10.5"</span>
+                    <span className="ad-size-dim">16&quot; × 10.5&quot;</span>
                   </div>
                 </div>
                 
@@ -248,7 +323,7 @@ const AdvertiseWithUs = () => {
                       <div className="shaded-area vertical-2-3">2/3 Vertical</div>
                     </div>
                     <span className="ad-size-label">2/3 Vertical</span>
-                    <span className="ad-size-dim">5" × 10.5"</span>
+                    <span className="ad-size-dim">5&quot; × 10.5&quot;</span>
                   </div>
                   
                   <div className="ad-size-card split-card">
@@ -256,7 +331,7 @@ const AdvertiseWithUs = () => {
                       <div className="shaded-area vertical-1-2">1/2 Vertical</div>
                     </div>
                     <span className="ad-size-label">1/2 Vertical</span>
-                    <span className="ad-size-dim">4" × 10.5"</span>
+                    <span className="ad-size-dim">4&quot; × 10.5&quot;</span>
                   </div>
                   
                   <div className="ad-size-card split-card">
@@ -264,7 +339,7 @@ const AdvertiseWithUs = () => {
                       <div className="shaded-area horizontal-1-2">1/2 Horizontal</div>
                     </div>
                     <span className="ad-size-label">1/2 Horizontal</span>
-                    <span className="ad-size-dim">8" × 5.25"</span>
+                    <span className="ad-size-dim">8&quot; × 5.25&quot;</span>
                   </div>
                 </div>
                 
@@ -275,7 +350,7 @@ const AdvertiseWithUs = () => {
                       <div className="shaded-area horizontal-spread-1-2">1/2 Horizontal Spread</div>
                     </div>
                     <span className="ad-size-label">1/2 Horizontal Spread</span>
-                    <span className="ad-size-dim">16" × 5.25"</span>
+                    <span className="ad-size-dim">16&quot; × 5.25&quot;</span>
                   </div>
                 </div>
               </div>
@@ -321,9 +396,27 @@ const AdvertiseWithUs = () => {
         .advertise-hero {
           background: #FAF8F5;
           color: #0f1923;
-          padding: 6.5rem 0;
+          padding: 7.5rem 0;
           position: relative;
           border-bottom: 1px solid #E8E3DC;
+          overflow: hidden;
+        }
+
+        .hero-bg-grid {
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(rgba(122, 15, 35, 0.02) 1px, transparent 1px);
+          background-size: 24px 24px;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        .hero-bg-radial {
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 70% 30%, rgba(122, 15, 35, 0.04) 0%, transparent 60%);
+          pointer-events: none;
+          z-index: 1;
         }
 
         .advertise-hero-shell {
@@ -332,12 +425,14 @@ const AdvertiseWithUs = () => {
           margin: 0 auto;
           padding-left: 32px !important;
           padding-right: 32px !important;
+          position: relative;
+          z-index: 2;
         }
 
         .advertise-hero-grid {
           display: grid;
-          grid-template-columns: 1.4fr 1fr;
-          gap: 4.5rem;
+          grid-template-columns: 1.35fr 1fr;
+          gap: 5rem;
           align-items: center;
         }
 
@@ -350,38 +445,98 @@ const AdvertiseWithUs = () => {
 
         .advertise-hero__eyebrow {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 700;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.25em;
           color: var(--cardinal, #7A0F23);
           text-transform: uppercase;
-          margin-bottom: 0.75rem;
+          margin-bottom: 1rem;
+          position: relative;
+          padding-left: 1rem;
+        }
+
+        .advertise-hero__eyebrow::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 6px;
+          height: 6px;
+          background: var(--cardinal, #7A0F23);
+          border-radius: 50%;
         }
 
         .advertise-hero__title {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+          font-size: clamp(2.5rem, 5vw, 3.8rem);
           font-weight: 800;
-          line-height: 1.15;
+          line-height: 1.1;
           color: #0f1923;
-          margin: 0 0 1.25rem;
+          margin: 0 0 1.5rem;
           letter-spacing: -0.02em;
+        }
+
+        .advertise-hero__title .accent-text {
+          color: var(--cardinal, #7A0F23);
+          position: relative;
+          display: inline-block;
         }
 
         .advertise-hero__desc {
           font-family: var(--font-serif-body, 'Libre Baskerville', serif);
           font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-          line-height: 1.75;
+          line-height: 1.8;
           color: #5A544F;
-          margin: 0 0 1.5rem;
+          margin: 0 0 2.5rem;
         }
 
-        .advertise-hero__divider {
-          width: 80px;
-          height: 3px;
+        .advertise-hero__actions {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+
+        .hero-btn-primary {
           background: var(--cardinal, #7A0F23);
-          margin-bottom: 2.25rem;
-          border-radius: 0;
+          color: #FFFFFF;
+          border: none;
+          padding: 14px 28px;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 15px rgba(122, 15, 35, 0.15);
+        }
+
+        .hero-btn-primary:hover {
+          background: #0f1923;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(15, 25, 35, 0.2);
+        }
+
+        .hero-btn-secondary {
+          background: transparent;
+          color: #0f1923;
+          border: 1.5px solid #0f1923;
+          padding: 12.5px 28px;
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.9rem;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+
+        .hero-btn-secondary:hover {
+          background: #0f1923;
+          color: #FFFFFF;
+          transform: translateY(-2px);
         }
 
         /* Right Column: Premium Masthead Card */
@@ -393,49 +548,63 @@ const AdvertiseWithUs = () => {
 
         .media-masthead-card {
           background: #FFFFFF;
-          border: 1.5px solid rgba(15, 25, 35, 0.08);
+          border: 1px solid #E2DDD7;
           border-radius: 0;
-          padding: 2.5rem;
+          padding: 3rem 2.5rem;
           width: 100%;
-          max-width: 380px;
-          box-shadow: 0 15px 35px rgba(15, 25, 35, 0.05);
+          max-width: 400px;
+          box-shadow: 0 20px 45px rgba(15, 25, 35, 0.04);
           position: relative;
           overflow: hidden;
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         .media-masthead-card:hover {
-          border-color: rgba(15, 25, 35, 0.15);
-          transform: translateY(-3px);
-          box-shadow: 0 20px 45px rgba(15, 25, 35, 0.1);
+          border-color: var(--cardinal, #7A0F23);
+          transform: translateY(-5px);
+          box-shadow: 0 30px 60px rgba(122, 15, 35, 0.08);
+        }
+
+        .masthead-border-accent {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: var(--cardinal, #7A0F23);
         }
 
         .masthead-seal {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 5.5rem;
+          font-size: 7rem;
           font-weight: 900;
-          color: rgba(15, 25, 35, 0.03);
+          color: rgba(122, 15, 35, 0.02);
           line-height: 1;
           position: absolute;
           right: -10px;
           bottom: -15px;
           pointer-events: none;
           letter-spacing: -0.05em;
+          transition: color 0.4s ease;
+        }
+
+        .media-masthead-card:hover .masthead-seal {
+          color: rgba(122, 15, 35, 0.04);
         }
 
         .masthead-info {
           display: flex;
           flex-direction: column;
-          gap: 1.5rem;
+          gap: 1.75rem;
           position: relative;
           z-index: 2;
         }
 
         .masthead-label {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.9rem;
+          font-size: 0.85rem;
           font-weight: 700;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
           color: var(--cardinal, #7A0F23);
           margin-bottom: 0.25rem;
@@ -443,10 +612,15 @@ const AdvertiseWithUs = () => {
 
         .masthead-badge {
           display: flex;
-          flex-direction: column;
-          gap: 0.35rem;
-          border-bottom: 1.5px solid rgba(15, 25, 35, 0.08);
-          padding-bottom: 0.75rem;
+          gap: 1.25rem;
+          align-items: center;
+          border-bottom: 1px solid #F0ECE6;
+          padding-bottom: 1.25rem;
+          transition: border-color 0.3s ease;
+        }
+
+        .media-masthead-card:hover .masthead-badge {
+          border-color: #E2DDD7;
         }
 
         .masthead-badge:last-child {
@@ -454,18 +628,42 @@ const AdvertiseWithUs = () => {
           padding-bottom: 0;
         }
 
+        .badge-icon {
+          width: 44px;
+          height: 44px;
+          background: rgba(122, 15, 35, 0.04);
+          color: var(--cardinal, #7A0F23);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+          flex-shrink: 0;
+        }
+
+        .media-masthead-card:hover .badge-icon {
+          background: var(--cardinal, #7A0F23);
+          color: #FFFFFF;
+        }
+
+        .badge-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.15rem;
+        }
+
         .badge-kicker {
           font-family: var(--font-sans, 'DM Sans', sans-serif);
-          font-size: 0.85rem;
+          font-size: 0.8rem;
           font-weight: 700;
-          letter-spacing: 0.18em;
-          color: var(--cardinal, #7A0F23);
+          letter-spacing: 0.1em;
+          color: #666666;
           text-transform: uppercase;
         }
 
         .badge-value {
           font-family: var(--font-serif, 'Playfair Display', serif);
-          font-size: 1.45rem;
+          font-size: 1.6rem;
           font-weight: 700;
           color: #0f1923;
         }
@@ -842,6 +1040,58 @@ const AdvertiseWithUs = () => {
           justify-content: center;
           text-align: center;
           border: 1px dashed #7E7E7E;
+        }
+
+        .web-spec-list {
+          margin-top: 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+        .web-spec-item {
+          border-left: 2px solid rgba(122, 15, 35, 0.15);
+          padding-left: 1.25rem;
+          transition: border-color 0.3s ease;
+        }
+        .web-spec-item:hover {
+          border-left-color: var(--cardinal, #7A0F23);
+        }
+        .web-spec-header {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          margin-bottom: 0.35rem;
+          flex-wrap: wrap;
+        }
+        .web-spec-marker {
+          width: 6px;
+          height: 6px;
+          background: var(--cardinal, #7A0F23);
+          border-radius: 50%;
+          display: inline-block;
+        }
+        .web-spec-title {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-weight: 700;
+          font-size: 1.15rem;
+          color: #0f1923;
+          margin: 0;
+        }
+        .web-spec-dim {
+          font-family: monospace;
+          font-size: 0.85rem;
+          color: var(--cardinal, #7A0F23);
+          background: rgba(122, 15, 35, 0.06);
+          padding: 1px 6px;
+          border-radius: 2px;
+          font-weight: 700;
+        }
+        .web-spec-desc {
+          font-family: var(--font-sans, 'DM Sans', sans-serif);
+          font-size: 0.95rem;
+          line-height: 1.5;
+          color: #666666;
+          margin: 0;
         }
 
         .ad-designs-comparison-grid {

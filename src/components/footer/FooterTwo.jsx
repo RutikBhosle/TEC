@@ -11,7 +11,7 @@ const navColumns = [
       { label: "Home", href: "/" },
       { label: "Magazines", href: "/magazines" },
       { label: "Blogs", href: "/blogs" },
-      { label: "Web Profiles", href: "/category/web-profiles" },
+      { label: "Featured Articles", href: "/category/web-profiles" },
       { label: "Advertise", href: "/advertise-with-us" },
       { label: "Contact", href: "/contact" },
     ],
