@@ -1,4 +1,4 @@
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import FooterTwo from "../../components/footer/FooterTwo";
 import DataErrorPlaceholder from "../../components/common/DataErrorPlaceholder";
@@ -40,7 +40,7 @@ const fetchTotalPostsCount = async (category) => {
   return count;
 };
 
-const PostCategory = ({ initialCategory, initialAllPosts }) => {
+const PostCategory = ({ initialCategory, initialPosts }) => {
   const [page, setPage] = useState(0);
 
   const {
@@ -53,12 +53,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
     queryKey: ["postData", initialCategory, page],
     queryFn: () => fetchPostsByCategory(initialCategory, page),
     keepPreviousData: true,
-  });
-
-  const { data: allPosts } = useQuery({
-    queryKey: ["allPosts"],
-    queryFn: () => fetchPostsByCategory(initialCategory, 0),
-    initialData: initialAllPosts,
+    initialData: page === 0 ? initialPosts : undefined,
   });
 
   const { data: totalPosts } = useQuery({
@@ -115,8 +110,19 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
     return <Loader />;
   }
 
+  const getCategoryDisplayName = (title, slug) => {
+    const cleanSlug = slug?.toLowerCase() || "";
+    const cleanTitle = title?.toLowerCase() || "";
+    if (cleanSlug === "master-talks" || cleanTitle === "master talks") return "Executive Perspectives";
+    if (cleanSlug === "market-news" || cleanTitle === "market news") return "Market Pulse";
+    if (cleanSlug === "business-bulletin" || cleanTitle === "business bulletin") return "The Briefing";
+    if (cleanSlug === "magazines" || cleanTitle === "magazines") return "Premium Editions";
+    return title;
+  };
+
   const cateContent = postData[0];
-  const categoryTitle = cateContent?.category?.title || getCategoryTitleFallback(initialCategory);
+  const rawCategoryTitle = cateContent?.category?.title || getCategoryTitleFallback(initialCategory);
+  const categoryTitle = getCategoryDisplayName(rawCategoryTitle, initialCategory);
 
   return (
     <div style={{ background: "#FAF8F5", color: "#0f1923", minHeight: "100vh" }}>
@@ -158,7 +164,7 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
                         )}
                       </div>
                       <div className="ec-cat-card-content">
-                        <span className="ec-cat-card-tag">{data.category?.title || categoryTitle}</span>
+                        <span className="ec-cat-card-tag">{getCategoryDisplayName(data.category?.title || categoryTitle, data.category?.slug || initialCategory)}</span>
                         <h3 className="ec-cat-card-title">{data.title}</h3>
                         {data.description && (
                           <p className="ec-cat-card-excerpt">
@@ -199,10 +205,8 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
             {/* Right side: Sidebar */}
             <div className="col-lg-4">
               <div className="post-sidebar">
-                <WidgetAd />
-                <WidgetSocialShare />
                 <WidgetCategory />
-                <WidgetPost dataPost={allPosts} />
+                <WidgetPost />
                 <WidgetAd
                   img="/images/clientbanner/clientbanner3.jpg"
                   height={492}
@@ -470,22 +474,13 @@ const PostCategory = ({ initialCategory, initialAllPosts }) => {
 export default PostCategory;
 
 export const getStaticProps = async ({ params }) => {
-  const queryClient = new QueryClient();
   const category = params.slug;
-
-  await queryClient.prefetchQuery({
-    queryKey: ["postData", category, 0],
-    queryFn: () => fetchPostsByCategory(category, 0),
-  });
-  await queryClient.prefetchQuery({
-    queryKey: ["allPosts"],
-    queryFn: () => fetchPostsByCategory(category, 0),
-  });
+  const initialPosts = await fetchPostsByCategory(category, 0);
 
   return {
     props: {
       initialCategory: category,
-      initialAllPosts: dehydrate(queryClient),
+      initialPosts,
     },
   };
 };

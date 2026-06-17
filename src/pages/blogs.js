@@ -93,7 +93,7 @@ const Blogs = () => {
   `;
 
   const { data, isLoading, error, refetch } = useQuery({
-    queryKey: ["allPosts"],
+    queryKey: ["blogsPosts"],
     queryFn: async () => {
       const response = await client.fetch(query);
       return response;
@@ -179,8 +179,20 @@ const Blogs = () => {
     }
   };
 
+  const getCategoryDisplayName = (title, slug) => {
+    const cleanSlug = slug?.toLowerCase() || "";
+    const cleanTitle = title?.toLowerCase() || "";
+    if (cleanSlug === "master-talks" || cleanTitle === "master talks") return "Executive Perspectives";
+    if (cleanSlug === "market-news" || cleanTitle === "market news") return "Market Pulse";
+    if (cleanSlug === "business-bulletin" || cleanTitle === "business bulletin") return "The Briefing";
+    if (cleanSlug === "magazines" || cleanTitle === "magazines") return "Premium Editions";
+    return title;
+  };
+
   const getCategory = (post) => {
-    if (post.category && post.category.title) return post.category.title;
+    if (post.category && post.category.title) {
+      return getCategoryDisplayName(post.category.title, post.category.slug);
+    }
     return "Star Prime Focus";
   };
 
@@ -399,8 +411,10 @@ const Blogs = () => {
                           <Image
                             src={post.featureImg || "/images/placeholder.png"}
                             alt={post.altText || post.title}
-                            fill
+                            width={500}
+                            height={300}
                             sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 380px"
+                            style={{ width: "100%", height: "auto" }}
                           />
                         </div>
                         <div className="feed-card-content">
@@ -1009,13 +1023,15 @@ const Blogs = () => {
         .feed-card-image-wrapper {
           position: relative;
           width: 100%;
-          height: 220px;
+          height: auto;
           overflow: hidden;
           background: #FAF8F5;
         }
 
         .feed-card-image-wrapper :global(img) {
-          object-fit: cover;
+          width: 100% !important;
+          height: auto !important;
+          display: block;
           transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
@@ -1380,7 +1396,7 @@ const Blogs = () => {
           }
 
           .feed-card-image-wrapper {
-            height: 200px;
+            height: auto;
           }
 
           .feed-sidebar-column {

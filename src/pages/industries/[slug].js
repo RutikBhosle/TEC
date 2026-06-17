@@ -403,8 +403,10 @@ const IndustryPosts = () => {
                           <Image
                             src={post.featureImg || "/images/placeholder.png"}
                             alt={post.altText || post.title}
-                            fill
+                            width={500}
+                            height={300}
                             sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 380px"
+                            style={{ width: "100%", height: "auto" }}
                           />
                         </div>
                         <div className="feed-card-content">
@@ -1011,13 +1013,15 @@ const IndustryPosts = () => {
         .feed-card-image-wrapper {
           position: relative;
           width: 100%;
-          height: 220px;
+          height: auto;
           overflow: hidden;
           background: #FAF8F5;
         }
 
         .feed-card-image-wrapper :global(img) {
-          object-fit: cover;
+          width: 100% !important;
+          height: auto !important;
+          display: block;
           transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
@@ -1232,7 +1236,7 @@ const IndustryPosts = () => {
           }
 
           .feed-card-image-wrapper {
-            height: 200px;
+            height: auto;
           }
         }
 

@@ -24,6 +24,16 @@ const toPlainText = (blocks = []) => {
     .join("\n\n");
 };
 
+const getCategoryDisplayName = (title, slug) => {
+  const cleanSlug = slug?.toLowerCase() || "";
+  const cleanTitle = title?.toLowerCase() || "";
+  if (cleanSlug === "master-talks" || cleanTitle === "master talks") return "Executive Perspectives";
+  if (cleanSlug === "market-news" || cleanTitle === "market news") return "Market Pulse";
+  if (cleanSlug === "business-bulletin" || cleanTitle === "business bulletin") return "The Briefing";
+  if (cleanSlug === "magazines" || cleanTitle === "magazines") return "Premium Editions";
+  return title;
+};
+
 const RelatedSidebarPosts = ({ postData }) => {
   const currentId = postData?._id;
   const type = postData?._type || "post";
@@ -192,7 +202,9 @@ const RelatedSidebarPosts = ({ postData }) => {
             excerpt = excerpt.length > 120 ? excerpt.substring(0, 120) + "..." : excerpt;
           }
 
-          const categoryTitle = post.category?.title || (type === "industryPost" ? "Industry" : "Market Pulse");
+          const rawCategoryTitle = post.category?.title || (type === "industryPost" ? "Industry" : "Market Pulse");
+          const categorySlug = post.category?.slug?.current || "";
+          const categoryTitle = getCategoryDisplayName(rawCategoryTitle, categorySlug);
 
           return (
             <Link

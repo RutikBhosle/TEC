@@ -109,15 +109,40 @@ const AdvertiseWithUs = () => {
         <section className="advertise-section website-showcase">
           <div className="advertise-shell">
             <div className="website-layout">
-              <div className="showcase-image-card">
-                <Image
-                  src="/images/ads-img.png"
-                  alt="The Star Prime Advertisement Placements on Desktop Website"
-                  width={600}
-                  height={800}
-                  style={{ width: "100%", height: "auto" }}
-                  className="showcase-img"
-                />
+              <div className="ad-layout-demo">
+                <div className="ad-web-mockup">
+                  {/* Top Banner */}
+                  <div className="ad-banner-mock">
+                    <div className="ad-banner-inner">
+                      <span className="ad-banner-title">BANNER ADVERTISEMENT</span>
+                      <span className="ad-banner-dim">980px × 110px</span>
+                    </div>
+                  </div>
+                  
+                  {/* Middle content section with sidebar */}
+                  <div className="ad-web-body">
+                    <div className="ad-web-content-placeholder">
+                      <div className="mock-line long"></div>
+                      <div className="mock-line short"></div>
+                      <div className="mock-line long"></div>
+                      <div className="mock-line medium"></div>
+                    </div>
+                    <div className="ad-sidebar-mock">
+                      <div className="ad-sidebar-inner">
+                        <span className="ad-sidebar-title">SIDE BAR ADVERTISEMENT</span>
+                        <span className="ad-sidebar-dim">280px × 280px</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Bottom Banner */}
+                  <div className="ad-banner-mock">
+                    <div className="ad-banner-inner">
+                      <span className="ad-banner-title">BANNER ADVERTISEMENT</span>
+                      <span className="ad-banner-dim">980px × 110px</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="website-copy">
                 <span className="section-eyebrow">Digital Channels</span>
@@ -148,26 +173,111 @@ const AdvertiseWithUs = () => {
               <div className="showcase-divider" />
             </header>
 
-            <div className="image-grid">
-              <div className="showcase-image-card hover-lift">
-                <Image
-                  src="/images/Advertisement-1.jpg"
-                  alt="The Star Prime Full Page Ad Dimensions"
-                  width={600}
-                  height={800}
-                  style={{ width: "100%", height: "auto" }}
-                  className="showcase-img"
-                />
+            <div className="ad-designs-comparison-grid">
+              {/* Box 1: Trim, Bleed, Safety specs */}
+              <div className="ad-specs-container">
+                <div className="ad-specs-box bleed-box">
+                  <div className="spec-label bleed-lbl">Bleed Size: 8.5" × 11"</div>
+                  
+                  <div className="ad-specs-box trim-box">
+                    <div className="spec-label trim-lbl">Trim Size: 8" × 10.5"</div>
+                    
+                    <div className="ad-specs-box live-box">
+                      <div className="spec-label live-lbl">Live Area / Type Safety: 7.25" × 10"</div>
+                      
+                      <div className="ad-specs-content">
+                        <h4 className="specs-title-red">Trim Size</h4>
+                        <p className="specs-val">8" × 10.5"</p>
+                        
+                        <h4 className="specs-title-red">Bleed Size</h4>
+                        <p className="specs-val">8.5" × 11"</p>
+                        
+                        <h4 className="specs-title-red">Type Safety</h4>
+                        <p className="specs-val">7.25" × 10"</p>
+                        
+                        <p className="specs-notice">(keep all copy within this area on bleed ads)</p>
+                        
+                        <p className="specs-note"><strong>NOTE:</strong> All dimensions are width × height</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Labeled pointers below */}
+                <div className="ad-specs-pointers">
+                  <div className="pointer-item">
+                    <span className="pointer-arrow">↑</span>
+                    <span className="pointer-text trim-text">Trim Line</span>
+                  </div>
+                  <div className="pointer-item">
+                    <span className="pointer-arrow">↑</span>
+                    <span className="pointer-text live-text">Live Area</span>
+                  </div>
+                  <div className="pointer-item">
+                    <span className="pointer-arrow">↑</span>
+                    <span className="pointer-text bleed-text">Bleed Line</span>
+                  </div>
+                </div>
               </div>
-              <div className="showcase-image-card hover-lift">
-                <Image
-                  src="/images/Advertisement-2.jpg"
-                  alt="The Star Prime Half Page Ad Dimensions"
-                  width={600}
-                  height={800}
-                  style={{ width: "100%", height: "auto" }}
-                  className="showcase-img"
-                />
+
+              {/* Box 2: Sizes Grid */}
+              <div className="ad-sizes-grid-wrapper">
+                {/* Top Row: Full Page & Spread Page */}
+                <div className="ad-sizes-row">
+                  <div className="ad-size-card full-page-card">
+                    <div className="page-sheet-container single-page">
+                      <div className="shaded-area full-page">Full Page</div>
+                    </div>
+                    <span className="ad-size-label">Full Page</span>
+                    <span className="ad-size-dim">8" × 10.5"</span>
+                  </div>
+                  
+                  <div className="ad-size-card spread-card">
+                    <div className="page-sheet-container double-page">
+                      <div className="shaded-area spread-page">Spread Page</div>
+                    </div>
+                    <span className="ad-size-label">Spread Page</span>
+                    <span className="ad-size-dim">16" × 10.5"</span>
+                  </div>
+                </div>
+                
+                {/* Middle Row: Vertical and Horizontal Splits */}
+                <div className="ad-sizes-row three-cols">
+                  <div className="ad-size-card split-card">
+                    <div className="page-sheet-container single-page split-bg">
+                      <div className="shaded-area vertical-2-3">2/3 Vertical</div>
+                    </div>
+                    <span className="ad-size-label">2/3 Vertical</span>
+                    <span className="ad-size-dim">5" × 10.5"</span>
+                  </div>
+                  
+                  <div className="ad-size-card split-card">
+                    <div className="page-sheet-container single-page split-bg">
+                      <div className="shaded-area vertical-1-2">1/2 Vertical</div>
+                    </div>
+                    <span className="ad-size-label">1/2 Vertical</span>
+                    <span className="ad-size-dim">4" × 10.5"</span>
+                  </div>
+                  
+                  <div className="ad-size-card split-card">
+                    <div className="page-sheet-container single-page split-bg">
+                      <div className="shaded-area horizontal-1-2">1/2 Horizontal</div>
+                    </div>
+                    <span className="ad-size-label">1/2 Horizontal</span>
+                    <span className="ad-size-dim">8" × 5.25"</span>
+                  </div>
+                </div>
+                
+                {/* Bottom Row: Horizontal Spread Split */}
+                <div className="ad-sizes-row centered">
+                  <div className="ad-size-card horizontal-spread-card">
+                    <div className="page-sheet-container double-page split-bg">
+                      <div className="shaded-area horizontal-spread-1-2">1/2 Horizontal Spread</div>
+                    </div>
+                    <span className="ad-size-label">1/2 Horizontal Spread</span>
+                    <span className="ad-size-dim">16" × 5.25"</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -656,7 +766,318 @@ const AdvertiseWithUs = () => {
         }
 
         .animate-fade {
-          animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+
+        /* ── ADVERTISEMENT MOCKUP DESIGNS ── */
+        .ad-layout-demo {
+          background: #FAF8F5;
+          border: 1px solid #E2DDD7;
+          padding: 2rem;
+          max-width: 700px;
+          margin: 0 auto;
+          width: 100%;
+        }
+        .ad-web-mockup {
+          background: #FFFFFF;
+          border: 1px solid #C4BDB3;
+          padding: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .ad-banner-mock {
+          background: #4A4A4A;
+          color: #FFFFFF;
+          height: 110px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          position: relative;
+          border: 1px dashed #7E7E7E;
+        }
+        .ad-banner-inner, .ad-sidebar-inner {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+        .ad-banner-title, .ad-sidebar-title {
+          font-family: 'DM Sans', sans-serif;
+          font-weight: 700;
+          font-size: 14px;
+          letter-spacing: 0.05em;
+        }
+        .ad-banner-dim, .ad-sidebar-dim {
+          font-family: monospace;
+          font-size: 12px;
+          color: #DCDCDC;
+        }
+        .ad-web-body {
+          display: grid;
+          grid-template-columns: 1fr 280px;
+          gap: 1.5rem;
+          align-items: stretch;
+        }
+        .ad-web-content-placeholder {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          justify-content: center;
+        }
+        .mock-line {
+          height: 10px;
+          background: #E8E3DC;
+          border-radius: 4px;
+        }
+        .mock-line.long { width: 100%; }
+        .mock-line.medium { width: 75%; }
+        .mock-line.short { width: 40%; }
+        .ad-sidebar-mock {
+          background: #4A4A4A;
+          color: #FFFFFF;
+          height: 280px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          border: 1px dashed #7E7E7E;
+        }
+
+        .ad-designs-comparison-grid {
+          display: grid;
+          grid-template-columns: 1fr 1.5fr;
+          gap: 2.5rem;
+          align-items: flex-start;
+          width: 100%;
+        }
+
+        .ad-specs-container {
+          background: #FFFFFF;
+          padding: 2rem;
+          border: 1px solid #E2DDD7;
+          width: 100%;
+        }
+        .ad-specs-box {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;
+          width: 100%;
+        }
+        .bleed-box {
+          border: 2px dashed #D63031;
+          aspect-ratio: 8.5 / 11;
+          padding: 1.5rem;
+        }
+        .trim-box {
+          border: 2px solid #000000;
+          padding: 1.5rem;
+          height: 100%;
+        }
+        .live-box {
+          border: 2px dashed #D63031;
+          padding: 2rem;
+          height: 100%;
+          background: rgba(250, 248, 245, 0.5);
+        }
+        .spec-label {
+          position: absolute;
+          font-size: 9px;
+          font-weight: 700;
+          text-transform: uppercase;
+          padding: 2px 6px;
+          background: #FFFFFF;
+          white-space: nowrap;
+          z-index: 5;
+        }
+        .bleed-lbl {
+          top: -10px;
+          left: 10px;
+          color: #D63031;
+          border: 1px solid #D63031;
+        }
+        .trim-lbl {
+          top: -10px;
+          left: 10px;
+          color: #000000;
+          border: 1px solid #000000;
+        }
+        .live-lbl {
+          top: -10px;
+          left: 10px;
+          color: #D63031;
+          border: 1px solid #D63031;
+        }
+        .ad-specs-content {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+        }
+        .specs-title-red {
+          color: #D63031;
+          font-size: 13px;
+          font-weight: 700;
+          margin: 0;
+        }
+        .specs-val {
+          font-size: 15px;
+          font-weight: 700;
+          color: #000000;
+          margin: 0 0 6px;
+        }
+        .specs-notice {
+          font-size: 11px;
+          color: #555555;
+          margin: 4px 0;
+          font-style: italic;
+          line-height: 1.4;
+        }
+        .specs-note {
+          font-size: 10px;
+          color: #000000;
+          margin-top: 8px;
+        }
+        .ad-specs-pointers {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 1.5rem;
+          border-top: 1px solid #E2DDD7;
+          padding-top: 1rem;
+        }
+        .pointer-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .pointer-arrow {
+          font-size: 14px;
+          color: #000000;
+        }
+        .pointer-text {
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+        .trim-text { color: #000000; }
+        .live-text { color: #D63031; }
+        .bleed-text { color: #D63031; }
+
+        .ad-sizes-grid-wrapper {
+          background: #FAF8F5;
+          padding: 2rem;
+          border: 1px solid #E2DDD7;
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          width: 100%;
+        }
+        .ad-sizes-row {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+          width: 100%;
+        }
+        .ad-sizes-row.three-cols {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .ad-sizes-row.centered {
+          display: flex;
+          justify-content: center;
+        }
+        .ad-size-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          background: #FFFFFF;
+          border: 1px solid rgba(15, 25, 35, 0.05);
+          padding: 1.25rem;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+          transition: all 0.3s ease;
+          width: 100%;
+        }
+        .ad-size-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+        .horizontal-spread-card {
+          max-width: 380px;
+        }
+        .page-sheet-container {
+          border: 1px solid #000000;
+          background: #FFFFFF;
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+          margin-bottom: 0.75rem;
+        }
+        .page-sheet-container.single-page {
+          aspect-ratio: 8 / 10.5;
+          width: 90px;
+        }
+        .page-sheet-container.double-page {
+          aspect-ratio: 16 / 10.5;
+          width: 180px;
+        }
+        .shaded-area {
+          background: #E8E3DC;
+          border: 1px dashed #7A0F23;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 9px;
+          font-weight: 700;
+          color: #7A0F23;
+          text-align: center;
+          position: absolute;
+          padding: 2px;
+          line-height: 1.1;
+        }
+        .shaded-area.full-page {
+          inset: 0;
+        }
+        .shaded-area.spread-page {
+          inset: 0;
+        }
+        .shaded-area.vertical-2-3 {
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 66.6%;
+        }
+        .shaded-area.vertical-1-2 {
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 50%;
+        }
+        .shaded-area.horizontal-1-2 {
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 50%;
+        }
+        .shaded-area.horizontal-spread-1-2 {
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 50%;
+        }
+        .ad-size-label {
+          font-family: var(--font-serif, 'Playfair Display', serif);
+          font-weight: 700;
+          font-size: 13px;
+          color: #0f1923;
+          margin-bottom: 4px;
+        }
+        .ad-size-dim {
+          font-family: monospace;
+          font-size: 11px;
+          color: #7A0F23;
+          font-weight: 700;
         }
 
         /* Responsive rules */
@@ -722,6 +1143,30 @@ const AdvertiseWithUs = () => {
           .image-grid {
             grid-template-columns: 1fr;
             gap: 1.5rem;
+          }
+          .ad-web-body {
+            grid-template-columns: 1fr;
+          }
+          .ad-banner-mock {
+            height: 80px;
+          }
+          .ad-sidebar-mock {
+            height: 200px;
+          }
+          .ad-designs-comparison-grid {
+            grid-template-columns: 1fr;
+          }
+          .ad-sizes-row.three-cols {
+            grid-template-columns: 1fr;
+          }
+          .ad-sizes-row {
+            grid-template-columns: 1fr;
+          }
+          .page-sheet-container.single-page {
+            width: 80px;
+          }
+          .page-sheet-container.double-page {
+            width: 160px;
           }
           .cta-wrap {
             padding: 3rem 1.5rem;

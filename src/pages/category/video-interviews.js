@@ -133,8 +133,6 @@ const PostCategory = ({ initialPosts }) => {
             </div>
             <div className="col-lg-4">
               <div className="post-sidebar">
-                <WidgetAd />
-                <WidgetSocialShare />
                 <WidgetCategory cateData={postData} />
                 <WidgetPost dataPost={postData} />
                 <WidgetAd

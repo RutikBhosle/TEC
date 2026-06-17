@@ -5,6 +5,16 @@ import { client } from "../../client";
 import Loader from "../common/Loader";
 import DataErrorPlaceholder from "../common/DataErrorPlaceholder";
 
+const getCategoryDisplayName = (title, slug) => {
+  const cleanSlug = slug?.toLowerCase() || "";
+  const cleanTitle = title?.toLowerCase() || "";
+  if (cleanSlug === "master-talks" || cleanTitle === "master talks") return "Executive Perspectives";
+  if (cleanSlug === "market-news" || cleanTitle === "market news") return "Market Pulse";
+  if (cleanSlug === "business-bulletin" || cleanTitle === "business bulletin") return "The Briefing";
+  if (cleanSlug === "magazines" || cleanTitle === "magazines") return "Premium Editions";
+  return title;
+};
+
 const MarketNews = () => {
   const query = `
 *[
@@ -307,7 +317,7 @@ const MarketNews = () => {
         )}
       </div>
       <div style={S.rowContent}>
-        <span style={S.rowTag}>{post.category?.title || "Market Pulse"}</span>
+        <span style={S.rowTag}>{getCategoryDisplayName(post.category?.title || "Market Pulse", post.category?.slug)}</span>
         <div style={S.rowTitle}>{post.title}</div>
         <div style={S.rowDate}>{formatDate(post)}</div>
       </div>
@@ -344,7 +354,7 @@ const MarketNews = () => {
                   )}
                 </div>
                 <div style={S.mainBody}>
-                  <span style={S.mainTag}>{mainPost.category?.title || "Market Pulse"}</span>
+                  <span style={S.mainTag}>{getCategoryDisplayName(mainPost.category?.title || "Market Pulse", mainPost.category?.slug)}</span>
                   <h3 style={S.mainTitle}>{mainPost.title}</h3>
                   {mainPostContent && (
                     <p style={S.mainExcerpt}>{mainPostContent}</p>
