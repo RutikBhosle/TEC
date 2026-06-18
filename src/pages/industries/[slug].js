@@ -1016,11 +1016,14 @@ const IndustryPosts = () => {
           height: auto;
           overflow: hidden;
           background: #FAF8F5;
+          container-type: inline-size;
         }
 
         .feed-card-image-wrapper :global(img) {
           width: 100% !important;
           height: auto !important;
+          max-height: 100cqw !important;
+          object-fit: cover !important;
           display: block;
           transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
