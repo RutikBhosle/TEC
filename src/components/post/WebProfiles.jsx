@@ -131,11 +131,13 @@ const WebProfiles = () => {
                       }}
                     >
                       {item.featureImg ? (
-                        <img
-                          src={item.featureImg}
-                          alt={item.title}
-                          className="ec-cover-img"
-                        />
+                        <Link href={`/magazine/${item.slug?.current || item.slug}`} className="ec-cover-link">
+                          <img
+                            src={item.featureImg}
+                            alt={item.title}
+                            className="ec-cover-img"
+                          />
+                        </Link>
                       ) : (
                         <div className="ec-cover-img-placeholder" />
                       )}
@@ -167,13 +169,31 @@ const WebProfiles = () => {
               </div>
 
               <h2 className="ec-magazine-title animate-slideUp">
-                {formatTitle(currentMagazine.title)}
+                <Link
+                  href={`/magazine/${currentMagazine.slug?.current || currentMagazine.slug}`}
+                  className="ec-title-link"
+                >
+                  {formatTitle(currentMagazine.title)}
+                </Link>
               </h2>
 
               <p className="ec-magazine-description animate-slideUp">
                 {formatDescription(currentMagazine.description) ||
                   "This landmark issue explores their philosophy, their impact on learning systems, and why education remains the most powerful lever for societal transformation."}
               </p>
+
+              <div className="ec-read-more-wrapper animate-slideUp">
+                <Link
+                  href={`/magazine/${currentMagazine.slug?.current || currentMagazine.slug}`}
+                  className="ec-read-more"
+                >
+                  Read More 
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="ec-read-more-arrow">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </Link>
+              </div>
 
               <div className="ec-magazine-divider" />
 
@@ -277,6 +297,19 @@ const WebProfiles = () => {
           height: 100%;
           object-fit: cover;
           opacity: 0.95;
+          transition: transform 0.4s ease;
+        }
+
+        .ec-cover-link {
+          display: block;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          overflow: hidden;
+        }
+
+        .ec-cover-link:hover .ec-cover-img {
+          transform: scale(1.03);
         }
 
         .ec-cover-img-placeholder {
@@ -351,6 +384,16 @@ const WebProfiles = () => {
           letter-spacing: -0.01em;
         }
 
+        .ec-title-link {
+          text-decoration: none !important;
+          color: inherit !important;
+          transition: color 0.25s ease;
+        }
+
+        .ec-title-link:hover {
+          color: #7A0F23 !important;
+        }
+
         :global(.ec-italic-title) {
           font-family: 'Playfair Display', serif;
           font-style: italic;
@@ -363,7 +406,37 @@ const WebProfiles = () => {
           font-size: 15px;
           color: #5A544F;
           line-height: 1.75;
-          margin: 0 0 32px 0;
+          margin: 0 0 16px 0;
+        }
+
+        .ec-read-more-wrapper {
+          margin-bottom: 24px;
+        }
+
+        .ec-read-more {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          color: #7A0F23;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          text-decoration: none !important;
+          transition: all 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+        }
+
+        .ec-read-more:hover {
+          color: #96010D;
+        }
+
+        :global(.ec-read-more-arrow) {
+          transition: transform 0.25s ease;
+        }
+
+        .ec-read-more:hover :global(.ec-read-more-arrow) {
+          transform: translateX(3px);
         }
 
         .ec-magazine-divider {
