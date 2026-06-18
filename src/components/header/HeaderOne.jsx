@@ -1032,6 +1032,15 @@ const HeaderOne = () => {
                     </button>
                     <div className={`nav-dropdown-menu ${industriesOpen ? "is-open" : ""}`.trim()}>
                       <Link
+                        href="/industries"
+                        className="nav-dropdown-item"
+                        onClick={() => {
+                          setIndustriesOpen(false);
+                        }}
+                      >
+                        All Industries
+                      </Link>
+                      <Link
                         href="/industries/healthcare"
                         className="nav-dropdown-item"
                         onClick={() => {
