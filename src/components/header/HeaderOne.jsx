@@ -993,15 +993,7 @@ const HeaderOne = () => {
                       >
                         Market Pulse
                       </Link>
-                      <Link
-                        href="/magazines"
-                        className="nav-dropdown-item"
-                        onClick={() => {
-                          setBlogsOpen(false);
-                        }}
-                      >
-                        Premium Editions
-                      </Link>
+
                       <Link
                         href="/category/business-bulletin"
                         className="nav-dropdown-item"

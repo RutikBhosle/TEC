@@ -75,7 +75,13 @@ const Blogs = () => {
   const query = `
     *[
       _type == "post" &&
-      "blogs-and-articles" in categories[]->slug.current
+      (
+        "web-profiles" in categories[]->slug.current ||
+        "blogs-and-articles" in categories[]->slug.current ||
+        "market-news" in categories[]->slug.current ||
+        "business-bulletin" in categories[]->slug.current ||
+        "master-talks" in categories[]->slug.current
+      )
     ]
     {
       title,
