@@ -56,7 +56,7 @@ const Home = () => {
       <Magazines />
 
       {/* 9 — PARTNER BRANDS (Dark strip, logo scroll) */}
-      <LogoSlider title="Our Partner Brands" showTitle={true} />
+      {/* <LogoSlider title="Our Partner Brands" showTitle={true} /> */}
 
       {/* 10 — FOOTER */}
       <FooterTwo />
