@@ -82,8 +82,10 @@ const MagazineHero = () => {
             <span className="ec-hero-kicker">Featured Profile</span>
             <div className="ec-hero-img-wrapper">
               {mainMag.featureImg ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img src={mainMag.featureImg} alt={mainMag.title} className="ec-hero-img" />
+                <Link href={`/post/${mainMag.slug?.current || mainMag.slug}`} className="ec-hero-img-link">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={mainMag.featureImg} alt={mainMag.title} className="ec-hero-img" />
+                </Link>
               ) : (
                 <div className="ec-hero-img-placeholder" />
               )}
@@ -92,11 +94,25 @@ const MagazineHero = () => {
             <div className="ec-hero-text">
               <span className="ec-hero-cat">{getCategory(mainMag)}</span>
               <h1 className="ec-hero-title">
-                {renderTitle(mainMag.title)}
+                <Link href={`/post/${mainMag.slug?.current || mainMag.slug}`} className="ec-hero-title-link">
+                  {renderTitle(mainMag.title)}
+                </Link>
               </h1>
               {mainMag.description && (
                 <p className="ec-hero-excerpt">{mainMag.description}</p>
               )}
+              <div className="ec-hero-read-more-wrapper">
+                <Link
+                  href={`/post/${mainMag.slug?.current || mainMag.slug}`}
+                  className="ec-hero-read-more"
+                >
+                  Read More
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" className="ec-hero-read-more-arrow">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </Link>
+              </div>
               <div className="ec-hero-meta">
                 <span className="ec-hero-meta-author">By Editorial Team</span>
                 <span className="ec-hero-meta-dot">·</span>
@@ -128,13 +144,9 @@ const MagazineHero = () => {
                 <span className="ec-hero-sidebar-num">0{i + 1}</span>
                 <div className="ec-hero-sidebar-content">
                   <div className="ec-hero-sidebar-cat">{getCategory(mag)}</div>
-                  <Link
-                    href={`/post/${mag.slug?.current || mag.slug}`}
-                    className="ec-hero-sidebar-title"
-                    onClick={(e) => e.stopPropagation()}
-                  >
+                  <span className="ec-hero-sidebar-title">
                     {renderTitle(mag.title)}
-                  </Link>
+                  </span>
                   <div className="ec-hero-sidebar-date">
                     {formatDate(mag.publishedAt || mag._updatedAt)}
                   </div>
@@ -196,6 +208,18 @@ const MagazineHero = () => {
           border-left: 5px solid #7A0F23;
         }
 
+        .ec-hero-img-link {
+          display: block;
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          overflow: hidden;
+        }
+
+        .ec-hero-img-link:hover .ec-hero-img {
+          transform: scale(1.03);
+        }
+
         .ec-hero-img {
           width: 100%;
           height: 100%;
@@ -244,6 +268,16 @@ const MagazineHero = () => {
           animation: fadeInUp 0.5s ease 0.2s both;
         }
 
+        .ec-hero-title-link {
+          text-decoration: none !important;
+          color: inherit !important;
+          transition: color 0.25s ease;
+        }
+
+        .ec-hero-title-link:hover {
+          color: #D0C9BF !important;
+        }
+
         .ec-hero-title :global(em) {
           font-style: italic;
           color: #D0C9BF;
@@ -256,12 +290,47 @@ const MagazineHero = () => {
           color: #D0C9BF;
           line-height: 1.7;
           max-width: 480px;
-          margin-bottom: 20px;
+          margin-bottom: 16px;
           animation: fadeInUp 0.5s ease 0.3s both;
           display: -webkit-box;
           -webkit-line-clamp: 4;
           -webkit-box-orient: vertical;
           overflow: hidden;
+        }
+
+        .ec-hero-read-more-wrapper {
+          margin-bottom: 20px;
+          margin-top: -8px;
+          animation: fadeInUp 0.5s ease 0.35s both;
+        }
+
+        .ec-hero-read-more {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 11px;
+          font-weight: 700;
+          color: #FAF8F5;
+          text-transform: uppercase;
+          letter-spacing: 0.12em;
+          text-decoration: none !important;
+          transition: all 0.2s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          border-bottom: 1px solid rgba(250, 248, 245, 0.3);
+          padding-bottom: 2px;
+        }
+
+        .ec-hero-read-more:hover {
+          color: #7A0F23;
+          border-bottom-color: #7A0F23;
+        }
+
+        :global(.ec-hero-read-more-arrow) {
+          transition: transform 0.25s ease;
+        }
+
+        .ec-hero-read-more:hover :global(.ec-hero-read-more-arrow) {
+          transform: translateX(3px);
         }
 
         .ec-hero-meta {
@@ -349,18 +418,19 @@ const MagazineHero = () => {
           margin-bottom: 4px;
         }
 
-        :global(.ec-hero-sidebar-title) {
+        .ec-hero-sidebar-title {
           font-family: 'Libre Baskerville', serif;
           font-size: 13px;
           font-weight: 400;
-          color: #FAF8F5 !important;
+          color: #FAF8F5;
           line-height: 1.45;
-          text-decoration: none;
           display: block;
           margin-bottom: 4px;
           transition: color 0.2s;
         }
-        :global(.ec-hero-sidebar-title:hover) { color: #D0C9BF !important; }
+        .ec-hero-sidebar-item:hover .ec-hero-sidebar-title {
+          color: #D0C9BF;
+        }
 
         .ec-hero-sidebar-date {
           font-family: 'DM Sans', sans-serif;
